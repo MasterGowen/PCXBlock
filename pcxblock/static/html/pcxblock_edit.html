@@ -1,0 +1,150 @@
+<div class="wrapper-comp-settings editor-with-buttons is-active" id="settings-tab">
+  <ul class="list-input settings-list">
+  
+    <li class="field comp-setting-entry is-set">
+      <div class="wrapper-comp-setting">
+        <label class="label setting-label" for="display_name">Название:</label>
+        <input class="input setting-input" name="display_name" id="display_name" value="{{display_name}}" type="text" />
+        <a href="#" class="button action-primary update_scenarios_repo">Обновить</a>
+      </div>
+    </li>
+    <div id='main-settings'>
+        <li class="field comp-setting-entry is-set">
+      <div class="wrapper-comp-setting">
+        <label class="label setting-label" for="question-area">Вопрос:</label>
+        <textarea id="question-area" class="input setting-input" rows=10 cols=50>{{question}}</textarea>
+      </div>
+    </li>
+    <li class="field comp-setting-entry is-set">
+      <div class="wrapper-comp-setting">
+        <label class="label setting-label" for="weight">Максимальное количество баллов (0-100):</label>
+        <input class="input setting-input" name="weight" id="weight" value="{{weight}}" type="number" min="0" max="100" />
+      </div>
+    </li>
+    <li class="field comp-setting-entry is-set">
+      <div class="wrapper-comp-setting">
+        <label class="label setting-label" for="max_attempts">Количество попыток:</label>
+        <input class="input setting-input" name="max_attempts" id="max_attempts" value="{{max_attempts}}" type="number" min="0" />
+      </div>
+    </li>
+  </div>
+  <div id='scenario-settings' hidden="true">
+    <li class="field comp-setting-entry is-set">
+      <div class="wrapper-comp-setting">
+        <label class="label setting-label" for="scenario">Используемый сценарий:</label>
+          
+            
+      {% if not scenario %}
+            {% if scenarios %}
+            <select class="input setting-input" name="scenario" id="scenario">
+              {% for filename, sc in scenarios.items %}
+                <option value="{{filename|safe}}">
+                  {{ sc.name }} - {{sc.description}}
+                </option>
+              {% endfor %}
+            </select>
+            {% else %}
+            <select class="input setting-input" name="scenario" id="scenario">
+              <option selected="selected">--------------</option>
+            </select>
+            <span class="scenario_alert" style="color:red;font-size:75%">Сценарии не найдены. Попробуйте обновить список сценариев из репозитория.</span>
+            <a href="#" class="button action-primary update_scenarios_repo">Обновить</a>
+            {% endif %}
+      {% else %}
+            {% if scenarios %}
+            <select class="input setting-input" name="scenario" id="scenario" disabled="disabled">
+                {% for filename, sc in scenarios.items %}
+                  {% if filename == scenario %}
+                    <option value="{{filename|safe}}" selected="selected">
+                      {{ sc.name }} - {{sc.description}}
+                    </option>
+                  {% endif %}
+                {% endfor %}
+            </select>
+            
+            {% else %}
+              <select class="input setting-input" name="scenario" id="scenario">
+                <option selected="selected">--------------</option>
+              </select><br /><br />
+              <span class="scenario_alert" style="color:red">Возможно, файл сценария не найден или создан неправильно.</span>
+              <a href="#" class="button action-primary update_scenarios_repo">Обновить</a>
+              {% endif %}
+      {% endif %}
+
+        
+      </div>
+    </li>
+    <style id="scenarioStyle" type="text/css"></style>
+    <li id="scenarioTemplate" class="field comp-setting-entry is-set">
+    </li>
+        <li class="field comp-setting-entry is-set">
+      <div class="wrapper-comp-setting">
+        <label class="label setting-label" for="sequence">Проверять последовательность:</label>
+        {% if sequence %}
+          <input class="input setting-input" style="height:20px" name="sequence" id="sequence" checked="checked" type="checkbox" />
+        {% else %}
+          <input class="input setting-input" style="height:20px" name="sequence" id="sequence" type="checkbox" />
+        {% endif %}
+      </div>
+    </li>
+    </div>
+    <div id='advanced-settings' hidden="true">
+      <li class="field comp-setting-entry is-set">
+      <div class="wrapper-comp-setting">
+        <label class="label setting-label" for="student_view_template">student_view_template:</label>
+        <textarea name="student_view_template" id="student_view_template" class="input setting-input edit-box" rows=10 cols=50>{{student_view_template}}</textarea>
+      </div>
+    </li>
+    <li class="field comp-setting-entry is-set">
+      <div class="wrapper-comp-setting">
+        <label class="label setting-label" for="correct_answer">Правильный ответ:</label>
+        <input id="correct_answer" class="input setting-input" value="{{correct_answer}}" />
+      </div>
+    </li>
+    </div>
+  </ul>
+  
+
+
+  <div class="xblock-actions">
+    <ul>
+      <li class="action-item">
+        <a href="#" class="button action-primary save-button">Save</a>
+      </li>
+      <li class="action-item">
+        <a href="#" class="button cancel-button">Cancel</a>
+      </li>
+    </ul>
+  </div>
+</div>
+    <!--<div class="wrapper-comp-editor is-inactive" id="editor-tab" data-editor="raw">
+            <div class="row">
+                <textarea name="" class="edit-box">raw text</textarea>
+            </div>
+    </div>
+
+<script type="application/javascript">
+ $("ul.action-modes").html(' <li class="action-item" data-mode="settings"><a href="#" class="settings-button is-set">Настройки</a></li><li class="action-item" data-mode="editor"><a href="#" class="editor-button">Raw code</a></li>')
+</script>-->
+
+<style>
+.update_scenarios_repo {
+  padding: 5px;
+  border: 1px solid gray;
+  background-color: azure;
+}
+</style>
+        <style>
+            .vectorArray g {
+                opacity: 0.1;
+            }
+            .vectorArray g:hover {
+                opacity: 0.6;
+            }
+            .vectorArray g[action=true] {
+                opacity: 1;
+            }
+            .vectorArray g[action=false] {display: none}
+            .vectorForces:hover .vectorArray g[action=false]{display: block;}
+            .invisible {opacity: 0}
+        </style>
