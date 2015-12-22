@@ -19,7 +19,7 @@ class PCXBlock(XBlock):
     display_name = String(
         display_name=u"Название",
         help=u"Название задания, которое увидят студенты.",
-        default=u'txt',
+        default=u'Compare pics',
         scope=Scope.settings
     )
 
@@ -176,7 +176,7 @@ class PCXBlock(XBlock):
 
     def student_view(self, *args, **kwargs):
         """
-        Отображение txtXBlock студенту (LMS).
+        Отображение PCXBlock студенту (LMS).
         """
 
         context = {
@@ -206,7 +206,7 @@ class PCXBlock(XBlock):
         fragment = Fragment()
         fragment.add_content(
             render_template(
-                'static/html/txt.html',
+                'static/html/pc.html',
                 context
             )
         )
