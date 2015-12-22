@@ -238,10 +238,11 @@ class PCXBlock(XBlock):
 
     @XBlock.json_handler
     def student_submit(self, data, suffix=''):
-        student_json = json.loads(data)
-        self.answer = student_json["answer"]
+        #student_json = json.loads(data)
+        #self.answer = student_json["answer"]
         #self.points = points
         self.attempts += 1
+        return {'result': 'success'}
 
 
 
