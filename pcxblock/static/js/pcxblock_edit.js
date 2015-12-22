@@ -1,4 +1,5 @@
 function PCXBlockEdit(runtime, element) {
+    alert('ok')
     $(element).find('.save-button').bind('click', function() {
         var handlerUrl = runtime.handlerUrl(element, 'studio_submit');
             data = {
