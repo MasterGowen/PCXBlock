@@ -206,7 +206,7 @@ class PCXBlock(XBlock):
         fragment = Fragment()
         fragment.add_content(
             render_template(
-                'static/html/pc.html',
+                'static/html/pcxblock.html',
                 context
             )
         )
