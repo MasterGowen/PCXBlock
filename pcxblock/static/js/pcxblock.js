@@ -1,7 +1,3 @@
-/* Javascript for MultiEngineXBlock. */
-
-if(!MultiEngineXBlockState) var MultiEngineXBlockState = {};
-
 function MultiEngineXBlock(runtime, element) {
 
     function success_func(result) {
