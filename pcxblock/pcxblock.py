@@ -162,7 +162,7 @@ class PCXBlock(XBlock):
         )
 
         js_urls = (
-            "static/js/pcxblock_edit.js",
+            "static/js/pcxblock_edi.js",
         )
 
         css_urls = (
