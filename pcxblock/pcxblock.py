@@ -233,8 +233,6 @@ class PCXBlock(XBlock):
         self.weight = data.get('weight')
         self.correct_answer = data.get('correct_answer')
         self.max_attempts = data.get('max_attempts')
-        self.keywords = data.get('keywords')
-        self.grading_threshold = data.get('grading_threshold')
 
         return {'result': 'success'}
 
@@ -242,7 +240,7 @@ class PCXBlock(XBlock):
     def student_submit(self, data, suffix=''):
         student_json = json.loads(data)
         self.answer = student_json["answer"]
-        self.points = points
+        #self.points = points
         self.attempts += 1
 
 

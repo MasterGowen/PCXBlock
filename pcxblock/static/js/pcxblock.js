@@ -29,16 +29,6 @@ function PCXBlock(runtime, element) {
     };
 
     var handlerUrl = runtime.handlerUrl(element, 'student_submit');
-    var saveStudentStateURL = runtime.handlerUrl(element,'save_student_state');
-
-    $(element).find('.Save').bind('click', function() {
-        $.ajax({
-            type: "POST",
-            url: saveStudentStateURL,
-            data: '',
-            success: success_save
-        });
-    });
 
     $(element).find('.Check').bind('click', function() {
         $.ajax({
