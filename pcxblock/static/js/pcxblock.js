@@ -27,14 +27,11 @@ function MultiEngineXBlock(runtime, element) {
         $.ajax({
             type: "POST",
             url: handlerUrl,
-            data: mengine.genJSON('answer', mengine.genAnswerObj()),
+            data: '',
             success: success_func
         });    
     };
 
-    
-  
-    var getStudentStateURL = runtime.handlerUrl(element,'get_student_state');
     var handlerUrl = runtime.handlerUrl(element, 'student_submit');
     var saveStudentStateURL = runtime.handlerUrl(element,'save_student_state');
 
@@ -42,7 +39,7 @@ function MultiEngineXBlock(runtime, element) {
         $.ajax({
             type: "POST",
             url: saveStudentStateURL,
-            data: mengine.genJSON('state', mengine.genAnswerObj()),
+            data: '',
             success: success_save
         });
     });
@@ -50,17 +47,11 @@ function MultiEngineXBlock(runtime, element) {
     $(element).find('.Check').bind('click', function() {
         $.ajax({
             type: "POST",
-            url: saveStudentStateURL,
-            data: mengine.genJSON('state', mengine.genAnswerObj()),
+            url: handlerUrl,
+            data: '',
             success: success_check
         });
 
     });
 
-    // Сценарий
-    eval(scenarioJSON.javascriptStudent)
-
-    MultiEngineXBlockState[mengine.id.valueOf()] = function(){
-        console.log(mengine.studentStateJSON);
-    };
 }
