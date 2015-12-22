@@ -34,7 +34,7 @@ function PCXBlock(runtime, element) {
         $.ajax({
             type: "POST",
             url: handlerUrl,
-            data: '',
+            data: '{"answer":"True"}',
             success: success_check
         });
 
