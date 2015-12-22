@@ -1,4 +1,4 @@
-function MultiEngineXBlock(runtime, element) {
+function PCXBlock(runtime, element) {
 
     function success_func(result) {
         //console.log("Количество баллов: " + result.correct/result.weight*100 + " ОТВЕТОВ: " + result.attempts);
