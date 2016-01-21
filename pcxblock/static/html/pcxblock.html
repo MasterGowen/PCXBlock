@@ -1,6 +1,50 @@
 
 <div class="xblock xblock-student_view xblock-student_view-problem xmodule_display xmodule_CapaModule xblock-initialized">
 
+<script type="text/javascript">
+            window.EmptyImage = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==';
+            window.minimimumOpacity = 0.1;
+            window.headerHeight = 100;
+            window.Config = {
+                Wall: { height: 2.5 * 100, width: 2 }
+            };
+            var formatter = new Formatting.NumberFormatter(new Formatting.NumberFormatInfo());
+            function onWindowResize() {
+                $('.leftMenu').css("height", window.headerHeight);
+                $('.leftMenu .logo').css("height", window.headerHeight);
+                $('.leftMenu .photo img').css("height", window.headerHeight*0.70);
+                $('.leftMenu .button').css("padding-top", window.headerHeight / 3);
+                $('.leftMenu .button').css("height", 2 * window.headerHeight / 3);
+                $('.buttons').css("top", window.headerHeight);
+                $('.designer-block').css("margin-left", $('.buttons').width());
+                $('.designer-block').height($('html').height() - window.headerHeight);
+                $('.designer-block').css("margin-top", window.headerHeight);
+                $('.designer-block').css("margin-right", 30);
+                $('.buttons').height($('html').height() - 90);
+                $('.propertyPanel').height($('html').height() - window.headerHeight - 3);
+                if (typeof World !== "undefined") {
+                    if (typeof World.Drawer2D !== "undefined") {
+                        World.Drawer2D.canvas.height = $('.designer-block').height() - 120;
+                        World.Drawer2D.canvas.width = $('.designer').width();
+                    }
+                }
+            }
+            var Meths = {
+                reset: function () {
+                    window.World.Objects.Walls = [];
+                    window.World.Objects.Line = [];
+                    window.World.Objects.Normals = [];
+                    return false;
+                },
+                back: function () {
+                    window.World.Crafter.KeyDown(27);
+                    return false;
+                },
+                linetool: function () {
+                   
+                }
+            };
+        </script>
 <div id="obertka">
 
     <body img="img/example.jpg">
