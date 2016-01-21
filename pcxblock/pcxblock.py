@@ -217,10 +217,10 @@ class PCXBlock(XBlock):
 
         css_urls = (
             'static/css/pcxblock.css',
-            'static/css/font.css',
+            'static/css/test_css.css',
         )
 
-        
+
         self.load_resources(js_urls, css_urls, fragment)
 
         fragment.initialize_js('PCXBlock')
