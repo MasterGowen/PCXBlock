@@ -78,6 +78,7 @@ div.designer {
     background-color: #bcbfc1;
 }
 div.designer > canvas {
+    height: 300px;
 	overflow:hidden;
 }
 div {
