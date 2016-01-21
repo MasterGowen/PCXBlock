@@ -220,8 +220,12 @@ class PCXBlock(XBlock):
             'static/css/test_css.css',
         )
 
+        img_urls = (
 
-        self.load_resources(js_urls, css_urls, fragment)
+        	'static/img/logo.png',
+
+        	)
+        self.load_resources(js_urls, css_urls, img_urls, fragment)
 
         fragment.initialize_js('PCXBlock')
         return fragment
