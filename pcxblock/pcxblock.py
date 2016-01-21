@@ -229,7 +229,7 @@ class PCXBlock(XBlock):
             'static/js/Crafters/Move2DCrafter.js',
             'static/js/Crafters/SimpleCrafter.js',
             'static/js/Crafters/WallCrafter.js',
-            'static/js/jquery-ui.min.js',
+            'static/js/Utils/jquery-ui.min.js',
             'static/js/Utils/bootstrap.min.js',
             
         )
