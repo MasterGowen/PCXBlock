@@ -1,17 +1,16 @@
 .preview-menu {
     background-color: aqua;
 }
-body,html {
+/*body,html {
 	background-color: #bcbfc1;
 	margin: 0;
 	padding: 0;
     height: 100%;
     width: 100%;
-    /*overflow: hidden;*/
     font-family: "dinreg";
 	color: #525b66;
     overflow: hidden;
-}
+}*/
 .button {
     font-size:1.1em;
 }
