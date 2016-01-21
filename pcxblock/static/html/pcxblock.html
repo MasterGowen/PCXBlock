@@ -114,16 +114,16 @@
             var createDef = function () {
                 window.World = new WorldClass($('.designer'));
                 window.minimimumOpacity = 0.1;
-                onWindowResize();
+               // onWindowResize();
                 window.World.Crafter = new Move2DCrafter();
                 $('.buttons.d2d').css('display', 'block');
                 window.World.SetMode(window.Modes.two);
             };
             createDef();
             $('.designer')[0].oncontextmenu = function () { return false; };
-            window.addEventListener('resize', onWindowResize, false);
+           // window.addEventListener('resize', onWindowResize, false);
             window.World.Crafter = new WallCrafter();
-            onWindowResize();
+           // onWindowResize();
             $('#linetool').addClass('active');
             $('.designer .controls').mousedown(function (event) {
                 if (event.stopPropagation)
@@ -215,5 +215,5 @@
 
         </div>
     </div>
-    
+
  </div>

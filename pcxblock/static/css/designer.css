@@ -70,6 +70,7 @@ div.designer {
     border: 3px solid #676767;
 }
 .designer-block {
+    width: 500px;
     padding-left: 30px;
     padding-top: 30px;
     background-color: #bcbfc1;
