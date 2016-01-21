@@ -231,7 +231,6 @@ class PCXBlock(XBlock):
             'static/js/Utils/Wall.js',
             'static/js/Utils/Wheel.js',
             'static/js/World.js',
-            'static/js/jq.js',
         )
 
         css_urls = (
