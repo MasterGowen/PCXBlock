@@ -46,14 +46,11 @@
                 }
             };
         </script>
-<div id="obertka" style="height: 1002px;">
+<div id="obertka" style="height: 302px;">
 
     <body img="img/example.jpg">
         <!--<div class="loader"></div>-->
-        <div class='leftMenu'>
-            <a class='logo' href="http://domovoi3d.isystemlab.ru"><img src="img/logo.png"/></a>
-            <div id="task">Задание</div>
-        </div>
+
         <div class='buttons d2d'>
             <div id="linetool" title="Линия" class="tool"><img src="img/line.png"/></div>
             <!--<div id="circle-tool" title="Окружность"><img src="img/circle.png"/></div>-->
@@ -114,7 +111,7 @@
             var createDef = function () {
                 window.World = new WorldClass($('.designer'));
                 window.minimimumOpacity = 0.1;
-               // onWindowResize();
+                onWindowResize();
                 window.World.Crafter = new Move2DCrafter();
                 $('.buttons.d2d').css('display', 'block');
                 window.World.SetMode(window.Modes.two);
