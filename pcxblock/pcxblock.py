@@ -221,7 +221,6 @@ class PCXBlock(XBlock):
             'static/js/Drawers/Drawer.js',
             'static/js/Drawers/Drawer2D.js',
             'static/js/js/guid.js',
-            'static/js/js/jq.js',
             'static/js/js/jscolor.js',
             'static/js/Utils/bootstrap.min.js',
             'static/js/Utils/caman.full.js',
