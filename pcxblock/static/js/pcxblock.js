@@ -1,6 +1,6 @@
 function PCXBlock(runtime, element) {
 
-    console.log("lol");
+    //console.log("lol");
 
     function success_func(result) {
         //console.log("Количество баллов: " + result.correct/result.weight*100 + " ОТВЕТОВ: " + result.attempts);
