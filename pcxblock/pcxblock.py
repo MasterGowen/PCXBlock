@@ -213,34 +213,13 @@ class PCXBlock(XBlock):
 
         js_urls = (
             'static/js/pcxblock.js',
-            'static/js/Behaviours/Behaviour.js',
-            'static/js/Crafters/Crafter.js',
-            'static/js/Crafters/Move2DCrafter.js',
-            'static/js/Crafters/SimpleCrafter.js',
-            'static/js/Crafters/WallCrafter.js',
-            'static/js/Drawers/Drawer.js',
-            'static/js/Drawers/Drawer2D.js',
-            'static/js/js/guid.js',
-            'static/js/js/jq.js',
-            'static/js/js/jscolor.js',
-            'static/js/Utils/bootstrap.min.js',
-            'static/js/Utils/caman.full.js',
-            'static/js/Utils/caman.full.min.js',
-            'static/js/Utils/FindCycles.js',
-            'static/js/Utils/NumberFormat.js',
-            'static/js/Utils/Pnt.js',
-            'static/js/Utils/Wall.js',
-            'static/js/Utils/Wheel.js',
-            'static/js/World.js',
-            'static/js/jq.js',
 
 
         )
 
         css_urls = (
             'static/css/pcxblock.css',
-            'static/css/designer.css',
-            'static/css/font.css',
+
         )
 
         self.load_resources(js_urls, css_urls, fragment)
