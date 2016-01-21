@@ -51,7 +51,7 @@
     <body img="img/example.jpg">
         <!--<div class="loader"></div>-->
         <div class='leftMenu'>
-            <a class='logo' href="http://domovoi3d.isystemlab.ru"><img src="static/img/logo.png"/></a>
+            <a class='logo' href="http://domovoi3d.isystemlab.ru"><img src="img/logo.png"/></a>
             <div id="task">Задание</div>
         </div>
         <div class='buttons d2d'>
@@ -108,4 +108,83 @@
     </body>
 
   </div>   
+  <script type="text/javascript">
+  $(document).ready(function () {
+            window.quality = 30;
+            var createDef = function () {
+                window.World = new WorldClass($('.designer'));
+                window.minimimumOpacity = 0.1;
+                onWindowResize();
+                window.World.Crafter = new Move2DCrafter();
+                $('.buttons.d2d').css('display', 'block');
+                window.World.SetMode(window.Modes.two);
+            };
+            createDef();
+            $('.designer')[0].oncontextmenu = function () { return false; };
+            window.addEventListener('resize', onWindowResize, false);
+            window.World.Crafter = new WallCrafter();
+            onWindowResize();
+            $('#linetool').addClass('active');
+            $('.designer .controls').mousedown(function (event) {
+                if (event.stopPropagation)
+                    event.stopPropagation();
+            });
+            $('.designer .controls .left').mousedown(function (e) {
+                window.World.Drawer.MoveLeft();
+            });
+            $('.designer .controls .right').mousedown(function (e) {
+                window.World.Drawer.MoveRight();
+            });
+            $('.designer .controls .up').mousedown(function (e) {
+                window.World.Drawer.MoveUp();
+            });
+            $('.designer .controls .down').mousedown(function (e) {
+                window.World.Drawer.MoveBottom();
+            });
+            $('.designer .controls .zoom-in').mousedown(function (e) {
+                window.World.Drawer.ScaleDown();
+            });
+            $('.designer .controls .zoom-out').mousedown(function (e) {
+                window.World.Drawer.ScaleUp();
+            });
+            $('.buttons div').click(function () {
+                if ($(this).hasClass('tool')) {
+                    $('.buttons div').removeClass('active');
+                    $(this).addClass('active');
+                }
+                var tool = $(this).attr('id');
+                Meths[tool]();
+            });
+            
+            $('body').on('click', '#drawerButtons #drawBottomLine', function () {
+                $('#drawerButtons .active').removeClass('active');
+                $(this).addClass('active');
+                $('#drawerButtons #saveResult').show();
+                if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetLineMode(true);
+            });
+            $('body').on('click', '#drawerButtons #drawLayers', function () {
+                $('#drawerButtons .active').removeClass('active');
+                $(this).addClass('active');
+                $('#drawerButtons #saveResult').hide();
+                if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetLineMode(false);
+            });
+            $('body').on('click', '#drawerButtons #saveResult', function () {
+                var canvas = $('.designer canvas').get(0);
+                // save canvas image as data url (png format by default)
+                var dataURL = canvas.toDataURL();
+                downloadCanvas(dataURL, 'result.png');
+                
+            });
+            $('#task').click(function () {
+                $('#errorModal .modal-title').text('Ваше задание');
+                $('#errorModal').modal('show');
+            });
+        });
+        function downloadCanvas(currDataURL, filename) {
+            var link = document.createElement("a");
+            link.href = currDataURL;
+            link.download = filename;
+            link.click();
+        }
+    </script>
  </div>
