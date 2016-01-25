@@ -1,19 +1,22 @@
 # -*- coding: utf-8 -*-
 
+import datetime
+import pkg_resources
 import json
 import pytz
 import datetime
 import pkg_resources
+import copy
 
 from django.template import Context, Template
 from django.utils.encoding import smart_text
 
 from xblock.core import XBlock
-from xblock.fields import Scope, Integer, String, Boolean
+from xblock.fields import Scope, Integer, String, JSONField, Boolean
 from xblock.fragment import Fragment
 
 from xmodule.util.duedate import get_extended_due_date
-
+from webob.response import Response
 
 class PCXBlock(XBlock):
     display_name = String(
@@ -275,7 +278,7 @@ class PCXBlock(XBlock):
 
     @XBlock.json_handler
     def student_submit(self, data, suffix=''):
-        #pic = json.loads(data)
+        pic = json.loads(data)
         #self.student_picture = pic["picture"]
         #pic = pic["picture"]
         #self.attempts += 1
