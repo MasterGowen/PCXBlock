@@ -21,9 +21,9 @@ function PCXBlock(runtime, element) {
 
 
     function success_save(result){
-    	var span = document.createElement('span');
-    	span.innerHTML = 'Сохранено';
-    	span.classList.add('saved');
+        var span = document.createElement('span');
+        span.innerHTML = 'Сохранено';
+        span.classList.add('saved');
         element.getElementsByClassName('action')[0].appendChild(span);
         setTimeout(function(){element.getElementsByClassName('saved')[0].parentNode.removeChild(element.getElementsByClassName('saved')[0])}, 1000);        
     };
@@ -47,7 +47,7 @@ function PCXBlock(runtime, element) {
         $.ajax({
             type: "POST",
             url: handlerUrl,
-            data: student_picture,
+            data: '{"picture":'+student_picture+'}',
             //success: success_check
         });
 
