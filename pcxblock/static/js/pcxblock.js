@@ -48,7 +48,7 @@ function PCXBlock(runtime, element) {
         $.ajax({
             type: "POST",
             url: handlerUrl,
-            data: JSON.stringify({picture: 'bla' }),
+            data: JSON.stringify({picture: student_picture }),
             //success: success_check
         });
 
