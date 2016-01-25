@@ -280,7 +280,7 @@ class PCXBlock(XBlock):
     def student_submit(self, data, suffix=''):
         #pic = json.loads(data)
         #self.student_picture = pic["picture"]
-        pic = pic["picture"]
+        pic = data["picture"]
         #self.attempts += 1
         return {'result': 'pic'}
 
