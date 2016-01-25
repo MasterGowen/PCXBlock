@@ -4,7 +4,13 @@
         {% if question != '' %}
             <p id="question">{{question}}</p>
         {% endif %}
-        
+
+     <div class="problem-progress">
+        {% if points == 0 or points %}
+            <me-span class="weight"> Набрано баллов: <me-span class="points">{{points}}</me-span></me-span>
+        {% endif %}
+
+    </div>   
 <script type="text/javascript">
             console.log("fromhtml");
             window.EmptyImage = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==';

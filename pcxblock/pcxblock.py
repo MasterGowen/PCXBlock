@@ -281,8 +281,10 @@ class PCXBlock(XBlock):
         #pic = json.loads(data)
         #self.student_picture = pic["picture"]
         pic = data["picture"]
-        #self.attempts += 1
-        return {'result':pic}
+        self.student_picture = data["picture"]
+        self.points = pic.count("aa")
+        self.attempts += 1
+        return {'result':points}
 
 
 
