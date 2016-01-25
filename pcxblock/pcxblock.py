@@ -262,6 +262,7 @@ class PCXBlock(XBlock):
         self.weight = data.get('weight')
         self.correct_answer = data.get('correct_answer')
         self.max_attempts = data.get('max_attempts')
+        self.backgroung_picture = data.get('backgroung_picture')
 
         return {'result': 'success'}
 
