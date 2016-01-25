@@ -37,7 +37,7 @@
                 $('.propertyPanel').height($('html').height() - window.headerHeight - 3);
                 if (typeof World !== "undefined") {
                     if (typeof World.Drawer2D !== "undefined") {
-                        World.Drawer2D.canvas.height = $('.designer-block').height() - 120;
+                        World.Drawer2D.canvas.height = 400;
                         World.Drawer2D.canvas.width = $('.designer').width();
                     }
                 }
@@ -96,22 +96,6 @@
                 <button id="drawLayers" class="microButton active">Режим эскиза</button>
                 <button id="drawBottomLine" class="microButton">Режим чертежа</button>
                 <button id="saveResult" class="microButton" style="display:none">Сохранить результат</button>
-            </div>
-        </div>
-       <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                        <h4 class="modal-title">Ваше задание</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div id="errormessage"></div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">ОК</button>
-                    </div>
-                </div>
             </div>
         </div>
     </body>
