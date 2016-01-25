@@ -8,7 +8,7 @@ function PCXBlock(runtime, element) {
         return dataURL;
     }
 
-    function success_func(result) {
+    /*function success_func(result) {
         //console.log("Количество баллов: " + result.correct/result.weight*100 + " ОТВЕТОВ: " + result.attempts);
         $('.attempts', element).text(result.attempts);
         $(element).find('.weight').html('Набрано баллов: <me-span class="points"></span>');
@@ -17,26 +17,26 @@ function PCXBlock(runtime, element) {
         if (result.max_attempts && result.max_attempts <= result.attempts) {
             $('.send_button', element).html('<p><strong>Попытки исчерпаны</strong></p>')
         };
-    };
+    };*/
 
 
-    function success_save(result){
+    /*function success_save(result){
         var span = document.createElement('span');
         span.innerHTML = 'Сохранено';
         span.classList.add('saved');
         element.getElementsByClassName('action')[0].appendChild(span);
         setTimeout(function(){element.getElementsByClassName('saved')[0].parentNode.removeChild(element.getElementsByClassName('saved')[0])}, 1000);        
-    };
+    };*/
 
-    function success_check(result){
-        console.log("success_check");
+    /*function success_check(result){
+        console.log("success_check");*/
        /* $.ajax({
             type: "POST",
             url: handlerUrl,
             data: '',
             success: success_func
         });    */
-    };
+    /*};*/
 
     var handlerUrl = runtime.handlerUrl(element, 'student_submit');
 
@@ -47,7 +47,7 @@ function PCXBlock(runtime, element) {
         $.ajax({
             type: "POST",
             url: handlerUrl,
-            data: JSON.stringify({ picture: 'bla' }),
+            data: JSON.stringify({picture: 'bla' }),
             //success: success_check
         });
 
