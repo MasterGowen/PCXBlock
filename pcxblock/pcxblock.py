@@ -83,6 +83,13 @@ class PCXBlock(XBlock):
         scope=Scope.settings
     )
 
+    backgroung_picture = String(
+        display_name=u"Подложенная картинка",
+        default="",	
+        scope=Scope.settings
+    )
+
+
     has_score = True
 
     @staticmethod
