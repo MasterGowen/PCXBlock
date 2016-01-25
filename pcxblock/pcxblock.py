@@ -284,7 +284,7 @@ class PCXBlock(XBlock):
         self.student_picture = data["picture"]
         self.points = pic.count("aa")
         self.attempts += 1
-        return {'result':points}
+        return {'result':self.points}
 
 
 
