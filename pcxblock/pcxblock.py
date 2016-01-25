@@ -282,7 +282,7 @@ class PCXBlock(XBlock):
         #self.student_picture = pic["picture"]
         pic = data["picture"]
         #self.attempts += 1
-        return {'result': 'pic'}
+        return {'result':pic}
 
 
 
