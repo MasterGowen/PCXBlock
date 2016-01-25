@@ -3,7 +3,7 @@ function PCXBlock(runtime, element) {
     //console.log("lol");
 
     function get_student_picture(){
-        var canvas = $('.designer canvas').get(0);
+        //var canvas = $('.designer canvas').get(0);
         var dataURL = 'lol';//canvas.toDataURL();
         return dataURL;
     }
@@ -48,7 +48,7 @@ function PCXBlock(runtime, element) {
             type: "POST",
             url: handlerUrl,
             data: student_picture,
-            success: success_check
+            //success: success_check
         });
 
     });
