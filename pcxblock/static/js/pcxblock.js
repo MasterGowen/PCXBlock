@@ -5,7 +5,7 @@ function PCXBlock(runtime, element) {
     function get_student_picture(){
         var canvas = $('.designer canvas').get(0);
         console.log(canvas);
-        var dataURL = 'lol';//canvas.toDataURL();
+        var dataURL = canvas.toDataURL();
         return dataURL;
     }
 
