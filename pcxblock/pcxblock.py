@@ -178,7 +178,7 @@ class PCXBlock(XBlock):
         )
 
         self.load_resources(js_urls, css_urls, fragment)
-        fragment.initialize_js('TxtXBlockEdit')
+        fragment.initialize_js('PCXBlock')
 
         return fragment
 
