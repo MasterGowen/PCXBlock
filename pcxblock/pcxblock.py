@@ -89,6 +89,11 @@ class PCXBlock(XBlock):
         scope=Scope.settings
     )
 
+    student_picture = String(
+        display_name=u"картинка студента",
+        default="",	
+        scope=Scope.user_state
+    )
 
     has_score = True
 
