@@ -9,7 +9,7 @@ function PCXBlock(runtime, element) {
         return dataURL;
     }
 
-    function success_func(result) {
+    /**function success_func(result) {
         //console.log("Количество баллов: " + result.correct/result.weight*100 + " ОТВЕТОВ: " + result.attempts);
         $('.attempts', element).text(result.attempts);
         $(element).find('.weight').html('Набрано баллов: <me-span class="points"></span>');
@@ -18,7 +18,7 @@ function PCXBlock(runtime, element) {
         if (result.max_attempts && result.max_attempts <= result.attempts) {
             $('.send_button', element).html('<p><strong>Попытки исчерпаны</strong></p>')
         };
-    };
+    };*/
 
 
     /*function success_save(result){
@@ -49,7 +49,7 @@ function PCXBlock(runtime, element) {
             type: "POST",
             url: handlerUrl,
             data: JSON.stringify({picture: student_picture }),
-            success: success_func
+            //success: success_func
         });
 
     });
