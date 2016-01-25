@@ -1,6 +1,10 @@
 
 <div class="xblock xblock-student_view xblock-student_view-problem xmodule_display xmodule_CapaModule xblock-initialized">
-
+    <div class="problem">
+        {% if question != '' %}
+            <p id="question">{{question}}</p>
+        {% endif %}
+        
 <script type="text/javascript">
             console.log("fromhtml");
             window.EmptyImage = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==';
@@ -186,11 +190,7 @@
     </script>
 
 
-    <div class="problem">
-        {% if question != '' %}
-            <p id="question">{{question}}</p>
-        {% endif %}
-        
+
 
         <div class="action">
                 {% if past_due and answer_opportunity %}
