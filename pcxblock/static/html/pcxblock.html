@@ -173,6 +173,7 @@
                 var canvas = $('.designer canvas').get(0);
                 // save canvas image as data url (png format by default)
                 var dataURL = canvas.toDataURL();
+                console.log(dataURL);
                 downloadCanvas(dataURL, 'result.png');
                 
             });
