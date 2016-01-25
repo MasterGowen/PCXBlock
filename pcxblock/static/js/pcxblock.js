@@ -1,14 +1,14 @@
-
 function PCXBlock(runtime, element) {
 
     //console.log("lol");
 
     function get_student_picture(){
         var canvas = $('.designer canvas').get(0);
-        var dataURL = canvas.toDataURL();
+        var dataURL = 'lol';//canvas.toDataURL();
+        result dataURL;
     }
 
-    /*function success_func(result) {
+    function success_func(result) {
         //console.log("Количество баллов: " + result.correct/result.weight*100 + " ОТВЕТОВ: " + result.attempts);
         $('.attempts', element).text(result.attempts);
         $(element).find('.weight').html('Набрано баллов: <me-span class="points"></span>');
@@ -17,7 +17,7 @@ function PCXBlock(runtime, element) {
         if (result.max_attempts && result.max_attempts <= result.attempts) {
             $('.send_button', element).html('<p><strong>Попытки исчерпаны</strong></p>')
         };
-    };*/
+    };
 
 
     function success_save(result){
@@ -29,7 +29,7 @@ function PCXBlock(runtime, element) {
     };
 
     function success_check(result){
-        console.log("success check!!!!");
+        console.log("success_check");
        /* $.ajax({
             type: "POST",
             url: handlerUrl,
@@ -39,13 +39,16 @@ function PCXBlock(runtime, element) {
     };
 
     var handlerUrl = runtime.handlerUrl(element, 'student_submit');
-    //var student_picture = get_student_picture();
-    console.log("get_student_picture: ");// + student_picture);
+
+    var student_picture = get_student_picture();
+
+    console.log("get_student_picture: " + student_picture);
+
     $(element).find('.Check').bind('click', function() {
         $.ajax({
             type: "POST",
             url: handlerUrl,
-            data: '{"student_picture":'+'student_picture'+'}',
+            data: student_picture,
             success: success_check
         });
 

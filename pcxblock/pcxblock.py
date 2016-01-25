@@ -278,6 +278,7 @@ class PCXBlock(XBlock):
         #student_json = json.loads(data)
         #self.answer = student_json["answer"]
         #self.points = points
+        self.student_picture = data;
         self.attempts += 1
         return {'result': 'success'}
 
