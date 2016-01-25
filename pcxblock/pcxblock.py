@@ -158,6 +158,7 @@ class PCXBlock(XBlock):
             "correct_answer": self.correct_answer,
             "answer": self.answer,
             "max_attempts": self.max_attempts,
+            "backgroung_picture": self.backgroung_picture,
         }
 
         fragment = Fragment()
@@ -193,6 +194,7 @@ class PCXBlock(XBlock):
             "correct_answer": self.correct_answer,
             "answer": self.answer,
             "attempts": self.attempts,
+            "backgroung_picture": self.backgroung_picture,
         }
 
         if self.max_attempts != 0:
