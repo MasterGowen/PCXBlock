@@ -15,12 +15,12 @@
             };
             var formatter = new Formatting.NumberFormatter(new Formatting.NumberFormatInfo());
             function onWindowResize() {
-                $('.leftMenu').css("height", window.headerHeight);
+                /*$('.leftMenu').css("height", window.headerHeight);
                 $('.leftMenu .logo').css("height", window.headerHeight);
                 $('.leftMenu .photo img').css("height", window.headerHeight*0.70);
                 $('.leftMenu .button').css("padding-top", window.headerHeight / 3);
                 $('.leftMenu .button').css("height", 2 * window.headerHeight / 3);
-                $('.buttons').css("top", window.headerHeight);
+                $('.buttons').css("top", window.headerHeight);*/
                 $('.designer-block').css("margin-left", $('.buttons').width());
                 $('.designer-block').height($('html').height() - window.headerHeight);
                 $('.designer-block').css("margin-top", window.headerHeight);
@@ -181,6 +181,7 @@
                 $('#errorModal .modal-title').text('Ваше задание');
                 $('#errorModal').modal('show');
             });
+            console.log("acghsdbvhc" + )
         });
         function downloadCanvas(currDataURL, filename) {
             var link = document.createElement("a");
