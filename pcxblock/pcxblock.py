@@ -7,7 +7,8 @@ import pytz
 import datetime
 import pkg_resources
 import copy
-import sys, cv2 as cv
+import sys
+import cv2
 import base64
 import numpy as np
 
