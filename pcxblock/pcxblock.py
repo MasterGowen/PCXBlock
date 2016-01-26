@@ -286,11 +286,12 @@ class PCXBlock(XBlock):
         self.student_picture = data["picture"]
         self.points = pic.count("aa")
         self.attempts += 1
+        
+        img_temp = data["picture"]
 
-
-
-
-
+        img_array = map(int, img_temp.decode('base64'))
+        img = cv2.imdecode(img_array, -1)
+        
         return {'result':self.points}
 
 
