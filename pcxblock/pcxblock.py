@@ -326,8 +326,9 @@ class PCXBlock(XBlock):
         dst = cv2.inRange(result_img, RED_MIN, RED_MAX)
         no_blue = cv2.countNonZero(dst)
         self.points = int(no_blue)
+        lol = self.points
         
-        return {'result':self.points}
+        return {"result":lol}
 
 
 
