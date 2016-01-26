@@ -7,8 +7,10 @@ import pytz
 import datetime
 import pkg_resources
 import copy
-import cv2
+import sys, cv2 as cv
 import base64
+import numpy as np
+
 
 from django.template import Context, Template
 from django.utils.encoding import smart_text
@@ -287,13 +289,7 @@ class PCXBlock(XBlock):
         self.points = pic.count("aa")
         self.attempts += 1
 
-        w = 500
-        no_of_bits = 8
-        channels = 3
-        h = 500
-        image = cv2.CreateImage((w,h),no_of_bits,channels)
-
-        lol = str(image)
+        lol = str(cv.__version__)
         #img_temp = data["picture"]
 
         #img_array = map(int, img_temp.decode('base64'))
