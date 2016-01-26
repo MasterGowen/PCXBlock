@@ -287,11 +287,11 @@ class PCXBlock(XBlock):
         self.points = pic.count("aa")
         self.attempts += 1
 
-        w=500
-        no_of_bits=8
-        channels=3
-        h=500
-        image=cv.CreateImage((w,h),no_of_bits,channels)
+        w = 500
+        no_of_bits = 8
+        channels = 3
+        h = 500
+        image = cv2.CreateImage((w,h),no_of_bits,channels)
 
         lol = str(image)
         #img_temp = data["picture"]
