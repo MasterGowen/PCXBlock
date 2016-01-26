@@ -324,11 +324,10 @@ class PCXBlock(XBlock):
         RED_MAX = np.array([50, 150, 255], np.uint8)
 
         dst = cv2.inRange(result_img, RED_MIN, RED_MAX)
-        no_blue = cv2.countNonZero(dst)
-        self.points = int(no_blue)
-        lol = self.points
-        
-        return {"result":lol}
+        red_pix = cv2.countNonZero(dst)
+        self.points = int(red_pix)
+s       
+        return {"points":self.points}
 
 
 
