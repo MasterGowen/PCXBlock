@@ -1,4 +1,47 @@
 <div class="wrapper-comp-settings editor-with-buttons is-active" id="settings-tab">
+<div id="obertka" style="height: 302px;">
+
+    <body background="{{backgroung_picture}}">
+        <!--<div class="loader"></div>-->
+
+        <div class='buttons d2d'>
+            <div id="linetool" title="Линия" class="tool"><img src="img/line.png"/></div>
+            <!--<div id="circle-tool" title="Окружность"><img src="img/circle.png"/></div>-->
+            <div id="reset" title="Очистить"><img src="img/eraser.png"/></div>
+            <div id="back" title="Отменить"><img src="img/back.png"/></div>
+        </div>
+        <div class="designer-block">
+            <div class='designer'>
+                <table class="controls">
+                    <tr>
+                        <td></td>
+                        <td class="act up"></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2" class="act left"></td>
+                        <td class="act zoom-in"></td>
+                        <td rowspan="2" class="act right"></td>
+                    </tr>
+                    <tr>
+                        <td class="act zoom-out"></td>                    
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td class="act down"></td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+            <div id="drawerButtons">
+                <button id="drawLayers" class="microButton active">Режим эскиза</button>
+                <button id="drawBottomLine" class="microButton">Режим чертежа</button>
+                <button id="saveResult" class="microButton" style="display:none">Сохранить результат</button>
+            </div>
+        </div>
+    </body>
+
+  </div>
   <ul class="list-input settings-list">
   
     <li class="field comp-setting-entry is-set">
