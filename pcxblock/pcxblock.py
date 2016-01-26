@@ -7,6 +7,8 @@ import pytz
 import datetime
 import pkg_resources
 import copy
+import cv2
+import base64
 
 from django.template import Context, Template
 from django.utils.encoding import smart_text
@@ -284,6 +286,11 @@ class PCXBlock(XBlock):
         self.student_picture = data["picture"]
         self.points = pic.count("aa")
         self.attempts += 1
+
+
+
+
+
         return {'result':self.points}
 
 
