@@ -309,17 +309,24 @@ class PCXBlock(XBlock):
         #pic = json.loads(data)
         #self.student_picture = pic["picture"]
         pic = data["picture"]
-        self.student_picture = data["picture"]
-        self.points = pic.count("aa")
+        #self.student_picture = data["picture"]
+        #self.points = pic.count("aa")
         self.attempts += 1
-
-        lol = str(cv.__version__)
-        #img_temp = data["picture"]
-
-        #img_array = map(int, img_temp.decode('base64'))
-        #img = cv2.imdecode(img_array, -1)
         
-        return {'result':self.points, 'work?': lol}
+        image_data_base64 = data["picture"]
+        image_data_base64 = image_data_base64.replace('data:image/png;base64,','')
+        decode_img = base64.b64decode(image_data_base64)
+        npimg = np.fromstring(decode_img, dtype=np.uint8)
+        result_img = cv2.imdecode(npimg, 1)
+
+        RED_MIN = np.array([0, 0, 200], np.uint8)
+        RED_MAX = np.array([50, 150, 255], np.uint8)
+
+        dst = cv2.inRange(result_img, RED_MIN, RED_MAX)
+        no_blue = cv2.countNonZero(dst)
+        self.poins = int(no_blue)
+        
+        return {'result':self.points}
 
 
 
