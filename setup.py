@@ -21,9 +21,13 @@ def package_data(pkg, roots):
 
 
 setup(
-    name='pc-xblock',
+    name='pcxblock',
     version='0.0a',
     description='Pictures comparision XBlock',
+    license='Affero GNU General Public License v3 (GPLv3)',
+    url="https://github.com/MasterGowen/PCXBlock.git",
+    author="Gowen",
+    zip_safe=False,
     packages=[
         'pcxblock',
     ],
