@@ -307,13 +307,8 @@ class PCXBlock(XBlock):
 
     @XBlock.json_handler
     def student_submit(self, data, suffix=''):
-        #pic = json.loads(data)
-        #self.student_picture = pic["picture"]
-        pic = data["picture"]
-        #self.student_picture = data["picture"]
-        #self.points = pic.count("aa")
-        self.attempts += 1
         
+        self.student_picture = data["picture"]
         image_data_base64 = data["picture"]
         image_data_base64 = image_data_base64.replace('data:image/png;base64,','')
         decode_img = base64.b64decode(image_data_base64)
@@ -326,8 +321,9 @@ class PCXBlock(XBlock):
         dst = cv2.inRange(result_img, RED_MIN, RED_MAX)
         red_pix = cv2.countNonZero(dst)
         self.points = int(red_pix)
-              
-        return {"points":self.points}
+        self.attempts += 1
+
+        return {"points": self.points}
 
 
 
