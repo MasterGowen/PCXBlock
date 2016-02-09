@@ -1,6 +1,9 @@
 ﻿var Drawer = function () {
     this.Offset = new Pnt();
+    this.MaxOffset = new Pnt();
+    this.MinOffset = new Pnt();
     this.Scale = 1;
+    this.MinScale = 1;
     this.CellSize = 2;
 };
 Drawer.prototype = {

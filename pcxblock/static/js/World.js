@@ -8,7 +8,9 @@ window.WorldClass = function (container) {
         Objs: [],
         Line: [],
         Elements: [],
-        Normals:[]
+        Normals: [],
+        Beziers: [],
+        SavedResult:''
     };
     this.Events = [];
     this.UndoedEvents = [];
@@ -129,7 +131,7 @@ window.WorldClass.prototype = {
             return;
         this.lastDate = Date.now();
         this.Drawer.Start();
-        if (this.Crafter.LineMode) this.Drawer.Draw(this.Objects, '#CBBFA8');
+        if (this.Crafter.PlotMode) this.Drawer.Draw(this.Objects, '#CBBFA8');
         else this.Drawer.Draw(this.Objects);
         this.Drawer.End();
     },

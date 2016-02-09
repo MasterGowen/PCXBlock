@@ -13,62 +13,79 @@
         {% endif %}
     </div>   
 
-<script type="text/javascript">
-            console.log("fromhtml");
+
+        <script>
             window.EmptyImage = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==';
             window.minimimumOpacity = 0.1;
             window.headerHeight = 100;
             window.Config = {
                 Wall: { height: 2.5 * 100, width: 2 }
             };
-            //var formatter = new Formatting.NumberFormatter(new Formatting.NumberFormatInfo());
+            var formatter = new Formatting.NumberFormatter(new Formatting.NumberFormatInfo());
             function onWindowResize() {
-                /*$('.leftMenu').css("height", window.headerHeight);
+                $('.leftMenu').css("height", window.headerHeight);
                 $('.leftMenu .logo').css("height", window.headerHeight);
                 $('.leftMenu .photo img').css("height", window.headerHeight*0.70);
                 $('.leftMenu .button').css("padding-top", window.headerHeight / 3);
                 $('.leftMenu .button').css("height", 2 * window.headerHeight / 3);
-                $('.buttons').css("top", window.headerHeight);*/
+                $('.buttons').css("top", window.headerHeight);
                 $('.designer-block').css("margin-left", $('.buttons').width());
-                $('.designer-block').height(460);
-               // $('.designer-block').css("margin-top", window.headerHeight);
+                $('.designer-block').height($('html').height() - window.headerHeight);
+                $('.designer-block').css("margin-top", window.headerHeight);
                 $('.designer-block').css("margin-right", 30);
-                $('.sequence-bottom').css("visibility", "hidden");
-                //$('.buttons').height($('html').height() - 90);
+                $('.buttons').height($('html').height() - 90);
                 $('.propertyPanel').height($('html').height() - window.headerHeight - 3);
                 if (typeof World !== "undefined") {
                     if (typeof World.Drawer2D !== "undefined") {
-                        World.Drawer2D.canvas.height = 400;
+                        World.Drawer2D.canvas.height = $('.designer-block').height() - 120;
                         World.Drawer2D.canvas.width = $('.designer').width();
                     }
                 }
             }
             var Meths = {
-                reset: function () {
+                resettool: function () {
                     window.World.Objects.Walls = [];
-                    window.World.Objects.Line = [];
+                    window.World.Objects.Beziers = [];
                     window.World.Objects.Normals = [];
                     return false;
                 },
-                back: function () {
+                backtool: function () {
                     window.World.Crafter.KeyDown(27);
                     return false;
                 },
-                linetool: function () {
-                   
-                }
+                benttool: function () {
+                    if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetBentMode();
+                },
+                linetool: function() {
+                    if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetLineMode();
+                },
+                beziertool: function() {
+                    if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetBezierMode();
+                },
+                walltool: function () {
+                    if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetWallMode();
+                },
             };
         </script>
 <div id="obertka" style="height: 302px;">
 
-    <body background="{{backgroung_picture}}">
+        <img class="ge_taskImg" src="img/example.jpg" style="display:none"/>
         <!--<div class="loader"></div>-->
-
+        <div class='leftMenu'>
+            <a class='logo'><img src="img/logo.png"/></a>
+            <div class="ge_panel">
+                <button class="ge_gridMode">Убрать сетку</button>
+            </div>
+            <div class="ge_task">Задание</div>
+        </div>
         <div class='buttons d2d'>
-            <div id="linetool" title="Линия" class="tool"><img src="img/line.png"/></div>
+            <div rel="benttool" title="Ломаная" class="tool"><img src="img/bent.png"/></div>
+            <div rel="linetool" title="Линия" class="tool"><img src="img/line.png"/></div>
+            <div rel="walltool" title="Прямоугольник" class="tool"><img src="img/rect.png"/></div>
+            <div rel="beziertool" title="Кривая Безье" class="tool"><img src="img/BezierCurve.png"/></div>
             <!--<div id="circle-tool" title="Окружность"><img src="img/circle.png"/></div>-->
-            <div id="reset" title="Очистить"><img src="img/eraser.png"/></div>
-            <div id="back" title="Отменить"><img src="img/back.png"/></div>
+            <div rel="resettool" title="Очистить"><img src="img/eraser.png"/></div>
+            <div rel="backtool" title="Отменить"><img src="img/back.png"/></div>
         </div>
         <div class="designer-block">
             <div class='designer'>
@@ -93,17 +110,33 @@
                     </tr>
                 </table>
             </div>
-            <div id="drawerButtons">
-                <button id="drawLayers" class="microButton active">Режим эскиза</button>
-                <button id="drawBottomLine" class="microButton">Режим чертежа</button>
-                <button id="saveResult" class="microButton" style="display:none">Сохранить результат</button>
+            <div class="ge_drawerButtons">
+                <button class="ge_drawLayers microButton active">Режим эскиза</button>
+                <button class="ge_drawBottomLine microButton">Режим чертежа</button>
+                <button class="ge_saveResult microButton" style="display:none">Сохранить результат</button>
             </div>
         </div>
-    </body>
+        <div class="modal fade ge_errorModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title">Ваше задание</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="ge_errormessage"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">ОК</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+  
 
   </div>   
-  <script type="text/javascript">
-  $(document).ready(function () {
+ <script>
+        $(document).ready(function () {
             window.quality = 30;
             var createDef = function () {
                 window.World = new WorldClass($('.designer'));
@@ -112,13 +145,14 @@
                 window.World.Crafter = new Move2DCrafter();
                 $('.buttons.d2d').css('display', 'block');
                 window.World.SetMode(window.Modes.two);
+                window.World.Drawer2D.setImage($('img.ge_taskImg').get(0));
             };
             createDef();
             $('.designer')[0].oncontextmenu = function () { return false; };
-           // window.addEventListener('resize', onWindowResize, false);
+            window.addEventListener('resize', onWindowResize, false);
             window.World.Crafter = new WallCrafter();
-           // onWindowResize();
-            $('#linetool').addClass('active');
+            onWindowResize();
+            $('[rel=benttool]').addClass('active');
             $('.designer .controls').mousedown(function (event) {
                 if (event.stopPropagation)
                     event.stopPropagation();
@@ -146,42 +180,39 @@
                     $('.buttons div').removeClass('active');
                     $(this).addClass('active');
                 }
-                var tool = $(this).attr('id');
+                var tool = $(this).attr('rel');
                 Meths[tool]();
             });
-            
-            $('body').on('click', '#drawerButtons #drawBottomLine', function () {
-                $('#drawerButtons .active').removeClass('active');
+            $('.ge_gridMode').click(function () {
+                var gridMode = window.World.Crafter.GetGridMode();
+                $(this).text(!gridMode?"Убрать сетку":"Показать сетку");
+                if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetGridMode(!gridMode);
+            });
+            $('body').on('click', '.ge_drawerButtons .ge_drawBottomLine', function () {
+                $('.ge_drawerButtons .active').removeClass('active');
                 $(this).addClass('active');
-                $('#drawerButtons #saveResult').show();
-                if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetLineMode(true);
+                $('.ge_drawerButtons .ge_saveResult').show();
+                if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetPlotMode(true);
             });
-            $('body').on('click', '#drawerButtons #drawLayers', function () {
-                $('#drawerButtons .active').removeClass('active');
+            $('body').on('click', '.ge_drawerButtons .ge_drawLayers', function () {
+                $('.ge_drawerButtons .active').removeClass('active');
                 $(this).addClass('active');
-                $('#drawerButtons #saveResult').hide();
-                if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetLineMode(false);
+                $('.ge_drawerButtons .ge_saveResult').hide();
+                if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetPlotMode(false);
             });
-            $('body').on('click', '#drawerButtons #saveResult', function () {
-                var canvas = $('.designer canvas').get(0);
-                // save canvas image as data url (png format by default)
-                var dataURL = canvas.toDataURL();
-               // console.log(dataURL);
-                downloadCanvas(dataURL, 'result.png');
-                
+            $('body').on('click', '.ge_drawerButtons .ge_saveResult', function () {
+                if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetResultMode(true);
+                window.World.Draw();
+                $('.ge_gridMode').text("Убрать сетку");
             });
-            $('#task').click(function () {
-                $('#errorModal .modal-title').text('Ваше задание');
-                $('#errorModal').modal('show');
+            $('.ge_task').click(function () {
+                $('.ge_errorModal .modal-title').text('Ваше задание');
+                $('.ge_errorModal').modal('show');
             });
-           // console.log("acghsdbvhc")
         });
-        function downloadCanvas(currDataURL, filename) {
-            var link = document.createElement("a");
-            link.href = currDataURL;
-            link.download = filename;
-            link.click();
-        }
+        var getResult = function() {
+            return window.World.SavedResult;
+        };
     </script>
 
 
