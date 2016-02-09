@@ -1,6 +1,9 @@
 function PCXBlock(runtime, element) {
 
     //console.log("lol");
+    var getResult = function() {
+            return element.World.SavedResult;
+        };
 
     function get_student_picture(){
         //var canvas = $('.designer canvas').get(0);
