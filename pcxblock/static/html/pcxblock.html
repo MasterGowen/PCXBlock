@@ -67,9 +67,9 @@
                 },
             };
         </script>
-<div id="obertka" style="height: 302px;">
 
-        <img class="ge_taskImg" src="img/example.jpg" style="display:none"/>
+<div id="workzone">
+        <img class="ge_taskImg" src="http://img1.joyreactor.cc/pics/post/full/anon-%D0%9A%D0%B0%D1%80%D1%82%D0%B8%D0%BD%D0%BA%D0%B0-2191131.jpeg" style="display:none"/>
         <!--<div class="loader"></div>-->
         <div class='leftMenu'>
             <a class='logo'><img src="img/logo.png"/></a>
@@ -132,7 +132,7 @@
                 </div>
             </div>
         </div>
-  
+    </div>
 
   </div>   
  <script>
@@ -188,19 +188,19 @@
                 $(this).text(!gridMode?"Убрать сетку":"Показать сетку");
                 if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetGridMode(!gridMode);
             });
-            $('body').on('click', '.ge_drawerButtons .ge_drawBottomLine', function () {
+            $('#workzone').on('click', '.ge_drawerButtons .ge_drawBottomLine', function () {
                 $('.ge_drawerButtons .active').removeClass('active');
                 $(this).addClass('active');
                 $('.ge_drawerButtons .ge_saveResult').show();
                 if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetPlotMode(true);
             });
-            $('body').on('click', '.ge_drawerButtons .ge_drawLayers', function () {
+            $('#workzone').on('click', '.ge_drawerButtons .ge_drawLayers', function () {
                 $('.ge_drawerButtons .active').removeClass('active');
                 $(this).addClass('active');
                 $('.ge_drawerButtons .ge_saveResult').hide();
                 if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetPlotMode(false);
             });
-            $('body').on('click', '.ge_drawerButtons .ge_saveResult', function () {
+            $('#workzone').on('click', '.ge_drawerButtons .ge_saveResult', function () {
                 if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetResultMode(true);
                 window.World.Draw();
                 $('.ge_gridMode').text("Убрать сетку");
