@@ -2,6 +2,7 @@ function PCXBlock(runtime, element) {
 
     //console.log("lol");
     var getResult = function() {
+        console.log("lol")
             return element.World.SavedResult;
         };
 
