@@ -3,9 +3,9 @@ function PCXBlock(runtime, element) {
     //console.log("lol");
 
     function get_student_picture(){
-        var canvas = $('.designer canvas').get(0);
-        console.log(canvas);
-        var dataURL = canvas.toDataURL();
+        //var canvas = $('.designer canvas').get(0);
+       // console.log(canvas);
+        var dataURL =  "dU" //canvas.toDataURL();
         return dataURL;
     }
 
