@@ -1,6 +1,5 @@
 function PCXBlock(runtime, element) {
 
-            window = element;
             window.EmptyImage = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==';
             window.minimimumOpacity = 0.1;
             window.headerHeight = 100;
