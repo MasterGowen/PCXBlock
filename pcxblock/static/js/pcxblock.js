@@ -17,7 +17,7 @@ function PCXBlock(runtime, element) {
                 $('.buttons').css("top", window.headerHeight);
                 $('.designer-block').css("margin-left", 75);
                 $('.designer-block').height(600);
-                $('.designer-block').css("margin-top", window.headerHeight);
+                $('.designer-block').css("margin-top", 0);
                 $('.designer-block').css("margin-right", 30);
                 $('.buttons').height(525);
                 $('.propertyPanel').height($('html').height() - window.headerHeight - 3);
