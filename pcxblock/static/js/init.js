@@ -50,7 +50,8 @@
                 },
             };
 
-$(document).ready(function () {
+        
+        $(document).ready(function () {
             window.quality = 30;
             var createDef = function () {
                 window.World = new WorldClass($('.designer'));

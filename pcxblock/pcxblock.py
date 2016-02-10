@@ -277,7 +277,7 @@ class PCXBlock(XBlock):
             'static/js/Crafters/WallCrafter.js',
             'static/js/Utils/jquery-ui.min.js',
             'static/js/Utils/bootstrap.min.js',
-            'static/js/init.js',
+            #'static/js/init.js',
             'static/js/pcxblock.js',
         )
 
