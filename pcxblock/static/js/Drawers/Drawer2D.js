@@ -7,8 +7,8 @@
     this.canvas = canvas2D;
 	var $this = this;
     Drawer.call(this);
-	$(window).keydown(function (e) {
-        if (window.World.Drawer !== $this) return;
+	$(element).keydown(function (e) {
+        if (element.World.Drawer !== $this) return;
         if (e.keyCode == 87 || e.keyCode == 38) {
             $this.MoveUp();
         }
@@ -69,7 +69,7 @@ Drawer2D.prototype.Draw = function (objects, currentColor) {
         ctx.moveTo(last.X, last.Y);
         ctx.lineTo($new.X, $new.Y);
         var col = currentColor || "rgba(255,182,0, 1)";
-        if (typeof window.World.Crafter.walls !== 'undefined' && window.World.Crafter.walls.filter(function (d) { return d.Eq(a); }).length > 0)
+        if (typeof element.World.Crafter.walls !== 'undefined' && element.World.Crafter.walls.filter(function (d) { return d.Eq(a); }).length > 0)
             col = currentColor || "rgba(237, 108, 2, 1)";
         ctx.strokeStyle = col;
         ctx.lineWidth = a.Width / $this.Scale;
@@ -105,7 +105,7 @@ Drawer2D.prototype.Draw = function (objects, currentColor) {
 		ctx.moveTo(last.X, last.Y);
         ctx.lineTo($new.X, $new.Y);
         var col = currentColor || "rgba(255,182,0, 1)";
-        if (typeof window.World.Crafter.walls !== 'undefined' && window.World.Crafter.walls.filter(function (d) { return d.Eq(a); }).length > 0)
+        if (typeof element.World.Crafter.walls !== 'undefined' && element.World.Crafter.walls.filter(function (d) { return d.Eq(a); }).length > 0)
             col = currentColor || "rgba(237, 108, 2, 1)";
 		ctx.strokeStyle = col;
         ctx.lineWidth = a.Width / $this.Scale;
@@ -115,14 +115,14 @@ Drawer2D.prototype.Draw = function (objects, currentColor) {
 		drawEllipse(a.End, 1, currentColor || '#ED6C02');
 	});
     this.End();
-    if (window.World.Crafter.ResultMode) {
+    if (element.World.Crafter.ResultMode) {
         var dataURL = $this.canvas.toDataURL();
-        window.World.SavedResult = dataURL;
+        element.World.SavedResult = dataURL;
         this.DownloadCanvas(dataURL, 'result.png');
-        window.World.Crafter.SetResultMode(false);
+        element.World.Crafter.SetResultMode(false);
         $this.canvas.width = $this.canvas.OldWidth;
         $this.canvas.height = $this.canvas.OldHeight;
-        window.World.Crafter.SetGridMode(true);
+        element.World.Crafter.SetGridMode(true);
     }
 };
 Drawer2D.prototype.setImage = function (img) {
@@ -135,10 +135,10 @@ Drawer2D.prototype.setImage = function (img) {
         can.Imgheight = this.height;
         var k = can.Imgwidth / can.container.width();
         if (can.Imgheight / can.container.height() < k) k = can.Imgheight / can.container.height();
-        window.World.Drawer.MinScale = k;
-        window.World.Drawer.Scale = k;
-        window.World.Drawer.MinOffset = new Pnt(0, 0);
-        window.World.Drawer.MaxOffset = new Pnt(can.Imgwidth/k, can.Imgheight/k);
+        element.World.Drawer.MinScale = k;
+        element.World.Drawer.Scale = k;
+        element.World.Drawer.MinOffset = new Pnt(0, 0);
+        element.World.Drawer.MaxOffset = new Pnt(can.Imgwidth/k, can.Imgheight/k);
     });
 };
 Drawer2D.prototype.setIdImage = function(id) {
@@ -146,7 +146,7 @@ Drawer2D.prototype.setIdImage = function(id) {
 };
 Drawer2D.prototype.Start = function () {
     var can = this.canvas;
-    if (window.World.Crafter.ResultMode) {
+    if (element.World.Crafter.ResultMode) {
         can.OldWidth = can.container.width();
         can.OldHeight = can.container.height();
         can.width = can.Imgwidth;
@@ -156,10 +156,10 @@ Drawer2D.prototype.Start = function () {
     var ctx = can.getContext("2d");
     ctx.fillStyle = "#FEFEFE";
     ctx.fillRect(0, 0, can.width, can.height);
-    if (can.Image && !window.World.Crafter.ResultMode) ctx.drawImage(can.Image, -this.Offset.X / this.Scale, -this.Offset.Y / this.Scale, can.Imgwidth / this.Scale, can.Imgheight / this.Scale);
+    if (can.Image && !element.World.Crafter.ResultMode) ctx.drawImage(can.Image, -this.Offset.X / this.Scale, -this.Offset.Y / this.Scale, can.Imgwidth / this.Scale, can.Imgheight / this.Scale);
     ctx.lineWidth = 0.1;
     // рисовалка сетки
-    if (window.World.Crafter.GridMode) {
+    if (element.World.Crafter.GridMode) {
         var ix;
         for (var x = (-this.Offset.X % this.CellSize) / this.Scale; x < can.width; x += this.CellSize / this.Scale) {
             ix = Math.round(x * this.Scale / this.CellSize);

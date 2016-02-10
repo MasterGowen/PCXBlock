@@ -1,6 +1,6 @@
 ﻿function AddWheel(elem, onW) {
     var onWheel = function (e) {
-        e = e || window.event;
+        e = e || element.event;
         var deltaY = e.deltaY || e.detail || e.wheelDeltaY;
         var deltaX = e.deltaX || e.detail || e.wheelDeltaX;
         if (deltaX || deltaY)

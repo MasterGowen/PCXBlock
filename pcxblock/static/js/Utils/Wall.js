@@ -3,15 +3,16 @@ var Wall = function (start, end) {
     this.id = ind++;
     this.Start = start;
     this.End = end;
-    this.Width = window.Config.Wall.width;
-    this.Height = window.Config.Wall.height;
+    this.Width = element.Config.Wall.width;
+    this.Height = element.Config.Wall.height;
     this.Config = { Left: { Changed: 2, fill: { objs: [], full: { color: "#ffffff" } } }, Right: { Changed: 2, fill: { objs: [], full: { color: "#ffffff" } } } };
-    window.updated = true;
+    element.updated = true;
 };
 Wall.prototype = {
     constructor: Wall,
     type : "wall"
 };
+
 Wall.prototype.IsOn = function(pnt) {
     var ch = function(one, two) {
         return Math.abs(one - two) < 1;

@@ -20,7 +20,7 @@ var jscolor = {
 
 
 	install : function() {
-		jscolor.addEvent(window, 'load', jscolor.init);
+		jscolor.addEvent(element, 'load', jscolor.init);
 	},
 
 
@@ -173,7 +173,7 @@ var jscolor = {
 
 	getRelMousePos : function(e) {
 		var x = 0, y = 0;
-		if (!e) { e = window.event; }
+		if (!e) { e = element.event; }
 		if (typeof e.offsetX === 'number') {
 			x = e.offsetX;
 			y = e.offsetY;
@@ -186,8 +186,8 @@ var jscolor = {
 
 
 	getViewPos : function() {
-		if(typeof window.pageYOffset === 'number') {
-			return [window.pageXOffset, window.pageYOffset];
+		if(typeof element.pageYOffset === 'number') {
+			return [element.pageXOffset, element.pageYOffset];
 		} else if(document.body && (document.body.scrollLeft || document.body.scrollTop)) {
 			return [document.body.scrollLeft, document.body.scrollTop];
 		} else if(document.documentElement && (document.documentElement.scrollLeft || document.documentElement.scrollTop)) {
@@ -199,8 +199,8 @@ var jscolor = {
 
 
 	getViewSize : function() {
-		if(typeof window.innerWidth === 'number') {
-			return [window.innerWidth, window.innerHeight];
+		if(typeof element.innerWidth === 'number') {
+			return [element.innerWidth, element.innerHeight];
 		} else if(document.body && (document.body.clientWidth || document.body.clientHeight)) {
 			return [document.body.clientWidth, document.body.clientHeight];
 		} else if(document.documentElement && (document.documentElement.clientWidth || document.documentElement.clientHeight)) {
@@ -621,13 +621,13 @@ var jscolor = {
 					holdSld && setSld(e);
 					if (document.selection) {
 						document.selection.empty();
-					} else if (window.getSelection) {
-						window.getSelection().removeAllRanges();
+					} else if (element.getSelection) {
+						element.getSelection().removeAllRanges();
 					}
 					dispatchImmediateChange();
 				}
 			};
-			if('ontouchstart' in window) { // if touch device
+			if('ontouchstart' in element) { // if touch device
 				p.box.addEventListener('touchmove', function(e) {
 					var event={
 						'offsetX': e.touches[0].pageX-touchOffset.X,
@@ -655,7 +655,7 @@ var jscolor = {
 				setPad(e);
 				dispatchImmediateChange();
 			};
-			if('ontouchstart' in window) {
+			if('ontouchstart' in element) {
 				p.padM.addEventListener('touchstart', function(e) {
 					touchOffset={
 						'X': e.target.offsetParent.offsetLeft,
@@ -675,7 +675,7 @@ var jscolor = {
 				setSld(e);
 				dispatchImmediateChange();
 			};
-			if('ontouchstart' in window) {
+			if('ontouchstart' in element) {
 				p.sldM.addEventListener('touchstart', function(e) {
 					touchOffset={
 						'X': e.target.offsetParent.offsetLeft,
@@ -951,7 +951,7 @@ var jscolor = {
 		});
 		jscolor.addEvent(target, 'blur', function() {
 			if(!abortBlur) {
-				window.setTimeout(function(){ abortBlur || blurTarget(); abortBlur=false; }, 0);
+				element.setTimeout(function(){ abortBlur || blurTarget(); abortBlur=false; }, 0);
 			} else {
 				abortBlur = false;
 			}
