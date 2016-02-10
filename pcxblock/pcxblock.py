@@ -277,7 +277,6 @@ class PCXBlock(XBlock):
             'static/js/Utils/jquery-ui.min.js',
             'static/js/Utils/bootstrap.min.js',
             'static/js/pcxblock.js',
-            
         )
 
         css_urls = (
