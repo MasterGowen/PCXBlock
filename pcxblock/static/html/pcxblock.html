@@ -209,6 +209,15 @@
                 $('.ge_errorModal .modal-title').text('Ваше задание');
                 $('.ge_errorModal').modal('show');
             });
+
+            $( ".designer" ).mouseout(function() {
+                $("body").css("overflow","auto")             
+               // $( "#log" ).append( "Handler for .mouseout() called." );
+            });
+
+            $( "div.overout" ).mouseover(function() { 
+                $("body").css("overflow","hidden")    
+            });
         });
         var getResult = function() {
             return window.World.SavedResult;
