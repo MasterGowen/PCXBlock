@@ -210,7 +210,7 @@ class PCXBlock(XBlock):
         css_urls = (
             #'static/css/pcxblock.css',
             #'static/css/test_css.css',
-            #'static/css/designer.css',
+            'static/css/designer.css',
             #'static/css/font.css',
         )
 
@@ -282,7 +282,7 @@ class PCXBlock(XBlock):
 
         css_urls = (
             'static/css/pcxblock.css',
-            'static/css/test_css.css',
+            #'static/css/test_css.css',
             'static/css/designer.css',
             'static/css/font.css',
         )
