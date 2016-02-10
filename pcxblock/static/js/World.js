@@ -1,6 +1,6 @@
-﻿element.Modes = { two: '2d', three: '3d', guide: 'guide'};
+﻿window.Modes = { two: '2d', three: '3d', guide: 'guide'};
 var parentness = {};
-element.WorldClass = function (container) {
+window.WorldClass = function (container) {
     this.Id = new Guid().Value;
     this.Objects = {
         Walls: [],
@@ -14,7 +14,7 @@ element.WorldClass = function (container) {
     };
     this.Events = [];
     this.UndoedEvents = [];
-    this.mode = element.Modes.two;
+    this.mode = window.Modes.two;
     this.leftMouse = false;
     this.rightMouse = false;
     if (typeof container !== "undefined") {
@@ -90,8 +90,8 @@ element.WorldClass = function (container) {
     }
 };
 
-element.WorldClass.prototype = {
-    constructor: element.WorldClass,
+window.WorldClass.prototype = {
+    constructor: window.WorldClass,
     undo: function() {
         if (this.Events.length > 0) {
             var e = this.Events.pop();
@@ -261,7 +261,7 @@ element.WorldClass.prototype = {
             mm.min.Y = Math.min(mm.min.Y, a.Start.Y, a.End.Y);
         });
         var center = mm.max.center(mm.min);
-        if (mode === element.Modes.two) {
+        if (mode === window.Modes.two) {
             $(this.Drawer2D.canvas).show();
 //            this.Drawer2D.Offset.X = center.X - this.Drawer2D.canvas.width / 2;
             //            this.Drawer2D.Offset.Y = center.Y - this.Drawer2D.canvas.height / 2;
@@ -274,7 +274,7 @@ element.WorldClass.prototype = {
     },
     SaveToLocalStorage:function() {
         this.Save(function(o) {
-            element.localStorage.setItem("saved", JSON.stringify(o));
+            window.localStorage.setItem("saved", JSON.stringify(o));
         });
     },
     SaveToDB: function () {
@@ -297,15 +297,15 @@ element.WorldClass.prototype = {
         var id = this.Id;
         $.ajax(
                 {
-                    url: element.ajaxAddress + "removeproject.php",
-                    data: { param: "pid = "+ element.User.parent +" and id = "+ id },
+                    url: window.ajaxAddress + "removeproject.php",
+                    data: { param: "pid = "+ window.User.parent +" and id = "+ id },
                     type:"POST"
                 }).success(function (d) {
                 });
         this.Save(function(o) {
             $.ajax(
                 {
-                    url: element.ajaxAddress + "saveproject.php",
+                    url: window.ajaxAddress + "saveproject.php",
                     data: { data: JSON.stringify(o), parent: o.parent, name: "Кухня", id: id, img:img },
                     type:"POST"
                 }).success(function(d) {
@@ -314,7 +314,7 @@ element.WorldClass.prototype = {
     },
     Save:function(howToSave) {
         var o = {
-            parent: element.User.parent
+            parent: window.User.parent
         };
         o.Walls = [];
         o.Areas = [];

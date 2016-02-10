@@ -56,9 +56,9 @@ WallCrafter.prototype.GetGridMode = function () {
 SimpleCrafter.prototype.KeyDown = function (key) {
     //undo
     if (key == 27) {
-        element.World.undo();
+        window.World.undo();
         document.body.style.cursor = 'default';
-        element.World.UpdateCycles();
+        window.World.UpdateCycles();
         delete this.startPoint;
         delete this.tmpWall;
         delete this.tmpWalls;
@@ -79,16 +79,16 @@ WallCrafter.prototype.MouseDown = function (pnt) {
     delete this.tmpWalls;
     if (typeof this.startPoint !== "undefined") {
         if (this.WallMode) {
-            element.World.UpdateCycles();
+            window.World.UpdateCycles();
             delete this.startPoint;
         } 
         if (this.LineMode) {
-                element.World.UpdateCycles();
+                window.World.UpdateCycles();
                 delete this.startPoint;
                 return;
         }
         if (this.BezierMode) {
-            element.World.UpdateCycles();
+            window.World.UpdateCycles();
             delete this.startPoint;
             return;
         }
@@ -97,7 +97,7 @@ WallCrafter.prototype.MouseDown = function (pnt) {
 };
 WallCrafter.prototype.DblClick = function () {
     document.body.style.cursor = 'default';
-    element.World.UpdateCycles();
+    window.World.UpdateCycles();
     delete this.startPoint;
     delete this.tmpWall;
     delete this.tmpWalls;
@@ -125,12 +125,12 @@ WallCrafter.prototype.ProcessPoint = function (pnt) {
     }
         
     var $this = this;
-    var near = element.World.Objects.Walls.filter(function (e) { return e.Start.length(pnt) < sizeCell/2 || e.End.length(pnt) < sizeCell/2; });
+    var near = window.World.Objects.Walls.filter(function (e) { return e.Start.length(pnt) < sizeCell/2 || e.End.length(pnt) < sizeCell/2; });
     if (near.length > 0)
         return near[0].Start.length(pnt) < sizeCell/2 ? near[0].Start : near[0].End;
     else {
         // проверка есть ли уже эта линия среди нарисованных
-        var onLine = element.World.Objects.Walls.map(function (e) {
+        var onLine = window.World.Objects.Walls.map(function (e) {
             var eps = sizeCell;
             normPnt = normPnt || pnt;
             if ((Math.min(e.Start.X, e.End.X) - eps) >= normPnt.X || (Math.max(e.Start.X, e.End.X) + eps) <= normPnt.X)
@@ -162,13 +162,13 @@ WallCrafter.prototype.ProcessPoint = function (pnt) {
     return normPnt || pnt;
 };
 WallCrafter.prototype.MouseMove = function (pnt) {
-    element.World.Drawer2D.mouse = pnt;
+    window.World.Drawer2D.mouse = pnt;
     pnt = this.ProcessPoint(pnt);
     if (typeof this.startPoint !== "undefined" && (this.startPoint.X != pnt.X || this.startPoint.Y != pnt.Y)) {
         document.body.style.cursor = 'crosshair';
         if (!this.WallMode) {
             if (typeof this.tmpWalls !== "undefined") {
-                element.World.undo();
+                window.World.undo();
                 delete this.tmpWalls;
             }
             
@@ -180,43 +180,43 @@ WallCrafter.prototype.MouseMove = function (pnt) {
             if (typeof this.tmpWall === "undefined") {
                 this.tmpWall = new Wall(this.startPoint, pnt);
                 
-                element.World.UndoedEvents = [];
-                element.World.UndoedEvents.push({
+                window.World.UndoedEvents = [];
+                window.World.UndoedEvents.push({
                     obj: this.tmpWall,
                     redo: function () {
-                        if (element.World.Crafter.LineMode) element.World.Objects.Normals.push(this.obj);
-                        if (element.World.Crafter.WallMode || element.World.Crafter.BentMode) element.World.Objects.Walls.push(this.obj);
-                        if (element.World.Crafter.BezierMode) element.World.Objects.Beziers.push(this.obj);
-                        element.World.Draw();
+                        if (window.World.Crafter.LineMode) window.World.Objects.Normals.push(this.obj);
+                        if (window.World.Crafter.WallMode || window.World.Crafter.BentMode) window.World.Objects.Walls.push(this.obj);
+                        if (window.World.Crafter.BezierMode) window.World.Objects.Beziers.push(this.obj);
+                        window.World.Draw();
                     },
                     undo: function () {
-                        if (element.World.Crafter.WallMode || element.World.Crafter.BentMode) 
-                            for (var i in element.World.Objects.Walls) {
-                                if (element.World.Objects.Walls[i] === this.obj)
-                                    delete element.World.Objects.Walls[i];
+                        if (window.World.Crafter.WallMode || window.World.Crafter.BentMode) 
+                            for (var i in window.World.Objects.Walls) {
+                                if (window.World.Objects.Walls[i] === this.obj)
+                                    delete window.World.Objects.Walls[i];
                             }
-                        if (element.World.Crafter.LineMode)
-                            for (var i in element.World.Objects.Normals) {
-                                if (element.World.Objects.Normals[i] === this.obj)
-                                    delete element.World.Objects.Normals[i];
+                        if (window.World.Crafter.LineMode)
+                            for (var i in window.World.Objects.Normals) {
+                                if (window.World.Objects.Normals[i] === this.obj)
+                                    delete window.World.Objects.Normals[i];
                             }
-                        if (element.World.Crafter.BezierMode)
-                            for (var i in element.World.Objects.Beziers) {
-                                if (element.World.Objects.Beziers[i] === this.obj)
-                                    delete element.World.Objects.Beziers[i];
+                        if (window.World.Crafter.BezierMode)
+                            for (var i in window.World.Objects.Beziers) {
+                                if (window.World.Objects.Beziers[i] === this.obj)
+                                    delete window.World.Objects.Beziers[i];
                         }
-                        element.World.Draw();
+                        window.World.Draw();
                     }
                 });
-                element.World.redo();
+                window.World.redo();
 
             } else {
                 this.tmpWall.End = pnt;
-//                element.World.Drawer2D.Message = Math.round(this.tmpWall.End.length(this.tmpWall.Start)) / 100 + "м";
+//                window.World.Drawer2D.Message = Math.round(this.tmpWall.End.length(this.tmpWall.Start)) / 100 + "м";
             }
         } else {
             if (typeof this.tmpWall !== "undefined") {
-                element.World.undo();
+                window.World.undo();
                 delete this.tmpWall;
             }
             if (typeof this.tmpWalls === "undefined") {
@@ -225,23 +225,23 @@ WallCrafter.prototype.MouseMove = function (pnt) {
                     new Wall(new Pnt(this.startPoint.X, pnt.Y), pnt),
                     new Wall(pnt, new Pnt(pnt.X, this.startPoint.Y)),
                     new Wall(new Pnt(pnt.X, this.startPoint.Y), this.startPoint)];
-                element.World.UndoedEvents = [];
-                element.World.UndoedEvents.push({
+                window.World.UndoedEvents = [];
+                window.World.UndoedEvents.push({
                     obj: this.tmpWalls,
                     redo: function() {
                         this.obj.forEach(function(e) {
-                            element.World.Objects.Walls.push(e);
+                            window.World.Objects.Walls.push(e);
                         });
-                        element.World.Draw();
+                        window.World.Draw();
                     },
                     undo: function() {
                         this.obj.forEach(function(e) {
-                            delete element.World.Objects.Walls[element.World.Objects.Walls.indexOf(e)];
+                            delete window.World.Objects.Walls[window.World.Objects.Walls.indexOf(e)];
                         });
-                        element.World.Draw();
+                        window.World.Draw();
                     }
                 });
-                element.World.redo();
+                window.World.redo();
             } else {
                 this.tmpWalls[0].End = new Pnt(this.startPoint.X, pnt.Y);
                 this.tmpWalls[1].Start = new Pnt(this.startPoint.X, pnt.Y);
@@ -249,11 +249,11 @@ WallCrafter.prototype.MouseMove = function (pnt) {
                 this.tmpWalls[2].Start = pnt;
                 this.tmpWalls[2].End = new Pnt(pnt.X, this.startPoint.Y);
                 this.tmpWalls[3].Start = new Pnt(pnt.X, this.startPoint.Y);
-//                element.World.Drawer2D.Message = Math.round(this.tmpWalls[0].End.length(this.tmpWalls[0].Start)) / 100 + " x "+Math.round(this.tmpWalls[1].End.length(this.tmpWalls[1].Start)) / 100+" м";
+//                window.World.Drawer2D.Message = Math.round(this.tmpWalls[0].End.length(this.tmpWalls[0].Start)) / 100 + " x "+Math.round(this.tmpWalls[1].End.length(this.tmpWalls[1].Start)) / 100+" м";
             }
         }
-        element.World.Draw();
+        window.World.Draw();
     } else {
-        delete element.World.Drawer2D.Message;
+        delete window.World.Drawer2D.Message;
     }
 };
