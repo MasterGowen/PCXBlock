@@ -210,13 +210,13 @@
                 $('.ge_errorModal').modal('show');
             });
 
-            $( ".designer" ).mouseout(function() {
+            $( "#workzone" ).mouseout(function() {
                 console.log("mouse OUT!");
                 $("body").css("overflow","auto");             
                // $( "#log" ).append( "Handler for .mouseout() called." );
             });
 
-            $( "div.overout" ).mouseover(function() {
+            $( "#workzone" ).mouseover(function() {
                 console.log("mouse IN!"); 
                 $("body").css("overflow","hidden")    
             });
