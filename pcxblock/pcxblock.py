@@ -183,8 +183,8 @@ class PCXBlock(XBlock):
         )
 
         js_urls = (
-            "static/js/test.js",
-            #"static/js/pcxblock_edit.js",
+            #"static/js/test.js",
+            "static/js/pcxblock_edit.js",
             #'static/js/js/guid.js',
             #'static/js/Utils/Pnt.js',
             #'static/js/Utils/caman.full.js',
