@@ -150,7 +150,7 @@ div[role=row] {
     position: fixed;
     z-index: 1000;
     background-color: #f0f0f0;
-    background-image: url('./img/loading.gif');
+    background-image: url('/asset-v1:itoo+01+2015+type@asset+block@loading.gif');
     background-repeat: no-repeat;
     background-position: center;
 }
@@ -174,26 +174,26 @@ div[role=row] {
 }
 
 .designer .controls td.act.left {
-    background-image: url('./img/left.png');
+    background-image: url('/asset-v1:itoo+01+2015+type@asset+block@left.png');
 }
 .designer .controls td.act.right {
-    background-image: url('./img/right.png');
+    background-image: url('/asset-v1:itoo+01+2015+type@asset+block@right.png');
 }
 .designer .controls td.act.up {
     height: 40px;
-    background-image: url('./img/up.png');
+    background-image: url('/asset-v1:itoo+01+2015+type@asset+block@up.png');
 }
 .designer .controls td.act.zoom-in {
     height: 20px;
-    background-image: url('./img/zoom-in.png');
+    background-image: url('/asset-v1:itoo+01+2015+type@asset+block@zoom-in.png');
 }
 .designer .controls td.act.zoom-out {
     height: 20px;
-    background-image: url('./img/zoom-out.png');
+    background-image: url('/asset-v1:itoo+01+2015+type@asset+block@zoom-out.png');
 }
 .designer .controls td.act.down {
     height: 40px;
-    background-image: url('./img/down.png');
+    background-image: url('/asset-v1:itoo+01+2015+type@asset+block@down.png');
 }
 .designer .controls td.act {
     cursor: pointer;
@@ -206,7 +206,7 @@ div[role=row] {
 }
 .designer .controls {
     position: absolute;
-    background: url('./img/circle.png') center no-repeat;
+    background: url('/asset-v1:itoo+01+2015+type@asset+block@circle.png') center no-repeat;
     opacity: 0.5;
     transition: opacity ease 0.5s;
     -moz-transition: opacity ease 0.5s;
