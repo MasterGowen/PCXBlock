@@ -258,7 +258,7 @@ class PCXBlock(XBlock):
         )
 
         js_urls = (
-            'static/js/init.js',
+            
             'static/js/js/guid.js',
             'static/js/Utils/Pnt.js',
             'static/js/Utils/caman.full.js',
@@ -277,6 +277,7 @@ class PCXBlock(XBlock):
             'static/js/Crafters/WallCrafter.js',
             'static/js/Utils/jquery-ui.min.js',
             'static/js/Utils/bootstrap.min.js',
+            'static/js/init.js',
             'static/js/pcxblock.js',
         )
 
