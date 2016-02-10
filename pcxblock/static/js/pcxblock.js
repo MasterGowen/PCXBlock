@@ -1,6 +1,7 @@
 function PCXBlock(runtime, element) {
 
         alert("js load");
+        console.log(element);
 
 
     
