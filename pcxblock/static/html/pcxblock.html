@@ -211,11 +211,13 @@
             });
 
             $( ".designer" ).mouseout(function() {
-                $("body").css("overflow","auto")             
+                console.log("mouse OUT!");
+                $("body").css("overflow","auto");             
                // $( "#log" ).append( "Handler for .mouseout() called." );
             });
 
-            $( "div.overout" ).mouseover(function() { 
+            $( "div.overout" ).mouseover(function() {
+                console.log("mouse IN!"); 
                 $("body").css("overflow","hidden")    
             });
         });
