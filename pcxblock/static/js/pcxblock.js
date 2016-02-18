@@ -139,9 +139,9 @@ function PCXBlock(runtime, element) {
                 $("body").css("overflow","hidden")    
             });
         });
-        var getResult = function() {
+        /*var getResult = function() {
             return window.World.SavedResult;
-        };
+        };*/
 
 
 
@@ -169,7 +169,7 @@ function PCXBlock(runtime, element) {
         setTimeout(function(){element.getElementsByClassName('saved')[0].parentNode.removeChild(element.getElementsByClassName('saved')[0])}, 1000);        
     };*/
 
-    /*function success_check(result){
+    /*function success_check(result){ge_saveResultge_saveResult
         console.log("success_check");*/
        /* $.ajax({
             type: "POST",
