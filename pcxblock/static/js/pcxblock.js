@@ -151,6 +151,7 @@ function PCXBlock(runtime, element) {
     function get_student_picture(){
         if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetResultMode(true);
         var dataURL = getResult();
+        console.log(dataURL);
         return dataURL;
     }
 
