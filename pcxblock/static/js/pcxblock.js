@@ -149,9 +149,9 @@ function PCXBlock(runtime, element) {
     //console.log("lol");
 
     function get_student_picture(){
-        if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetResultMode(true);
-        var dataURL = getResult();
-        console.log(dataURL);
+       // if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetResultMode(true);
+        //var dataURL = getResult();
+        //console.log(dataURL);
         return dataURL;
     }
 
@@ -184,7 +184,7 @@ function PCXBlock(runtime, element) {
     var handlerUrl = runtime.handlerUrl(element, 'student_submit');
 
     $(element).find('.Check').bind('click', function() {
-       var student_picture = get_student_picture();
+       var student_picture = getResult();
        console.log("get_student_picture: " + student_picture);
         
         $.ajax({
