@@ -149,9 +149,7 @@ function PCXBlock(runtime, element) {
     //console.log("lol");
 
     function get_student_picture(){
-        var canvas = $('.designer canvas').get(0);
-        console.log(canvas);
-        var dataURL = canvas.toDataURL();
+        var dataURL = getResult();
         return dataURL;
     }
 
@@ -160,7 +158,7 @@ function PCXBlock(runtime, element) {
         //$('.attempts', element).text(result.attempts);
         $(element).find('.weight').html('Набрано баллов: <me-span class="points"></span>');
         $('.points', element).text(result.points );
-    };*/
+    };
 
 
     /*function success_save(result){
