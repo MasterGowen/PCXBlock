@@ -60,6 +60,7 @@
                 <button class="ge_drawLayers microButton active">Режим эскиза</button>
                 <button class="ge_drawBottomLine microButton">Режим чертежа</button>
                 <button class="ge_saveResult microButton" style="display:none">Сохранить результат</button>
+                <button id="lol">Получить base64 в консоль</button>
             </div>
         </div>
         <div class="modal fade ge_errorModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -81,8 +82,10 @@
     </div>
 
   </div>   
+
 <script>
         function getResult() {
+            alert("lollll");
             return window.World.SavedResult;
         };
 </script>
