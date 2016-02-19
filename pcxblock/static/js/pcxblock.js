@@ -119,8 +119,8 @@ function PCXBlock(runtime, element) {
                 if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetPlotMode(false);
             });
             $('#workzone').on('click', '.ge_drawerButtons .ge_saveResult', function () {
-                if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetResultMode(true);
-                window.World.Draw();
+               /* if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetResultMode(true);
+                window.World.Draw();*/
                 $('.ge_gridMode').text("Убрать сетку");
             });
             $('.ge_task').click(function () {
@@ -138,6 +138,15 @@ function PCXBlock(runtime, element) {
                 console.log("mouse IN!"); 
                 $("body").css("overflow","hidden")    
             });
+
+
+
+            $('#lol').click(function () {
+                
+            if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetResultMode(true);
+                window.World.Draw();
+                return window.World.SavedResult;
+            });
         });
         /*var getResult = function() {
             return window.World.SavedResult;
@@ -149,6 +158,8 @@ function PCXBlock(runtime, element) {
     //console.log("lol");
 
     function get_student_picture(){
+        if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetResultMode(true);
+                window.World.Draw();
        // if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetResultMode(true);
         //var dataURL = getResult();
         //console.log(dataURL);
