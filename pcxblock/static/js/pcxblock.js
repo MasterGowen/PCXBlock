@@ -147,6 +147,7 @@ function PCXBlock(runtime, element) {
                window.World.Crafter.SetResultMode(true);
                 window.World.Draw();
                 var res = window.World.SavedResult;
+                console.log("PICTURE: " + res);
             });
         });
         /*var getResult = function() {
