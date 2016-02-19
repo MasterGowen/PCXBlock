@@ -199,7 +199,7 @@ function PCXBlock(runtime, element) {
     $(element).find('.Check').bind('click', function() {
         if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetResultMode(true);
                 window.World.Draw();
-        var student_picture = window.World.SavedResult;
+        var student_picture = String(window.World.SavedResult);
        /*var student_picture = getResult();*/
        console.log("get_student_picture: " + student_picture);
         
