@@ -144,7 +144,7 @@ function PCXBlock(runtime, element) {
             $('#lol').click(function () {
                 
             if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetResultMode(true);
-                //window.World.Draw();
+                window.World.Draw();
                 console.log(window.World.SavedResult);
             });
         });
