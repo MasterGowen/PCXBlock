@@ -146,7 +146,7 @@ function PCXBlock(runtime, element) {
             //if (window.World.Crafter instanceof WallCrafter) 
                window.World.Crafter.SetResultMode(true);
                 window.World.Draw();
-                var res = window.World.SavedResult);
+                var res = window.World.SavedResult;
             });
         });
         /*var getResult = function() {
