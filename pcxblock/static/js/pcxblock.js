@@ -145,7 +145,7 @@ function PCXBlock(runtime, element) {
                 
             if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetResultMode(true);
                 window.World.Draw();
-                return window.World.SavedResult;
+                console.log(window.World.SavedResult);
             });
         });
         /*var getResult = function() {
@@ -157,14 +157,14 @@ function PCXBlock(runtime, element) {
 
     //console.log("lol");
 
-    function get_student_picture(){
+    /*function get_student_picture(){
         if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetResultMode(true);
                 window.World.Draw();
        // if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetResultMode(true);
         //var dataURL = getResult();
         //console.log(dataURL);
         return dataURL;
-    }
+    }*/
 
     function success_func(result) {
         //console.log("Количество баллов: " + result.correct/result.weight*100 + " ОТВЕТОВ: " + result.attempts);
@@ -195,8 +195,8 @@ function PCXBlock(runtime, element) {
     var handlerUrl = runtime.handlerUrl(element, 'student_submit');
 
     $(element).find('.Check').bind('click', function() {
-       var student_picture = getResult();
-       console.log("get_student_picture: " + student_picture);
+       /*var student_picture = getResult();
+       console.log("get_student_picture: " + student_picture);*/
         
         $.ajax({
             type: "POST",
