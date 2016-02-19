@@ -118,11 +118,13 @@ function PCXBlock(runtime, element) {
                 $('.ge_drawerButtons .ge_saveResult').hide();
                 if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetPlotMode(false);
             });
+            
             $('#workzone').on('click', '.ge_drawerButtons .ge_saveResult', function () {
                if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetResultMode(true);
                 window.World.Draw();
                 $('.ge_gridMode').text("Убрать сетку");
             });
+
             $('.ge_task').click(function () {
                 $('.ge_errorModal .modal-title').text('Ваше задание');
                 $('.ge_errorModal').modal('show');
@@ -195,6 +197,9 @@ function PCXBlock(runtime, element) {
     var handlerUrl = runtime.handlerUrl(element, 'student_submit');
 
     $(element).find('.Check').bind('click', function() {
+        if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetResultMode(true);
+                window.World.Draw();
+        var student_picture = window.World.SavedResult;
        /*var student_picture = getResult();
        console.log("get_student_picture: " + student_picture);*/
         
