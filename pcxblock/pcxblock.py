@@ -367,6 +367,8 @@ class PCXBlock(XBlock):
 
         grade_global = min(grade_first, grade_second) * max(grade_first, grade_second) * 100
 
+        grade_global = int(grade_global)
+
         self.points = grade_global
         self.attempts += 1
 
