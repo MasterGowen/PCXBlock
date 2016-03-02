@@ -351,18 +351,24 @@ class PCXBlock(XBlock):
 
         thickness_contour = 30
         diff = thresh_callback(student_image, correct_image, thickness_contour, 0)
+        diff1 = thresh_callback(correct_image, student_image, thickness_contour, 0)
 
+        gray_wrong_pixels_cout1 = pixels_count(diff1, [70, 70, 70], [251, 251, 251])
         gray_wrong_pixels_cout = pixels_count(diff, [70, 70, 70], [251, 251, 251])
 
 
-        grade_points = float((all_gray_student_pixels_cout - gray_wrong_pixels_cout))/all_gray_student_pixels_cout
+        grade_first = float((all_gray_student_pixels_cout - gray_wrong_pixels_cout))/all_gray_student_pixels_cout
+        grade_first = int(grade_first*50)
 
-        grade_points = int(grade_points*100)
+        grade_second = float((all_gray_correct_pixels_cout - gray_wrong_pixels_cout1))/all_gray_correct_pixels_cout
+        grade_second = int(grade_second*50)
 
-        self.points = grade_points
+        grade_global = grade_first + grade_second
+
+        self.points = grade_global
         self.attempts += 1
 
-        return {"points": self.points}
+        return {"points": self.points, "grade_first": grade_first, "grade_second": grade_second}
 
 
 
