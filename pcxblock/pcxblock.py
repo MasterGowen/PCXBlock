@@ -358,10 +358,10 @@ class PCXBlock(XBlock):
 
 
         grade_first = float((all_gray_student_pixels_cout - gray_wrong_pixels_cout))/all_gray_student_pixels_cout
-        grade_first = int(grade_first)
+        grade_first = grade_first
 
         grade_second = float((all_gray_correct_pixels_cout - gray_wrong_pixels_cout1))/all_gray_correct_pixels_cout
-        grade_second = int(grade_second)
+        grade_second = grade_second
 
 
 
