@@ -347,7 +347,7 @@ class PCXBlock(XBlock):
         student_image = base64_to_image(student_picture_base64)
 
         all_gray_student_pixels_cout = pixels_count(student_image, [70, 70, 70], [251, 251, 251])
-
+        all_gray_correct_pixels_cout = pixels_count(correct_image, [70, 70, 70], [251, 251, 251])
 
         thickness_contour = 30
         diff = thresh_callback(student_image, correct_image, thickness_contour, 0)
