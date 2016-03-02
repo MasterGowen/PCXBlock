@@ -358,12 +358,14 @@ class PCXBlock(XBlock):
 
 
         grade_first = float((all_gray_student_pixels_cout - gray_wrong_pixels_cout))/all_gray_student_pixels_cout
-        grade_first = int(grade_first*50)
+        grade_first = int(grade_first)
 
         grade_second = float((all_gray_correct_pixels_cout - gray_wrong_pixels_cout1))/all_gray_correct_pixels_cout
-        grade_second = int(grade_second*50)
+        grade_second = int(grade_second)
 
-        grade_global = grade_first + grade_second
+
+
+        grade_global = min(grade_first, grade_second) * max(grade_first, grade_second) * 100
 
         self.points = grade_global
         self.attempts += 1
