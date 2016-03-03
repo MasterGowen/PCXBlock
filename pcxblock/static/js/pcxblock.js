@@ -24,8 +24,13 @@ function PCXBlock(runtime, element) {
                 $('.propertyPanel').height($('html').height() - window.headerHeight - 3);
                 if (typeof World !== "undefined") {
                     if (typeof World.Drawer2D !== "undefined") {
-                        World.Drawer2D.canvas.height = $('.designer-block').height() - 120;
+                        if (World.Drawer2D.FullScreen) {
+                            World.Drawer2D.canvas.height = $('.designer').height();
+                        } else {
+                            World.Drawer2D.canvas.height = $('.designer-block').height() - 120;
+                        } 
                         World.Drawer2D.canvas.width = $('.designer').width();
+                        World.Drawer2D.reSizeCanvas();
                     }
                 }
             }
