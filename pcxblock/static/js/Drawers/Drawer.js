@@ -5,6 +5,7 @@
     this.Scale = 1;
     this.MinScale = 1;
     this.CellSize = 2;
+    this.FullScreen = 0;
 };
 Drawer.prototype = {
     Draw: function (objs) {

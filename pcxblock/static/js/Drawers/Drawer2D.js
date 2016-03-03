@@ -84,10 +84,9 @@ Drawer2D.prototype.Draw = function (objects, currentColor) {
         var ctx = $this.canvas.getContext("2d");
         ctx.save();
         ctx.beginPath();
-        var last = toPnt(a.Start), $new = toPnt(a.End);
-        ctx.moveTo(last.X, last.Y);
-        //todo: get controlpoints
-        ctx.bezierCurveTo($new.X, $new.Y, $new.X, $new.Y, $new.X, $new.Y);
+        var start = toPnt(a.Start), cpoint1 = toPnt(a.FirstControlPoint), cpoint2 = toPnt(a.SecondControlPoint), end = toPnt(a.End);
+        ctx.moveTo(start.X, start.Y);
+        ctx.bezierCurveTo(cpoint1.X, cpoint1.Y, cpoint2.X, cpoint2.Y, end.X, end.Y);
         var col = currentColor || "rgba(255,182,0, 1)";
         ctx.strokeStyle = col;
         ctx.lineWidth = a.Width / $this.Scale;
@@ -95,6 +94,8 @@ Drawer2D.prototype.Draw = function (objects, currentColor) {
         ctx.restore();
         drawEllipse(a.Start, 1, currentColor || '#ED6C02');
         drawEllipse(a.End, 1, currentColor || '#ED6C02');
+        drawEllipse(a.FirstControlPoint, 1, currentColor || 'rgba(255,182,0, 1)');
+        drawEllipse(a.SecondControlPoint, 1, currentColor || 'rgba(255,182,0, 1)');
     });
 
     walls.forEach(function(a) {
@@ -115,19 +116,29 @@ Drawer2D.prototype.Draw = function (objects, currentColor) {
 		drawEllipse(a.End, 1, currentColor || '#ED6C02');
 	});
     this.End();
-
-    //ТУТ РИСУЕТСЯ
     if (window.World.Crafter.ResultMode) {
         var dataURL = $this.canvas.toDataURL();
         window.World.SavedResult = dataURL;
-        //console.log(dataURL);
-       // this.DownloadCanvas(dataURL, 'result.png');
+        //this.DownloadCanvas(dataURL, 'result.png');
         window.World.Crafter.SetResultMode(false);
         $this.canvas.width = $this.canvas.OldWidth;
         $this.canvas.height = $this.canvas.OldHeight;
         window.World.Crafter.SetGridMode(true);
     }
 };
+Drawer2D.prototype.fullModeScreen = function (flag) {
+    this.FullScreen = flag;
+}
+Drawer2D.prototype.reSizeCanvas = function() {
+    var can = this.canvas;
+    if (can.Imgwidth) {
+        var k = can.Imgwidth / can.container.width();
+        if (can.Imgheight / can.container.height() < k) k = can.Imgheight / can.container.height();
+        window.World.Drawer.MinScale = k;
+        window.World.Drawer.Scale = k;
+        window.World.Drawer.Offset = new Pnt();
+    }
+}
 Drawer2D.prototype.setImage = function (img) {
     var can = this.canvas;
     can.Image = img;
@@ -141,7 +152,7 @@ Drawer2D.prototype.setImage = function (img) {
         window.World.Drawer.MinScale = k;
         window.World.Drawer.Scale = k;
         window.World.Drawer.MinOffset = new Pnt(0, 0);
-        window.World.Drawer.MaxOffset = new Pnt(can.Imgwidth/k, can.Imgheight/k);
+        window.World.Drawer.MaxOffset = new Pnt(can.Imgwidth, can.Imgheight);
     });
 };
 Drawer2D.prototype.setIdImage = function(id) {
@@ -191,26 +202,32 @@ Drawer2D.prototype.DownloadCanvas = function (currDataURL, filename) {
     link.click();
 };
 Drawer2D.prototype.ScaleUp = function () {
-    if (this.Scale > this.MinScale) return;
+    if (this.Scale >= this.MinScale) return;
     this.Scale *= 1.1;
+    if (this.canvas.container.width() + this.Offset.X / this.Scale > (this.MaxOffset.X / this.Scale)) {
+        this.Offset.X = this.MaxOffset.X - this.canvas.container.width() * this.Scale;
+    }
+    if (this.canvas.container.height() + this.Offset.Y / this.Scale + 10 * this.Scale > (this.MaxOffset.Y / this.Scale)) {
+        this.Offset.Y = this.MaxOffset.Y - this.canvas.container.height() * this.Scale;
+    }
 };
 Drawer2D.prototype.ScaleDown = function () {
-    if (this.Scale < 0.05) return;
+    if (this.Scale <= 0.05) return;
     this.Scale /= 1.1;
 };
 Drawer2D.prototype.MoveLeft = function () {
-    if (this.Offset.X - 10 * this.Scale < this.MinOffset.X) return;
+    if (this.Offset.X - 10 * this.Scale <= this.MinOffset.X) return;
     this.Offset.X -= 10 * this.Scale;
 };
 Drawer2D.prototype.MoveRight = function () {
-//    if (this.canvas.container.width()+this.Offset.X + 10 * this.Scale > (this.MaxOffset.X/this.Scale)) return;
+    if (this.canvas.container.width() + this.Offset.X / this.Scale + 10 * this.Scale >= (this.MaxOffset.X / this.Scale)) return;
     this.Offset.X += 10 * this.Scale;
 };
 Drawer2D.prototype.MoveUp = function () {
-    if (this.Offset.Y - 10 * this.Scale < this.MinOffset.Y) return;
+    if (this.Offset.Y - 10 * this.Scale <= this.MinOffset.Y) return;
     this.Offset.Y -= 10 * this.Scale;
 };
 Drawer2D.prototype.MoveBottom = function () {
-//    if (this.canvas.container.height()+this.Offset.Y + 10 * this.Scale > (this.MaxOffset.Y /this.Scale)) return;
+    if (this.canvas.container.height() + this.Offset.Y / this.Scale + 10 * this.Scale >= (this.MaxOffset.Y / this.Scale)) return;
     this.Offset.Y += 10 * this.Scale;
 };
