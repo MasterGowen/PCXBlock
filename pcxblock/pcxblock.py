@@ -356,7 +356,8 @@ class PCXBlock(XBlock):
         gray_wrong_pixels_cout1 = pixels_count(diff1, [70, 70, 70], [251, 251, 251])
         gray_wrong_pixels_cout = pixels_count(diff, [70, 70, 70], [251, 251, 251])
 
-
+        grade_first = 0
+        grade_second = 0
         if(all_gray_student_pixels_cout!=0):
             grade_first = float((all_gray_student_pixels_cout - gray_wrong_pixels_cout))/all_gray_student_pixels_cout
             grade_first = grade_first
