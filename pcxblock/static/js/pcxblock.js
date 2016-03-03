@@ -132,13 +132,13 @@ function PCXBlock(runtime, element) {
             });
 
             $( "#workzone" ).mouseout(function() {
-                console.log("mouse OUT!");
+                //console.log("mouse OUT!");
                 $("body").css("overflow","auto");             
                // $( "#log" ).append( "Handler for .mouseout() called." );
             });
 
             $( "#workzone" ).mouseover(function() {
-                console.log("mouse IN!"); 
+                //console.log("mouse IN!"); 
                 $("body").css("overflow","hidden")    
             });
 
