@@ -357,17 +357,19 @@ class PCXBlock(XBlock):
         gray_wrong_pixels_cout = pixels_count(diff, [70, 70, 70], [251, 251, 251])
 
 
-        grade_first = float((all_gray_student_pixels_cout - gray_wrong_pixels_cout))/all_gray_student_pixels_cout
-        grade_first = grade_first
+        if(all_gray_student_pixels_cout!=0):
+            grade_first = float((all_gray_student_pixels_cout - gray_wrong_pixels_cout))/all_gray_student_pixels_cout
+            grade_first = grade_first
 
-        grade_second = float((all_gray_correct_pixels_cout - gray_wrong_pixels_cout1))/all_gray_correct_pixels_cout
-        grade_second = grade_second
+            grade_second = float((all_gray_correct_pixels_cout - gray_wrong_pixels_cout1))/all_gray_correct_pixels_cout
+            grade_second = grade_second
 
+            grade_global = min(grade_first, grade_second) * max(grade_first, grade_second) * 100
 
+            grade_global = int(grade_global)
+        else:
+            grade_global = 0
 
-        grade_global = min(grade_first, grade_second) * max(grade_first, grade_second) * 100
-
-        grade_global = int(grade_global)
 
         self.points = grade_global
         self.attempts += 1
