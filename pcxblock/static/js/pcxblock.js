@@ -30,7 +30,7 @@ function PCXBlock(runtime, element) {
                             World.Drawer2D.canvas.height = $('.designer-block').height() - 120;
                         } 
                         World.Drawer2D.canvas.width = $('.designer').width();
-                        World.Drawer2D.reSizeCanvas();
+                     //   World.Drawer2D.reSizeCanvas();
                     }
                 }
             }
