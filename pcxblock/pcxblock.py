@@ -271,6 +271,7 @@ class PCXBlock(XBlock):
             'static/js/Utils/FindCycles.js',
             'static/js/Utils/NumberFormat.js',
             'static/js/Utils/Wall.js',  
+            'static/js/Utils/BezierCurve.js',
             'static/js/Crafters/Crafter.js',
             'static/js/Crafters/SimpleCrafter.js',
             'static/js/Crafters/Move2DCrafter.js',

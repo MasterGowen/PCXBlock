@@ -119,7 +119,7 @@ Drawer2D.prototype.Draw = function (objects, currentColor) {
     if (window.World.Crafter.ResultMode) {
         var dataURL = $this.canvas.toDataURL();
         window.World.SavedResult = dataURL;
-        //this.DownloadCanvas(dataURL, 'result.png');
+        this.DownloadCanvas(dataURL, 'result.png');
         window.World.Crafter.SetResultMode(false);
         $this.canvas.width = $this.canvas.OldWidth;
         $this.canvas.height = $this.canvas.OldHeight;
