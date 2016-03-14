@@ -38,13 +38,6 @@ class PCXBlock(XBlock):
         scope=Scope.settings
     )
 
-    correct_answer = String(
-        display_name=u"Правильный ответ",
-        help=u"Правильный ответ",
-        default="",
-        scope=Scope.settings
-    )
-
     weight = Integer(
         display_name=u"Максимальное количество баллов",
         help=(u"Максимальное количество баллов",
@@ -72,18 +65,6 @@ class PCXBlock(XBlock):
         scope=Scope.user_state
     )
 
-    answer = String(
-        display_name=u"Ответ пользователя",
-        default="",
-        scope=Scope.user_state
-    )
-
-    keywords = String(
-        display_name=u"Слова, вхождение которых обязательно.",
-        help=u"Обязательные слова",
-        default="",
-        scope=Scope.settings
-    )
 
     grading_threshold = Integer(
         display_name=u"Количество баллов студента",
@@ -102,6 +83,13 @@ class PCXBlock(XBlock):
         default="",	
         scope=Scope.user_state
     )
+
+    correct_picture = String(
+        display_name=u"правильная картинка",
+        default="",	
+        scope=Scope.user_state
+    )
+
 
     has_score = True
 
@@ -168,7 +156,6 @@ class PCXBlock(XBlock):
             "display_name": self.display_name,
             "weight": self.weight,
             "question": self.question,
-            "correct_answer": self.correct_answer,
             "answer": self.answer,
             "max_attempts": self.max_attempts,
             "backgroung_picture": self.backgroung_picture,
@@ -183,35 +170,11 @@ class PCXBlock(XBlock):
         )
 
         js_urls = (
-            #"static/js/test.js",
             "static/js/pcxblock_edit.js",
-            #'static/js/js/guid.js',
-            #'static/js/Utils/Pnt.js',
-            #'static/js/Utils/caman.full.js',
-            #'static/js/World.js',
-            #'static/js/Behaviours/Behaviour.js',
-            #'static/js/Drawers/Drawer.js',
-            #'static/js/Drawers/Drawer2D.js',           
-            #'static/js/js/jscolor.js',
-            #'static/js/Utils/Wheel.js',
-            #'static/js/Utils/FindCycles.js',
-            #'static/js/Utils/NumberFormat.js',
-            #'static/js/Utils/Wall.js',  
-            #'static/js/Crafters/Crafter.js',
-            #'static/js/Crafters/SimpleCrafter.js',
-            #'static/js/Crafters/Move2DCrafter.js',
-            #'static/js/Crafters/WallCrafter.js',
-            #'static/js/Utils/jquery-ui.min.js',
-            #'static/js/Utils/bootstrap.min.js',
-            
-
         )
 
         css_urls = (
-            #'static/css/pcxblock.css',
-            #'static/css/test_css.css',
             'static/css/designer.css',
-            #'static/css/font.css',
         )
 
         self.load_resources(js_urls, css_urls, fragment)
@@ -223,12 +186,10 @@ class PCXBlock(XBlock):
         """
         Отображение PCXBlock студенту (LMS).
         """
-
         context = {
             "display_name": self.display_name,
             "weight": self.weight,
             "question": self.question,
-            "correct_answer": self.correct_answer,
             "answer": self.answer,
             "attempts": self.attempts,
             "backgroung_picture": self.backgroung_picture,
@@ -278,13 +239,11 @@ class PCXBlock(XBlock):
             'static/js/Crafters/WallCrafter.js',
             'static/js/Utils/jquery-ui.min.js',
             'static/js/Utils/bootstrap.min.js',
-            #'static/js/init.js',
             'static/js/pcxblock.js',
         )
 
         css_urls = (
             'static/css/pcxblock.css',
-            #'static/css/test_css.css',
             'static/css/designer.css',
             'static/css/font.css',
         )
@@ -301,7 +260,6 @@ class PCXBlock(XBlock):
         self.display_name = data.get('display_name')
         self.question = data.get('question')
         self.weight = data.get('weight')
-        self.correct_answer = data.get('correct_answer')
         self.max_attempts = data.get('max_attempts')
         self.backgroung_picture = data.get('backgroung_picture')
 
