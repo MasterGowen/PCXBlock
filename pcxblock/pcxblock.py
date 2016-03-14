@@ -156,7 +156,6 @@ class PCXBlock(XBlock):
             "display_name": self.display_name,
             "weight": self.weight,
             "question": self.question,
-            "answer": self.answer,
             "max_attempts": self.max_attempts,
             "backgroung_picture": self.backgroung_picture,
         }
@@ -190,7 +189,6 @@ class PCXBlock(XBlock):
             "display_name": self.display_name,
             "weight": self.weight,
             "question": self.question,
-            "answer": self.answer,
             "attempts": self.attempts,
             "backgroung_picture": self.backgroung_picture,
         }
@@ -200,9 +198,6 @@ class PCXBlock(XBlock):
 
         if self.past_due():
             context["past_due"] = True
-
-        if self.answer != '{}':
-            context["points"] = self.points
 
         if answer_opportunity(self):
             context["answer_opportunity"] = True
