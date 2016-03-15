@@ -1,5 +1,5 @@
 function PCXBlockEdit(runtime, element) {
-   window.EmptyImage = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==';
+            window.EmptyImage = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==';
             window.minimimumOpacity = 0.1;
             window.headerHeight = 100;
             window.Config = {
@@ -156,19 +156,20 @@ function PCXBlockEdit(runtime, element) {
                 console.log("PICTURE: " + res);*/
             });
         });
+
    console.log("studio js");
-    $(".modal-content").css("height",900);        
+    $(".modal-content").css("height", 900);        
    
 
     $(element).find('.save-button').bind('click', function() {
         var handlerUrl = runtime.handlerUrl(element, 'studio_submit');
             data = {
-                display_name: $(element).find('input[name=display_name]').val(),
+               /* display_name: $(element).find('input[name=display_name]').val(),
                 question: $(element).find('input[name=question]').val(),
                 weight: $(element).find('input[name=weight]').val(),
                 correct_answer: $(element).find('input[name=correct_answer]').val(),
                 max_attempts: $(element).find('input[name=max_attempts]').val(),
-                backgroung_picture: $(element).find('input[name=backgroung_picture]').val()
+                backgroung_picture: $(element).find('input[name=backgroung_picture]').val()*/
             };
 
         $.post(handlerUrl, JSON.stringify(data)).done(function(response) {
