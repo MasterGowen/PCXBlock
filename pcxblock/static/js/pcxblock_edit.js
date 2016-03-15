@@ -158,8 +158,8 @@ function PCXBlockEdit(runtime, element) {
                 question: $(element).find('input[name=question]').val(),
                 weight: $(element).find('input[name=weight]').val(),
             
-                max_attempts: $(element).find('input[name=max_attempts]').val(),*/
-                backgroung_picture: $(element).find('input[name=backgroung_picture]').val()
+                max_attempts: $(element).find('input[name=max_attempts]').val(),
+                backgroung_picture: $(element).find('input[name=backgroung_picture]').val()*/
             };
 
         $.post(handlerUrl, JSON.stringify(data)).done(function(response) {
