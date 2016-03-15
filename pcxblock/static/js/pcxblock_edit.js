@@ -152,7 +152,7 @@ function PCXBlockEdit(runtime, element) {
 
 
     console.log("studio js");
-    $(".modal-content").css("height", 750);        
+    $(".modal-content").css("height", 1050);        
    
     $( "#workzone" ).mouseover(function() {
                 $("body").css("overflow","hidden")    
