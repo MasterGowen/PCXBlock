@@ -24,10 +24,6 @@ from xmodule.util.duedate import get_extended_due_date
 from webob.response import Response
 
 class PCXBlock(XBlock):
-
-	#0 - back.png
-	#1 - bent.png
-
    	pics = JSONField(
         display_name=u"Правильный ответ",
         help=u"Скрытое поле для правильного ответа в формате json.",
