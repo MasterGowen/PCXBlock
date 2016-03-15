@@ -152,6 +152,7 @@ class PCXBlock(XBlock):
         """
         Отображение pcxblock разработчику (CMS).
         """
+
         context = {
             "display_name": self.display_name,
             "weight": self.weight,
@@ -186,67 +187,76 @@ class PCXBlock(XBlock):
         Отображение PCXBlock студенту (LMS).
         """
 
-        context = {
-            "display_name": self.display_name,
-            "weight": self.weight,
-            "question": self.question,
-            "attempts": self.attempts,
-            "backgroung_picture": self.backgroung_picture,
-        }
+        if(student_id(self) != "student"):
+            context = {
+                "display_name": self.display_name,
+                "weight": self.weight,
+                "question": self.question,
+                "attempts": self.attempts,
+                "backgroung_picture": self.backgroung_picture,
+            }
 
-        #if(student_id)
-        if self.max_attempts != 0:
-            context["max_attempts"] = self.max_attempts
+            #if(student_id)
+            if self.max_attempts != 0:
+                context["max_attempts"] = self.max_attempts
 
-        if self.past_due():
-            context["past_due"] = True
+            if self.past_due():
+                context["past_due"] = True
 
-        if answer_opportunity(self):
-            context["answer_opportunity"] = True
+            if answer_opportunity(self):
+                context["answer_opportunity"] = True
 
-        if self.is_course_staff() is True or self.is_instructor() is True:
-            context['is_course_staff'] = True
+            if self.is_course_staff() is True or self.is_instructor() is True:
+                context['is_course_staff'] = True
 
-        fragment = Fragment()
-        fragment.add_content(
-            render_template(
-                'static/html/pcxblock.html',
-                context
+            fragment = Fragment()
+            fragment.add_content(
+                render_template(
+                    'static/html/pcxblock.html',
+                    context
+                )
             )
-        )
 
-        js_urls = (
-            
-            'static/js/js/guid.js',
-            'static/js/Utils/Pnt.js',
-            'static/js/Utils/caman.full.js',
-            'static/js/World.js',
-            'static/js/Behaviours/Behaviour.js',
-            'static/js/Drawers/Drawer.js',
-            'static/js/Drawers/Drawer2D.js',           
-            'static/js/js/jscolor.js',
-            'static/js/Utils/Wheel.js',
-            'static/js/Utils/FindCycles.js',
-            'static/js/Utils/NumberFormat.js',
-            'static/js/Utils/Wall.js',  
-            'static/js/Utils/BezierCurve.js',
-            'static/js/Crafters/Crafter.js',
-            'static/js/Crafters/SimpleCrafter.js',
-            'static/js/Crafters/Move2DCrafter.js',
-            'static/js/Crafters/WallCrafter.js',
-            'static/js/Utils/jquery-ui.min.js',
-            'static/js/Utils/bootstrap.min.js',
-            'static/js/pcxblock.js',
-        )
+            js_urls = (
+                
+                'static/js/js/guid.js',
+                'static/js/Utils/Pnt.js',
+                'static/js/Utils/caman.full.js',
+                'static/js/World.js',
+                'static/js/Behaviours/Behaviour.js',
+                'static/js/Drawers/Drawer.js',
+                'static/js/Drawers/Drawer2D.js',           
+                'static/js/js/jscolor.js',
+                'static/js/Utils/Wheel.js',
+                'static/js/Utils/FindCycles.js',
+                'static/js/Utils/NumberFormat.js',
+                'static/js/Utils/Wall.js',  
+                'static/js/Utils/BezierCurve.js',
+                'static/js/Crafters/Crafter.js',
+                'static/js/Crafters/SimpleCrafter.js',
+                'static/js/Crafters/Move2DCrafter.js',
+                'static/js/Crafters/WallCrafter.js',
+                'static/js/Utils/jquery-ui.min.js',
+                'static/js/Utils/bootstrap.min.js',
+                'static/js/pcxblock.js',
+            )
 
-        css_urls = (
-            'static/css/pcxblock.css',
-            'static/css/designer.css',
-            'static/css/font.css',
-        )
+            css_urls = (
+                'static/css/pcxblock.css',
+                'static/css/designer.css',
+                'static/css/font.css',
+            )
 
-        self.load_resources(js_urls, css_urls, fragment)
-
+            self.load_resources(js_urls, css_urls, fragment)
+        else:
+            fragment = Fragment()
+            fragment.add_content(
+                render_template(
+                    'static/html/pcxblock_studio.html',
+                    context
+                )
+            )
+            self.load_resources(fragment)
         fragment.initialize_js('PCXBlock')
         return fragment
 
