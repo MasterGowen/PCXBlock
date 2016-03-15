@@ -140,11 +140,7 @@ function PCXBlockEdit(runtime, element) {
                // $( "#log" ).append( "Handler for .mouseout() called." );
             });
 
-            $( "#workzone" ).mouseover(function() {
-                $(".modal-content").css("overflow","hidden");
-                $("body").css("overflow","hidden")    
-            });
-
+        
 
 
             $('#lol').click(function () {
