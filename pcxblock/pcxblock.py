@@ -185,6 +185,7 @@ class PCXBlock(XBlock):
         """
         Отображение PCXBlock студенту (LMS).
         """
+
         context = {
             "display_name": self.display_name,
             "weight": self.weight,
@@ -193,6 +194,7 @@ class PCXBlock(XBlock):
             "backgroung_picture": self.backgroung_picture,
         }
 
+        #if(student_id)
         if self.max_attempts != 0:
             context["max_attempts"] = self.max_attempts
 
@@ -259,6 +261,8 @@ class PCXBlock(XBlock):
         self.backgroung_picture = data.get('backgroung_picture')
 
         return {'result': 'success'}
+
+	
 
     @XBlock.json_handler
     def student_submit(self, data, suffix=''):
@@ -329,8 +333,9 @@ class PCXBlock(XBlock):
 
         self.points = grade_global
         self.attempts += 1
+        si = student_id(self)
 
-        return {"points": self.points, "grade_first": grade_first, "grade_second": grade_second}
+        return {"points": self.points, "grade_first": grade_first, "grade_second": si}
 
 
 
@@ -370,6 +375,9 @@ def render_template(template_path, context=None):
     template = Template(template_str)
     return template.render(Context(context))
 
+@property
+    def student_id(self):
+        return self.xmodule_runtime.anonymous_student_id
 
 def load_resource(resource_path):
     """
