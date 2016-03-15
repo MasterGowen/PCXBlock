@@ -99,9 +99,10 @@ div.designer {
 #workzone div.designer > canvas {
 	overflow:hidden;
 }
-#workzone div {
+
+/*#workzone div {
 	position:relative;
-}
+}*/
 #workzone div[role=row] {
     float: left;
     position: relative;
