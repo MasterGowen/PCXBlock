@@ -96,13 +96,13 @@ div.designer {
     padding-top: 30px;
     background-color: #bcbfc1;
 }
-div.designer > canvas {
+#workzone div.designer > canvas {
 	overflow:hidden;
 }
-div {
+#workzone div {
 	position:relative;
 }
-div[role=row] {
+#workzone div[role=row] {
     float: left;
     position: relative;
     clear: both;
