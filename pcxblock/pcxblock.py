@@ -164,7 +164,7 @@ class PCXBlock(XBlock):
         fragment = Fragment()
         fragment.add_content(
             render_template(
-                'static/html/pcxblock.html',
+                'static/html/pcxblock_edit.html',
                 context
             )
         )
@@ -189,7 +189,7 @@ class PCXBlock(XBlock):
             'static/js/Crafters/WallCrafter.js',
             'static/js/Utils/jquery-ui.min.js',
             'static/js/Utils/bootstrap.min.js',
-            'static/js/pcxblock.js',
+            'static/js/pcxblock_edit.js',
         )
 
         css_urls = (
