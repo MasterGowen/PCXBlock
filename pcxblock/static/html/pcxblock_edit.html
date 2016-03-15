@@ -79,25 +79,21 @@
 
 
 
-    <div id='main-settings'>
+  <div class="wrapper-comp-settings editor-with-buttons is-active" id="settings-tab">
+  <ul class="list-input settings-list">
+  
     <li class="field comp-setting-entry is-set">
       <div class="wrapper-comp-setting">
         <label class="label setting-label" for="display_name">Название:</label>
         <input class="input setting-input" name="display_name" id="display_name" value="{{display_name}}" type="text" />
+        <a href="#" class="button action-primary update_scenarios_repo">Обновить</a>
       </div>
     </li>
-    
+    <div id='main-settings'>
         <li class="field comp-setting-entry is-set">
       <div class="wrapper-comp-setting">
         <label class="label setting-label" for="question-area">Вопрос:</label>
-        <textarea id="question-area" class="input setting-input" name="question" rows=10 cols=50>{{question}}</textarea>
-      </div>
-    </li>
-    
-    <li class="field comp-setting-entry is-set">
-      <div class="wrapper-comp-setting">
-        <label class="label setting-label" for="backgroung_picture">URL подложенной картинки:</label>
-         <input id="backgroung_picture" class="input setting-input" name="backgroung_picture" value="{{backgroung_picture}}" />
+        <textarea id="question-area" class="input setting-input" rows=10 cols=50>{{question}}</textarea>
       </div>
     </li>
     <li class="field comp-setting-entry is-set">
@@ -112,13 +108,10 @@
         <input class="input setting-input" name="max_attempts" id="max_attempts" value="{{max_attempts}}" type="number" min="0" />
       </div>
     </li>
-    <li class="field comp-setting-entry is-set">
-      <div class="wrapper-comp-setting">
-        <label class="label setting-label" for="correct_answer">Правильный ответ</label>
-        <input class="input setting-input" name="correct_answer" id="correct_answer" value="{{correct_answer}}" type="number" min="0" />
-      </div>
-    </li>
   </div>
+</ul>
+</div>
+
   <ul class="list-input settings-list">
   <div class="xblock-actions">
     <ul>
