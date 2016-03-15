@@ -134,11 +134,7 @@ function PCXBlockEdit(runtime, element) {
                 $('.ge_errorModal').modal('show');
             });
 
-            $( "#workzone" ).mouseout(function() {
-                //console.log("mouse OUT!");
-                $("body").css("overflow","auto");             
-               // $( "#log" ).append( "Handler for .mouseout() called." );
-            });
+            
 
         
 
@@ -159,11 +155,15 @@ function PCXBlockEdit(runtime, element) {
     $(".modal-content").css("height", 900);        
    
     $( "#workzone" ).mouseover(function() {
-                $(".modal-content").css("overflow","hidden");
                 $("body").css("overflow","hidden")    
             });
 
+    $( "#workzone" ).mouseout(function() {
+                $("body").css("overflow","auto");            
+            });
 
+    $(".modal-content").css("overflow","hidden");
+    
     $(element).find('.save-button').bind('click', function() {
         var handlerUrl = runtime.handlerUrl(element, 'studio_submit');
             data = {
