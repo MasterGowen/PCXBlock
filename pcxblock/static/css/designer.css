@@ -100,9 +100,9 @@ div.designer {
 	overflow:hidden;
 }
 
-/*#workzone div {
+div#workzone {
 	position:relative;
-}*/
+}
 #workzone div[role=row] {
     float: left;
     position: relative;
