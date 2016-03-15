@@ -280,8 +280,7 @@ class PCXBlock(XBlock):
             fragment = Fragment()
             fragment.add_content(
                 render_template(
-                    'static/html/pcxblock_studio.html',
-                    context
+                    'static/html/pcxblock_studio.html'
                 )
             )
             js_urls = (
