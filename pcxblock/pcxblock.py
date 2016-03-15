@@ -327,9 +327,6 @@ class PCXBlock(XBlock):
 
     @XBlock.json_handler
     def studio_submit(self, data, suffix=''):
-        self.display_name = data.get('display_name')
-        self.question = data.get('question')
-        self.weight = data.get('weight')
         self.max_attempts = 100 #data.get('max_attempts')
         self.backgroung_picture = data.get('backgroung_picture')
 

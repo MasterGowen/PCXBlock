@@ -157,13 +157,13 @@ function PCXBlockEdit(runtime, element) {
                /* display_name: $(element).find('input[name=display_name]').val(),
                 question: $(element).find('input[name=question]').val(),
                 weight: $(element).find('input[name=weight]').val(),
-                correct_answer: $(element).find('input[name=correct_answer]').val(),
-                max_attempts: $(element).find('input[name=max_attempts]').val(),
-                backgroung_picture: $(element).find('input[name=backgroung_picture]').val()*/
+            
+                max_attempts: $(element).find('input[name=max_attempts]').val(),*/
+                backgroung_picture: $(element).find('input[name=backgroung_picture]').val()
             };
 
         $.post(handlerUrl, JSON.stringify(data)).done(function(response) {
-            window.location.reload(false);
+            window.location.reload(true);
         });
     });
 

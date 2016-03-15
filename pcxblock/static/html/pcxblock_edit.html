@@ -54,12 +54,21 @@
 
   <div class="wrapper-comp-settings editor-with-buttons is-active" id="settings-tab">
     <ul class="list-input settings-list" style="padding-top: 24px;">
+      
       <li class="field comp-setting-entry is-set">
+        <div class="wrapper-comp-setting">
+          <label class="label setting-label" for="background_image">Подложенная картинка:</label>
+          <input class="input setting-input" name="background_image" id="background_image" value="{{background_image}}" type="text" />
+        </div>
+      </li>
+
+      <!--<li class="field comp-setting-entry is-set">
         <div class="wrapper-comp-setting">
           <label class="label setting-label" for="display_name">Название:</label>
           <input class="input setting-input" name="display_name" id="display_name" value="{{display_name}}" type="text" />
         </div>
       </li>
+
       <div id='main-settings'>
           <li class="field comp-setting-entry is-set">
         <div class="wrapper-comp-setting">
@@ -79,7 +88,7 @@
           <input class="input setting-input" name="max_attempts" id="max_attempts" value="{{max_attempts}}" type="number" min="0" />
           </div>
         </li>
-      </div>
+      </div>-->
     </ul>
   </div>
 
