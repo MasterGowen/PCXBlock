@@ -1,7 +1,7 @@
 function PCXBlockEdit(runtime, element) {
    
    console.log("studio js");
-            
+    $(".modal-content").css("height",900);        
    
 
     $(element).find('.save-button').bind('click', function() {
