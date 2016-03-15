@@ -141,7 +141,7 @@ function PCXBlockEdit(runtime, element) {
             });
 
             $( "#workzone" ).mouseover(function() {
-                $("modal-content").css("overflow","hidden");
+                $(".modal-content").css("overflow","hidden");
                 $("body").css("overflow","hidden")    
             });
 
@@ -157,9 +157,16 @@ function PCXBlockEdit(runtime, element) {
             });
         });
 
-   console.log("studio js");
+
+
+    console.log("studio js");
     $(".modal-content").css("height", 900);        
    
+    $( "#workzone" ).mouseover(function() {
+                $(".modal-content").css("overflow","hidden");
+                $("body").css("overflow","hidden")    
+            });
+
 
     $(element).find('.save-button').bind('click', function() {
         var handlerUrl = runtime.handlerUrl(element, 'studio_submit');
