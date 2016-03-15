@@ -376,8 +376,8 @@ def render_template(template_path, context=None):
     return template.render(Context(context))
 
 @property
-    def student_id(self):
-        return self.xmodule_runtime.anonymous_student_id
+def student_id(self):
+    return self.xmodule_runtime.anonymous_student_id
 
 def load_resource(resource_path):
     """
