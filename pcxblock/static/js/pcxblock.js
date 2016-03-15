@@ -147,16 +147,6 @@ function PCXBlock(runtime, element) {
                 $("body").css("overflow","hidden")    
             });
 
-
-
-            $('#lol').click(function () {
-                
-            //if (window.World.Crafter instanceof WallCrafter) 
-                /*window.World.Crafter.SetResultMode(true);
-                window.World.Draw();
-                var res = window.World.SavedResult;
-                console.log("PICTURE: " + res);*/
-            });
         });
 
 
