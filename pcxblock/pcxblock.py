@@ -231,6 +231,7 @@ class PCXBlock(XBlock):
                 "question": self.question,
                 "attempts": self.attempts,
                 "backgroung_picture": self.backgroung_picture,
+                "pics": self.pics,
             }
 
             #if(student_id)
