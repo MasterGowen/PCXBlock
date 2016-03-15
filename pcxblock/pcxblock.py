@@ -375,7 +375,6 @@ def render_template(template_path, context=None):
     template = Template(template_str)
     return template.render(Context(context))
 
-@property
 def student_id(self):
     return self.xmodule_runtime.anonymous_student_id
 
