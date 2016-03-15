@@ -141,7 +141,7 @@ function PCXBlockEdit(runtime, element) {
             });
 
             $( "#workzone" ).mouseover(function() {
-                //console.log("mouse IN!"); 
+                $("modal-content").css("overflow","hidden");
                 $("body").css("overflow","hidden")    
             });
 
