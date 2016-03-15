@@ -134,25 +134,12 @@ function PCXBlockEdit(runtime, element) {
                 $('.ge_errorModal').modal('show');
             });
 
-            
-
-        
-
-
-            $('#lol').click(function () {
-                
-            //if (window.World.Crafter instanceof WallCrafter) 
-                /*window.World.Crafter.SetResultMode(true);
-                window.World.Draw();
-                var res = window.World.SavedResult;
-                console.log("PICTURE: " + res);*/
-            });
         });
 
 
 
     console.log("studio js");
-    $(".modal-content").css("height", 1050);        
+    $(".modal-content").css("height", 1070);        
    
     $( "#workzone" ).mouseover(function() {
                 $("body").css("overflow","hidden")    
