@@ -298,7 +298,7 @@ class PCXBlock(XBlock):
 
             self.load_resources(js_urls, css_urls, fragment)
         else:
-        	context = {
+            context = {
                 "backgroung_picture": self.backgroung_picture,
             }
 
