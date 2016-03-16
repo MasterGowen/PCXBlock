@@ -19,7 +19,7 @@ function PCXBlockEdit(runtime, element) {
         var handlerUrl = runtime.handlerUrl(element, 'studio_submit'),
             data = {
                 display_name: $(element).find('input[name=display_name]').val(),
-                question: $(element).find('input[name=question]').val(),
+                question: $(element).find('textarea[name=question]').val(),
                 weight: $(element).find('input[name=weight]').val(),
             
                 max_attempts: $(element).find('input[name=max_attempts]').val(),
@@ -27,7 +27,7 @@ function PCXBlockEdit(runtime, element) {
             };
 
         $.post(handlerUrl, JSON.stringify(data)).done(function(response) {
-            window.location.reload(false);
+            window.location.reload(true);
         });
     });
 
