@@ -6,6 +6,7 @@
             };
             var formatter = new Formatting.NumberFormatter(new Formatting.NumberFormatInfo());
             function onWindowResize() {
+                console.log('RESIIIIIIIIIIIIIIIIZE!');
                 $('.leftMenu').css("height", window.headerHeight);
                 $('.leftMenu .logo').css("height", window.headerHeight);
                 $('.leftMenu .photo img').css("height", window.headerHeight*0.70);
