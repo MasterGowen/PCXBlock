@@ -8,7 +8,6 @@ function PCXBlock(runtime, element) {
     $( "#workzone" ).mouseout(function() {
         $("body").css("overflow","auto");            
     });
-    //console.log("lol");
 
     /*function get_student_picture(){
         if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetResultMode(true);
