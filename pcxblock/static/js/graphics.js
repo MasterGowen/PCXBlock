@@ -104,9 +104,7 @@
                 Meths[tool]();
             });
 
-            function getResult() {
-                return window.World.SavedResult;
-            };
+            
 
             $('.ge_gridMode').click(function () {
                 var gridMode = window.World.Crafter.GetGridMode();
@@ -129,7 +127,7 @@
                 if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetResultMode(true);
                 window.World.Draw();
                 $('.ge_gridMode').text("Убрать сетку");
-                var base = getResult();
+                var base = getResult;
                 onWindowResize();
                 console.log(base);
                 onWindowResize();
@@ -143,13 +141,14 @@
 
             
 
-            function getResult() {
-                return window.World.SavedResult;
-            };
+            
 
         });
 
         
+        var getResult = function() {
+            return window.World.SavedResult;
+        };
 
         $(".modal-content").css("height", 1070);        
         $(".modal-content").css("overflow","hidden");
