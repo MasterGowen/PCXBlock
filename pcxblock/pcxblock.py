@@ -52,7 +52,7 @@ class PCXBlock(XBlock):
         display_name=u"Максимальное количество баллов",
         help=(u"Максимальное количество баллов",
               u"которое может получить студент."),
-        default=100,
+        default=10,
         scope=Scope.settings
     )
 
