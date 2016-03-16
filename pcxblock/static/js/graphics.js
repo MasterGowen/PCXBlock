@@ -124,19 +124,23 @@
                 if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetResultMode(true);
                 window.World.Draw();
                 $('.ge_gridMode').text("Убрать сетку");
+                getResult();
+                onWindowResize();
+                console.log("ok!");
             });
             $('.ge_task').click(function () {
                 $('.ge_errorModal .modal-title').text('Ваше задание');
                 $('.ge_errorModal').modal('show');
             });
         });
+
         var getResult = function() {
             return window.World.SavedResult;
         };
 
         $(".modal-content").css("height", 1070);        
         $(".modal-content").css("overflow","hidden");
-        
+
         $( "#workzone" ).mouseover(function() {
                 $("body").css("overflow","hidden")    
             });
