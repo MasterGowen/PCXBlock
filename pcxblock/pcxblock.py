@@ -75,7 +75,6 @@ class PCXBlock(XBlock):
         scope=Scope.user_state
     )
 
-
     grading_threshold = Integer(
         display_name=u"Количество баллов студента",
         default=None,
@@ -397,6 +396,11 @@ class PCXBlock(XBlock):
         self.points = grade_global
         self.attempts += 1
         #si = student_id(self)
+
+        self.runtime.publish(self, 'grade', {
+            'value': self.points,
+            'max_value': self.weight,
+        })
 
         return {"points": self.points, "grade_first": grade_first, "grade_second": grade_second}
 
