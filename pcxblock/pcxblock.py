@@ -378,10 +378,10 @@ class PCXBlock(XBlock):
         gray_wrong_pixels_cout1 = pixels_count(diff1, [70, 70, 70], [251, 251, 251])
         gray_wrong_pixels_cout = pixels_count(diff, [70, 70, 70], [251, 251, 251])
 
-
         grade_first = 0
         grade_second = 0
-        if(all_gray_student_pixels_cout!=0):
+
+        if all_gray_student_pixels_cout!=0:
             grade_first = float((all_gray_student_pixels_cout - gray_wrong_pixels_cout))/all_gray_student_pixels_cout
             grade_first = grade_first
 
@@ -394,13 +394,11 @@ class PCXBlock(XBlock):
         else:
             grade_global = 0
 
-
         self.points = grade_global
         self.attempts += 1
         #si = student_id(self)
 
         return {"points": self.points, "grade_first": grade_first, "grade_second": grade_second}
-
 
 
 def answer_opportunity(self):
@@ -439,8 +437,10 @@ def render_template(template_path, context=None):
     template = Template(template_str)
     return template.render(Context(context))
 
+
 def student_id(self):
     return self.xmodule_runtime.anonymous_student_id
+
 
 def load_resource(resource_path):
     """
