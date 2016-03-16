@@ -6,20 +6,6 @@
             };
             var formatter = new Formatting.NumberFormatter(new Formatting.NumberFormatInfo());
             function onWindowResize() {
-                /*$('.leftMenu').css("height", window.headerHeight);
-                $('.leftMenu .logo').css("height", window.headerHeight);
-                $('.leftMenu .photo img').css("height", window.headerHeight*0.70);
-                $('.leftMenu .button').css("padding-top", window.headerHeight / 3);
-                $('.leftMenu .button').css("height", 2 * window.headerHeight / 3);
-                $('.buttons').css("top", window.headerHeight);
-                $('.designer-block').css("margin-left", $('.buttons').width());
-                $('.designer-block').height($('#workzone').height() - window.headerHeight);
-                $('.designer-block').css("margin-top", window.headerHeight);
-                $('.designer-block').css("margin-right", 30);
-                $('.buttons').height($('#workzone').height() - 90);
-                $('.propertyPanel').height($('#workzone').height() - window.headerHeight - 3);*/
-
-                console.log('RESIIIIIIIIIIIIIIIIZE!');
                 $('.leftMenu').css("height", window.headerHeight);
                 $('.leftMenu .logo').css("height", window.headerHeight);
                 $('.leftMenu .photo img').css("height", window.headerHeight*0.70);

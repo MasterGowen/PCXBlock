@@ -398,7 +398,7 @@ class PCXBlock(XBlock):
         else:
             grade_global = 0
 
-        self.points = grade_global
+        self.points = grade_global * self.weight
         self.attempts += 1
         #si = student_id(self)
 

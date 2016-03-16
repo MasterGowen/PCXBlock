@@ -51,14 +51,13 @@ function PCXBlock(runtime, element) {
     $(element).find('.Check').bind('click', function() {
 
         if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetResultMode(true);
-            window.World.Draw();
-            $('.ge_gridMode').text("Убрать сетку");
-            //onWindowResize();
-            console.log(getResult());
+        window.World.Draw();
+        $('.ge_gridMode').text("Убрать сетку");
+         //onWindowResize();
+        console.log(getResult());
 
 
        var student_picture = getResult();
-       console.log("get_student_picture: " + student_picture);
         
         $.ajax({
             type: "POST",
