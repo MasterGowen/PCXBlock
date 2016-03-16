@@ -23,14 +23,14 @@ from xblock.fragment import Fragment
 from xmodule.util.duedate import get_extended_due_date
 from webob.response import Response
 
-import pics
+import defaults
 
 
 class PCXBlock(XBlock):
     pics = JSONField(
         display_name=u"Правильный ответ",
         help=u"Скрытое поле для правильного ответа в формате json.",
-        default=pics.default,
+        default=defaults.default,
         scope=Scope.settings
     )
    
@@ -84,7 +84,7 @@ class PCXBlock(XBlock):
 
     backgroung_picture = String(
         display_name=u"Подложенная картинка",
-        default=pics.background_default,
+        default=defaults.background_default,
         scope=Scope.settings
     )
 
@@ -96,7 +96,7 @@ class PCXBlock(XBlock):
 
     correct_picture = String(
         display_name=u"правильная картинка",
-        default=pics.correct_default,
+        default=defaults.correct_default,
         scope=Scope.user_state
     )
 
@@ -167,14 +167,14 @@ class PCXBlock(XBlock):
             "weight": self.weight,
             "question": self.question,
             "max_attempts": self.max_attempts,
-            "backgroung_picture": self.pics.background_default,
-            "pic_back": self.pics.default["pic_back"],
-            "pic_bent": self.pics.default["pic_bent"],
-            "pic_line": self.pics.default["pic_line"],
-            "pic_rect": self.pics.default["pic_rect"],
-            "pic_BezierCurve": self.pics.default["pic_BezierCurve"],
-            "pic_eraser": self.pics.default["pic_eraser"],
-            "pic_logo": self.pics.default["pic_logo"],
+            "backgroung_picture": self.defaults.background_default,
+            "pic_back": self.defaults.default["pic_back"],
+            "pic_bent": self.defaults.default["pic_bent"],
+            "pic_line": self.defaults.default["pic_line"],
+            "pic_rect": self.defaults.default["pic_rect"],
+            "pic_BezierCurve": self.defaults.default["pic_BezierCurve"],
+            "pic_eraser": self.defaults.default["pic_eraser"],
+            "pic_logo": self.defaults.default["pic_logo"],
         }
 
         fragment = Fragment()
@@ -231,14 +231,14 @@ class PCXBlock(XBlock):
                 "weight": self.weight,
                 "question": self.question,
                 "attempts": self.attempts,
-                "backgroung_picture": self.pics.background_default,
-                "pic_back": self.pics.default["pic_back"],
-                "pic_bent": self.pics.default["pic_bent"],
-                "pic_line": self.pics.default["pic_line"],
-                "pic_rect": self.pics.default["pic_rect"],
-                "pic_BezierCurve": self.pics.default["pic_BezierCurve"],
-                "pic_eraser": self.pics.default["pic_eraser"],
-                "pic_logo": self.pics.default["pic_logo"],
+                "backgroung_picture": self.defaults.background_default,
+                "pic_back": self.defaults.default["pic_back"],
+                "pic_bent": self.defaults.default["pic_bent"],
+                "pic_line": self.defaults.default["pic_line"],
+                "pic_rect": self.defaults.default["pic_rect"],
+                "pic_BezierCurve": self.defaults.default["pic_BezierCurve"],
+                "pic_eraser": self.defaults.default["pic_eraser"],
+                "pic_logo": self.defaults.default["pic_logo"],
             }
 
             #if(student_id)
