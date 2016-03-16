@@ -1,17 +1,5 @@
 function PCXBlock(runtime, element) {
 
-    
-
-
-
-
-
-
-
-
-
-
-
 
     $( "#workzone" ).mouseover(function() {
         $("body").css("overflow","hidden")    
@@ -60,10 +48,6 @@ function PCXBlock(runtime, element) {
     var handlerUrl = runtime.handlerUrl(element, 'student_submit');
 
     $(element).find('.Check').bind('click', function() {
-        if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetResultMode(true);
-                window.World.Draw();
-        window.World.Crafter.SetResultMode(true);
-        var student_picture = String(window.World.SavedResult);
        /*var student_picture = getResult();*/
        console.log("get_student_picture: " + student_picture);
         
