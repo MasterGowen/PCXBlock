@@ -124,7 +124,7 @@
                 if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetResultMode(true);
                 window.World.Draw();
                 $('.ge_gridMode').text("Убрать сетку");
-                getResult();
+                var base = getResult();
                 onWindowResize();
                 console.log("ok!");
             });
