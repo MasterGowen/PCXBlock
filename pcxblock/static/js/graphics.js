@@ -6,7 +6,7 @@
             };
             var formatter = new Formatting.NumberFormatter(new Formatting.NumberFormatInfo());
             function onWindowResize() {
-                $('.leftMenu').css("height", window.headerHeight);
+                /*$('.leftMenu').css("height", window.headerHeight);
                 $('.leftMenu .logo').css("height", window.headerHeight);
                 $('.leftMenu .photo img').css("height", window.headerHeight*0.70);
                 $('.leftMenu .button').css("padding-top", window.headerHeight / 3);
@@ -17,10 +17,10 @@
                 $('.designer-block').css("margin-top", window.headerHeight);
                 $('.designer-block').css("margin-right", 30);
                 $('.buttons').height($('#workzone').height() - 90);
-                $('.propertyPanel').height($('#workzone').height() - window.headerHeight - 3);
+                $('.propertyPanel').height($('#workzone').height() - window.headerHeight - 3);*/
 
                 console.log('RESIIIIIIIIIIIIIIIIZE!');
-               /* $('.leftMenu').css("height", window.headerHeight);
+                $('.leftMenu').css("height", window.headerHeight);
                 $('.leftMenu .logo').css("height", window.headerHeight);
                 $('.leftMenu .photo img').css("height", window.headerHeight*0.70);
                 $('.leftMenu .button').css("padding-top", window.headerHeight / 3);
@@ -32,7 +32,7 @@
                 $('.designer-block').css("margin-right", 30);
                 $('.designer').css("margin-top",75);
                 $('.buttons').height(525);
-                $('.propertyPanel').height($('html').height() - window.headerHeight - 3);*/
+                $('.propertyPanel').height($('html').height() - window.headerHeight - 3);
                 if (typeof World !== "undefined") {
                     if (typeof World.Drawer2D !== "undefined") {
                         if (World.Drawer2D.FullScreen) {
