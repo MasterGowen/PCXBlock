@@ -131,9 +131,11 @@
                 $('.ge_gridMode').text("Убрать сетку");
                 var base = getResult();
                 onWindowResize();
-                console.log("ok!");
+                console.log(base);
+                onWindowResize();
+               // console.log("ok!");
             });
-            
+
             $('.ge_task').click(function () {
                 $('.ge_errorModal .modal-title').text('Ваше задание');
                 $('.ge_errorModal').modal('show');
