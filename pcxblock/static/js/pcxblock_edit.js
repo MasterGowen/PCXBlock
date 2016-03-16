@@ -6,7 +6,8 @@ function PCXBlockEdit(runtime, element) {
                 Wall: { height: 2.5 * 100, width: 2 }
             };
             var formatter = new Formatting.NumberFormatter(new Formatting.NumberFormatInfo());
-            function onWindowResize() {
+
+            function update() {
                 $('.leftMenu').css("height", window.headerHeight);
                 $('.leftMenu .logo').css("height", window.headerHeight);
                 $('.leftMenu .photo img').css("height", window.headerHeight*0.70);
@@ -32,6 +33,8 @@ function PCXBlockEdit(runtime, element) {
                     }
                 }
             }
+
+
             var Meths = {
                 resettool: function () {
                     window.World.Objects.Walls = [];
@@ -63,7 +66,7 @@ function PCXBlockEdit(runtime, element) {
             var createDef = function () {
                 window.World = new WorldClass($('.designer'));
                 window.minimimumOpacity = 0.1;
-                onWindowResize();
+                update();
                 window.World.Crafter = new Move2DCrafter();
                 $('.buttons.d2d').css('display', 'block');
                 window.World.SetMode(window.Modes.two);
@@ -71,9 +74,11 @@ function PCXBlockEdit(runtime, element) {
             };
             createDef();
             $('.designer')[0].oncontextmenu = function () { return false; };
-            window.addEventListener('resize', onWindowResize, false);
+            //window.addEventListener('resize', onWindowResize, false);
             window.World.Crafter = new WallCrafter();
-            onWindowResize();
+            
+            update();
+            //onWindowResize();
             $('[rel=benttool]').addClass('active');
             $('.designer .controls').mousedown(function (event) {
                 if (event.stopPropagation)
@@ -126,6 +131,7 @@ function PCXBlockEdit(runtime, element) {
             $('#workzone').on('click', '.ge_drawerButtons .ge_saveResult', function () {
                if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetResultMode(true);
                 window.World.Draw();
+                update();
                 $('.ge_gridMode').text("Убрать сетку");
             });
 
@@ -136,8 +142,12 @@ function PCXBlockEdit(runtime, element) {
 
         });
 
-
-
+	
+	//ge_saveResult
+	var getResult = function() {
+            return window.World.SavedResult;
+            update();
+        };
     console.log("studio js");
     $(".modal-content").css("height", 1070);        
    
