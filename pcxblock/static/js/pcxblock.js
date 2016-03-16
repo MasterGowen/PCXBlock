@@ -48,7 +48,7 @@ function PCXBlock(runtime, element) {
     var handlerUrl = runtime.handlerUrl(element, 'student_submit');
 
     $(element).find('.Check').bind('click', function() {
-       /*var student_picture = getResult();*/
+       var student_picture = getResult();
        console.log("get_student_picture: " + student_picture);
         
         $.ajax({

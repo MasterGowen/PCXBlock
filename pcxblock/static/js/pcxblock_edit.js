@@ -3,20 +3,6 @@ function PCXBlockEdit(runtime, element) {
     console.log("studio js");
     
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     $( "#workzone" ).mouseover(function() {
         $("body").css("overflow","hidden")    
     });
@@ -24,7 +10,7 @@ function PCXBlockEdit(runtime, element) {
     $( "#workzone" ).mouseout(function() {
         $("body").css("overflow","auto");            
     });
-    
+
     $(".modal-content").css("height", 1070);        
     $(".modal-content").css("overflow","hidden");
 

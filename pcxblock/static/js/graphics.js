@@ -142,7 +142,6 @@
                 window.World.Draw();
                 $('.ge_gridMode').text("Убрать сетку");
                 onWindowResize();
-                onWindowResize();
                 console.log(getResult());
                // console.log("ok!");
             });
