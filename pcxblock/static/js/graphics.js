@@ -138,11 +138,11 @@
                 if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetPlotMode(false);
             });
             $('body').on('click', '.ge_drawerButtons .ge_saveResult', function () {
-                if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetResultMode(true);
+                /*if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetResultMode(true);
                 window.World.Draw();
                 $('.ge_gridMode').text("Убрать сетку");
                 onWindowResize();
-                console.log(getResult());
+                console.log(getResult());*/
                // console.log("ok!");
             });
 

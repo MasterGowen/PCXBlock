@@ -24,6 +24,7 @@ function PCXBlock(runtime, element) {
         //$('.attempts', element).text(result.attempts);
         $(element).find('.weight').html('Набрано баллов: <me-span class="points"></span>');
         $('.points', element).text(result.points );
+        onWindowResize();
     };
 
 
@@ -48,6 +49,14 @@ function PCXBlock(runtime, element) {
     var handlerUrl = runtime.handlerUrl(element, 'student_submit');
 
     $(element).find('.Check').bind('click', function() {
+
+        if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetResultMode(true);
+            window.World.Draw();
+            $('.ge_gridMode').text("Убрать сетку");
+            onWindowResize();
+            console.log(getResult());
+
+
        var student_picture = getResult();
        console.log("get_student_picture: " + student_picture);
         
