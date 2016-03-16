@@ -19,7 +19,8 @@ function PCXBlockEdit(runtime, element) {
       if (this.files && this.files[0]) {
         var FR = new FileReader();
         FR.onload = function(e) {
-          $(element).find('input[name=background_image]').innerHTML = e.target.result;
+          $(element).find('input[name=background_image]')[0].innerHTML = e.target.result;
+          console.log(e.target.result);
         };
 
         FR.readAsDataURL(this.files[0]);
