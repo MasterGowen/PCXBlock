@@ -329,6 +329,8 @@ class PCXBlock(XBlock):
         self.max_attempts = data.get('max_attempts')
         self.background_image = data.get('background_image')
 
+        #TODO Если картинки нет - то подложить белую
+
         return {'result': 'success'}
 
     @XBlock.json_handler
