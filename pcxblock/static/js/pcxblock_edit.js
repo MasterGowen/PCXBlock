@@ -25,7 +25,7 @@ function PCXBlockEdit(runtime, element) {
         FR.readAsDataURL(this.files[0]);
       }
     };
-    $(element).find('input[name=upload_image]').addEventListener("change", readFile, false);
+    $(element).find('input[name=upload_image]')[0].addEventListener("change", readFile, false);
     
     $(element).find('.save-button').bind('click', function() {
         var handlerUrl = runtime.handlerUrl(element, 'studio_submit'),
