@@ -81,7 +81,7 @@ class PCXBlock(XBlock):
         scope=Scope.settings
     )
 
-    backgroung_picture = String(
+    background_image = String(
         display_name=u"Подложенная картинка",
         default=defaults.background_default,
         scope=Scope.settings
@@ -323,8 +323,11 @@ class PCXBlock(XBlock):
 
     @XBlock.json_handler
     def studio_submit(self, data, suffix=''):
-        self.max_attempts = 100 #data.get('max_attempts')
-        self.backgroung_picture = data.get('backgroung_picture')
+        self.display_name = data.get('display_name')
+        self.question = data.get('question')
+        self.weight = data.get('weight')
+        self.max_attempts = data.get('max_attempts')
+        self.background_image = data.get('background_image')
 
         return {'result': 'success'}
 

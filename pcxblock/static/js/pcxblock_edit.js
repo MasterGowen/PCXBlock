@@ -16,14 +16,14 @@ function PCXBlockEdit(runtime, element) {
 
     
     $(element).find('.save-button').bind('click', function() {
-        var handlerUrl = runtime.handlerUrl(element, 'studio_submit');
+        var handlerUrl = runtime.handlerUrl(element, 'studio_submit'),
             data = {
-               /* display_name: $(element).find('input[name=display_name]').val(),
+                display_name: $(element).find('input[name=display_name]').val(),
                 question: $(element).find('input[name=question]').val(),
                 weight: $(element).find('input[name=weight]').val(),
             
                 max_attempts: $(element).find('input[name=max_attempts]').val(),
-                backgroung_picture: $(element).find('input[name=backgroung_picture]').val()*/
+                background_image: $(element).find('input[name=background_image]').val()
             };
 
         $.post(handlerUrl, JSON.stringify(data)).done(function(response) {
