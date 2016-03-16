@@ -74,7 +74,7 @@ function PCXBlockEdit(runtime, element) {
             };
             createDef();
             $('.designer')[0].oncontextmenu = function () { return false; };
-            //window.addEventListener('resize', onWindowResize, false);
+            window.addEventListener('resize', update, false);
             window.World.Crafter = new WallCrafter();
             
             update();
