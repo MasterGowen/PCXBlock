@@ -151,16 +151,8 @@
             return window.World.SavedResult;
         };
 
-        $(".modal-content").css("height", 1070);        
-        $(".modal-content").css("overflow","hidden");
-
-        $( "#workzone" ).mouseover(function() {
-                $("body").css("overflow","hidden")    
-            });
-
-        $( "#workzone" ).mouseout(function() {
-                $("body").css("overflow","auto");            
-            });
+        
+        
 
         
         document.cancelFullScreen = document.cancelFullScreen || document.webkitCancelFullScreen || document.mozCancelFullScreen;

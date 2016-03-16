@@ -1,6 +1,25 @@
 function PCXBlock(runtime, element) {
 
+    
 
+
+
+
+
+
+
+
+
+
+
+
+    $( "#workzone" ).mouseover(function() {
+        $("body").css("overflow","hidden")    
+    });
+
+    $( "#workzone" ).mouseout(function() {
+        $("body").css("overflow","auto");            
+    });
     //console.log("lol");
 
     /*function get_student_picture(){
