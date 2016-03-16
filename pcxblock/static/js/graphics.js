@@ -103,6 +103,11 @@
                 var tool = $(this).attr('rel');
                 Meths[tool]();
             });
+
+            function getResult() {
+                return window.World.SavedResult;
+            };
+
             $('.ge_gridMode').click(function () {
                 var gridMode = window.World.Crafter.GetGridMode();
                 $(this).text(!gridMode?"Убрать сетку":"Показать сетку");
@@ -128,15 +133,21 @@
                 onWindowResize();
                 console.log("ok!");
             });
+            
             $('.ge_task').click(function () {
                 $('.ge_errorModal .modal-title').text('Ваше задание');
                 $('.ge_errorModal').modal('show');
             });
+
+            
+
+            function getResult() {
+                return window.World.SavedResult;
+            };
+
         });
 
-        var getResult = function() {
-            return window.World.SavedResult;
-        };
+        
 
         $(".modal-content").css("height", 1070);        
         $(".modal-content").css("overflow","hidden");
