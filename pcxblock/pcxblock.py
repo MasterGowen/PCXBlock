@@ -405,9 +405,9 @@ class PCXBlock(XBlock):
 
         self.points = grade_global
         self.attempts += 1
-        si = student_id(self)
+        #si = student_id(self)
 
-        return {"points": self.points, "grade_first": grade_first, "grade_second": si}
+        return {"points": self.points, "grade_first": grade_first, "grade_second": grade_second}
 
 
 
