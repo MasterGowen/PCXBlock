@@ -166,7 +166,7 @@ class PCXBlock(XBlock):
             "weight": self.weight,
             "question": self.question,
             "max_attempts": self.max_attempts,
-            "backgroung_picture": defaults.background_default,
+            "background_image": defaults.background_default,
             "pic_back": defaults.default["pic_back"],
             "pic_bent": defaults.default["pic_bent"],
             "pic_line": defaults.default["pic_line"],
@@ -230,7 +230,7 @@ class PCXBlock(XBlock):
                 "weight": self.weight,
                 "question": self.question,
                 "attempts": self.attempts,
-                "backgroung_picture": defaults.background_default,
+                "background_image": defaults.background_default,
                 "pic_back": defaults.default["pic_back"],
                 "pic_bent": defaults.default["pic_bent"],
                 "pic_line": defaults.default["pic_line"],
@@ -295,7 +295,7 @@ class PCXBlock(XBlock):
             self.load_resources(js_urls, css_urls, fragment)
         else:
             context = {
-                "backgroung_picture": self.backgroung_picture,
+                "background_image": self.background_image,
                 "correct_picture": self.correct_picture
             }
 
