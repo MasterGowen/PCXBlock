@@ -329,8 +329,6 @@ class PCXBlock(XBlock):
 
         return {'result': 'success'}
 
-	
-
     @XBlock.json_handler
     def student_submit(self, data, suffix=''):
         
@@ -352,15 +350,15 @@ class PCXBlock(XBlock):
         def thresh_callback(stud_pic, correct_pic, thick_cont, thresh):
             sp = copy.copy(stud_pic)
             cp = copy.copy(correct_pic)
-            gray = cv2.cvtColor(cp,cv2.COLOR_BGR2GRAY)
-            blur = cv2.GaussianBlur(gray,(5,5),0)
-            edges = cv2.Canny(blur,thresh,thresh*2)
-            drawing = np.zeros(cp.shape,np.uint8)     # Image to draw the contours
-            _,contours,hierarchy = cv2.findContours(edges,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
+            gray = cv2.cvtColor(cp, cv2.COLOR_BGR2GRAY)
+            blur = cv2.GaussianBlur(gray, (5, 5), 0)
+            edges = cv2.Canny(blur, thresh, thresh * 2)
+            drawing = np.zeros(cp.shape, np.uint8)     # Image to draw the contours
+            _, contours, hierarchy = cv2.findContours(edges, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
             for cnt in contours:
-                cv2.drawContours(drawing,[cnt],0,(0,255,0),thick_cont)
-                cv2.drawContours(sp,[cnt],0,(255, 255, 255),thick_cont)
+                cv2.drawContours(drawing, [cnt], 0, (0, 255, 0), thick_cont)
+                cv2.drawContours(sp, [cnt], 0, (255, 255, 255), thick_cont)
             return sp
 
 
