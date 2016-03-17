@@ -1,8 +1,4 @@
-﻿if (typeof gridStep !== 'undefined') {
-    console.log(gridStep + 'drawer2d');
-
-
-var Drawer2D = function (container) {
+﻿var Drawer2D = function (container) {
     container.append("<canvas mode='2d'></canvas>");
     var canvas2D = $('canvas[mode=2d]', container)[0];
     canvas2D.width = container.width();
@@ -235,7 +231,3 @@ Drawer2D.prototype.MoveBottom = function () {
     if (this.canvas.container.height() + this.Offset.Y / this.Scale + 10 * this.Scale >= (this.MaxOffset.Y / this.Scale)) return;
     this.Offset.Y += 10 * this.Scale;
 };
-}
-else {
-    console.log('undef');
-}

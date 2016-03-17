@@ -28,6 +28,9 @@ Drawer.prototype = {
             $this.DrawWallPaper(obj);
         });
     },
+
+
+
     DrawFloor: function (objects, canvas, proc, additionalDrawing, angle) {
         angle = angle || 0;
         var areas = objects.Areas;
