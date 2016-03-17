@@ -3,7 +3,7 @@ function PCXBlockEdit(runtime, element) {
     console.log("studio js");
 
     function success_func(result) {
-       //gridStep = result["grid_step"];
+       gridStep = result["grid_step"];
        console.log("Шаг сетки venm: " + result);
     };
     
