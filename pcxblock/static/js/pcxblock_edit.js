@@ -29,7 +29,7 @@ function PCXBlockEdit(runtime, element) {
     
 
 
-    var getGridStep = runtime.handlerUrl(element,'get_settings');
+    var getGridStep = runtime.handlerUrl(element, 'get_settings');
 
     console.log("Шаг сетки: " + getGridStep);
 

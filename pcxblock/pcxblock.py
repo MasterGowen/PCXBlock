@@ -82,7 +82,6 @@ class PCXBlock(XBlock):
     )
 
     editor_settings = JSONField(
-
 		display_name=u"Правильный ответ",
         help=u"Скрытое поле для правильного ответа в формате json.",
         default={
@@ -338,9 +337,10 @@ class PCXBlock(XBlock):
     @XBlock.json_handler
     def get_settings(self, data, suffix=''):
 
-        body = self.editor_settings
-        response = Response(body=body, content_type='application/json' )
-        return response
+        body = self.editor_settings["grid_step"]
+        
+        return body
+
 
     @XBlock.json_handler
     def studio_submit(self, data, suffix=''):
