@@ -82,14 +82,13 @@ class PCXBlock(XBlock):
     )
 
     editor_settings = JSONField(
-		display_name=u"Правильный ответ",
+        display_name=u"Правильный ответ",
         help=u"Скрытое поле для правильного ответа в формате json.",
         default={
-        		"grid_step":"10"
-        		},
+            "grid_step": "10"
+        },
         scope=Scope.settings
-
-   	)
+    )
     
 
     background_image = String(
@@ -100,7 +99,7 @@ class PCXBlock(XBlock):
 
     student_picture = String(
         display_name=u"картинка студента",
-        default="",	
+        default="",    
         scope=Scope.user_state
     )
 
@@ -337,9 +336,7 @@ class PCXBlock(XBlock):
     @XBlock.json_handler
     def get_settings(self, data, suffix=''):
 
-
         return self.editor_settings
-
 
     @XBlock.json_handler
     def studio_submit(self, data, suffix=''):
@@ -395,24 +392,24 @@ class PCXBlock(XBlock):
         correct_image = base64_to_image(correct_image_base64)
         student_image = base64_to_image(student_picture_base64)
 
-        all_gray_student_pixels_cout = pixels_count(student_image, [70, 70, 70], [251, 251, 251])
-        all_gray_correct_pixels_cout = pixels_count(correct_image, [70, 70, 70], [251, 251, 251])
+        all_gray_student_pixels_count = pixels_count(student_image, [70, 70, 70], [251, 251, 251])
+        all_gray_correct_pixels_count = pixels_count(correct_image, [70, 70, 70], [251, 251, 251])
 
         thickness_contour = 25
         diff = thresh_callback(student_image, correct_image, thickness_contour, 0)
         diff1 = thresh_callback(correct_image, student_image, thickness_contour, 0)
 
-        gray_wrong_pixels_cout1 = pixels_count(diff1, [70, 70, 70], [251, 251, 251])
-        gray_wrong_pixels_cout = pixels_count(diff, [70, 70, 70], [251, 251, 251])
+        gray_wrong_pixels_count1 = pixels_count(diff1, [70, 70, 70], [251, 251, 251])
+        gray_wrong_pixels_count = pixels_count(diff, [70, 70, 70], [251, 251, 251])
 
         grade_first = 0
         grade_second = 0
 
-        if all_gray_student_pixels_cout!=0:
-            grade_first = float((all_gray_student_pixels_cout - gray_wrong_pixels_cout))/all_gray_student_pixels_cout
+        if all_gray_student_pixels_count != 0:
+            grade_first = float((all_gray_student_pixels_count - gray_wrong_pixels_count))/all_gray_student_pixels_count
             grade_first = grade_first
 
-            grade_second = float((all_gray_correct_pixels_cout - gray_wrong_pixels_cout1))/all_gray_correct_pixels_cout
+            grade_second = float((all_gray_correct_pixels_count - gray_wrong_pixels_count1))/all_gray_correct_pixels_count
             grade_second = grade_second
 
             grade_global = min(grade_first, grade_second) * max(grade_first, grade_second) * 100
