@@ -4,7 +4,7 @@ function PCXBlockEdit(runtime, element) {
 
     function success_func(result) {
        //gridStep = result["grid_step"];
-       console.log("Шаг сетки venm: " + result["grid_step"]);
+       console.log("Шаг сетки venm: " + result);
     };
     
     $.ajax({
