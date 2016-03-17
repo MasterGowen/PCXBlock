@@ -198,6 +198,13 @@ Drawer2D.prototype.Start = function () {
 
 Drawer2D.prototype.ReDrawGrid = function () {
     var can = this.canvas;
+
+    var ctx = can.getContext("2d");
+    ctx.fillStyle = "#FD0000";
+    ctx.fillRect(0, 0, can.width, can.height);
+    if (can.Image && !window.World.Crafter.ResultMode) ctx.drawImage(can.Image, -this.Offset.X / this.Scale, -this.Offset.Y / this.Scale, can.Imgwidth / this.Scale, can.Imgheight / this.Scale);
+    ctx.lineWidth = 0.1;
+
     if (window.World.Crafter.GridMode) {
         var ix;
         for (var x = (-this.Offset.X % this.CellSize) / this.Scale; x < can.width; x += this.CellSize / this.Scale) {
