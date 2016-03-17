@@ -231,7 +231,7 @@ class PCXBlock(XBlock):
         self.load_resources(js_urls, css_urls, fragment)
         fragment.initialize_js('PCXBlockEdit')
 
-        return lol,fragment
+        return fragment
 
     def student_view(self, *args, **kwargs):
         """
