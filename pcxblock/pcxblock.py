@@ -337,9 +337,10 @@ class PCXBlock(XBlock):
     @XBlock.json_handler
     def get_settings(self, data, suffix=''):
 
-        body = self.editor_settings["grid_step"]
+        body = self.editor_settings
         
-        return body
+        response = Response(body=body, content_type='application/json' )
+        return response
 
 
     @XBlock.json_handler
