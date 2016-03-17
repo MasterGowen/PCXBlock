@@ -81,11 +81,17 @@ class PCXBlock(XBlock):
         scope=Scope.settings
     )
 
-    grid_step = Integer(
-        display_name=u"Шаг сетки",
-        default=2,
+    editor_settings = JSONField(
+
+		display_name=u"Правильный ответ",
+        help=u"Скрытое поле для правильного ответа в формате json.",
+        default={
+        		"grid_step":"2"
+        		},
         scope=Scope.settings
-    )
+
+   	)
+    
 
     background_image = String(
         display_name=u"Подложенная картинка",
@@ -181,7 +187,7 @@ class PCXBlock(XBlock):
             "pic_BezierCurve": defaults.default["pic_BezierCurve"],
             "pic_eraser": defaults.default["pic_eraser"],
             "pic_logo": defaults.default["pic_logo"],
-            "grid_step": self.grid_step,
+            #"grid_step": self.grid_step,
         }
 
         fragment = Fragment()
@@ -246,7 +252,7 @@ class PCXBlock(XBlock):
                 "pic_BezierCurve": defaults.default["pic_BezierCurve"],
                 "pic_eraser": defaults.default["pic_eraser"],
                 "pic_logo": defaults.default["pic_logo"],
-                "grid_step":self.grid_step,
+                #"grid_step":self.grid_step,
             }
 
             #if(student_id)
@@ -332,7 +338,9 @@ class PCXBlock(XBlock):
     @XBlock.json_handler
     def get_settings(self, data, suffix=''):
 
-    	return self.grid_step
+    body = self.editor_settings
+    response = Response(body=body, content_type='application/json' )
+    return response
 
     @XBlock.json_handler
     def studio_submit(self, data, suffix=''):
@@ -341,7 +349,7 @@ class PCXBlock(XBlock):
         self.weight = data.get('weight')
         self.max_attempts = data.get('max_attempts')
         self.background_image = data.get('background_image')
-        self.grid_step = data.get('grid_step')
+        self.editor_settings["grid_step"] = data.get('grid_step')
 
         #TODO Если картинки нет - то подложить белую
 

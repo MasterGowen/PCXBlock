@@ -31,7 +31,7 @@ function PCXBlockEdit(runtime, element) {
 
     var getGridStep = runtime.handlerUrl(element,'get_settings');
 
-    console.log("Шаг сетки: " + get_settings);
+    console.log("Шаг сетки: " + getGridStep);
 
     $(element).find('.save-button').bind('click', function() {
         var handlerUrl = runtime.handlerUrl(element, 'studio_submit'),
