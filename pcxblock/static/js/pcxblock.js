@@ -1,6 +1,4 @@
-function PCXBlock(runtime, element, data) {
-
-    var gridStep = data.grid_step;
+function PCXBlock(runtime, element) {
 
     $( "#workzone" ).mouseover(function() {
         $("body").css("overflow","hidden")    

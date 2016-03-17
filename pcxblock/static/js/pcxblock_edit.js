@@ -1,7 +1,9 @@
 //var gridStep  = 0;
 
-function PCXBlockEdit(runtime, element) {
+function PCXBlockEdit(runtime, element, data) {
     console.log("studio js");
+
+    var gridStep = data.grid_step;
 
     /*function success_func(result) {
        gridStep = JSON.parse(result).grid_step;
