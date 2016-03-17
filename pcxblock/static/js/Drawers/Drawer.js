@@ -1,5 +1,4 @@
-﻿//var gridStep = 
-
+﻿
 var Drawer = function () {
     this.Offset = new Pnt();
     this.MaxOffset = new Pnt();
@@ -9,9 +8,11 @@ var Drawer = function () {
 
     if (typeof gridStep !== 'undefined') {
         this.CellSize = gridStep;
+        console.log('ok' + gridStep);
     }
     else {
         this.CellSize = 2;
+        console.log('ne ok');
     }
 
     this.FullScreen = 0;
