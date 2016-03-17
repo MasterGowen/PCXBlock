@@ -4,7 +4,7 @@ var xxx = 2;
 function XLol(runtime, element, data){
 
     var gridStep = data.grid_step;
-    x = gridStep;
+    xxx = gridStep;
     console.log("gridStep: " + gridStep);
 }
 
