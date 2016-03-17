@@ -4,7 +4,7 @@ function PCXBlockEdit(runtime, element) {
     console.log("studio js");
 
     function success_func(result) {
-       gridStep = result["grid_step"];
+       gridStep = JSON.parse(result).grid_step;
        console.log("Шаг сетки venm: " + gridStep);
     };
     
