@@ -18,16 +18,16 @@ var Drawer = function () {
     if (typeof gridStep !== 'undefined') {
         if(gridStep !== null){
             this.CellSize = xxx;
-            console.log('ok' + xxx);
+            console.log('lok' + xxx);
         }
         else{
             this.CellSize = xxx;
-        console.log('ne ok 12');
+        console.log('ne lok 12');
         }
     }
     else {
         this.CellSize = xxx;
-        console.log('ne ok');
+        console.log('ne lok');
     }
 
     this.FullScreen = 0;
