@@ -7,8 +7,14 @@ var Drawer = function () {
     this.MinScale = 1;
 
     if (typeof gridStep !== 'undefined') {
-        this.CellSize = gridStep;
-        console.log('ok' + gridStep);
+        if(gridStep !== null){
+            this.CellSize = gridStep;
+            console.log('ok' + gridStep);
+        }
+        else{
+            this.CellSize = 2;
+        console.log('ne ok 12');
+        }
     }
     else {
         this.CellSize = 2;
