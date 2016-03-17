@@ -338,7 +338,7 @@ class PCXBlock(XBlock):
     def get_settings(self, data, suffix=''):
 
 
-        return {'result': self.editor_settings}
+        return self.editor_settings
 
 
     @XBlock.json_handler
