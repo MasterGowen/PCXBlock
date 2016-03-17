@@ -332,7 +332,7 @@ class PCXBlock(XBlock):
     @XBlock.json_handler
     def get_settings(self, data, suffix=''):
 
-    	return {'grid_step': self.grid_step}
+    	return self.grid_step
 
     @XBlock.json_handler
     def studio_submit(self, data, suffix=''):
