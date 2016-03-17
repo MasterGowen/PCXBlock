@@ -269,6 +269,7 @@ class PCXBlock(XBlock):
                 context['is_course_staff'] = True
 
             fragment = Fragment()
+            fragment.add_javascript("var gridStep = " + str(self.editor_settings["grid_step"]) + ";")
             fragment.add_content(
                 render_template(
                     'static/html/pcxblock.html',
