@@ -336,7 +336,7 @@ class PCXBlock(XBlock):
     @XBlock.handler
     def get_settings(self, data, suffix=''):
 
-        return json.dumps(self.editor_settings)
+        return self.editor_settings
 
     @XBlock.json_handler
     def studio_submit(self, data, suffix=''):
