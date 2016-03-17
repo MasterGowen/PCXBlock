@@ -1,7 +1,23 @@
+var gridStep  = "lol";
+
 function PCXBlockEdit(runtime, element) {
             
     console.log("studio js");
+
+    function success_func(result) {
+       var gridStep = result["grid_step"];
+       console.log("Шаг сетки venm: " + result["grid_step"]);
+    };
+
+
     
+    $.ajax({
+            type: "POST",
+            url: runtime.handlerUrl(element, 'get_settings'),
+            data: JSON.stringify({picture: "student_picture" }),
+            success: success_func
+    });
+
 
     $( "#workzone" ).mouseover(function() {
         $("body").css("overflow","hidden")    
@@ -31,19 +47,7 @@ function PCXBlockEdit(runtime, element) {
 
    
 
-    function success_func(result) {
-       
-        console.log("Шаг сетки venm: " + result["grid_step"]);
-    };
-
-
     
-    $.ajax({
-            type: "POST",
-            url: runtime.handlerUrl(element, 'get_settings'),
-            data: JSON.stringify({picture: "student_picture" }),
-            success: success_func
-    });
 
     
 
