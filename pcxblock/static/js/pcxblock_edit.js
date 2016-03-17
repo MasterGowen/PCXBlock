@@ -35,7 +35,8 @@ function PCXBlockEdit(runtime, element) {
                 weight: $(element).find('input[name=weight]').val(),
             
                 max_attempts: $(element).find('input[name=max_attempts]').val(),
-                background_image: $(element).find('input[name=background_image]').val()
+                background_image: $(element).find('input[name=background_image]').val(),
+                grid_step: $(element).find('input[namegrid_step]').val()
             };
 
         $.post(handlerUrl, JSON.stringify(data)).done(function(response) {

@@ -81,6 +81,13 @@ class PCXBlock(XBlock):
         scope=Scope.settings
     )
 
+    grid_step = Integer(
+        display_name=u"Шаг сетки",
+        default=2,
+        scope=Scope.settings
+    )
+
+
     background_image = String(
         display_name=u"Подложенная картинка",
         default=defaults.background_default,
@@ -98,6 +105,7 @@ class PCXBlock(XBlock):
         default=defaults.correct_default,
         scope=Scope.user_state
     )
+
 
     has_score = True
 
@@ -174,6 +182,7 @@ class PCXBlock(XBlock):
             "pic_BezierCurve": defaults.default["pic_BezierCurve"],
             "pic_eraser": defaults.default["pic_eraser"],
             "pic_logo": defaults.default["pic_logo"],
+            "grid_step": self.grid_step,
         }
 
         fragment = Fragment()
@@ -238,6 +247,7 @@ class PCXBlock(XBlock):
                 "pic_BezierCurve": defaults.default["pic_BezierCurve"],
                 "pic_eraser": defaults.default["pic_eraser"],
                 "pic_logo": defaults.default["pic_logo"],
+                "grid_step":self.grid_step,
             }
 
             #if(student_id)
@@ -328,6 +338,7 @@ class PCXBlock(XBlock):
         self.weight = data.get('weight')
         self.max_attempts = data.get('max_attempts')
         self.background_image = data.get('background_image')
+        self.grid_step = data.get('grid_step')
 
         #TODO Если картинки нет - то подложить белую
 
