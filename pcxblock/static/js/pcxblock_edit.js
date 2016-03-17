@@ -27,11 +27,31 @@ function PCXBlockEdit(runtime, element) {
     };
     $(element).find('input[name=upload_image]')[0].addEventListener("change", readFile, false);
     
+    function Get(requestURL) {
+            if(requestURL){
+                var xhr = new XMLHttpRequest();
+                xhr.open("GET", requestURL, false);
+                xhr.send(null);
 
+                xhr.onload = function(e) {
+                    if (xhr.readyState === 4) {
+                        if (xhr.status === 200) {
+                            console.log('Data loading ... OK!');
+                        } else {
+                            console.error(xhr.statusText);
+                        }
+                    }
+                };
+                xhr.onerror = function(e) {
+                    console.error(xhr.statusText);
+                };
+                return xhr.responseText;
+            };
+        }
 
     var getGridStep = runtime.handlerUrl(element, 'get_settings');
 
-    console.log("Шаг сетки: " + getGridStep);
+    console.log("Шаг сетки venm: " + Get(getGridStep));
 
     $(element).find('.save-button').bind('click', function() {
         var handlerUrl = runtime.handlerUrl(element, 'studio_submit'),
