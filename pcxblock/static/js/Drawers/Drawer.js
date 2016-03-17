@@ -1,4 +1,6 @@
-﻿var Drawer = function () {
+﻿//var gridStep = 
+
+var Drawer = function () {
     this.Offset = new Pnt();
     this.MaxOffset = new Pnt();
     this.MinOffset = new Pnt();
