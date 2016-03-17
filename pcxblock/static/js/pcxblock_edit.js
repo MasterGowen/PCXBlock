@@ -2,9 +2,9 @@ function PCXBlockEdit(runtime, element) {
     var gridStep  = 0;
     console.log("studio js");
 
-    function success_func(result) {
+    function success_func(grid_step) {
        //gridStep = result["grid_step"];
-       console.log("Шаг сетки venm: " + result);
+       console.log("Шаг сетки venm: " + grid_step);
     };
     
     $.ajax({
