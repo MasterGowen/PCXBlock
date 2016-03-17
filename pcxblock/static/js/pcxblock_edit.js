@@ -8,15 +8,14 @@ function PCXBlockEdit(runtime, element) {
        gridStep = result["grid_step"];
        console.log("Шаг сетки venm: " + result["grid_step"]);
     };
-
-
-
     
     $.ajax({
             type: "POST",
             url: runtime.handlerUrl(element, 'get_settings'),
             success: success_func
     });
+
+
 
 
     $( "#workzone" ).mouseover(function() {
@@ -42,14 +41,6 @@ function PCXBlockEdit(runtime, element) {
       }
     };
     $(element).find('input[name=upload_image]')[0].addEventListener("change", readFile, false);
-    
-
-
-   
-
-    
-
-    
 
     $(element).find('.save-button').bind('click', function() {
         var handlerUrl = runtime.handlerUrl(element, 'studio_submit'),
