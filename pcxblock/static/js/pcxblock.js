@@ -53,6 +53,7 @@ function PCXBlock(runtime, element) {
         window.World.Draw();
         $('.ge_gridMode').text("Убрать сетку");
          //onWindowResize();
+        window.World.Crafter.SetGridMode(false)
         console.log(getResult());
 
 
