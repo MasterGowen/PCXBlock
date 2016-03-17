@@ -338,9 +338,9 @@ class PCXBlock(XBlock):
     @XBlock.json_handler
     def get_settings(self, data, suffix=''):
 
-    body = self.editor_settings
-    response = Response(body=body, content_type='application/json' )
-    return response
+        body = self.editor_settings
+        response = Response(body=body, content_type='application/json' )
+        return response
 
     @XBlock.json_handler
     def studio_submit(self, data, suffix=''):
