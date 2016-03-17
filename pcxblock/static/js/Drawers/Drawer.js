@@ -6,12 +6,13 @@
     this.MinScale = 1;
     if (typeof gridStep !== 'undefined') {
         this.CellSize = gridStep;
+        console.log('gridStep is: ' + gridStep + 'px')
     }
     else {
      this.CellSize = 2;
     }
     console.log('Drawer cell size is: ' + this.CellSize + 'px')
-    console.log('gridStep is: ' + gridStep + 'px')
+
     this.FullScreen = 0;
 };
 Drawer.prototype = {
