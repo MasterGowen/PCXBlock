@@ -189,7 +189,6 @@ class PCXBlock(XBlock):
         }
 
         fragment = Fragment()
-        fragment.add_javascript("var gridStep = " + str(self.editor_settings["grid_step"]) + ";")
         fragment.add_content(
             render_template(
                 'static/html/pcxblock_edit.html',
@@ -229,7 +228,7 @@ class PCXBlock(XBlock):
         )
 
         self.load_resources(js_urls, css_urls, fragment)
-        fragment.initialize_js('PCXBlockEdit')
+        fragment.initialize_js('PCXBlockEdit', {'grid_step': self.editor_settings["grid_step"]})
 
         return fragment
 
@@ -269,7 +268,6 @@ class PCXBlock(XBlock):
                 context['is_course_staff'] = True
 
             fragment = Fragment()
-            fragment.add_javascript("var gridStep = " + str(self.editor_settings["grid_step"]) + ";")
             fragment.add_content(
                 render_template(
                     'static/html/pcxblock.html',

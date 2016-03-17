@@ -5,7 +5,7 @@ var Drawer = function () {
     this.MinOffset = new Pnt();
     this.Scale = 1;
     this.MinScale = 1;
-
+    
     if (typeof gridStep !== 'undefined') {
         if(gridStep !== null){
             this.CellSize = gridStep;
