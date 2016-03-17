@@ -87,7 +87,6 @@ class PCXBlock(XBlock):
         scope=Scope.settings
     )
 
-
     background_image = String(
         display_name=u"Подложенная картинка",
         default=defaults.background_default,
