@@ -4,7 +4,7 @@
     this.MinOffset = new Pnt();
     this.Scale = 1;
     this.MinScale = 1;
-    this.CellSize = {{grid_step}};
+    this.CellSize = "{{grid_step}}";
     this.FullScreen = 0;
 };
 Drawer.prototype = {
