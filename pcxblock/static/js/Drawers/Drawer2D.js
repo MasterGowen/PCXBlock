@@ -195,6 +195,32 @@ Drawer2D.prototype.Start = function () {
         }
     } 
 };
+
+Drawer2D.prototype.ReDrawGrid = function () {
+    var can = this.canvas;
+    if (window.World.Crafter.GridMode) {
+        var ix;
+        for (var x = (-this.Offset.X % this.CellSize) / this.Scale; x < can.width; x += this.CellSize / this.Scale) {
+            ix = Math.round(x * this.Scale / this.CellSize);
+            var kx = Math.round((this.Offset.X + this.CellSize / this.Scale * ix) / this.CellSize);
+            ctx.lineWidth = (kx % 5 == 0) ? 0.5 : 0.3;
+            ctx.beginPath();
+            ctx.moveTo(x, 0);
+            ctx.lineTo(x, can.height);
+            ctx.stroke();
+        }
+        for (var y = (-this.Offset.Y % this.CellSize) / this.Scale; y < can.height; y += this.CellSize / this.Scale) {
+            ix = Math.round(y * this.Scale / this.CellSize);
+            var ky = Math.round((this.Offset.Y + this.CellSize / this.Scale * ix) / this.CellSize);
+            ctx.lineWidth = (ky % 5 == 0) ? 0.5 : 0.3;
+            ctx.beginPath();
+            ctx.moveTo(0, y);
+            ctx.lineTo(can.width, y);
+            ctx.stroke();
+        }
+    }
+};
+
 Drawer2D.prototype.DownloadCanvas = function (currDataURL, filename) {
     var link = document.createElement("a");
     link.href = currDataURL;
