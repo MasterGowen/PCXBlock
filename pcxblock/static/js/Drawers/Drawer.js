@@ -4,12 +4,12 @@
     this.MinOffset = new Pnt();
     this.Scale = 1;
     this.MinScale = 1;
+
     if (typeof gridStep !== 'undefined') {
         this.CellSize = gridStep;
-        console.log('gridStep is: ' + gridStep + 'px')
     }
     else {
-     this.CellSize = 2;
+        this.CellSize = 2;
     }
 
     this.FullScreen = 0;
