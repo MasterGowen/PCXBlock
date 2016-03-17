@@ -27,6 +27,12 @@ function PCXBlockEdit(runtime, element) {
     };
     $(element).find('input[name=upload_image]')[0].addEventListener("change", readFile, false);
     
+
+
+    var getGridStep = runtime.handlerUrl(element,'get_settings');
+
+    console.log("Шаг сетки: " + get_settings);
+
     $(element).find('.save-button').bind('click', function() {
         var handlerUrl = runtime.handlerUrl(element, 'studio_submit'),
             data = {
