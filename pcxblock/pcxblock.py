@@ -333,10 +333,10 @@ class PCXBlock(XBlock):
         return fragment
 
     # handlers
-    @XBlock.json_handler
+    @XBlock.handler
     def get_settings(self, data, suffix=''):
 
-        return {"grid_step": "10"}  # self.editor_settings
+        return json.dumps(self.editor_settings)
 
     @XBlock.json_handler
     def studio_submit(self, data, suffix=''):
@@ -414,7 +414,7 @@ class PCXBlock(XBlock):
 
             grade_global = min(grade_first, grade_second) * max(grade_first, grade_second) * 100
 
-            grade_global = int(grade_global)
+            #grade_global = int(grade_global)
         else:
             grade_global = 0
 
