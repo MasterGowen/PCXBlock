@@ -189,7 +189,7 @@ class PCXBlock(XBlock):
         }
 
         fragment = Fragment()
-        fragment.add_javascript("var gridStep = 10;")
+        fragment.add_javascript("var gridStep = " + str(self.editor_settings["grid_step"]) + "1;")
         fragment.add_content(
             render_template(
                 'static/html/pcxblock_edit.html',
