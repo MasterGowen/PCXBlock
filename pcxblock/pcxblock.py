@@ -185,7 +185,7 @@ class PCXBlock(XBlock):
             "pic_BezierCurve": defaults.default["pic_BezierCurve"],
             "pic_eraser": defaults.default["pic_eraser"],
             "pic_logo": defaults.default["pic_logo"],
-            #"grid_step": self.grid_step,
+            "grid_step": self.editor_settings["grid_step"],
         }
 
         fragment = Fragment()
@@ -250,7 +250,7 @@ class PCXBlock(XBlock):
                 "pic_BezierCurve": defaults.default["pic_BezierCurve"],
                 "pic_eraser": defaults.default["pic_eraser"],
                 "pic_logo": defaults.default["pic_logo"],
-                #"grid_step":self.grid_step,
+                "grid_step": self.editor_settings["grid_step"],
             }
 
             #if(student_id)
