@@ -337,10 +337,8 @@ class PCXBlock(XBlock):
     @XBlock.json_handler
     def get_settings(self, data, suffix=''):
 
-        body = self.editor_settings
-        
-        response = Response(body=body, content_type='application/json' )
-        return response
+
+        return {'result': self.editor_settings}
 
 
     @XBlock.json_handler

@@ -27,31 +27,24 @@ function PCXBlockEdit(runtime, element) {
     };
     $(element).find('input[name=upload_image]')[0].addEventListener("change", readFile, false);
     
-    function Get(requestURL) {
-            if(requestURL){
-                var xhr = new XMLHttpRequest();
-                xhr.open("POST", requestURL, false);
-                xhr.send(null);
 
-                xhr.onload = function(e) {
-                    if (xhr.readyState === 4) {
-                        if (xhr.status === 200) {
-                            console.log('Data loading ... OK!');
-                        } else {
-                            console.error(xhr.statusText);
-                        }
-                    }
-                };
-                xhr.onerror = function(e) {
-                    console.error(xhr.statusText);
-                };
-                return xhr.responseText;
-            };
-        }
 
-    var getGridStep = runtime.handlerUrl(element, 'get_settings');
+   
 
-    console.log("Шаг сетки venm: " + Get(getGridStep));
+    function success_func(result) {
+       
+        console.log("Шаг сетки venm: " + result);
+    };
+
+
+    $.ajax({
+            type: "POST",
+            url: runtime.handlerUrl(element, 'get_settings'),
+            data: JSON.stringify({picture: "student_picture" }),
+            success: success_func
+        });
+
+    
 
     $(element).find('.save-button').bind('click', function() {
         var handlerUrl = runtime.handlerUrl(element, 'studio_submit'),
