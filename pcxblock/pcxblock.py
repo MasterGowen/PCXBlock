@@ -347,10 +347,12 @@ class PCXBlock(XBlock):
         self.question = data.get('question')
         self.weight = data.get('weight')
         self.max_attempts = data.get('max_attempts')
-        self.background_image = data.get('background_image')
         self.editor_settings["grid_step"] = data.get('grid_step')
 
-        #TODO Если картинки нет - то подложить белую
+        if data.get('background_image') == "":
+            self.background_image = defaults.empty_image
+        else:
+            self.background_image = data.get('background_image')
 
         return {'result': 'success'}
 
