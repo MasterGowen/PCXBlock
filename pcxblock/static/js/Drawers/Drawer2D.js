@@ -1,8 +1,8 @@
 ﻿if (typeof gridStep !== 'undefined') {
-    console.log('undef');
+    console.log(gridStep + 'drawer2d');
 }
 else {
- console.log(gridStep + 'drawer2d');
+    console.log('undef');
 }
 
 var Drawer2D = function (container) {
