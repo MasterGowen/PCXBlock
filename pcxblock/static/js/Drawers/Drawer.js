@@ -11,6 +11,7 @@
      this.CellSize = 2;
     }
     console.log('Drawer cell size is: ' + this.CellSize + 'px')
+    console.log('gridStep is: ' + gridStep + 'px')
     this.FullScreen = 0;
 };
 Drawer.prototype = {
