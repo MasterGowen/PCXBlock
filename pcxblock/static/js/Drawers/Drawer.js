@@ -1,4 +1,13 @@
 ﻿
+var xxx = 2;
+
+function XLol(runtime, element, data){
+
+    var gridStep = data.grid_step;
+    x = gridStep;
+    console.log("gridStep: " + gridStep);
+}
+
 var Drawer = function () {
     this.Offset = new Pnt();
     this.MaxOffset = new Pnt();
@@ -8,16 +17,16 @@ var Drawer = function () {
     
     if (typeof gridStep !== 'undefined') {
         if(gridStep !== null){
-            this.CellSize = gridStep;
-            console.log('ok' + gridStep);
+            this.CellSize = xxx;
+            console.log('ok' + xxx);
         }
         else{
-            this.CellSize = 2;
+            this.CellSize = xxx;
         console.log('ne ok 12');
         }
     }
     else {
-        this.CellSize = 2;
+        this.CellSize = xxx;
         console.log('ne ok');
     }
 
