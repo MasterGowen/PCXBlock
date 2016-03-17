@@ -336,8 +336,8 @@ class PCXBlock(XBlock):
     @XBlock.json_handler
     def get_settings(self, data, suffix=''):
 
-        return {"result": {"grid_step": "10"}}  
-        
+        return {"result": self.editor_settings }  
+
     @XBlock.json_handler
     def studio_submit(self, data, suffix=''):
         self.display_name = data.get('display_name')
