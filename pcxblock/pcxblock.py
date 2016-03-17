@@ -85,7 +85,7 @@ class PCXBlock(XBlock):
 		display_name=u"Правильный ответ",
         help=u"Скрытое поле для правильного ответа в формате json.",
         default={
-        		"grid_step":"2"
+        		"grid_step":"10"
         		},
         scope=Scope.settings
 
