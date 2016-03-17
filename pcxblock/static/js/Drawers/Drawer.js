@@ -4,7 +4,12 @@
     this.MinOffset = new Pnt();
     this.Scale = 1;
     this.MinScale = 1;
-    this.CellSize = gridStep;
+    if (typeof gridStep !== 'undefined') {
+        this.CellSize = gridStep;
+    }
+    else {
+     this.CellSize = 2;
+    }
     this.FullScreen = 0;
 };
 Drawer.prototype = {
