@@ -1,6 +1,4 @@
-﻿console.log('ololo')
-
-var Drawer = function () {
+﻿var Drawer = function () {
     this.Offset = new Pnt();
     this.MaxOffset = new Pnt();
     this.MinOffset = new Pnt();
@@ -12,7 +10,7 @@ var Drawer = function () {
     else {
      this.CellSize = 2;
     }
-    console.log(this.CellSize)
+    console.log('Drawer cell size is: ' + this.CellSize + 'px')
     this.FullScreen = 0;
 };
 Drawer.prototype = {
