@@ -30,7 +30,7 @@ function PCXBlockEdit(runtime, element) {
     function Get(requestURL) {
             if(requestURL){
                 var xhr = new XMLHttpRequest();
-                xhr.open("GET", requestURL, false);
+                xhr.open("POST", requestURL, false);
                 xhr.send(null);
 
                 xhr.onload = function(e) {
