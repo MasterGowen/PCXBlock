@@ -10,7 +10,8 @@ function PCXBlockEdit(runtime, element) {
     $.ajax({
             type: "POST",
             url: runtime.handlerUrl(element, 'get_settings'),
-            success: success_func
+            success: success_func,
+            data: JSON.stringify({"task": "get_settings"})
     });
 
 

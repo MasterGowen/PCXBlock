@@ -333,10 +333,10 @@ class PCXBlock(XBlock):
         return fragment
 
     # handlers
-    @XBlock.handler
+    @XBlock.json_handler
     def get_settings(self, data, suffix=''):
 
-        return self.editor_settings
+        return {'result': 'success'}  # self.editor_settings
 
     @XBlock.json_handler
     def studio_submit(self, data, suffix=''):
