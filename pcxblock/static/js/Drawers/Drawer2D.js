@@ -1,4 +1,11 @@
-﻿var Drawer2D = function (container) {
+﻿if (typeof gridStep !== 'undefined') {
+    console.log('undef');
+}
+else {
+ console.log(gridStep + 'drawer2d');
+}
+
+var Drawer2D = function (container) {
     container.append("<canvas mode='2d'></canvas>");
     var canvas2D = $('canvas[mode=2d]', container)[0];
     canvas2D.width = container.width();
@@ -195,39 +202,6 @@ Drawer2D.prototype.Start = function () {
         }
     } 
 };
-
-Drawer2D.prototype.ReDrawGrid = function () {
-    var can = this.canvas;
-
-    var ctx = can.getContext("2d");
-    ctx.fillStyle = "#FD0000";
-    ctx.fillRect(0, 0, can.width, can.height);
-    if (can.Image && !window.World.Crafter.ResultMode) ctx.drawImage(can.Image, -this.Offset.X / this.Scale, -this.Offset.Y / this.Scale, can.Imgwidth / this.Scale, can.Imgheight / this.Scale);
-    ctx.lineWidth = 0.1;
-
-    if (window.World.Crafter.GridMode) {
-        var ix;
-        for (var x = (-this.Offset.X % this.CellSize) / this.Scale; x < can.width; x += this.CellSize / this.Scale) {
-            ix = Math.round(x * this.Scale / this.CellSize);
-            var kx = Math.round((this.Offset.X + this.CellSize / this.Scale * ix) / this.CellSize);
-            ctx.lineWidth = (kx % 5 == 0) ? 0.5 : 0.3;
-            ctx.beginPath();
-            ctx.moveTo(x, 0);
-            ctx.lineTo(x, can.height);
-            ctx.stroke();
-        }
-        for (var y = (-this.Offset.Y % this.CellSize) / this.Scale; y < can.height; y += this.CellSize / this.Scale) {
-            ix = Math.round(y * this.Scale / this.CellSize);
-            var ky = Math.round((this.Offset.Y + this.CellSize / this.Scale * ix) / this.CellSize);
-            ctx.lineWidth = (ky % 5 == 0) ? 0.5 : 0.3;
-            ctx.beginPath();
-            ctx.moveTo(0, y);
-            ctx.lineTo(can.width, y);
-            ctx.stroke();
-        }
-    }
-};
-
 Drawer2D.prototype.DownloadCanvas = function (currDataURL, filename) {
     var link = document.createElement("a");
     link.href = currDataURL;

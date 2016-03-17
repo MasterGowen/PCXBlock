@@ -10,7 +10,6 @@
     else {
      this.CellSize = 2;
     }
-    console.log('Drawer cell size is: ' + this.CellSize + 'px')
     this.FullScreen = 0;
 };
 Drawer.prototype = {
