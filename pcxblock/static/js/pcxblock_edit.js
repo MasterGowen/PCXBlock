@@ -1,5 +1,6 @@
+var gridStep  = 0;
+
 function PCXBlockEdit(runtime, element) {
-    var gridStep  = 0;
     console.log("studio js");
 
     function success_func(result) {

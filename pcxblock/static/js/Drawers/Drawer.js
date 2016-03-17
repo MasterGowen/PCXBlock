@@ -10,6 +10,7 @@
     else {
      this.CellSize = 2;
     }
+    console.log(this.CellSize)
     this.FullScreen = 0;
 };
 Drawer.prototype = {
