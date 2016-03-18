@@ -191,7 +191,6 @@ class PCXBlock(XBlock):
         fragment = Fragment()
         fragment.add_content(
             render_template(
-                'static/js/init.js',
                 'static/html/pcxblock_edit.html',
                 context
             )
@@ -199,7 +198,7 @@ class PCXBlock(XBlock):
 
 
         js_urls = (
-            
+            'static/js/init.js',
             'static/js/js/guid.js',
             'static/js/Utils/Pnt.js',
             'static/js/Utils/caman.full.js',
