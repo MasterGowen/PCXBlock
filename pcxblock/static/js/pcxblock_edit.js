@@ -2,8 +2,7 @@ var gridStep  = 2;
 
 function PCXBlockEdit(runtime, element, data) {
     console.log("studio js");
-    gridStep = data.grid_step;
-    console.log("gridStep :" + gridStep);
+    
     /*function success_func(result) {
        gridStep = JSON.parse(result).grid_step;
        console.log("Шаг сетки venm: " + gridStep);
@@ -16,8 +15,17 @@ function PCXBlockEdit(runtime, element, data) {
             data: JSON.stringify({"task": "get_settings"})
     });
 */
+	if (typeof gridStep != 'undefined') {
+		    gridStep = data.grid_step;
+   			console.log("gridStep :" + gridStep); 
+		}
 
+	$(function ($) {
+        /* Here's where you'd do things on page load. */
+		gridStep = data.grid_step;
+    	console.log("gridStep 2:" + gridStep);
 
+    });
 
     $( "#workzone" ).mouseover(function() {
         $("body").css("overflow","hidden")    
