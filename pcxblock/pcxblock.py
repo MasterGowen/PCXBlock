@@ -199,7 +199,6 @@ class PCXBlock(XBlock):
 
 
         js_urls = (
-            'static/js/init.js',
             'static/js/js/guid.js',
             'static/js/Utils/Pnt.js',
             'static/js/Utils/caman.full.js',
@@ -233,15 +232,16 @@ class PCXBlock(XBlock):
         #lol = Fragment()
         #lol.initialize_js('XLol', {'grid_step': self.editor_settings["grid_step"]})
 
-
+        fragment.add_javascript("var xxx = 10;")
         self.load_resources(js_urls, css_urls, fragment)
         #fragment.initialize_js('XLol', {'grid_step': self.editor_settings["grid_step"]})
         
-        lol = Fragment()
-        lol.initialize_js('XLol', {'grid_step': self.editor_settings["grid_step"]})
+        #lol = Fragment()
+        #lol.initialize_js('XLol', {'grid_step': self.editor_settings["grid_step"]})
+
         fragment.initialize_js('PCXBlockEdit')
         
-        return {lol, fragment}
+        return fragment
 
 
 
