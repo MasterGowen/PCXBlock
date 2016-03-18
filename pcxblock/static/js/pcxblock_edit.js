@@ -24,6 +24,7 @@ function PCXBlockEdit(runtime, element, data) {
 	var lol = data.grid_step;
 	console.log("lol: " + lol);
 
+
     $( "#workzone" ).mouseover(function() {
         $("body").css("overflow","hidden")    
     });
