@@ -15,11 +15,11 @@ function PCXBlockEdit(runtime, element, data) {
             data: JSON.stringify({"task": "get_settings"})
     });
 */
-
-	/*if (typeof gridStep != 'undefined') {
-		    gridStep = data.grid_step;
-   			console.log("gridStep :" + gridStep); 
-		}*/
+    
+    /*if (typeof gridStep != 'undefined') {
+            gridStep = data.grid_step;
+            console.log("gridStep :" + gridStep); 
+    }*/
 
 	var lol = data.grid_step;
 	console.log("lol: " + lol);
