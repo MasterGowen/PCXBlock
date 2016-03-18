@@ -1,32 +1,22 @@
-﻿
-var xxx = 2;
-
-function XLol(runtime, element, data){
-
-    var gridStep = data.grid_step;
-    xxx = gridStep;
-    console.log("gridStep: " + gridStep);
-}
-
-var Drawer = function () {
+﻿var Drawer = function () {
     this.Offset = new Pnt();
     this.MaxOffset = new Pnt();
     this.MinOffset = new Pnt();
     this.Scale = 1;
     this.MinScale = 1;
-    
+    //this.CellSize = GridStep;
     if (typeof gridStep !== 'undefined') {
         if(gridStep !== null){
-            this.CellSize = xxx;
-            console.log('lok' + xxx);
+            this.CellSize = GridStep;
+            console.log('lok' + GridStep);
         }
         else{
-            this.CellSize = xxx;
+            this.CellSize = 2;
         console.log('ne lok 12');
         }
     }
     else {
-        this.CellSize = xxx;
+        this.CellSize = 2;
         console.log('ne lok');
     }
 
