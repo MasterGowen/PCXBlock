@@ -236,17 +236,10 @@ class PCXBlock(XBlock):
 
         self.load_resources(js_urls, css_urls, fragment)
         #fragment.initialize_js('XLol', {'grid_step': self.editor_settings["grid_step"]})
+        
+        fragment.initialize_js('XLol', {'grid_step': self.editor_settings["grid_step"]})
         fragment.initialize_js('PCXBlockEdit')
-
-        def settings(self):
-            lol = Fragment()
-            js_urls = ()
-            css_urls = ()
-
-            self.load_resources(js_urls, css_urls, lol)
-            lol.initialize_js('XLol', {'grid_step': self.editor_settings["grid_step"]})
-            return lol
-
+        
         return fragment
 
 
