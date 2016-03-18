@@ -1,8 +1,9 @@
-//var gridStep  = 0;
+var gridStep  = 2;
 
-function PCXBlockEdit(runtime, element) {
+function PCXBlockEdit(runtime, element, data) {
     console.log("studio js");
-
+    gridStep = data.grid_step;
+    console.log("gridStep :" + gridStep);
     /*function success_func(result) {
        gridStep = JSON.parse(result).grid_step;
        console.log("Шаг сетки venm: " + gridStep);
