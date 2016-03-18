@@ -243,8 +243,6 @@ class PCXBlock(XBlock):
         
         return fragment
 
-
-
         
     def student_view(self, *args, **kwargs):
         """

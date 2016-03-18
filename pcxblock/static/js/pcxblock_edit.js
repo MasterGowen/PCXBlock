@@ -1,4 +1,4 @@
-var gridStep  = 2;
+//var gridStep = 2;
 
 function PCXBlockEdit(runtime, element, data) {
     console.log("studio js");
@@ -16,11 +16,13 @@ function PCXBlockEdit(runtime, element, data) {
     });
 */
 
-	if (typeof gridStep != 'undefined') {
+	/*if (typeof gridStep != 'undefined') {
 		    gridStep = data.grid_step;
    			console.log("gridStep :" + gridStep); 
-		}
+		}*/
 
+	var lol = data.grid_step;
+	console.log("lol: " + lol);
 
     $( "#workzone" ).mouseover(function() {
         $("body").css("overflow","hidden")    

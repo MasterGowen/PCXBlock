@@ -4,7 +4,7 @@
     this.MinOffset = new Pnt();
     this.Scale = 1;
     this.MinScale = 1;
-    this.CellSize = gridStep;
+    this.CellSize = 2;
 
     this.FullScreen = 0;
 };
