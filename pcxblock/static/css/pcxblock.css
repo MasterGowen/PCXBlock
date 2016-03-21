@@ -1,1 +1,7 @@
-﻿
+﻿.controls .left{
+	float: none !important;
+}
+
+.controls .right{
+	float: none !important;
+}
