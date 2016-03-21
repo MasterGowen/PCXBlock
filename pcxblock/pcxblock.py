@@ -24,6 +24,7 @@ from xmodule.util.duedate import get_extended_due_date
 from webob.response import Response
 
 import defaults
+from utils import check_method, pixels_count, base64_to_image, thresh_callback
 
 
 class PCXBlock(XBlock):
@@ -369,67 +370,43 @@ class PCXBlock(XBlock):
     @XBlock.json_handler
     def student_submit(self, data, suffix=''):
         
-        def pixels_count(img, color_min, color_max):
-            color_min = np.array(color_min, np.uint8)
-            color_max = np.array(color_max, np.uint8)
-            dst = cv2.inRange(img, color_min, color_max)
-            pix_count = cv2.countNonZero(dst)
-            return pix_count
+        def get_pictures(data):
+            self.student_picture = data["picture"]
+            student_picture_base64 = data["picture"]
 
-        def base64_to_image(base64image):
-            image_data_base64 = base64image
-            image_data_base64 = image_data_base64.replace('data:image/png;base64,', '')
-            decode_img = base64.b64decode(image_data_base64)
-            npimg = np.fromstring(decode_img, dtype=np.uint8)
-            result_img = cv2.imdecode(npimg, 1)
-            return result_img
+        @check_method
+        def pixel_method(student_picture_base64, correct_image_base64):
+            correct_image_base64 = defaults.correct_image
+            correct_image = base64_to_image(correct_image_base64)
+            student_image = base64_to_image(student_picture_base64)
 
-        def thresh_callback(stud_pic, correct_pic, thick_cont, thresh):
-            sp = copy.copy(stud_pic)
-            cp = copy.copy(correct_pic)
-            gray = cv2.cvtColor(cp, cv2.COLOR_BGR2GRAY)
-            blur = cv2.GaussianBlur(gray, (5, 5), 0)
-            edges = cv2.Canny(blur, thresh, thresh * 2)
-            drawing = np.zeros(cp.shape, np.uint8)     # Image to draw the contours
-            _, contours, hierarchy = cv2.findContours(edges, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+            all_gray_student_pixels_count = pixels_count(student_image, [70, 70, 70], [251, 251, 251])
+            all_gray_correct_pixels_count = pixels_count(correct_image, [70, 70, 70], [251, 251, 251])
 
-            for cnt in contours:
-                cv2.drawContours(drawing, [cnt], 0, (0, 255, 0), thick_cont)
-                cv2.drawContours(sp, [cnt], 0, (255, 255, 255), thick_cont)
-            return sp
+            thickness_contour = 25
+            diff = thresh_callback(student_image, correct_image, thickness_contour, 0)
+            diff1 = thresh_callback(correct_image, student_image, thickness_contour, 0)
 
-        self.student_picture = data["picture"]
-        student_picture_base64 = data["picture"]
+            gray_wrong_pixels_count1 = pixels_count(diff1, [70, 70, 70], [251, 251, 251])
+            gray_wrong_pixels_count = pixels_count(diff, [70, 70, 70], [251, 251, 251])
 
-        correct_image_base64 = defaults.correct_image
-        correct_image = base64_to_image(correct_image_base64)
-        student_image = base64_to_image(student_picture_base64)
+            grade_first = 0
+            grade_second = 0
 
-        all_gray_student_pixels_count = pixels_count(student_image, [70, 70, 70], [251, 251, 251])
-        all_gray_correct_pixels_count = pixels_count(correct_image, [70, 70, 70], [251, 251, 251])
+            if all_gray_student_pixels_count != 0:
+                grade_first = float((all_gray_student_pixels_count - gray_wrong_pixels_count))/all_gray_student_pixels_count
+                grade_first = grade_first
 
-        thickness_contour = 25
-        diff = thresh_callback(student_image, correct_image, thickness_contour, 0)
-        diff1 = thresh_callback(correct_image, student_image, thickness_contour, 0)
+                grade_second = float((all_gray_correct_pixels_count - gray_wrong_pixels_count1))/all_gray_correct_pixels_count
+                grade_second = grade_second
 
-        gray_wrong_pixels_count1 = pixels_count(diff1, [70, 70, 70], [251, 251, 251])
-        gray_wrong_pixels_count = pixels_count(diff, [70, 70, 70], [251, 251, 251])
+                grade_global = min(grade_first, grade_second) * max(grade_first, grade_second) * 100
 
-        grade_first = 0
-        grade_second = 0
+                #grade_global = int(grade_global)
+            else:
+                grade_global = 0
 
-        if all_gray_student_pixels_count != 0:
-            grade_first = float((all_gray_student_pixels_count - gray_wrong_pixels_count))/all_gray_student_pixels_count
-            grade_first = grade_first
-
-            grade_second = float((all_gray_correct_pixels_count - gray_wrong_pixels_count1))/all_gray_correct_pixels_count
-            grade_second = grade_second
-
-            grade_global = min(grade_first, grade_second) * max(grade_first, grade_second) * 100
-
-            #grade_global = int(grade_global)
-        else:
-            grade_global = 0
+            return grade_global
 
         self.points = grade_global * self.weight / 100
         self.attempts += 1
