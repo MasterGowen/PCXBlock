@@ -45,38 +45,48 @@ Drawer2D.prototype.Draw = function (objects, currentColor) {
 		ctx.restore();
 	};
     
-    if(typeof line !== "undefined") {
-        var ctx = $this.canvas.getContext("2d");
-        ctx.save();
-        ctx.beginPath();
-        var last = toPnt(line.Start), $new = toPnt(line.End);
-        ctx.moveTo(last.X, last.Y);
-        ctx.lineTo($new.X, $new.Y);
-        var col = currentColor||"rgba(255,30,146, 1)";
-        ctx.strokeStyle = col;
-        ctx.lineWidth = line.Width / $this.Scale;
-        ctx.stroke();
-        ctx.restore();
-        drawEllipse(line.Start, 1, currentColor || '#ED6C02');
-        drawEllipse(line.End, 1, currentColor || '#ED6C02');
-    }
-    
+//    if(typeof line !== "undefined") {
+//        var ctx = $this.canvas.getContext("2d");
+//        ctx.save();
+//        ctx.beginPath();
+//        var last = toPnt(line.Start), $new = toPnt(line.End);
+//        ctx.moveTo(last.X, last.Y);
+//        ctx.lineTo($new.X, $new.Y);
+//        var col = currentColor||"rgba(255,30,146, 1)";
+//        ctx.strokeStyle = col;
+//        ctx.lineWidth = line.Width / $this.Scale;
+//        ctx.stroke();
+//        ctx.restore();
+//        drawEllipse(line.Start, 1, currentColor || '#ED6C02');
+//        drawEllipse(line.End, 1, currentColor || '#ED6C02');
+//    }
+//    
     objects.Normals.forEach(function (a) {
         var ctx = $this.canvas.getContext("2d");
         ctx.save();
         ctx.beginPath();
+        var col = currentColor || "rgba(255,182,0, 1)";
+        if (window.World.Crafter.PlotMode) {
+            switch (a.LineType) {
+                case "dashdot": ctx.setLineDash([15, 5, 1, 5]); col = "rgba(0,0,0,1)"; break;
+                case "main": col = "rgba(0,0,0,1)"; break;
+                case "dashed": ctx.setLineDash([15, 5]); col = "rgba(0,0,0,1)"; break;
+                case "thin": a.Width = 0.7; col = "rgba(0,0,0,1)"; break;
+            }
+        }
         var last = toPnt(a.Start), $new = toPnt(a.End);
         ctx.moveTo(last.X, last.Y);
         ctx.lineTo($new.X, $new.Y);
-        var col = currentColor || "rgba(255,182,0, 1)";
         if (typeof window.World.Crafter.walls !== 'undefined' && window.World.Crafter.walls.filter(function (d) { return d.Eq(a); }).length > 0)
             col = currentColor || "rgba(237, 108, 2, 1)";
         ctx.strokeStyle = col;
         ctx.lineWidth = a.Width / $this.Scale;
         ctx.stroke();
         ctx.restore();
-        drawEllipse(a.Start, 1, currentColor || '#ED6C02');
-        drawEllipse(a.End, 1, currentColor || '#ED6C02');
+        if (!window.World.Crafter.ResultMode) {
+            drawEllipse(a.Start, 1, currentColor || '#ED6C02');
+            drawEllipse(a.End, 1, currentColor || '#ED6C02');
+        }
     });
     
 
@@ -84,18 +94,28 @@ Drawer2D.prototype.Draw = function (objects, currentColor) {
         var ctx = $this.canvas.getContext("2d");
         ctx.save();
         ctx.beginPath();
+        var col = currentColor || "rgba(255,182,0, 1)";
+        if (window.World.Crafter.PlotMode) {
+            switch (a.LineType) {
+                case "dashdot": ctx.setLineDash([15, 5, 1, 5]); col = "rgba(0,0,0,1)"; break;
+                case "main": col = "rgba(0,0,0,1)"; break;
+                case "dashed": ctx.setLineDash([15, 5]); col = "rgba(0,0,0,1)"; break;
+                case "thin": a.Width = 0.5; col = "rgba(0,0,0,1)"; break;
+            }
+        }
         var start = toPnt(a.Start), cpoint1 = toPnt(a.FirstControlPoint), cpoint2 = toPnt(a.SecondControlPoint), end = toPnt(a.End);
         ctx.moveTo(start.X, start.Y);
         ctx.bezierCurveTo(cpoint1.X, cpoint1.Y, cpoint2.X, cpoint2.Y, end.X, end.Y);
-        var col = currentColor || "rgba(255,182,0, 1)";
         ctx.strokeStyle = col;
         ctx.lineWidth = a.Width / $this.Scale;
         ctx.stroke();
         ctx.restore();
-        drawEllipse(a.Start, 1, currentColor || '#ED6C02');
-        drawEllipse(a.End, 1, currentColor || '#ED6C02');
-        drawEllipse(a.FirstControlPoint, 1, currentColor || 'rgba(255,182,0, 1)');
-        drawEllipse(a.SecondControlPoint, 1, currentColor || 'rgba(255,182,0, 1)');
+        if (!window.World.Crafter.ResultMode) {
+            drawEllipse(a.Start, 1, currentColor || '#ED6C02');
+            drawEllipse(a.End, 1, currentColor || '#ED6C02');
+            drawEllipse(a.FirstControlPoint, 1, currentColor || 'rgba(255,182,0, 1)');
+            drawEllipse(a.SecondControlPoint, 1, currentColor || 'rgba(255,182,0, 1)');
+        }
     });
 
     walls.forEach(function(a) {
@@ -103,23 +123,33 @@ Drawer2D.prototype.Draw = function (objects, currentColor) {
 		ctx.save();
 		ctx.beginPath();
 		var last = toPnt(a.Start), $new = toPnt(a.End);
+		var col = currentColor || "rgba(255,182,0, 1)";
+		if (typeof window.World.Crafter.walls !== 'undefined' && window.World.Crafter.walls.filter(function (d) { return d.Eq(a); }).length > 0)
+		    col = currentColor || "rgba(237, 108, 2, 1)";
+		if (window.World.Crafter.PlotMode) {
+		    switch(a.LineType) {
+		        case "dashdot": ctx.setLineDash([15, 5, 1, 5]); col = "rgba(0,0,0,1)"; break;
+		        case "main": col = "rgba(0,0,0,1)"; break;
+		        case "dashed": ctx.setLineDash([15, 5]); col = "rgba(0,0,0,1)"; break;
+		        case "thin": a.Width = 0.5; col = "rgba(0,0,0,1)"; break;
+		    }
+		}
 		ctx.moveTo(last.X, last.Y);
         ctx.lineTo($new.X, $new.Y);
-        var col = currentColor || "rgba(255,182,0, 1)";
-        if (typeof window.World.Crafter.walls !== 'undefined' && window.World.Crafter.walls.filter(function (d) { return d.Eq(a); }).length > 0)
-            col = currentColor || "rgba(237, 108, 2, 1)";
 		ctx.strokeStyle = col;
         ctx.lineWidth = a.Width / $this.Scale;
 		ctx.stroke();
 		ctx.restore();
-		drawEllipse(a.Start, 1, currentColor || '#ED6C02');
-		drawEllipse(a.End, 1, currentColor || '#ED6C02');
-	});
+        if (!window.World.Crafter.ResultMode) {
+            drawEllipse(a.Start, 1, currentColor || '#ED6C02');
+            drawEllipse(a.End, 1, currentColor || '#ED6C02');
+        }
+    });
     this.End();
     if (window.World.Crafter.ResultMode) {
         var dataURL = $this.canvas.toDataURL();
         window.World.SavedResult = dataURL;
-        //this.DownloadCanvas(dataURL, 'result.png');
+        this.DownloadCanvas(dataURL, 'result.png');
         window.World.Crafter.SetResultMode(false);
         $this.canvas.width = $this.canvas.OldWidth;
         $this.canvas.height = $this.canvas.OldHeight;

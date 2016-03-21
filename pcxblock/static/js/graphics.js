@@ -54,6 +54,18 @@
                 walltool: function () {
                     if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetWallMode();
                 },
+                mainline: function () {
+                    if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetLineType("main");
+                },
+                dashdotline: function () {
+                    if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetLineType("dashdot");
+                },
+                dashedline: function () {
+                    if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetLineType("dashed");
+                },
+                thinline: function () {
+                    if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetLineType("thin");
+                },
             };
 
             $(document).ready(function () {
@@ -63,7 +75,6 @@
                 window.minimimumOpacity = 0.1;
                 onWindowResize();
                 window.World.Crafter = new Move2DCrafter();
-                $('.buttons.d2d').css('display', 'block');
                 window.World.SetMode(window.Modes.two);
                 window.World.Drawer2D.setImage($('img.ge_taskImg').get(0));
             };
@@ -73,6 +84,7 @@
             window.World.Crafter = new WallCrafter();
             onWindowResize();
             $('[rel=benttool]').addClass('active');
+            $('[rel=mainline]').addClass('active');
             $('.designer .controls').mousedown(function (event) {
                 if (event.stopPropagation)
                     event.stopPropagation();
@@ -103,9 +115,6 @@
                 var tool = $(this).attr('rel');
                 Meths[tool]();
             });
-
-            
-
             $('.ge_gridMode').click(function () {
                 var gridMode = window.World.Crafter.GetGridMode();
                 $(this).text(!gridMode?"Убрать сетку":"Показать сетку");
@@ -116,31 +125,27 @@
                 $(this).addClass('active');
                 $('.ge_drawerButtons .ge_saveResult').show();
                 if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetPlotMode(true);
+                $('.d2d').hide();
+                $('.lines-types').show();
+                
             });
             $('body').on('click', '.ge_drawerButtons .ge_drawLayers', function () {
                 $('.ge_drawerButtons .active').removeClass('active');
                 $(this).addClass('active');
                 $('.ge_drawerButtons .ge_saveResult').hide();
                 if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetPlotMode(false);
+                $('.d2d').show();
+                $('.lines-types').hide();
             });
             $('body').on('click', '.ge_drawerButtons .ge_saveResult', function () {
-                /*if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetResultMode(true);
+                if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetResultMode(true);
                 window.World.Draw();
                 $('.ge_gridMode').text("Убрать сетку");
-                onWindowResize();
-                console.log(getResult());*/
-               // console.log("ok!");
             });
-
             $('.ge_task').click(function () {
                 $('.ge_errorModal .modal-title').text('Ваше задание');
                 $('.ge_errorModal').modal('show');
             });
-
-            
-
-            
-
         });
 
         

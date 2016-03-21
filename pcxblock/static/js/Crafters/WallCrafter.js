@@ -8,6 +8,7 @@
     this.PlotMode = false;
     this.GridMode = true;
     this.PaintMode = "WallMode";
+    this.LineType = "main";
     SimpleCrafter.call(this);
 };
 WallCrafter.prototype = new SimpleCrafter();
@@ -53,47 +54,55 @@ WallCrafter.prototype.SetGridMode = function (flag) {
 WallCrafter.prototype.GetGridMode = function () {
     return this.GridMode;
 };
+WallCrafter.prototype.SetLineType = function (flag) {
+    this.LineType = flag;
+};
 SimpleCrafter.prototype.KeyDown = function (key) {
     //undo
-    if (key == 27) {
-        window.World.undo();
-        document.body.style.cursor = 'default';
-        window.World.UpdateCycles();
-        delete this.startPoint;
-        delete this.tmpWall;
-        delete this.tmpBezier;
-        delete this.tmpWalls;
+    if (!this.PlotMode) {
+        if (key == 27) {
+            window.World.undo();
+            document.body.style.cursor = 'default';
+            window.World.UpdateCycles();
+            delete this.startPoint;
+            delete this.tmpWall;
+            delete this.tmpBezier;
+            delete this.tmpWalls;
+        }
+        if (key == 18)
+            this.PrecisionMode = true;
     }
-    if (key == 18)
-        this.PrecisionMode = true;
 };
 SimpleCrafter.prototype.KeyUp = function (key) {
-    if (key == 18)
-        this.PrecisionMode = false;
-    if (key == 16)
-        this.WallMode = false;
+    if (!this.PlotMode) {
+        if (key == 18)
+            this.PrecisionMode = false;
+        if (key == 16)
+            this.WallMode = false;
+    }
 };
 
 WallCrafter.prototype.MouseDown = function (pnt) {
-    document.body.style.cursor = 'default';
-    delete this.tmpWall;
-    delete this.tmpWalls;
-    if (typeof this.startPoint !== "undefined") {
-        if (this.WallMode) {
-            window.World.UpdateCycles();
-            delete this.startPoint;
-            return;
-        } 
-        if (this.LineMode) {
+    if (!this.PlotMode) {
+        document.body.style.cursor = 'default';
+        delete this.tmpWall;
+        delete this.tmpWalls;
+        if (typeof this.startPoint !== "undefined") {
+            if (this.WallMode) {
                 window.World.UpdateCycles();
                 delete this.startPoint;
                 return;
-        }
-        if (this.BezierMode) {
-            window.World.UpdateCycles();
-            delete this.startPoint;
-            this.startPoint = this.ProcessPoint(pnt);
-            switch (this.tmpBezier.CurrentIndex) {
+            }
+            if (this.LineMode) {
+                window.World.UpdateCycles();
+                delete this.startPoint;
+                return;
+            }
+            if (this.BezierMode) {
+                window.World.UpdateCycles();
+                delete this.startPoint;
+                this.startPoint = this.ProcessPoint(pnt);
+                switch (this.tmpBezier.CurrentIndex) {
                 case 1:
                     this.tmpBezier.FirstControlPoint = this.tmpBezier.SecondControlPoint = this.tmpBezier.End = this.startPoint;
                     this.tmpBezier.CurrentIndex++;
@@ -110,19 +119,52 @@ WallCrafter.prototype.MouseDown = function (pnt) {
                 default:
                     delete this.tmpBezier;
                     delete this.startPoint;
+                }
+                return;
             }
-            return;
         }
-        }  
-    this.startPoint = this.ProcessPoint(pnt);
+        this.startPoint = this.ProcessPoint(pnt);
+    } else {
+        var flag = false;
+        window.World.Objects.Walls.forEach(function (a) {
+            if (!flag) {
+                //abs(sqrt(sqr(x1-x3)+sqr(y1-y3)) + sqrt(sqr(x2-x3)+sqr(y2-y3)) - sqrt(sqr(x2-x1)+sqr(y2-y1))) <0.01
+                if (Math.abs(Math.sqrt(Math.pow(a.Start.X-pnt.X,2)+Math.pow(a.Start.Y-pnt.Y,2))+Math.sqrt(Math.pow(a.End.X - pnt.X,2)+Math.pow(a.End.Y - pnt.Y,2))-Math.sqrt(Math.pow(a.End.X - a.Start.X,2)+Math.pow(a.End.Y - a.Start.Y,2)))<0.15){
+                    a.LineType = window.World.Crafter.LineType;
+                    flag = true;
+                }
+            }
+        });
+        if (!flag) {
+            window.World.Objects.Normals.forEach(function (a) {
+                if (!flag) {
+                    if (Math.abs(Math.sqrt(Math.pow(a.Start.X - pnt.X, 2) + Math.pow(a.Start.Y - pnt.Y, 2)) + Math.sqrt(Math.pow(a.End.X - pnt.X, 2) + Math.pow(a.End.Y - pnt.Y, 2)) - Math.sqrt(Math.pow(a.End.X - a.Start.X, 2) + Math.pow(a.End.Y - a.Start.Y, 2))) < 0.15) {
+                        a.LineType = window.World.Crafter.LineType;
+                        flag = true;
+                    }
+                }
+            });
+        }
+        if (!flag) {
+            window.World.Objects.Beziers.forEach(function (a) {
+                if (!flag) {
+                    var points = [a.Start,a.FirstControlPoint,a.SecondControlPoint,a.End];
+                    flag = window.World.Crafter.Kardano(points, pnt);
+                    if (flag) a.LineType = window.World.Crafter.LineType;
+                }
+            });
+        }
+    }
 };
 WallCrafter.prototype.DblClick = function () {
-    document.body.style.cursor = 'default';
-    window.World.UpdateCycles();
-    delete this.startPoint;
-    delete this.tmpWall;
-    delete this.tmpBezier;
-    delete this.tmpWalls;
+    if (!this.PlotMode) {
+        document.body.style.cursor = 'default';
+        window.World.UpdateCycles();
+        delete this.startPoint;
+        delete this.tmpWall;
+        delete this.tmpBezier;
+        delete this.tmpWalls;
+    }
 };
 WallCrafter.prototype.ProcessPoint = function (pnt) {
     if (this.PrecisionMode)
@@ -134,7 +176,6 @@ WallCrafter.prototype.ProcessPoint = function (pnt) {
        var len = Math.round(this.startPoint.length(pnt) / 10) * 10;
 		var ang = this.startPoint.AngleTo(pnt);
 		if (!this.WallMode)
-//			ang = Math.round(this.startPoint.AngleTo(pnt) / Math.PI * 180 / 15) * 15 / 180 * Math.PI; // перевод в радианы и округление до 0, 45, 90, 135, 180, 225, 270, 315, 360
 			ang = Math.round(this.startPoint.AngleTo(pnt) / Math.PI * 180 )  / 180 * Math.PI; 
 		var norma = new Pnt(this.startPoint.X + len * Math.cos(ang), this.startPoint.Y + len * Math.sin(ang));
 		normPnt = new Pnt(Math.round(norma.X / sizeCell) * sizeCell, Math.round(norma.Y / sizeCell) * sizeCell);
@@ -184,6 +225,8 @@ WallCrafter.prototype.ProcessPoint = function (pnt) {
     return normPnt || pnt;
 };
 WallCrafter.prototype.MouseMove = function (pnt) {
+    if (!this.PlotMode) {
+        
     window.World.Drawer2D.mouse = pnt;
     pnt = this.ProcessPoint(pnt);
     if (typeof this.startPoint !== "undefined" && (this.startPoint.X != pnt.X || this.startPoint.Y != pnt.Y)) {
@@ -272,10 +315,6 @@ WallCrafter.prototype.MouseMove = function (pnt) {
                     redo: function () {
                         if (window.World.Crafter.LineMode) window.World.Objects.Normals.push(this.obj);
                         if (window.World.Crafter.WallMode || window.World.Crafter.BentMode) window.World.Objects.Walls.push(this.obj);
-//                        //todo: необходимо дать возможность выделить контрольные точки
-//                        if (window.World.Crafter.BezierMode) {
-//                            window.World.Objects.Beziers.push(this.obj);
-//                        }
                         window.World.Draw();
                     },
                     undo: function () {
@@ -304,4 +343,47 @@ WallCrafter.prototype.MouseMove = function (pnt) {
     } else {
         delete window.World.Drawer2D.Message;
     }
+    }
+};
+WallCrafter.prototype.Kardano = function (points,pnt) {
+    var z = [];
+    var x = [];
+    z[0] = points[3].X - 3 * points[2].X + 3 * points[1].X - points[0].X;
+    z[1] = 3 * points[2].X - 6 * points[1].X + 3 * points[0].X;
+    z[2] = 3 * points[1].X - 3*points[0].X;
+    z[3] = points[0].X - pnt.X;
+    var a = z[1] / z[0];
+    var b = z[2] / z[0];
+    var c = z[3] / z[0];
+    var q=(a*a-3.*b)/9.; var r=(a*(2.*a*a-9.*b)+27.*c)/54.;
+    var r2=r*r; var q3=q*q*q;
+        if(r2<q3) {
+            var t = Math.acos(r/Math.sqrt(q3));
+            a = a / 3.; q = -2. * Math.sqrt(q);
+            x[0] = q * Math.cos(t / 3.) - a;
+            x[1] = q * Math.cos((t + 2*Math.PI) / 3.) - a;
+            x[2] = q * Math.cos((t - 2*Math.PI) / 3.) - a;
+    //        return(3);
+        }
+        else {
+            var aa,bb;
+            if(r<=0.) r=-r;
+            aa=-Math.pow(r+Math.sqrt(r2-q3),1./3.); 
+            if(aa!=0.) bb=q/aa;
+            else bb=0.;
+            a/=3.; q=aa+bb; r=aa-bb; 
+            x[0]=q-a;
+            x[1]=(-0.5)*q-a;
+            x[2]=(-Math.sqrt(3.)*0.5)*Math.abs(r);
+//            if(x[2]==0.) return(2);
+    //        return(1);
+        }
+    for (var i = 0; i < x.length; i++) {
+        var y = Math.pow(1 - x[i], 3) * points[0].Y + 3 * x[i] * Math.pow(1 - x[i], 2) * points[1].Y + 3 * Math.pow(x[i], 2) * (1 - x[i]) * points[2].Y + Math.pow(x[i], 3) * points[3].Y;
+        if (Math.abs(y - pnt.Y) < 2) {
+            return true;
+        }
+    }
+    return false;
+
 };

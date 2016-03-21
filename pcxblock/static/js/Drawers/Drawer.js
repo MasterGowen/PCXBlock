@@ -5,7 +5,6 @@
     this.Scale = 1;
     this.MinScale = 1;
     this.CellSize = 2;
-
     this.FullScreen = 0;
 };
 Drawer.prototype = {
@@ -22,9 +21,6 @@ Drawer.prototype = {
             $this.DrawWallPaper(obj);
         });
     },
-
-
-
     DrawFloor: function (objects, canvas, proc, additionalDrawing, angle) {
         angle = angle || 0;
         var areas = objects.Areas;

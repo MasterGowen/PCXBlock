@@ -179,6 +179,8 @@ class PCXBlock(XBlock):
             "question": self.question,
             "max_attempts": self.max_attempts,
             "background_image": self.background_image,
+            "grid_step": self.editor_settings["grid_step"],
+
             "pic_back": defaults.default["pic_back"],
             "pic_bent": defaults.default["pic_bent"],
             "pic_line": defaults.default["pic_line"],
@@ -186,7 +188,10 @@ class PCXBlock(XBlock):
             "pic_BezierCurve": defaults.default["pic_BezierCurve"],
             "pic_eraser": defaults.default["pic_eraser"],
             "pic_logo": defaults.default["pic_logo"],
-            "grid_step": self.editor_settings["grid_step"],
+            "main_line": defaults.default["main_line"],
+            "dash_dot_line": defaults.default["dash_dot_line"],
+            "dashed_line": defaults.default["dashed_line"],
+            "thin_line":d efaults.default["thin_line"],
         }
 
         fragment = Fragment()
@@ -246,6 +251,8 @@ class PCXBlock(XBlock):
                 "question": self.question,
                 "attempts": self.attempts,
                 "background_image": self.background_image,
+                "grid_step": self.editor_settings["grid_step"],
+            
                 "pic_back": defaults.default["pic_back"],
                 "pic_bent": defaults.default["pic_bent"],
                 "pic_line": defaults.default["pic_line"],
@@ -253,7 +260,10 @@ class PCXBlock(XBlock):
                 "pic_BezierCurve": defaults.default["pic_BezierCurve"],
                 "pic_eraser": defaults.default["pic_eraser"],
                 "pic_logo": defaults.default["pic_logo"],
-                "grid_step": self.editor_settings["grid_step"],
+                "main_line": defaults.default["main_line"],
+                "dash_dot_line": defaults.default["dash_dot_line"],
+                "dashed_line": defaults.default["dashed_line"],
+                "thin_line":d efaults.default["thin_line"],
             }
 
             #if(student_id)
