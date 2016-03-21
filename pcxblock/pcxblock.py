@@ -191,7 +191,7 @@ class PCXBlock(XBlock):
             "main_line": defaults.default["main_line"],
             "dash_dot_line": defaults.default["dash_dot_line"],
             "dashed_line": defaults.default["dashed_line"],
-            "thin_line":d efaults.default["thin_line"],
+            "thin_line": defaults.default["thin_line"],
         }
 
         fragment = Fragment()
@@ -263,7 +263,7 @@ class PCXBlock(XBlock):
                 "main_line": defaults.default["main_line"],
                 "dash_dot_line": defaults.default["dash_dot_line"],
                 "dashed_line": defaults.default["dashed_line"],
-                "thin_line":d efaults.default["thin_line"],
+                "thin_line": defaults.default["thin_line"],
             }
 
             #if(student_id)
