@@ -408,9 +408,9 @@ class PCXBlock(XBlock):
             else:
                 grade_global = 0
 
-            return grade_global
+            return grade_global, grade_first, grade_second
 
-        pixel_method(get_pictures(data))
+        grade_global, grade_first, grade_second = pixel_method(get_pictures(data))
 
         self.points = grade_global * self.weight / 100
         self.attempts += 1
