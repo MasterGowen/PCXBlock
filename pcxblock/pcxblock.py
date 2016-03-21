@@ -374,8 +374,10 @@ class PCXBlock(XBlock):
             self.student_picture = data["picture"]
             student_picture_base64 = data["picture"]
 
+            return student_picture_base64
+
         @check_method
-        def pixel_method(student_picture_base64, correct_image_base64):
+        def pixel_method(student_picture_base64):
             correct_image_base64 = defaults.correct_image
             correct_image = base64_to_image(correct_image_base64)
             student_image = base64_to_image(student_picture_base64)
@@ -407,6 +409,9 @@ class PCXBlock(XBlock):
                 grade_global = 0
 
             return grade_global
+
+        get_pictures()
+        pixel_method(student_picture_base64)
 
         self.points = grade_global * self.weight / 100
         self.attempts += 1
