@@ -414,7 +414,7 @@ class PCXBlock(XBlock):
 
         self.points = grade_global * self.weight / 100
         self.attempts += 1
-        #si = student_id(self)
+        
 
         self.runtime.publish(self, 'grade', {
             'value': self.points,

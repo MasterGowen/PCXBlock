@@ -7,6 +7,11 @@ def check_method(func):
     return func
 
 
+"""
+Подсчет пикселей заданного цветы на изображении
+color_min - минимальный цвет
+color_max - максимальный цвет
+"""
 def pixels_count(img, color_min, color_max):
             color_min = np.array(color_min, np.uint8)
             color_max = np.array(color_max, np.uint8)
@@ -14,7 +19,9 @@ def pixels_count(img, color_min, color_max):
             pix_count = cv2.countNonZero(dst)
             return pix_count
 
-
+"""
+Конвертация из base64
+"""
 def base64_to_image(base64image):
     image_data_base64 = base64image
     image_data_base64 = image_data_base64.replace('data:image/png;base64,', '')
@@ -30,7 +37,7 @@ def thresh_callback(stud_pic, correct_pic, thick_cont, thresh):
     gray = cv2.cvtColor(cp, cv2.COLOR_BGR2GRAY)
     blur = cv2.GaussianBlur(gray, (5, 5), 0)
     edges = cv2.Canny(blur, thresh, thresh * 2)
-    drawing = np.zeros(cp.shape, np.uint8)     # Image to draw the contours
+    drawing = np.zeros(cp.shape, np.uint8) # Image to draw the contours
     _, contours, hierarchy = cv2.findContours(edges, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
     for cnt in contours:
