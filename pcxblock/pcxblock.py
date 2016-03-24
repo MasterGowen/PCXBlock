@@ -392,9 +392,6 @@ class PCXBlock(XBlock):
             gray_wrong_pixels_count1 = pixels_count(diff1, [70, 70, 70], [251, 251, 251])
             gray_wrong_pixels_count = pixels_count(diff, [70, 70, 70], [251, 251, 251])
 
-            grade_first = 0
-            grade_second = 0
-
             if all_gray_student_pixels_count != 0:
                 grade_first = float((all_gray_student_pixels_count - gray_wrong_pixels_count))/all_gray_student_pixels_count
                 grade_first = grade_first
@@ -404,13 +401,12 @@ class PCXBlock(XBlock):
 
                 grade_global = min(grade_first, grade_second) * max(grade_first, grade_second) * 100
 
-                #grade_global = int(grade_global)
             else:
                 grade_global = 0
 
-            return grade_global, grade_first, grade_second
+            return grade_global
 
-        grade_global, grade_first, grade_second = pixel_method(get_pictures(data))
+        grade_global = pixel_method(get_pictures(data))
 
         self.points = grade_global * self.weight / 100
         self.attempts += 1
@@ -421,7 +417,7 @@ class PCXBlock(XBlock):
             'max_value': self.weight,
         })
 
-        return {"points": self.points, "grade_first": grade_first, "grade_second": grade_second}
+        return {"points": self.points}
 
 
 def answer_opportunity(self):

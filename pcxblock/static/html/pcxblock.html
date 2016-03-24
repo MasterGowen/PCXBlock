@@ -1,7 +1,7 @@
 <div class="xblock xblock-student_view xblock-student_view-problem xmodule_display xmodule_CapaModule xblock-initialized">
     <div class="problem">
         {% if question != '' and question != "None" %}
-            <p id="question">{{question}}</p>
+            <div id="question">{{question|safe}}</div>
         {% endif %}
 
      <div class="problem-progress">
