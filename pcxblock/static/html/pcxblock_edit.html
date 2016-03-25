@@ -67,8 +67,9 @@
         <div class="wrapper-comp-setting">
           <label class="label setting-label" for="background_image">Подложенная картинка:</label>
           <input name="upload_image" type='file'>
-          <input class="input setting-input" name="background_image" id="background_image" value="{{background_image}}" type="text" />
+          <button class="label setting-label" for="background_image" onclick="$(this).parent().next().toggle()">Base64</button>
         </div>
+        <div><input class="input setting-input" name="background_image" id="background_image" value="{{background_image}}" type="text" /></div>>
       </li>
 
       <li class="field comp-setting-entry is-set">
