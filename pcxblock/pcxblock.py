@@ -29,8 +29,8 @@ from utils import check_method, pixels_count, base64_to_image, thresh_callback
 
 class PCXBlock(XBlock):
     pics = JSONField(
-        display_name=u"Правильный ответ",
-        help=u"Скрытое поле для правильного ответа в формате json.",
+        display_name=u"Картинки",
+        help=u"Картинки",
         default=defaults.default,
         scope=Scope.settings
     )
@@ -45,7 +45,7 @@ class PCXBlock(XBlock):
     question = String(
         display_name=u"Вопрос",
         help=u"Текст задания.",
-        default=u"Вы готовы?",
+        default=u"Вы готовы, дети?",
         scope=Scope.settings
     )
 
@@ -83,8 +83,8 @@ class PCXBlock(XBlock):
     )
 
     editor_settings = JSONField(
-        display_name=u"Правильный ответ",
-        help=u"Скрытое поле для правильного ответа в формате json.",
+        display_name=u"Настройки редактора",
+        help=u"Настройки редактора",
         default={
             "grid_step": "10"
         },
@@ -99,13 +99,13 @@ class PCXBlock(XBlock):
     )
 
     student_picture = String(
-        display_name=u"картинка студента",
+        display_name=u"Картинка студента",
         default="",    
         scope=Scope.user_state
     )
 
     correct_picture = String(
-        display_name=u"правильная картинка",
+        display_name=u"Правильная картинка",
         default=defaults.correct_default,
         scope=Scope.user_state
     )
