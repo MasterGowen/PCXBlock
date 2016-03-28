@@ -57,3 +57,7 @@ docs/_build/
 target/
 .idea
 .idea/*
+node_modules
+node_modules/*
+.eslintrc
+.eslintrc~
