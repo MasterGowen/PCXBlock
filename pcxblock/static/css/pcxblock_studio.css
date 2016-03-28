@@ -1,9 +1,16 @@
 /*костыл*/
 [class*="view-"] .modal-window .editor-with-buttons.wrapper-comp-settings .list-input.settings-list {
-  height: 100%;
+  height: 1070px;
 }
  /*конец*/
+ 
+.controls .left{
+    float: none !important;
+}
 
+.controls .right{
+    float: none !important;
+}
 .action-tabs{
     margin-left: 10px;
     display: inline-block;
