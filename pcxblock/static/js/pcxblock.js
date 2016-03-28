@@ -81,15 +81,15 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
         $('.ge_gridMode').text("Убрать сетку");*/
 
         // drawResult();
-        var res = drawResult(),
+       // var res = drawResult(),
         // res = getResult();
 
-            studentPicture = res;
+         //   studentPicture = res;
 
         $.ajax({
             "type": "POST",
             "url": handlerUrl,
-            "data": JSON.stringify({"picture": studentPicture}),
+            "data": JSON.stringify({"picture": $(element).find('input[name=student_answer]').val()}),
             "success": successFunc
         });
 
