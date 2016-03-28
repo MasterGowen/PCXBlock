@@ -8,9 +8,13 @@ function PCXBlock(runtime, element, data) {
         $("body").css("overflow","auto");            
     });
 
-    if (window.World.Crafter.GridMode) {
+    console.log(data.grid_step);
+    /*if (window.World.Crafter.GridMode) {
             window.World.Drawer.SetStepGrid(data.grid_step);
-    }
+    }*/
+
+
+
     /*function get_student_picture(){
         if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetResultMode(true);
                 window.World.Draw();

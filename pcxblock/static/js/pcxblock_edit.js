@@ -101,7 +101,7 @@ function PCXBlockEdit(runtime, element, data) {
         drawResult();
         var res = getResult();
 
-        console.log(res);
+        //console.log(res);
 
         var handlerUrl = runtime.handlerUrl(element, 'studio_submit'),
             data = {
