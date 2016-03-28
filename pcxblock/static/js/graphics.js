@@ -147,8 +147,8 @@
         });
         
     if (window.World.Crafter.GridMode) {
-            console.log("{self.editor_settings}");
-            //window.World.Drawer.SetStepGrid(2);
+            console.log("{{self.editor_settings}}");
+          //  window.World.Drawer.SetStepGrid(2);
     }
         
         document.cancelFullScreen = document.cancelFullScreen || document.webkitCancelFullScreen || document.mozCancelFullScreen;

@@ -57,6 +57,7 @@ class PCXBlock(XBlock):
         scope=Scope.settings
     )
 
+    #TODO: 1!
     max_attempts = Integer(
         display_name=u"Максимальное количество попыток",
         help=u"",
