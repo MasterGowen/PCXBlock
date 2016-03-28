@@ -107,7 +107,7 @@ class PCXBlock(XBlock):
     correct_picture = String(
         display_name=u"Правильная картинка",
         default=defaults.correct_default,
-        scope=Scope.user_state
+        scope=Scope.settings
     )
 
 
