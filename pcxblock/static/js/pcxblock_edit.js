@@ -91,6 +91,7 @@ function PCXBlockEdit(runtime, element, data) {
         $('.ge_gridMode').text("Убрать сетку");*/
 
         var res = drawResult();
+        console.log(res);
 
         var handlerUrl = runtime.handlerUrl(element, 'studio_submit'),
             data = {
