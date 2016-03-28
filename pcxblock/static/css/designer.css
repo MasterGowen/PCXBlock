@@ -166,6 +166,12 @@ td.act i.fa, .ge_zoom i {
   width: 100%;
   height: 100%;
 }
+#workzone:full-screen, 
+.designer-block:full-screen, 
+.designer:full-screen  {
+  width: 100%;
+  height: 100%;
+}
 
 /* add a scroll bar to stop page from jerking around */
 .modal-open.page-overflow .page-container,
