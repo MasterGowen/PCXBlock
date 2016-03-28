@@ -18,9 +18,7 @@
 }
 
 .buttons div {
-    width: 70px;
-    height: 70px;
-    margin: 10px 15px;
+    margin: 3px 25px;
 }
 .buttons div:hover,.buttons div.active {
     cursor: pointer;
@@ -36,12 +34,10 @@
 }
 div.designer {
     position: relative;
-  background-color: #fafafa;
-    border: 3px solid #676767;
+    background-color: #fafafa;
+    border: 1px solid grey;
 }
-.designer-block {
-    padding-left: 30px;
-}
+
 #workzone div.designer > canvas {
   overflow:hidden;
 }
@@ -131,7 +127,7 @@ div#workzone {
     -ie-transition: opacity ease 0.5s;
     bottom: -25px;
 }
-td.act:hover {
+.designer .controls td.act {
     opacity: 1;
 }
 td.act i.fa, .ge_zoom i {

@@ -12,7 +12,7 @@
                 // $('.leftMenu .button').css("padding-top", window.headerHeight / 3);
                 // $('.leftMenu .button').css("height", 2 * window.headerHeight / 3);
                 // $('.buttons').css("top", window.headerHeight);
-                $('.designer-block').css("margin-left", 75);
+                // $('.designer-block').css("margin-left", 75);
                 $('.designer-block').height(600);
                 $('.designer-block').css("margin-top", "1em");
                 // $('.designer-block').css("margin-right", 30);
