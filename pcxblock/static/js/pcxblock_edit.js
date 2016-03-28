@@ -86,9 +86,9 @@ function PCXBlockEdit(runtime, element, data) {
 
     $(element).find('.save-button').bind('click', function() {
 
-        if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetResultMode(true);
+       /* if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetResultMode(true);
             window.World.Draw();
-        $('.ge_gridMode').text("Убрать сетку");
+        $('.ge_gridMode').text("Убрать сетку");*/
 
         var res = drawResult();
 

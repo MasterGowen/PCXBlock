@@ -54,9 +54,9 @@ function PCXBlock(runtime, element, data) {
 
     $(element).find('.Check').bind('click', function() {
 
-        if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetResultMode(true);
+        /*if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetResultMode(true);
             window.World.Draw();
-        $('.ge_gridMode').text("Убрать сетку");
+        $('.ge_gridMode').text("Убрать сетку");*/
 
         //drawResult();
         var res = drawResult();
