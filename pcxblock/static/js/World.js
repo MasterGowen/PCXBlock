@@ -80,7 +80,7 @@ window.WorldClass = function (container) {
         var d = 10;
         var cnt = 1;
         var dr = function() {
-            setInterval(function() {
+            setInterval(function () {
                 $this.Draw();
             }, d);
         };

@@ -25,7 +25,8 @@
                             World.Drawer2D.canvas.height = $('.designer').height();
                         } else {
                             World.Drawer2D.canvas.height = $('.designer-block').height() - 120;
-                        } 
+                            $('.designer').height(World.Drawer2D.canvas.height);
+                        }
                         World.Drawer2D.canvas.width = $('.designer').width();
                         World.Drawer2D.reSizeCanvas();
                     }
@@ -70,18 +71,13 @@
 
             $(document).ready(function () {
             window.quality = 30;
-            var createDef = function () {
-                window.World = new WorldClass($('.designer'));
-                window.minimimumOpacity = 0.1;
-                onWindowResize();
-                window.World.Crafter = new Move2DCrafter();
-                window.World.SetMode(window.Modes.two);
-                window.World.Drawer2D.setImage($('img.ge_taskImg').get(0));
-            };
-            createDef();
+            window.World = new WorldClass($('.designer'));
+            window.minimimumOpacity = 0.1;
+            window.World.Crafter = new WallCrafter();
+            window.World.SetMode(window.Modes.two);
+            window.World.Drawer2D.setImage($('img.ge_taskImg').get(0));
             $('.designer')[0].oncontextmenu = function () { return false; };
             window.addEventListener('resize', onWindowResize, false);
-            window.World.Crafter = new WallCrafter();
             onWindowResize();
             $('[rel=benttool]').addClass('active');
             $('[rel=mainline]').addClass('active');
@@ -146,27 +142,22 @@
                 $('.ge_errorModal .modal-title').text('Ваше задание');
                 $('.ge_errorModal').modal('show');
             });
+            
+            $('#ge_step_grid').change(function () {
+                if (window.World.Crafter.GridMode) {
+                    window.World.Drawer.SetStepGrid($(this).val());
+                }
+            });
         });
-
         
-        var getResult = function() {
-            return window.World.SavedResult;
-        };
-
-        
-        
-
         
         document.cancelFullScreen = document.cancelFullScreen || document.webkitCancelFullScreen || document.mozCancelFullScreen;
 
         function onFullScreenEnter() {
-            console.log("Enter fullscreen initiated from iframe");
-            
             window.World.Drawer.fullModeScreen(1);
         };
 
         function onFullScreenExit() {
-            console.log("Exit fullscreen initiated from iframe");
             window.World.Drawer.fullModeScreen(0);
         };
 
@@ -201,3 +192,10 @@
                 enterFullscreen(id);
             }
         }
+        var drawResult = function () {
+            if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetResultMode(true);
+            window.World.Draw();
+        };
+        var getResult = function () {
+            return window.World.SavedResult;
+        };

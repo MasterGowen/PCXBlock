@@ -27,9 +27,13 @@ Drawer2D.prototype = new Drawer();
 Drawer2D.prototype.GetWorldPoint = function(data) {
     return new Pnt(data.X * this.Scale + this.Offset.X, this.Scale * data.Y + this.Offset.Y);
 };
+Drawer2D.prototype.SetStepGrid = function (val) {
+    if (val > 1 && val <= 100) {
+        this.CellSize = val;
+    }
+};
 Drawer2D.prototype.Draw = function (objects, currentColor) {
     var objs = objects.Walls;
-     if (objects.Line.length>0) var line = objects.Line[0];
     this.Start();
     var walls = objs.filter(function (a) { return a.type === "wall"; });
 	var $this = this;
@@ -44,23 +48,7 @@ Drawer2D.prototype.Draw = function (objects, currentColor) {
 		ctx.fill();
 		ctx.restore();
 	};
-    
-//    if(typeof line !== "undefined") {
-//        var ctx = $this.canvas.getContext("2d");
-//        ctx.save();
-//        ctx.beginPath();
-//        var last = toPnt(line.Start), $new = toPnt(line.End);
-//        ctx.moveTo(last.X, last.Y);
-//        ctx.lineTo($new.X, $new.Y);
-//        var col = currentColor||"rgba(255,30,146, 1)";
-//        ctx.strokeStyle = col;
-//        ctx.lineWidth = line.Width / $this.Scale;
-//        ctx.stroke();
-//        ctx.restore();
-//        drawEllipse(line.Start, 1, currentColor || '#ED6C02');
-//        drawEllipse(line.End, 1, currentColor || '#ED6C02');
-//    }
-//    
+
     objects.Normals.forEach(function (a) {
         var ctx = $this.canvas.getContext("2d");
         ctx.save();
@@ -74,21 +62,32 @@ Drawer2D.prototype.Draw = function (objects, currentColor) {
                 case "thin": a.Width = 0.7; col = "rgba(0,0,0,1)"; break;
             }
         }
-        var last = toPnt(a.Start), $new = toPnt(a.End);
-        ctx.moveTo(last.X, last.Y);
-        ctx.lineTo($new.X, $new.Y);
-        if (typeof window.World.Crafter.walls !== 'undefined' && window.World.Crafter.walls.filter(function (d) { return d.Eq(a); }).length > 0)
-            col = currentColor || "rgba(237, 108, 2, 1)";
-        ctx.strokeStyle = col;
-        ctx.lineWidth = a.Width / $this.Scale;
-        ctx.stroke();
-        ctx.restore();
-        if (!window.World.Crafter.ResultMode) {
+        if (window.World.Crafter.ResultMode) {
+            if (a.LineType) {
+                var last = toPnt(a.Start), $new = toPnt(a.End);
+                ctx.moveTo(last.X, last.Y);
+                ctx.lineTo($new.X, $new.Y);
+                if (typeof window.World.Crafter.walls !== 'undefined' && window.World.Crafter.walls.filter(function (d) { return d.Eq(a); }).length > 0)
+                    col = currentColor || "rgba(237, 108, 2, 1)";
+                ctx.strokeStyle = col;
+                ctx.lineWidth = a.Width / $this.Scale;
+                ctx.stroke();
+                ctx.restore();
+            }
+        } else {
+            var last = toPnt(a.Start), $new = toPnt(a.End);
+            ctx.moveTo(last.X, last.Y);
+            ctx.lineTo($new.X, $new.Y);
+            if (typeof window.World.Crafter.walls !== 'undefined' && window.World.Crafter.walls.filter(function (d) { return d.Eq(a); }).length > 0)
+                col = currentColor || "rgba(237, 108, 2, 1)";
+            ctx.strokeStyle = col;
+            ctx.lineWidth = a.Width / $this.Scale;
+            ctx.stroke();
+            ctx.restore();
             drawEllipse(a.Start, 1, currentColor || '#ED6C02');
             drawEllipse(a.End, 1, currentColor || '#ED6C02');
         }
     });
-    
 
     objects.Beziers.forEach(function (a) {
         var ctx = $this.canvas.getContext("2d");
@@ -103,14 +102,24 @@ Drawer2D.prototype.Draw = function (objects, currentColor) {
                 case "thin": a.Width = 0.5; col = "rgba(0,0,0,1)"; break;
             }
         }
-        var start = toPnt(a.Start), cpoint1 = toPnt(a.FirstControlPoint), cpoint2 = toPnt(a.SecondControlPoint), end = toPnt(a.End);
-        ctx.moveTo(start.X, start.Y);
-        ctx.bezierCurveTo(cpoint1.X, cpoint1.Y, cpoint2.X, cpoint2.Y, end.X, end.Y);
-        ctx.strokeStyle = col;
-        ctx.lineWidth = a.Width / $this.Scale;
-        ctx.stroke();
-        ctx.restore();
-        if (!window.World.Crafter.ResultMode) {
+        if (window.World.Crafter.ResultMode) {
+            if (a.LineType) {
+                var start = toPnt(a.Start), cpoint1 = toPnt(a.FirstControlPoint), cpoint2 = toPnt(a.SecondControlPoint), end = toPnt(a.End);
+                ctx.moveTo(start.X, start.Y);
+                ctx.bezierCurveTo(cpoint1.X, cpoint1.Y, cpoint2.X, cpoint2.Y, end.X, end.Y);
+                ctx.strokeStyle = col;
+                ctx.lineWidth = a.Width / $this.Scale;
+                ctx.stroke();
+                ctx.restore();
+            }
+        } else {
+            var start = toPnt(a.Start), cpoint1 = toPnt(a.FirstControlPoint), cpoint2 = toPnt(a.SecondControlPoint), end = toPnt(a.End);
+            ctx.moveTo(start.X, start.Y);
+            ctx.bezierCurveTo(cpoint1.X, cpoint1.Y, cpoint2.X, cpoint2.Y, end.X, end.Y);
+            ctx.strokeStyle = col;
+            ctx.lineWidth = a.Width / $this.Scale;
+            ctx.stroke();
+            ctx.restore();
             drawEllipse(a.Start, 1, currentColor || '#ED6C02');
             drawEllipse(a.End, 1, currentColor || '#ED6C02');
             drawEllipse(a.FirstControlPoint, 1, currentColor || 'rgba(255,182,0, 1)');
@@ -134,18 +143,26 @@ Drawer2D.prototype.Draw = function (objects, currentColor) {
 		        case "thin": a.Width = 0.5; col = "rgba(0,0,0,1)"; break;
 		    }
 		}
-		ctx.moveTo(last.X, last.Y);
-        ctx.lineTo($new.X, $new.Y);
-		ctx.strokeStyle = col;
-        ctx.lineWidth = a.Width / $this.Scale;
-		ctx.stroke();
-		ctx.restore();
-        if (!window.World.Crafter.ResultMode) {
+        if (window.World.Crafter.ResultMode) {
+            if (a.LineType) {
+                ctx.moveTo(last.X, last.Y);
+                ctx.lineTo($new.X, $new.Y);
+                ctx.strokeStyle = col;
+                ctx.lineWidth = a.Width / $this.Scale;
+                ctx.stroke();
+                ctx.restore();
+            }
+        } else {
+            ctx.moveTo(last.X, last.Y);
+            ctx.lineTo($new.X, $new.Y);
+		    ctx.strokeStyle = col;
+            ctx.lineWidth = a.Width / $this.Scale;
+		    ctx.stroke();
+		    ctx.restore();
             drawEllipse(a.Start, 1, currentColor || '#ED6C02');
             drawEllipse(a.End, 1, currentColor || '#ED6C02');
         }
     });
-    this.End();
     if (window.World.Crafter.ResultMode) {
         var dataURL = $this.canvas.toDataURL();
         window.World.SavedResult = dataURL;
@@ -153,8 +170,10 @@ Drawer2D.prototype.Draw = function (objects, currentColor) {
         window.World.Crafter.SetResultMode(false);
         $this.canvas.width = $this.canvas.OldWidth;
         $this.canvas.height = $this.canvas.OldHeight;
+        this.Scale = 1;
         window.World.Crafter.SetGridMode(true);
     }
+    this.End();
 };
 Drawer2D.prototype.fullModeScreen = function (flag) {
     this.FullScreen = flag;
@@ -200,6 +219,10 @@ Drawer2D.prototype.Start = function () {
     var ctx = can.getContext("2d");
     ctx.fillStyle = "#FEFEFE";
     ctx.fillRect(0, 0, can.width, can.height);
+    if (window.World.Crafter.ResultMode) {
+        this.Offset.X = 0;
+        this.Offset.Y = 0;
+    }
     if (can.Image && !window.World.Crafter.ResultMode) ctx.drawImage(can.Image, -this.Offset.X / this.Scale, -this.Offset.Y / this.Scale, can.Imgwidth / this.Scale, can.Imgheight / this.Scale);
     ctx.lineWidth = 0.1;
     // рисовалка сетки
@@ -233,12 +256,23 @@ Drawer2D.prototype.DownloadCanvas = function (currDataURL, filename) {
 };
 Drawer2D.prototype.ScaleUp = function () {
     if (this.Scale >= this.MinScale) return;
-    this.Scale *= 1.1;
-    if (this.canvas.container.width() + this.Offset.X / this.Scale > (this.MaxOffset.X / this.Scale)) {
-        this.Offset.X = this.MaxOffset.X - this.canvas.container.width() * this.Scale;
+    if (Math.abs(this.Scale - this.MinScale) <= 0.01) this.Scale = this.MinScale;
+    else {
+        this.Scale *= 1.1;
     }
-    if (this.canvas.container.height() + this.Offset.Y / this.Scale + 10 * this.Scale > (this.MaxOffset.Y / this.Scale)) {
-        this.Offset.Y = this.MaxOffset.Y - this.canvas.container.height() * this.Scale;
+    if (this.canvas.container.width() + this.Offset.X / this.Scale > (this.MaxOffset.X / this.Scale)) {
+        if (this.MaxOffset.X - this.canvas.container.width() * this.Scale > this.MinOffset.X) {
+            this.Offset.X = this.MaxOffset.X - this.canvas.container.width() * this.Scale;
+        } else {
+            this.Offset.X = this.MinOffset.X;
+        }
+    }
+    if (this.canvas.container.height() + this.Offset.Y / this.Scale + this.OffsetStep * this.Scale > (this.MaxOffset.Y / this.Scale)) {
+        if (this.MaxOffset.Y - this.canvas.container.height() * this.Scale > this.MinOffset.Y) {
+            this.Offset.Y = this.MaxOffset.Y - this.canvas.container.height() * this.Scale;
+        } else {
+            this.Offset.Y = this.MinOffset.Y;
+        }
     }
 };
 Drawer2D.prototype.ScaleDown = function () {
@@ -246,18 +280,40 @@ Drawer2D.prototype.ScaleDown = function () {
     this.Scale /= 1.1;
 };
 Drawer2D.prototype.MoveLeft = function () {
-    if (this.Offset.X - 10 * this.Scale <= this.MinOffset.X) return;
-    this.Offset.X -= 10 * this.Scale;
+    if (this.Offset.X - this.OffsetStep * this.Scale <= this.MinOffset.X) {
+        if (this.Offset.X > this.MinOffset.X) {
+            this.Offset.X -= this.Offset.X - this.MinOffset.X;
+        }
+        return;
+    }
+    this.Offset.X -= this.OffsetStep * this.Scale;
 };
 Drawer2D.prototype.MoveRight = function () {
-    if (this.canvas.container.width() + this.Offset.X / this.Scale + 10 * this.Scale >= (this.MaxOffset.X / this.Scale)) return;
-    this.Offset.X += 10 * this.Scale;
+    var currentWidth = this.canvas.container.width() + this.Offset.X / this.Scale;
+    if (currentWidth + this.OffsetStep * this.Scale >= (this.MaxOffset.X / this.Scale)) {
+        if (this.MaxOffset.X / this.Scale > currentWidth) {
+            this.Offset.X +=this.MaxOffset.X / this.Scale - currentWidth;
+        }
+        return;
+    }
+    this.Offset.X += this.OffsetStep * this.Scale;
 };
 Drawer2D.prototype.MoveUp = function () {
-    if (this.Offset.Y - 10 * this.Scale <= this.MinOffset.Y) return;
-    this.Offset.Y -= 10 * this.Scale;
+    if (this.Offset.Y - this.OffsetStep * this.Scale <= this.MinOffset.Y) {
+        if (this.MinOffset.Y < this.Offset.Y) {
+            this.Offset.Y -= this.Offset.Y - this.MinOffset.Y;
+        }
+        return;
+    }
+    this.Offset.Y -= this.OffsetStep * this.Scale;
 };
 Drawer2D.prototype.MoveBottom = function () {
-    if (this.canvas.container.height() + this.Offset.Y / this.Scale + 10 * this.Scale >= (this.MaxOffset.Y / this.Scale)) return;
-    this.Offset.Y += 10 * this.Scale;
+    var currentHeight = this.canvas.container.height() + this.Offset.Y / this.Scale;
+    if (currentHeight + this.OffsetStep * this.Scale >= (this.MaxOffset.Y / this.Scale)) {
+        if (this.MaxOffset.Y / this.Scale > currentHeight) {
+            this.Offset.Y += this.MaxOffset.Y / this.Scale-currentHeight;
+        }
+        return;
+    }
+    this.Offset.Y += this.OffsetStep * this.Scale;
 };

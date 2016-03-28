@@ -13,33 +13,34 @@
     </div>   
 
 <div id="workzone">
-        <img class="ge_taskImg" src="{{background_image}}" style="display:none"/>
+       <img class="ge_taskImg" src="img/example.png" style="display:none"/>
         <!--<div class="loader"></div>-->
         <div class='leftMenu'>
-            <a class='logo'><img src="{{pic_logo}}"/></a>
+            <a class='logo'><img src="img/logo.png"/></a>
             <div class="ge_panel">
                 <button class="ge_gridMode">Убрать сетку</button>
+                <label>Шаг сетки: <input type="number" min="2" max="100" step="1" id="ge_step_grid" value="2"/></label>
             </div>
+            <div class="ge_task">Задание</div>
         </div>
         <div class='buttons d2d'>
-            <div rel="benttool" title="Ломаная" class="tool"><img src="{{pic_bent}}"/></div>
-            <div rel="linetool" title="Линия" class="tool"><img src="{{pic_line}}"/></div>
-            <div rel="walltool" title="Прямоугольник" class="tool"><img src="{{pic_rect}}"/></div>
-            <div rel="beziertool" title="Кривая Безье" class="tool"><img src="{{pic_BezierCurve}}"/></div>
-            <!--<div id="circle-tool" title="Окружность"><img src="/static/circle.png"/></div>-->
-            <div rel="resettool" title="Очистить"><img src="{{pic_eraser}}"/></div>
-            <div rel="backtool" title="Отменить"><img src='{{pic_back}}'/></div>
+            <div rel="benttool" title="Ломаная" class="tool"><img src="img/bent.png"/></div>
+            <div rel="linetool" title="Линия" class="tool"><img src="img/line.png"/></div>
+            <div rel="walltool" title="Прямоугольник" class="tool"><img src="img/rect.png"/></div>
+            <div rel="beziertool" title="Кривая Безье" class="tool"><img src="img/BezierCurve.png"/></div>
+            <!--<div id="circle-tool" title="Окружность"><img src="img/circle.png"/></div>-->
+            <div rel="resettool" title="Очистить"><img src="img/eraser.png"/></div>
+            <div rel="backtool" title="Отменить"><img src="img/back.png"/></div>
         </div>
-
         <div class='buttons lines-types' style="display:none">
-            <div rel="mainline" title="Основная линия" class="tool"><img src="{{main_line}}"/></div>
-            <div rel="dashdotline" title="Штрихпунктирная линия" class="tool"><img src="{{dash_dot_line}}"/></div>
-            <div rel="dashedline" title="Штриховая линия" class="tool"><img src="{{dashed_line}}"/></div>
-            <div rel="thinline" title="Тонкая линия" class="tool"><img src="{{thin_line}}"/></div>
+            <div rel="mainline" title="Основная линия" class="tool"><img src="img/main-line.png"/></div>
+            <div rel="dashdotline" title="Штрихпунктирная линия" class="tool"><img src="img/dash-dot-line.png"/></div>
+            <div rel="dashedline" title="Штриховая линия" class="tool"><img src="img/dashed-line.png"/></div>
+            <div rel="thinline" title="Тонкая линия" class="tool"><img src="img/thin-line.png"/></div>
         </div>
         <div class="designer-block">
-            <div class='designer' style="height:500px">
-                <table class="controls">
+            <div class='designer' id="ge_canvas">
+                <table class="controls ge_move">
                     <tr>
                         <td></td>
                         <td class="act up"></td>
@@ -58,7 +59,6 @@
                         <td class="act down"></td>
                         <td></td>
                     </tr>
-
                 </table>
                 <div class="ge_zoom controls" onclick="enterFullscreen('ge_canvas')"></div>
             </div>
@@ -66,6 +66,22 @@
                 <button class="ge_drawLayers microButton active">Режим эскиза</button>
                 <button class="ge_drawBottomLine microButton">Режим чертежа</button>
                 <button class="ge_saveResult microButton" style="display:none">Сохранить результат</button>
+            </div>
+        </div>
+        <div class="modal fade ge_errorModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title">Ваше задание</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="ge_errormessage"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">ОК</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

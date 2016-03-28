@@ -3,6 +3,7 @@
     this.MaxOffset = new Pnt();
     this.MinOffset = new Pnt();
     this.Scale = 1;
+    this.OffsetStep = 50;
     this.MinScale = 1;
     this.CellSize = 2;
     this.FullScreen = 0;
