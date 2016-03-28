@@ -47,7 +47,7 @@
     float: left;
     height: 100px;
 }
-.ge_panel button {
+/*.ge_panel button {
     margin-top: 10%;
     -webkit-border-radius: 19px;
     -moz-border-radius: 19px;
@@ -68,8 +68,8 @@
   background-image: -o-linear-gradient(top, #CBBFA8, #c29e5b);
   background-image: linear-gradient(to bottom, #CBBFA8, #c29e5b);
   color: #000;
-}
-.buttons div {
+}*/
+/*.buttons div {
     width: 70px;
     height: 70px;
     margin: 10px 15px;
@@ -85,7 +85,7 @@
 .buttons div img {
     width: 100%;
     border-radius: 50%;
-}
+}*/
 div.designer {
     position: relative;
   background-color: #fafafa;
@@ -561,7 +561,7 @@ button.close {
     border-style: solid;
     border-width: 1px 0;
 }
-.microButton {
+/*.microButton {
     display: block;
     margin: 0 auto;
     cursor: pointer;
@@ -572,12 +572,12 @@ button.close {
     text-decoration: none;
     border: 2px solid #bec0c1;
     background-color: #429cb0;
-    background: rgb(245,245,245); /* Old browsers */
-    background: -moz-linear-gradient(top, rgba(245,245,245,1) 49%, rgba(232,233,234,1) 52%, rgba(232,233,234,1) 52%, rgba(232,233,234,1) 53%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(49%,rgba(245,245,245,1)), color-stop(52%,rgba(232,233,234,1)), color-stop(52%,rgba(232,233,234,1)), color-stop(53%,rgba(232,233,234,1))); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top, rgba(245,245,245,1) 49%,rgba(232,233,234,1) 52%,rgba(232,233,234,1) 52%,rgba(232,233,234,1) 53%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top, rgba(245,245,245,1) 49%,rgba(232,233,234,1) 52%,rgba(232,233,234,1) 52%,rgba(232,233,234,1) 53%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top, rgba(245,245,245,1) 49%,rgba(232,233,234,1) 52%,rgba(232,233,234,1) 52%,rgba(232,233,234,1) 53%); /* IE10+ */
+    background: rgb(245,245,245); 
+    background: -moz-linear-gradient(top, rgba(245,245,245,1) 49%, rgba(232,233,234,1) 52%, rgba(232,233,234,1) 52%, rgba(232,233,234,1) 53%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(49%,rgba(245,245,245,1)), color-stop(52%,rgba(232,233,234,1)), color-stop(52%,rgba(232,233,234,1)), color-stop(53%,rgba(232,233,234,1)));
+    background: -webkit-linear-gradient(top, rgba(245,245,245,1) 49%,rgba(232,233,234,1) 52%,rgba(232,233,234,1) 52%,rgba(232,233,234,1) 53%);
+    background: -o-linear-gradient(top, rgba(245,245,245,1) 49%,rgba(232,233,234,1) 52%,rgba(232,233,234,1) 52%,rgba(232,233,234,1) 53%);
+    background: -ms-linear-gradient(top, rgba(245,245,245,1) 49%,rgba(232,233,234,1) 52%,rgba(232,233,234,1) 52%,rgba(232,233,234,1) 53%);
     background: linear-gradient(to bottom, rgba(245,245,245,1) 49%,rgba(232,233,234,1) 52%,rgba(232,233,234,1) 52%,rgba(232,233,234,1) 53%); 
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
@@ -585,15 +585,15 @@ button.close {
     color: #525b66;
     border: 2px double rgb(146, 148, 150);
     background-color: #429cb0;
-    background: rgb(245,245,245); /* Old browsers */
-    background: -moz-linear-gradient(top, rgba(245,245,245,1) 49%, rgba(232,233,234,1) 52%, rgba(232,233,234,1) 52%, rgba(232,233,234,1) 53%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(49%,rgba(245,245,245,1)), color-stop(52%,rgba(232,233,234,1)), color-stop(52%,rgba(232,233,234,1)), color-stop(53%,rgba(232,233,234,1))); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top, rgba(245,245,245,1) 49%,rgba(232,233,234,1) 52%,rgba(232,233,234,1) 52%,rgba(232,233,234,1) 53%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top, rgba(245,245,245,1) 49%,rgba(232,233,234,1) 52%,rgba(232,233,234,1) 52%,rgba(232,233,234,1) 53%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top, rgba(245,245,245,1) 49%,rgba(232,233,234,1) 52%,rgba(232,233,234,1) 52%,rgba(232,233,234,1) 53%); /* IE10+ */
+    background: rgb(245,245,245);
+    background: -moz-linear-gradient(top, rgba(245,245,245,1) 49%, rgba(232,233,234,1) 52%, rgba(232,233,234,1) 52%, rgba(232,233,234,1) 53%); 
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(49%,rgba(245,245,245,1)), color-stop(52%,rgba(232,233,234,1)), color-stop(52%,rgba(232,233,234,1)), color-stop(53%,rgba(232,233,234,1))); 
+    background: -webkit-linear-gradient(top, rgba(245,245,245,1) 49%,rgba(232,233,234,1) 52%,rgba(232,233,234,1) 52%,rgba(232,233,234,1) 53%); 
+    background: -o-linear-gradient(top, rgba(245,245,245,1) 49%,rgba(232,233,234,1) 52%,rgba(232,233,234,1) 52%,rgba(232,233,234,1) 53%); 
+    background: -ms-linear-gradient(top, rgba(245,245,245,1) 49%,rgba(232,233,234,1) 52%,rgba(232,233,234,1) 52%,rgba(232,233,234,1) 53%); 
     background: linear-gradient(to bottom, rgba(245,245,245,1) 49%,rgba(232,233,234,1) 52%,rgba(232,233,234,1) 52%,rgba(232,233,234,1) 53%); 
     box-shadow: 0 0 10px rgba(0,0,0,0.5) inset;
-} 
+} */
  .ge_drawerButtons {
      text-align: center;
  }
