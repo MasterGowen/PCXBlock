@@ -157,12 +157,12 @@ td.act i.fa, .ge_zoom i {
 
 /* полноэкранное отображение <video> */
 
-#workzone:-webkit-full-screen  {
+#workzone:-webkit-full-screen, .designer-block:-webkit-full-screen,  .designer:-webkit-full-screen  {
   width: 100%;
   height: 100%;
 }
 
-.workzone:-moz-full-screen  {
+#workzone:-moz-full-screen, .designer-block:-moz-full-screen, .designer:-moz-full-screen  {
   width: 100%;
   height: 100%;
 }
