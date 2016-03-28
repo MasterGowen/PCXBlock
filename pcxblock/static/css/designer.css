@@ -12,33 +12,7 @@
 .button {
     font-size:1.1em;
 }
-.leftMenu .ge_task {
-    display: inline-block;
-    position: absolute;
-    top: 25px;
-    right: 30px;
-  -webkit-border-radius: 28;
-  -moz-border-radius: 28;
-  border-radius: 28px;
-  font-family: Arial;
-  color: #525b66;
-  font-size: 20px;
-  background: #CBBFA8;
-  padding: 10px 20px 10px 20px;
-  text-decoration: none;
-  outline: none;
-}
 
-.leftMenu .ge_task:hover {
-  background: #CBBFA8;
-  background-image: -webkit-linear-gradient(top, #CBBFA8, #c29e5b);
-  background-image: -moz-linear-gradient(top, #CBBFA8, #c29e5b);
-  background-image: -ms-linear-gradient(top, #CBBFA8, #c29e5b);
-  background-image: -o-linear-gradient(top, #CBBFA8, #c29e5b);
-  background-image: linear-gradient(to bottom, #CBBFA8, #c29e5b);
-  text-decoration: none;
-  color: #000;
-}
 .leftMenu img {
     height: 100px;
 }
@@ -93,8 +67,6 @@ div.designer {
 }
 .designer-block {
     padding-left: 30px;
-    padding-top: 30px;
-    background-color: #bcbfc1;
 }
 #workzone div.designer > canvas {
   overflow:hidden;
@@ -590,11 +562,6 @@ button.close {
     box-shadow: 0 0 10px rgba(0,0,0,0.5) inset;
 } */
  .ge_drawerButtons {
-     text-align: center;
+    text-align: center;
+    margin-top: 1rem;
  }
-.ge_drawerButtons .microButton {
-    display: inline-block;
-    margin-top: 15px;
-    margin-right: 15px;
-}
- 
