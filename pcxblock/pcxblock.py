@@ -290,7 +290,6 @@ class PCXBlock(XBlock):
             )
 
             js_urls = (
-                
                 'static/js/js/guid.js',
                 'static/js/Utils/Pnt.js',
                 'static/js/Utils/caman.full.js',
