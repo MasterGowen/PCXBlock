@@ -16,33 +16,7 @@
 .leftMenu img {
     height: 100px;
 }
-.leftMenu .ge_panel {
-    position: relative;
-    float: left;
-    height: 100px;
-}
-/*.ge_panel button {
-    margin-top: 10%;
-    -webkit-border-radius: 19px;
-    -moz-border-radius: 19px;
-    border-radius: 19px;
-    font-family: Arial;
-    color: #525b66;
-    font-size: 16px;
-    background: #CBBFA8;
-    padding: 8px 20px 8px 20px;
-    outline: none;
-    width: 160px;
-}
-.ge_panel button:hover {
-    background: #CBBFA8;
-  background-image: -webkit-linear-gradient(top, #CBBFA8, #c29e5b);
-  background-image: -moz-linear-gradient(top, #CBBFA8, #c29e5b);
-  background-image: -ms-linear-gradient(top, #CBBFA8, #c29e5b);
-  background-image: -o-linear-gradient(top, #CBBFA8, #c29e5b);
-  background-image: linear-gradient(to bottom, #CBBFA8, #c29e5b);
-  color: #000;
-}*/
+
 .buttons div {
     width: 70px;
     height: 70px;
@@ -80,27 +54,7 @@ div#workzone {
     position: relative;
     clear: both;
 }
-.leftMenu {
-  position: absolute;
-    top: 0;
-    margin: 0 auto;
-    width: 100%;
-    clear: both;
-    z-index: 1;
-}
-.leftMenu .logo {
-    margin-left: 25px;
-    margin-right: 15px;
-}
-.leftMenu > * {
-    text-align: center;
-    float: left;
-    position: relative;
-}
-.leftMenu > div.button {
-    cursor: pointer;
-    width: 100px;
-}
+
 .leftMenu .help-react.act, .leftMenu > div:hover, .leftMenu > div.activ {
     background-color: transparent;
     cursor: pointer;
@@ -528,39 +482,6 @@ button.close {
     border-style: solid;
     border-width: 1px 0;
 }
-/*.microButton {
-    display: block;
-    margin: 0 auto;
-    cursor: pointer;
-    color: #525b66;
-    padding: 5px 10px;
-    position: relative;
-    font-weight: bold;
-    text-decoration: none;
-    border: 2px solid #bec0c1;
-    background-color: #429cb0;
-    background: rgb(245,245,245); 
-    background: -moz-linear-gradient(top, rgba(245,245,245,1) 49%, rgba(232,233,234,1) 52%, rgba(232,233,234,1) 52%, rgba(232,233,234,1) 53%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(49%,rgba(245,245,245,1)), color-stop(52%,rgba(232,233,234,1)), color-stop(52%,rgba(232,233,234,1)), color-stop(53%,rgba(232,233,234,1)));
-    background: -webkit-linear-gradient(top, rgba(245,245,245,1) 49%,rgba(232,233,234,1) 52%,rgba(232,233,234,1) 52%,rgba(232,233,234,1) 53%);
-    background: -o-linear-gradient(top, rgba(245,245,245,1) 49%,rgba(232,233,234,1) 52%,rgba(232,233,234,1) 52%,rgba(232,233,234,1) 53%);
-    background: -ms-linear-gradient(top, rgba(245,245,245,1) 49%,rgba(232,233,234,1) 52%,rgba(232,233,234,1) 52%,rgba(232,233,234,1) 53%);
-    background: linear-gradient(to bottom, rgba(245,245,245,1) 49%,rgba(232,233,234,1) 52%,rgba(232,233,234,1) 52%,rgba(232,233,234,1) 53%); 
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
-}
-.microButton:hover, .microButton.active {
-    color: #525b66;
-    border: 2px double rgb(146, 148, 150);
-    background-color: #429cb0;
-    background: rgb(245,245,245);
-    background: -moz-linear-gradient(top, rgba(245,245,245,1) 49%, rgba(232,233,234,1) 52%, rgba(232,233,234,1) 52%, rgba(232,233,234,1) 53%); 
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(49%,rgba(245,245,245,1)), color-stop(52%,rgba(232,233,234,1)), color-stop(52%,rgba(232,233,234,1)), color-stop(53%,rgba(232,233,234,1))); 
-    background: -webkit-linear-gradient(top, rgba(245,245,245,1) 49%,rgba(232,233,234,1) 52%,rgba(232,233,234,1) 52%,rgba(232,233,234,1) 53%); 
-    background: -o-linear-gradient(top, rgba(245,245,245,1) 49%,rgba(232,233,234,1) 52%,rgba(232,233,234,1) 52%,rgba(232,233,234,1) 53%); 
-    background: -ms-linear-gradient(top, rgba(245,245,245,1) 49%,rgba(232,233,234,1) 52%,rgba(232,233,234,1) 52%,rgba(232,233,234,1) 53%); 
-    background: linear-gradient(to bottom, rgba(245,245,245,1) 49%,rgba(232,233,234,1) 52%,rgba(232,233,234,1) 52%,rgba(232,233,234,1) 53%); 
-    box-shadow: 0 0 10px rgba(0,0,0,0.5) inset;
-} */
  .ge_drawerButtons {
     text-align: center;
     margin-top: 1rem;
