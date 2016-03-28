@@ -1,7 +1,7 @@
 //var gridStep = 2;
 
 function PCXBlockEdit(runtime, element, data) {
-    console.log("studio js");
+    //console.log("studio js");
     
     /*function success_func(result) {
        gridStep = JSON.parse(result).grid_step;
@@ -22,7 +22,7 @@ function PCXBlockEdit(runtime, element, data) {
     }*/
 
 	var lol = data.grid_step;
-	console.log("lol: " + lol);
+	//console.log("lol: " + lol);
     
     $('#grid_step').change(function () {
         if (window.World.Crafter.GridMode) {
@@ -88,12 +88,17 @@ function PCXBlockEdit(runtime, element, data) {
 	};
 
     $(element).find('.save-button').bind('click', function() {
+
+        //var para = document.createElement("text");
+
         if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetResultMode(true);
             window.World.Draw();
         $('.ge_gridMode').text("Убрать сетку");
 
         drawResult();
         var res = getResult();
+
+        console.log(res);
 
         var handlerUrl = runtime.handlerUrl(element, 'studio_submit'),
             data = {
@@ -103,7 +108,7 @@ function PCXBlockEdit(runtime, element, data) {
                 max_attempts: $(element).find('input[name=max_attempts]').val(),
                 background_image: $(element).find('input[name=background_image]').val(),
                 grid_step: $(element).find('input[name=grid_step]').val(),
-                correct_picture: res
+                correct_picture: str(res)
             };
 
         $.post(handlerUrl, JSON.stringify(data)).done(function(response) {
