@@ -88,6 +88,13 @@ function PCXBlockEdit(runtime, element, data) {
 	};
 
     $(element).find('.save-button').bind('click', function() {
+        if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetResultMode(true);
+            window.World.Draw();
+        $('.ge_gridMode').text("Убрать сетку");
+
+        drawResult();
+        var res = getResult();
+
         var handlerUrl = runtime.handlerUrl(element, 'studio_submit'),
             data = {
                 display_name: $(element).find('input[name=display_name]').val(),
@@ -95,7 +102,8 @@ function PCXBlockEdit(runtime, element, data) {
                 weight: $(element).find('input[name=weight]').val(),
                 max_attempts: $(element).find('input[name=max_attempts]').val(),
                 background_image: $(element).find('input[name=background_image]').val(),
-                grid_step: $(element).find('input[name=grid_step]').val()
+                grid_step: $(element).find('input[name=grid_step]').val(),
+                correct_picture: res
             };
 
         $.post(handlerUrl, JSON.stringify(data)).done(function(response) {

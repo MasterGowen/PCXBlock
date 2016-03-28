@@ -359,6 +359,7 @@ class PCXBlock(XBlock):
         self.weight = data.get('weight')
         self.max_attempts = data.get('max_attempts')
         self.editor_settings["grid_step"] = data.get('grid_step')
+        self.correct_picture = data.get('correct_picture')
 
         if data.get('background_image') == "":
             self.background_image = defaults.empty_image
@@ -377,9 +378,9 @@ class PCXBlock(XBlock):
             return student_picture_base64
 
         @check_method
-        def pixel_method(student_picture_base64):
-            correct_image_base64 = defaults.correct_image
-            correct_image = base64_to_image(correct_image_base64)
+        def pixel_method(student_picture_base64, correct_picture_base64):
+
+            correct_image = base64_to_image(correct_picture_base64)
             student_image = base64_to_image(student_picture_base64)
 
             all_gray_student_pixels_count = pixels_count(student_image, [70, 70, 70], [251, 251, 251])
@@ -406,7 +407,8 @@ class PCXBlock(XBlock):
 
             return grade_global
 
-        grade_global = pixel_method(get_pictures(data))
+
+        grade_global = pixel_method(get_pictures(data), self.correct_picture)
 
         self.points = grade_global * self.weight / 100
         self.attempts += 1
