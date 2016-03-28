@@ -1,4 +1,4 @@
-function PCXBlock(runtime, element, data) {
+function PCXBlock(runtime, element) {
 
     $( "#workzone" ).mouseover(function() {
         $("body").css("overflow","hidden")    
@@ -7,11 +7,6 @@ function PCXBlock(runtime, element, data) {
     $( "#workzone" ).mouseout(function() {
         $("body").css("overflow","auto");            
     });
-
-    console.log(data.grid_step);
-    /*if (window.World.Crafter.GridMode) {
-            window.World.Drawer.SetStepGrid(data.grid_step);
-    }*/
 
 
 
@@ -28,8 +23,8 @@ function PCXBlock(runtime, element, data) {
         //console.log("Количество баллов: " + result.correct/result.weight*100 + " ОТВЕТОВ: " + result.attempts);
         //$('.attempts', element).text(result.attempts);
         $(element).find('.weight').html('Набрано баллов: <me-span class="points"></span>');
-        $('.points', element).text(result.points );
-        onWindowResize();
+        $('.points', element).text(result.points);
+       // onWindowResize();
     };
 
 
@@ -56,14 +51,13 @@ function PCXBlock(runtime, element, data) {
     $(element).find('.Check').bind('click', function() {
 
         if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetResultMode(true);
-        window.World.Draw();
+            window.World.Draw();
         $('.ge_gridMode').text("Убрать сетку");
-         //onWindowResize();
-      //  window.World.Crafter.SetGridMode(false)
-        console.log(getResult());
 
+        drawResult();
+        var res = getResult();
 
-       var student_picture = getResult();
+       var student_picture = res;
         
         $.ajax({
             type: "POST",

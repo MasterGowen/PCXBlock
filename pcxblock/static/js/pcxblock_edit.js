@@ -22,9 +22,7 @@ function PCXBlockEdit(runtime, element, data) {
     }*/
 
 	//var lol = data.grid_step;
-    if (window.World.Crafter.GridMode) {
-            window.World.Drawer.SetStepGrid(data.grid_step);
-    }
+
 	//console.log("lol: " + lol);
     
     $('#grid_step').change(function () {
