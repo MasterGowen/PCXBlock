@@ -1,4 +1,4 @@
-function PCXBlock(runtime, element) {
+function PCXBlock(runtime, element, data) {
 
     $( "#workzone" ).mouseover(function() {
         $("body").css("overflow","hidden")    
@@ -8,6 +8,9 @@ function PCXBlock(runtime, element) {
         $("body").css("overflow","auto");            
     });
 
+    if (window.World.Crafter.GridMode) {
+            window.World.Drawer.SetStepGrid(data.grid_step);
+    }
     /*function get_student_picture(){
         if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetResultMode(true);
                 window.World.Draw();

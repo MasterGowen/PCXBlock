@@ -343,7 +343,7 @@ class PCXBlock(XBlock):
 
             self.load_resources(js_urls, css_urls, fragment)
 
-        fragment.initialize_js('PCXBlock')
+        fragment.initialize_js('PCXBlock', {'grid_step': self.editor_settings["grid_step"]})
         return fragment
 
     # handlers
