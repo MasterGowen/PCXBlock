@@ -1,8 +1,5 @@
-//var gridStep = 2;
-
 function PCXBlockEdit(runtime, element, data) {
-    //console.log("studio js");
-    
+ 
     /*function success_func(result) {
        gridStep = JSON.parse(result).grid_step;
        console.log("Шаг сетки venm: " + gridStep);
@@ -15,16 +12,15 @@ function PCXBlockEdit(runtime, element, data) {
             data: JSON.stringify({"task": "get_settings"})
     });
 */
-    
-    /*if (typeof gridStep != 'undefined') {
-            gridStep = data.grid_step;
-            console.log("gridStep :" + gridStep); 
-    }*/
 
 	//var lol = data.grid_step;
 
 	//console.log("lol: " + lol);
     
+    if (window.World.Crafter.GridMode) {
+            window.World.Drawer.SetStepGrid(data.grid_step);
+        }
+
     $('#grid_step').change(function () {
         if (window.World.Crafter.GridMode) {
             window.World.Drawer.SetStepGrid($(this).val());
@@ -90,16 +86,12 @@ function PCXBlockEdit(runtime, element, data) {
 
     $(element).find('.save-button').bind('click', function() {
 
-        //var para = document.createElement("text");
-
         if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetResultMode(true);
             window.World.Draw();
         $('.ge_gridMode').text("Убрать сетку");
 
         drawResult();
         var res = getResult();
-
-        //console.log(res);
 
         var handlerUrl = runtime.handlerUrl(element, 'studio_submit'),
             data = {
