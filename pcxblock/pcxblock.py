@@ -383,15 +383,17 @@ class PCXBlock(XBlock):
             correct_image = base64_to_image(correct_picture_base64)
             student_image = base64_to_image(student_picture_base64)
 
-            all_gray_student_pixels_count = pixels_count(student_image, [70, 70, 70], [251, 251, 251])
-            all_gray_correct_pixels_count = pixels_count(correct_image, [70, 70, 70], [251, 251, 251])
+            line_color_min = [0, 0, 0]
+            line_color_max = [200, 200, 200] 
+            all_gray_student_pixels_count = pixels_count(student_image, line_color_min, line_color_max)
+            all_gray_correct_pixels_count = pixels_count(correct_image, line_color_min, line_color_max)
 
             thickness_contour = 25
             diff = thresh_callback(student_image, correct_image, thickness_contour, 0)
             diff1 = thresh_callback(correct_image, student_image, thickness_contour, 0)
 
-            gray_wrong_pixels_count1 = pixels_count(diff1, [70, 70, 70], [251, 251, 251])
-            gray_wrong_pixels_count = pixels_count(diff, [70, 70, 70], [251, 251, 251])
+            gray_wrong_pixels_count1 = pixels_count(diff1, line_color_min, line_color_max)
+            gray_wrong_pixels_count = pixels_count(diff, line_color_min, line_color_max)
 
             if all_gray_student_pixels_count != 0:
                 grade_first = float((all_gray_student_pixels_count - gray_wrong_pixels_count))/all_gray_student_pixels_count
