@@ -108,7 +108,7 @@ function PCXBlockEdit(runtime, element, data) {
                 max_attempts: $(element).find('input[name=max_attempts]').val(),
                 background_image: $(element).find('input[name=background_image]').val(),
                 grid_step: $(element).find('input[name=grid_step]').val(),
-                correct_picture: res;
+                correct_picture: res
             };
 
         $.post(handlerUrl, JSON.stringify(data)).done(function(response) {
