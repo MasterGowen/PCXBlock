@@ -143,11 +143,7 @@
                 $('.ge_errorModal').modal('show');
             });
             
-            $('#ge_step_grid').change(function () {
-                if (window.World.Crafter.GridMode) {
-                    window.World.Drawer.SetStepGrid($(this).val());
-                }
-            });
+
         });
         
         
