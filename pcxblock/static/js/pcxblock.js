@@ -1,4 +1,4 @@
-function PCXBlock(runtime, element) {
+function PCXBlock(runtime, element, data) {
 
     $( "#workzone" ).mouseover(function() {
         $("body").css("overflow","hidden")    
