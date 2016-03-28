@@ -482,3 +482,7 @@ button.close {
     text-align: center;
     margin-top: 1rem;
  }
+
+ .ge_move {
+  right: -25px;
+ }
