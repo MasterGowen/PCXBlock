@@ -14,11 +14,11 @@
                 // $('.buttons').css("top", window.headerHeight);
                 $('.designer-block').css("margin-left", 75);
                 $('.designer-block').height(600);
-                $('.designer-block').css("margin-top", 0);
-                $('.designer-block').css("margin-right", 30);
-                $('.designer').css("margin-top",75);
-                $('.buttons').height(525);
-                $('.propertyPanel').height($('html').height() - window.headerHeight - 3);
+                // $('.designer-block').css("margin-top", 0);
+                // $('.designer-block').css("margin-right", 30);
+                // $('.designer').css("margin-top",75);
+                // $('.buttons').height(525);
+                // $('.propertyPanel').height($('html').height() - window.headerHeight - 3);
                 if (typeof World !== "undefined") {
                     if (typeof World.Drawer2D !== "undefined") {
                         if (World.Drawer2D.FullScreen) {
