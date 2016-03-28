@@ -37,7 +37,7 @@
             <div rel="dashedline" title="Штриховая линия" class="tool"><img src="{{dashed_line}}"/></div>
             <div rel="thinline" title="Тонкая линия" class="tool"><img src="{{thin_line}}"/></div>
         </div>
-        <div class="designer-block">
+        <div class="designer-block" id='designer-block'>
             <div class='designer' id="ge_canvas">
                 <table class="controls ge_move">
                     <tr>
@@ -59,7 +59,7 @@
                         <td></td>
                     </tr>
                 </table>
-                <div class="ge_zoom controls" onclick="enterFullscreen('ge_canvas')"><i class="fa fa-expand"></i></div>
+                <div class="ge_zoom controls" onclick="enterFullscreen('designer-block')"><i class="fa fa-expand"></i></div>
             </div>
             <div class="ge_drawerButtons">
                 <button class="ge_drawLayers active">Режим эскиза</button>
