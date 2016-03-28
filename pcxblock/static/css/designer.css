@@ -97,7 +97,7 @@ div#workzone {
 }
 
 .designer .controls td {
-    color: white;
+    color: black;
     font-size: 100%;
     }
 .designer .controls td.act.right {
@@ -135,11 +135,11 @@ div#workzone {
 .designer .controls:hover {
     opacity: 1;
 }
-td.act i.fa {
-  text-shadow: 1px 1px 1px #ccc;
+td.act i.fa, .ge_zoom i {
+  text-shadow: 2px 2px 2px #FFF;
 }
 .ge_zoom {
-    color: white;
+    color: black;
     font-size: 200%;
     transition: opacity ease 0.5s;
     -moz-transition: opacity ease 0.5s;
