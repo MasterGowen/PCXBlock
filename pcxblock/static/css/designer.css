@@ -135,6 +135,9 @@ div#workzone {
 .designer .controls:hover {
     opacity: 1;
 }
+td.act i.fa {
+  text-shadow: 1px 1px 1px #ccc;
+}
 .ge_zoom {
     color: white;
     font-size: 200%;
