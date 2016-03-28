@@ -168,6 +168,7 @@ Drawer2D.prototype.Draw = function (objects, currentColor) {
         var dataURL = $this.canvas.toDataURL();
         window.World.SavedResult = dataURL;
         globalImage = dataURL;
+        $("#workzone #student_answer").val(dataURL);
         //this.DownloadCanvas(dataURL, 'result.png');
         window.World.Crafter.SetResultMode(false);
         $this.canvas.width = $this.canvas.OldWidth;
