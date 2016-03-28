@@ -58,8 +58,9 @@ function PCXBlock(runtime, element, data) {
             window.World.Draw();
         $('.ge_gridMode').text("Убрать сетку");
 
-        drawResult();
-        var res = getResult();
+        //drawResult();
+        var res = drawResult();
+        //res = getResult();
 
        var student_picture = res;
         
