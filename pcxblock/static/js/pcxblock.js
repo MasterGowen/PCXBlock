@@ -75,7 +75,8 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
 
     $(element).find(".Check").
     bind("click", function check () {
-
+    if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetResultMode(true);
+        window.World.Draw();
         /* if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetResultMode(true);
             window.World.Draw();
         $('.ge_gridMode').text("Убрать сетку");*/
