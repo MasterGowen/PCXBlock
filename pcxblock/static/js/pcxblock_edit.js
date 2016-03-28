@@ -1,4 +1,6 @@
 function PCXBlockEdit(runtime, element, data) {
+
+  onWindowResize();
  
     /*function success_func(result) {
        gridStep = JSON.parse(result).grid_step;
