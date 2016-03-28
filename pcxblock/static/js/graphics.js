@@ -173,7 +173,8 @@
             document.cancelFullScreen();
             document.querySelector('#' + id + ' .ge_zoom').onclick = function () {
                 enterFullscreen(id);
-            }
+            };
+            onWindowResize();
         }
         var drawResult = function () {
             if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetResultMode(true);
