@@ -27,7 +27,7 @@ function PCXBlock(runtime, element, data) {
         //console.log("Количество баллов: " + result.correct/result.weight*100 + " ОТВЕТОВ: " + result.attempts);
         //$('.attempts', element).text(result.attempts);
         $(element).find('.weight').html('Набрано баллов: <me-span class="points"></span>');
-        $('.points', element).text(result.points);
+        $('.points', element).text(Math.round(result.points));
        // onWindowResize();
     };
 
