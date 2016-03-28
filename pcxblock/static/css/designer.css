@@ -131,7 +131,7 @@ div#workzone {
     -ie-transition: opacity ease 0.5s;
     bottom: -25px;
 }
-.designer .controls:hover {
+.designer .controls td.act:hover {
     opacity: 1;
 }
 td.act i.fa, .ge_zoom i {
