@@ -149,10 +149,10 @@ td.act i.fa, .ge_zoom i {
 }
 
 :-webkit-full-screen {
-  background:  rgb(203, 191, 168);
+  background:  grey;
 }
 :-moz-full-screen {
-  background:  rgb(203, 191, 168);
+  background:  grey;
 }
 
 /* полноэкранное отображение <video> */
