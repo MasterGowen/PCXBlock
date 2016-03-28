@@ -481,3 +481,8 @@ button.close {
  .ge_move {
   right: -25px;
  }
+
+ .designer-block {
+  height: 600px;
+  margin-top: 1em;
+ }
