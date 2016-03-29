@@ -52,7 +52,7 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
         window.World.Draw();
         // drawResult();
        // var res = drawResult(),
-        res = getResult();
+        res = drawResult();
 
     $("#dialog-confirm").attr("src",res);
 	$( "#dialog-confirm" ).dialog({
@@ -60,11 +60,20 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
       	height:140,
       	modal: true,
       	buttons: {
-        "Delete all items": function() {
-          	$( this ).dialog( "close" );
+        "Отправить": function() {
+          	$.ajax({
+            "type": "POST",
+            "url": handlerUrl,
+            "data": JSON.stringify({"picture": res }),
+            "success": successFunc
+        });
+
         	},
-        Cancel: function() {
+        "Не отправлять": function() {
           $( this ).dialog( "close" );
+       
+
+
         }
       }
     });
@@ -74,13 +83,7 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
 
          //   studentPicture = res;
 
-        $.ajax({
-            "type": "POST",
-            "url": handlerUrl,
-            "data": JSON.stringify({"picture": res }),
-            "success": successFunc
-        });
-
+      
     });
 
 };
