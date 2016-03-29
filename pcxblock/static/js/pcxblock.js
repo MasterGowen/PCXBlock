@@ -23,7 +23,7 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
             window.World.Drawer.SetStepGrid(data.grid_step);
         }
 
-        $("background_check_picture").attr("src", $(element).find(".ge_taskImg").prop('src'))
+        $(element).find("#background_check_picture").attr("src", $(element).find(".ge_taskImg").prop('src'))
     });
 
     function successFunc (result) {
