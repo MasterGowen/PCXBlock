@@ -59,7 +59,7 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
       });
     }
 
-    $('.close_modal_button').click(function () {
+    $('#close_modal_button').click(function () {
 			closeCompleteAlert();
     });
 
@@ -73,7 +73,7 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
         res = drawResult();
 
         $('#student_check_picture').attr("src", res);
-        
+
         showCompleteAlert();
         /*$('.ge_errorModal .modal-title').text('Ваше задание');
          $('.ge_errorModal').modal('show');*/
