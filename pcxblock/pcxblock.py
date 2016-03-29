@@ -233,7 +233,6 @@ class PCXBlock(XBlock):
             'static/css/pcxblock_studio.css',
             'static/css/designer.css',
             'static/css/font.css',
-            'public/images/ll.svg'
         )
 
 
@@ -257,7 +256,7 @@ class PCXBlock(XBlock):
                 "grid_step": self.editor_settings["grid_step"],
             
                 "pic_back": defaults.default["pic_back"],
-                "pic_bent": defaults.default["pic_bent"],
+                "pic_bent": self.runtime.local_resource_url(self, 'public/images/ll.svg'),
                 "pic_line": defaults.default["pic_line"],
                 "pic_rect": defaults.default["pic_rect"],
                 "pic_BezierCurve": defaults.default["pic_BezierCurve"],
