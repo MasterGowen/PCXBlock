@@ -51,7 +51,7 @@ function PCXBlockEdit (runtime, element, data) {
     $(".modal-content").css("overflow", "hidden");
 
 
-    function readFile() {
+    function changeBackgroundPicture() {
 
       if (this.files && this.files[0]) {
 
@@ -59,7 +59,7 @@ function PCXBlockEdit (runtime, element, data) {
         FR.onload = function(e) {
 
           $(element).find("input[name=background_image]")[0].value = e.target.result;
-
+          $(element).find(".ge_taskImg").attr('src', e.target.result);
         };
 
         FR.readAsDataURL(this.files[0]);
@@ -68,7 +68,8 @@ function PCXBlockEdit (runtime, element, data) {
 
     }
 
-    $(element).find("input[name=upload_image]")[0].addEventListener("change", readFile, false);
+
+    $(element).find("input[name=upload_image]")[0].addEventListener("change", changeBackgroundPicture, false);
 
     var tabList = "<li class=\"action-tabs is-active-tabs\" id=\"main-settings-tab\">Изображение</li><li class=\"action-tabs\" id=\"scenario-settings-tab\">Основные</li><li class=\"action-tabs\" id=\"advanced-settings-tab\">Расширенные</li>";
   document.getElementsByClassName("editor-modes action-list action-modes")[0].innerHTML = tabList;
