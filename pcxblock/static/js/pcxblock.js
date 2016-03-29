@@ -72,43 +72,24 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
        // var res = drawResult(),
         res = drawResult();
 
-        $('#student_check_picture').attr("src", res);
+        //$('#student_check_picture').attr("src", res);
 
         showCompleteAlert();
+        onWindowResize();
         /*$('.ge_errorModal .modal-title').text('Ваше задание');
          $('.ge_errorModal').modal('show');*/
 
-
-   // window.stop();
-
-   /* $("#ololo").attr("src", res);
-	$( "#dialog-confirm" ).dialog({
-    	  resizable: false,
-      	height:660,
-      	modal: true,
-      	buttons: {
-        "Отправить": function() {
-          	$.ajax({
-            "type": "POST",
-            "url": handlerUrl,
-            "data": JSON.stringify({"picture": res }),
-            "success": successFunc
-        });
-
-        	},
-        "Не отправлять": function() {
-          $( this ).dialog( "close" );
-       
+         $('#send_answer').click(function () {
+			$.ajax({
+            	"type": "POST",
+            	"url": handlerUrl,
+            	"data": JSON.stringify({"picture": res }),
+            	"success": successFunc
+        	});
+    	
+    	});
 
 
-        }
-      }
-    });*/
-    
-
-    
-
-         //   studentPicture = res;
 
       
     });
