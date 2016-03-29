@@ -7,7 +7,7 @@
 }
 
 .pcoverlay{
-	background: rgba(0, 0, 0, 0.78) url(http://bshk.ru/test-iq/images/overlay.png) repeat top;
+	background: rgba(0, 0, 0, 0.78) url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAAOCAYAAAD0f5bSAAAABGdBTUEAALGPC/xhBQAAABh0RVh0U29mdHdhcmUAUGFpbnQuTkVUIHYzLjM2qefiJQAAACVJREFUKFNjtLe3b2AgFYA0kYoZSNUAdtmoJkhIjwYENMmRFRAABtDShPYvM2QAAAAASUVORK5CYII=') repeat top;
 	position:fixed;
 	top:0px;
 	bottom:0px;
@@ -18,7 +18,7 @@
 
 .pcbox{
 	position:fixed;
-	top:-300px;
+	top:-40%;
 	left:20%;
 	right:20%;
 	color:#7F7F7F;

@@ -43,12 +43,25 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
         onWindowResize()
 
     }
-        function showCompleteAlert(){
-            $('#pcoverlay').fadeIn('slow',function(){
-            $('#pcbox').animate({'top':'160px'},500);
-            $("html,body").css("overflow","hidden");
-        });
-        }
+    
+    function showCompleteAlert(){
+
+        $('#pcoverlay').fadeIn('slow',function(){
+        $('#pcbox').animate({'top':'160px'},300);
+        $("html,body").css("overflow","hidden");
+      });
+    }
+
+    function closeCompleteAlert(){
+        $('#pcoverlay').fadeOut('slow',function(){
+        $('#pcbox').animate({'top':'-40%'},300);
+        $("html,body").css("overflow","auto");
+      });
+    }
+
+    $('.close_modal_button').click(function () {
+			closeCompleteAlert();
+    });
 
     $(element).find(".Check").
     bind("click", function check () {
@@ -58,6 +71,9 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
         // drawResult();
        // var res = drawResult(),
         res = drawResult();
+
+        $('#student_check_picture').attr("src", res);
+        
         showCompleteAlert();
         /*$('.ge_errorModal .modal-title').text('Ваше задание');
          $('.ge_errorModal').modal('show');*/
