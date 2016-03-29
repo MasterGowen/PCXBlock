@@ -44,6 +44,12 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
 
     }
 
+function showCompleteAlert(){
+    $('#pc-overlay').fadeIn('slow', function(){
+       $('#pc_box').animate({'top':'50%'},500);
+    });
+    $("html,body").css("overflow","hidden");
+}
 
     $(element).find(".Check").
     bind("click", function check () {
@@ -53,14 +59,10 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
         // drawResult();
        // var res = drawResult(),
         res = drawResult();
-
+        showCompleteAlert();
         /*$('.ge_errorModal .modal-title').text('Ваше задание');
          $('.ge_errorModal').modal('show');*/
 
-    $('#pc-overlay').fadeIn('slow', function(){
-       $('#pc_box').animate({'top':'50%'},500);
-    });
-    $("html,body").css("overflow","hidden");
 
    // window.stop();
 
