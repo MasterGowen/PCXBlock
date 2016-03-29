@@ -44,13 +44,6 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
 
     }
 
-function showCompleteAlert(){
-    $('#pc-overlay').fadeIn('slow', function(){
-       $('#pc_box').animate({'top':'50%'},500);
-    });
-    $("html,body").css("overflow","hidden");
-}
-
     $(element).find(".Check").
     bind("click", function check () {
 

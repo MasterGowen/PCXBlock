@@ -183,10 +183,11 @@
         };
         
         function showCompleteAlert(){
-    $('#pcoverlay').fadeIn('slow',function(){
-       $('#pcbox').animate({'top':'160px'},500);
-    });
-    $("html,body").css("overflow","hidden");
+            $('#pcoverlay').fadeIn('slow',function(){
+            $('#pcbox').animate({'top':'160px'},500);
+            $("html,body").css("overflow","hidden");
+        });
+        
    // window.stop();
 }
         /*var getResult = function () {
