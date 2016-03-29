@@ -43,6 +43,12 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
         onWindowResize()
 
     }
+        function showCompleteAlert(){
+            $('#pcoverlay').fadeIn('slow',function(){
+            $('#pcbox').animate({'top':'160px'},500);
+            $("html,body").css("overflow","hidden");
+        });
+        }
 
     $(element).find(".Check").
     bind("click", function check () {
