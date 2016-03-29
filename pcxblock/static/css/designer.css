@@ -18,20 +18,15 @@
 }
 
 .buttons div {
-    margin: 3px 25px;
+    margin: 7px 12px;
 }
 .buttons div:hover,.buttons div.active {
     cursor: pointer;
 }
 .buttons div:hover img,.buttons div.active img{
-    margin-left: -2px;
-    margin-top: -2px;
-    border: 2px solid #ED6C02;
+    background-color: white;
 }
-.buttons div img {
-    width: 100%;
-    border-radius: 50%;
-}
+
 div.designer {
     position: relative;
     background-color: #fafafa;
@@ -56,12 +51,11 @@ div#workzone {
     cursor: pointer;
 }
 .buttons {
+    background-color: lightgrey;
+    width: 500px;
     position: absolute;
-    left: 0;
-    width: 100px;
-    padding-top: 5px;
+    height: 50px;
     z-index: 1;
-    margin-top: 1em;
 }
 .loader {
     width: 100%;
