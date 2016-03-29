@@ -54,10 +54,10 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
        // var res = drawResult(),
         res = drawResult();
 
-    $("#dialog-confirm").attr("src",res);
+    $("#ololo").attr("src", res);
 	$( "#dialog-confirm" ).dialog({
     	  resizable: false,
-      	height:140,
+      	height:660,
       	modal: true,
       	buttons: {
         "Отправить": function() {
