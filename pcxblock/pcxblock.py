@@ -233,6 +233,7 @@ class PCXBlock(XBlock):
             'static/css/pcxblock_studio.css',
             'static/css/designer.css',
             'static/css/font.css',
+            'public/images/ll.svg'
         )
 
 
