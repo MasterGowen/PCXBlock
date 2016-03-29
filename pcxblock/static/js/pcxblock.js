@@ -47,14 +47,14 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
     function showCompleteAlert(){
 
         $('#pcoverlay').fadeIn('slow',function(){
-        $('#pcbox').animate({'top':'160px'},300);
+        $('#pcbox').animate({'top':'100%'},300);
         $("html,body").css("overflow","hidden");
       });
     }
 
     function closeCompleteAlert(){
         $('#pcoverlay').fadeOut('slow',function(){
-        $('#pcbox').animate({'top':'-40%'},300);
+        $('#pcbox').animate({'top':'-100%'},300);
         $("html,body").css("overflow","auto");
       });
     }
