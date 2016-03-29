@@ -18,13 +18,17 @@
 }
 
 .buttons div {
-    margin: 7px 12px;
+    margin: 0px 12px;
 }
 .buttons div:hover,.buttons div.active {
     cursor: pointer;
 }
 .buttons div:hover img,.buttons div.active img{
     background-color: white;
+}
+.tool img {
+    height: 60px;
+    width: 60px;
 }
 
 div.designer {
