@@ -47,18 +47,37 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
 
     $(element).find(".Check").
     bind("click", function check () {
-    if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetResultMode(true);
+
+	if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetResultMode(true);
         window.World.Draw();
         // drawResult();
        // var res = drawResult(),
-        // res = getResult();
+        res = getResult();
+
+    $("#dialog-confirm").attr("src",res);
+	$( "#dialog-confirm" ).dialog({
+    	  resizable: false,
+      	height:140,
+      	modal: true,
+      	buttons: {
+        "Delete all items": function() {
+          	$( this ).dialog( "close" );
+        	},
+        Cancel: function() {
+          $( this ).dialog( "close" );
+        }
+      }
+    });
+    
+
+    
 
          //   studentPicture = res;
 
         $.ajax({
             "type": "POST",
             "url": handlerUrl,
-            "data": JSON.stringify({"picture": $(element).find('input[name=student_answer]').val()}),
+            "data": JSON.stringify({"picture": res }),
             "success": successFunc
         });
 
