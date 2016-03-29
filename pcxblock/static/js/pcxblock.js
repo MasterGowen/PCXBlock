@@ -35,8 +35,8 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
     function successFunc (result) {
 
         // console.log("Количество баллов: " + result.correct/result.weight*100 + " ОТВЕТОВ: " + result.attempts);
-        // $('.attempts', element).text(result.attempts);
-
+        
+        $('.attempts', element).text(result.attempts);
         $(element).find(".weight").
         html("Набрано баллов: <me-span class=\"points\"></span>");
         $(".points", element).text(Math.round(result.points));
