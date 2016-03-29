@@ -54,8 +54,14 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
        // var res = drawResult(),
         res = drawResult();
 
-        $('.ge_errorModal .modal-title').text('Ваше задание');
-         $('.ge_errorModal').modal('show');
+        /*$('.ge_errorModal .modal-title').text('Ваше задание');
+         $('.ge_errorModal').modal('show');*/
+
+    $('#overlay').fadeIn('slow',function(){
+       $('#box').animate({'top':'160px'},500);
+    });
+    $("html,body").css("overflow","hidden");
+   // window.stop();
 
    /* $("#ololo").attr("src", res);
 	$( "#dialog-confirm" ).dialog({
