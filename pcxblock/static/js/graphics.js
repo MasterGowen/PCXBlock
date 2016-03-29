@@ -182,10 +182,7 @@
             return globalImage;
         };
         
-
         
-   // window.stop();
-}
         /*var getResult = function () {
             return window.World.SavedResult;
         };*/
