@@ -54,7 +54,10 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
        // var res = drawResult(),
         res = drawResult();
 
-    $("#ololo").attr("src", res);
+        $('.ge_errorModal .modal-title').text('Ваше задание');
+         $('.ge_errorModal').modal('show');
+
+   /* $("#ololo").attr("src", res);
 	$( "#dialog-confirm" ).dialog({
     	  resizable: false,
       	height:660,
@@ -76,7 +79,7 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
 
         }
       }
-    });
+    });*/
     
 
     
