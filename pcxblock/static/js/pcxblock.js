@@ -58,9 +58,10 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
          $('.ge_errorModal').modal('show');*/
 
     $('#overlay').fadeIn('slow',function(){
-       $('#box').animate({'top':'160px'},500);
+       $('#box').animate({'top':'50%'},500);
     });
     $("html,body").css("overflow","hidden");
+
    // window.stop();
 
    /* $("#ololo").attr("src", res);
