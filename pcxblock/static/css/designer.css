@@ -24,9 +24,10 @@
     cursor: pointer;
 }
 .buttons div:hover img,.buttons div.active img{
-    background-color: white;
+    background-color: #F3F3F3;
+    border-radius: 7px;
 }
-.tool img {
+.tool>img {
     height: 60px;
     width: 60px;
 }
