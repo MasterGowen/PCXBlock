@@ -72,7 +72,7 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
        // var res = drawResult(),
         var res = drawResult();
 
-        //$('#student_check_picture').attr("src", res);
+        $('#student_check_picture').attr("src", res);
 
         showCompleteAlert();
         onWindowResize();
