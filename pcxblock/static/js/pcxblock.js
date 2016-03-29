@@ -40,7 +40,7 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
         $(element).find(".weight").
         html("Набрано баллов: <me-span class=\"points\"></span>");
         $(".points", element).text(Math.round(result.points));
-        onWindowResize()
+        closeCompleteAlert();
 
     }
     
@@ -70,7 +70,7 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
         window.World.Draw();
         // drawResult();
        // var res = drawResult(),
-        res = drawResult();
+        var res = drawResult();
 
         //$('#student_check_picture').attr("src", res);
 
