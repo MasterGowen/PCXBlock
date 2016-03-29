@@ -46,15 +46,15 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
     
     function showCompleteAlert(){
 
-        $('#pcoverlay').fadeIn('slow',function(){
-        $('#pcbox').animate({'top':'20%'},300);
+        $('#pcoverlay').fadeIn('fast',function(){
+        $('#pcbox').animate({'top':'20%'},200);
         $("html,body").css("overflow","hidden");
       });
     }
 
     function closeCompleteAlert(){
-        $('#pcoverlay').fadeOut('slow',function(){
-        $('#pcbox').animate({'top':'-100%'},300);
+        $('#pcoverlay').fadeOut('fast',function(){
+        $('#pcbox').animate({'top':'-100%'},200);
         $("html,body").css("overflow","auto");
       });
     }
