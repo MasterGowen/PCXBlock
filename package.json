@@ -1,0 +1,20 @@
+{
+  "name": "PCXBlock",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MasterGowen/PCXBlock.git"
+  },
+  "keywords": [],
+  "author": "mastergowen@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MasterGowen/PCXBlock/issues"
+  },
+  "homepage": "https://github.com/MasterGowen/PCXBlock"
+}
