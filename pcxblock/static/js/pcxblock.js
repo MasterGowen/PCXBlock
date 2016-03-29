@@ -64,6 +64,12 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
 			closeCompleteAlert();
     });
 
+    $(function() {
+
+    $( ".buttons.d2d" ).draggable();
+
+  });
+
     $(element).find(".Check").
     bind("click", function check () {
 

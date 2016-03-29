@@ -51,6 +51,7 @@ div#workzone {
     cursor: pointer;
 }
 .buttons {
+    display: inline-flex;
     background-color: lightgrey;
     width: 500px;
     position: absolute;
