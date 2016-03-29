@@ -25,4 +25,15 @@
 	-moz-box-shadow: 0 1px 5px #333;
 	-webkit-box-shadow: 0 1px 5px #333;
 	z-index:1001;
-	}
+}
+
+#student_check_picture{
+    width: 96%;
+    border: 1px solid #e6e6e6;
+}
+
+#background_check_picture{
+    position: absolute;
+    width: 96%;
+    border: 1px solid #e6e6e6;
+}

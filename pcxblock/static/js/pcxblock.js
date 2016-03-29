@@ -10,26 +10,20 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
     var handlerUrl = runtime.handlerUrl(element, "student_submit");
 
     $("#workzone").mouseover(function workzoneMouseover () {
-
         $("body").css("overflow", "hidden");
-
     });
-
     $("#workzone").mouseout(function workzoneMouseOut () {
-
         $("body").css("overflow", "auto");
-
     });
 
 
     $(document).ready(function makeGrid () {
-
+        
         if (window.World.Crafter.GridMode) {
-
             window.World.Drawer.SetStepGrid(data.grid_step);
-
         }
 
+        $("background_check_picture").attr("src", $(element).find(".ge_taskImg").prop('src'))
     });
 
     function successFunc (result) {
