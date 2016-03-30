@@ -88,6 +88,7 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
     $(function() {
 
     $( ".buttons.d2d" ).draggable();
+    $( ".buttons.lines-types" ).draggable();
 
   });
 
