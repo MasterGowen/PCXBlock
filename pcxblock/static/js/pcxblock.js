@@ -40,14 +40,16 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
     function showCompleteAlert(){
         $('#pcoverlay').fadeIn('fast', function(){
         $('#pcbox').fadeIn('fast', function(){});
-        $("body").css("overflow","hidden");
+        disableScroll();
+        //$("body").css("overflow","hidden");
       });
     }
 
     function closeCompleteAlert(){
         $('#pcoverlay').fadeOut('fast', function(){
         $('#pcbox').fadeOut('fast', function(){});
-        $("body").css("overflow","auto");
+        enableScroll();
+        //$("body").css("overflow","auto");
       });
     }
 
