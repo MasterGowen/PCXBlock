@@ -9,10 +9,10 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
 
     var handlerUrl = runtime.handlerUrl(element, "student_submit");
 
-    $("#workzone").mouseover(function workzoneMouseover () {
+    $(element).find("#ge_canvas").mouseover(function workzoneMouseover () {
         disableScroll();
     });
-    $("#workzone").mouseout(function workzoneMouseOut () {
+    $(element).find("#ge_canvas").mouseout(function workzoneMouseOut () {
         enableScroll();
     });
 
