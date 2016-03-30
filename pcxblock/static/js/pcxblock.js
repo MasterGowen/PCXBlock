@@ -27,8 +27,6 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
     });
 
     function successFunc (result) {
-
-        // console.log("Количество баллов: " + result.correct/result.weight*100 + " ОТВЕТОВ: " + result.attempts);
         
         $('.attempts', element).text(result.attempts);
         $(element).find(".weight").
@@ -68,16 +66,11 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
 
 	if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetResultMode(true);
         window.World.Draw();
-        // drawResult();
-       // var res = drawResult(),
         var res = drawResult();
 
         $('#student_check_picture').attr("src", res);
 
         showCompleteAlert();
-        onWindowResize();
-        /*$('.ge_errorModal .modal-title').text('Ваше задание');
-         $('.ge_errorModal').modal('show');*/
 
          $('#send_answer').click(function () {
 			$.ajax({

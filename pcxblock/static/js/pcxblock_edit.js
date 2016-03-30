@@ -2,27 +2,9 @@ function PCXBlockEdit (runtime, element, data) {
 
   onWindowResize();
 
-    /*function success_func(result) {
-       gridStep = JSON.parse(result).grid_step;
-       console.log("Шаг сетки venm: " + gridStep);
-    };
-
-    $.ajax({
-            type: "POST",
-            url: runtime.handlerUrl(element, 'get_settings'),
-            success: success_func,
-            data: JSON.stringify({"task": "get_settings"})
-    });
-*/
-
-  //var lol = data.grid_step;
-
-  //console.log("lol: " + lol);
 
     if (window.World.Crafter.GridMode) {
-
             window.World.Drawer.SetStepGrid(data.grid_step);
-
         }
 
     $("#grid_step").change(function () {
@@ -111,10 +93,6 @@ function PCXBlockEdit (runtime, element, data) {
   };
 
     $(element).find(".save-button").bind("click", function() {
-
-       /* if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetResultMode(true);
-            window.World.Draw();
-        $('.ge_gridMode').text("Убрать сетку");*/
 
         var res = drawResult();
         console.log(res);
