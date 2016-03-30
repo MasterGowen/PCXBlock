@@ -8,6 +8,7 @@
 
 var show_background = true;
 var resultImage;
+
 var PCXBlock = function PCXBlock (runtime, element, data) {
 
     var handlerUrl = runtime.handlerUrl(element, "student_submit");
@@ -19,12 +20,8 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
         enableScroll();
     });
 
-
     $('.show-hide-background').click(function () {
-
-
         $(this).text(!show_background?"Скрыть фон":"Показать фон");
-
         if(show_background){
             $(element).find("#background_check_picture").css( "display", "none" );
             show_background = false;
@@ -33,7 +30,6 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
             $(element).find("#background_check_picture").css( "display", "block" );
             show_background = true;
         }
-
     });
 
 
@@ -47,13 +43,13 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
     });
 
     function successFunc (result) {
-        
+        closeCompleteAlert();
         $('.attempts', element).text(result.attempts);
         $(element).find(".weight").
         html("Набрано баллов: <me-span class=\"points\"></span>");
 
         $(".points", element).text(Math.round(result.points));
-        closeCompleteAlert();
+        
 
     }
     
@@ -63,8 +59,6 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
 
         setResultImage();
         $('#student_check_picture').attr("src", resultImage);
-
-
         $('#pcbox').fadeIn('fast', function(){
         });
         disableScroll();

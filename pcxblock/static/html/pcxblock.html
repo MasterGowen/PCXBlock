@@ -8,6 +8,7 @@
         <div class="modal-header">
           <h4 class="modal-title">Отправить задание на проверку?</h4>
         </div>
+
         <div class="modal-body">
         <p>Ваша картинка:</p>
             <div style="text-align: right;">
@@ -19,9 +20,10 @@
                 <img id="student_check_picture"  src="{{empty_image}}"></img>
             </div>
         </div>
+
         <div class="modal-footer">
             <button id="close_modal_button">Закрыть</button>
-            <button id="send_answer">Отправить</button>
+            <button id="send_answer">Проверить</button>
         </div>
     </div>
 </div>
@@ -96,6 +98,7 @@
             </div>
         </div>
     </div>
+    
   </div>   
         <div class="action">
                 {% if past_due and answer_opportunity %}
