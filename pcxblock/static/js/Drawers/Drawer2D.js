@@ -1,4 +1,5 @@
 ﻿var globalImage;
+var globalOlolo;
 var Drawer2D = function (container) {
     container.append("<canvas mode='2d'></canvas>");
     var canvas2D = $('canvas[mode=2d]', container)[0];
@@ -163,18 +164,21 @@ Drawer2D.prototype.Draw = function (objects, currentColor) {
             drawEllipse(a.Start, 1, currentColor || '#ED6C02');
             drawEllipse(a.End, 1, currentColor || '#ED6C02');
         }
-    });
+    }); 
     if (window.World.Crafter.ResultMode) {
+        globalOlolo = ololo();
+    }   
+    function ololo(){
         var dataURL = $this.canvas.toDataURL();
         window.World.SavedResult = dataURL;
         globalImage = dataURL;
-        //$("#workzone #student_answer").attr("value", dataURL);
         //this.DownloadCanvas(dataURL, 'result.png');
         window.World.Crafter.SetResultMode(false);
         $this.canvas.width = $this.canvas.OldWidth;
         $this.canvas.height = $this.canvas.OldHeight;
         this.Scale = 1;
         window.World.Crafter.SetGridMode(true);
+        return dataURL;
     }
     this.End();
 };

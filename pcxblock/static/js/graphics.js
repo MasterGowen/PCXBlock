@@ -10,7 +10,8 @@
                     if (typeof World.Drawer2D !== "undefined") {
                         if (World.Drawer2D.FullScreen) {
                             World.Drawer2D.canvas.height = $('.designer').height();
-                        } else {
+                        } 
+                        else {
                             World.Drawer2D.canvas.height = $('.designer-block').height() - 120;
                             $('.designer').height(World.Drawer2D.canvas.height);
                         }
@@ -98,11 +99,13 @@
                 var tool = $(this).attr('rel');
                 Meths[tool]();
             });
+
             $('.ge_gridMode').click(function () {
                 var gridMode = window.World.Crafter.GetGridMode();
                 $(this).text(!gridMode?"Убрать сетку":"Показать сетку");
                 if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetGridMode(!gridMode);
             });
+
             $('body').on('click', '.ge_drawerButtons .ge_drawBottomLine', function () {
                 $('.ge_drawerButtons .active').removeClass('active');
                 $(this).addClass('active');

@@ -22,8 +22,8 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
         if (window.World.Crafter.GridMode) {
             window.World.Drawer.SetStepGrid(data.grid_step);
         }
+        $(element).find("#background_check_picture").attr("src", $(element).find(".ge_taskImg").prop('src'));
 
-        $(element).find("#background_check_picture").attr("src", $(element).find(".ge_taskImg").prop('src'))
     });
 
     function successFunc (result) {
@@ -38,18 +38,16 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
     }
     
     function showCompleteAlert(){
-        $('#pcoverlay').fadeIn('fast', function(){
-        $('#pcbox').fadeIn('fast', function(){});
+        $('#pcoverlay').fadeIn('slow', function(){
+        $('#pcbox').fadeIn('slow', function(){});
         disableScroll();
-        //$("body").css("overflow","hidden");
       });
     }
 
     function closeCompleteAlert(){
-        $('#pcoverlay').fadeOut('fast', function(){
-        $('#pcbox').fadeOut('fast', function(){});
+        $('#pcoverlay').fadeOut('slow', function(){
+        $('#pcbox').fadeOut('slow', function(){});
         enableScroll();
-        //$("body").css("overflow","auto");
       });
     }
 
