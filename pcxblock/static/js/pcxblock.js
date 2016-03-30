@@ -40,11 +40,12 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
     
     function showCompleteAlert(){
         $('#pcoverlay').fadeIn('fast', function(){
+        res = globalImage;
+        $('#student_check_picture').attr("src", res);
+
         $('#pcbox').fadeIn('fast', function(){
 
-            res = globalImage;
-
-        $('#student_check_picture').attr("src", res);
+            
         });
         disableScroll();
       });
