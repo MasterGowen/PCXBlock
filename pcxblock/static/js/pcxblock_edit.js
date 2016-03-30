@@ -18,16 +18,13 @@ function PCXBlockEdit (runtime, element, data) {
     });
 
     $("#workzone").mouseover(function () {
-
-        $("body").css("overflow", "hidden");
-
+        disableScroll();
     });
 
     $("#workzone").mouseout(function () {
-
-        $("body").css("overflow", "auto");
-
+        enableScroll();
     });
+
 
     $(".modal-content").css("height", 1070);
     $(".modal-content").css("overflow", "hidden");

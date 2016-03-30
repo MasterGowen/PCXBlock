@@ -13,12 +13,21 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
 
     var handlerUrl = runtime.handlerUrl(element, "student_submit");
 
+
     $(element).find("#ge_canvas").mouseover(function workzoneMouseover () {
         disableScroll();
     });
+
     $(element).find("#ge_canvas").mouseout(function workzoneMouseOut () {
         enableScroll();
     });
+
+    $('#close_modal_button').click(function () {
+            closeCompleteAlert();
+    });
+
+
+
 
     $('.show-hide-background').click(function () {
         $(this).text(!show_background?"Скрыть фон":"Показать фон");
@@ -34,12 +43,10 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
 
 
     $(document).ready(function makeGrid () {
-        
         if (window.World.Crafter.GridMode) {
             window.World.Drawer.SetStepGrid(data.grid_step);
         }
         $(element).find("#background_check_picture").attr("src", $(element).find(".ge_taskImg").prop('src'));
-
     });
 
     function successFunc (result) {
@@ -47,7 +54,6 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
         $('.attempts', element).text(result.attempts);
         $(element).find(".weight").
         html("Набрано баллов: <me-span class=\"points\"></span>");
-
         $(".points", element).text(Math.round(result.points));
         
 
@@ -77,9 +83,7 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
         resultImage = globalImage;
     }
 
-    $('#close_modal_button').click(function () {
-			closeCompleteAlert();
-    });
+    
 
     $(function() {
 
