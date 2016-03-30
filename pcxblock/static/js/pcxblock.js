@@ -10,10 +10,10 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
     var handlerUrl = runtime.handlerUrl(element, "student_submit");
 
     $("#workzone").mouseover(function workzoneMouseover () {
-        $("body").css("overflow", "hidden");
+        disableScroll();
     });
     $("#workzone").mouseout(function workzoneMouseOut () {
-        $("body").css("overflow", "auto");
+        enableScroll();
     });
 
 
