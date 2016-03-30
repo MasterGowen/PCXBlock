@@ -27,9 +27,11 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
 
         if(show_background){
             $(element).find("#background_check_picture").css( "display", "none" );
+            show_background = false;
         }
         else{
             $(element).find("#background_check_picture").css( "display", "block" );
+            show_background = true;
         }
 
     });
