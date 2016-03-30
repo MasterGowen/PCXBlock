@@ -39,15 +39,17 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
     }
     
     function showCompleteAlert(){
+
         $('#pcoverlay').fadeIn('fast', function(){
-       // res = globalImage;
+            
+        setResultImage();
         $('#student_check_picture').attr("src", resultImage);
 
-        $('#pcbox').fadeIn('fast', function(){
 
-            
+        $('#pcbox').fadeIn('fast', function(){
         });
         disableScroll();
+        onWindowResize();
       });
     }
 
@@ -79,7 +81,7 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
         window.World.Draw();
         drawResult();
         
-        setResultImage();
+        
         showCompleteAlert();
 
          $('#send_answer').click(function () {
