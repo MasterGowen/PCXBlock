@@ -166,9 +166,6 @@ Drawer2D.prototype.Draw = function (objects, currentColor) {
         }
     }); 
     if (window.World.Crafter.ResultMode) {
-        globalOlolo = ololo();
-    }   
-    function ololo(){
         var dataURL = $this.canvas.toDataURL();
         window.World.SavedResult = dataURL;
         globalImage = dataURL;
@@ -178,8 +175,8 @@ Drawer2D.prototype.Draw = function (objects, currentColor) {
         $this.canvas.height = $this.canvas.OldHeight;
         this.Scale = 1;
         window.World.Crafter.SetGridMode(true);
-        return dataURL;
-    }
+    }   
+
     this.End();
 };
 Drawer2D.prototype.fullModeScreen = function (flag) {

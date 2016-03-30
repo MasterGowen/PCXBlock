@@ -182,7 +182,6 @@
         var drawResult = function () {
             if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetResultMode(true);
             window.World.Draw();
-            return globalImage;
         };
         
         

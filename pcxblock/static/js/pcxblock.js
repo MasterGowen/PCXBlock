@@ -5,6 +5,7 @@
  * @param {int} data The second number.
  * @returns {int} The sum of the two numbers.
  */
+ var res;
 var PCXBlock = function PCXBlock (runtime, element, data) {
 
     var handlerUrl = runtime.handlerUrl(element, "student_submit");
@@ -38,15 +39,20 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
     }
     
     function showCompleteAlert(){
-        $('#pcoverlay').fadeIn('slow', function(){
-        $('#pcbox').fadeIn('slow', function(){});
+        $('#pcoverlay').fadeIn('fast', function(){
+        $('#pcbox').fadeIn('fast', function(){
+
+            res = globalImage;
+
+        $('#student_check_picture').attr("src", res);
+        });
         disableScroll();
       });
     }
 
     function closeCompleteAlert(){
-        $('#pcoverlay').fadeOut('slow', function(){
-        $('#pcbox').fadeOut('slow', function(){});
+        $('#pcoverlay').fadeOut('fast', function(){
+        $('#pcbox').fadeOut('fast', function(){});
         enableScroll();
       });
     }
@@ -66,9 +72,8 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
 
 	if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetResultMode(true);
         window.World.Draw();
-        var res = drawResult();
-
-        $('#student_check_picture').attr("src", res);
+        drawResult();
+        
 
         showCompleteAlert();
 
