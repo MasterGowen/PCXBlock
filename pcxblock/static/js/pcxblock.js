@@ -5,7 +5,7 @@
  * @param {int} data The second number.
  * @returns {int} The sum of the two numbers.
  */
- var res;
+var resultImage;
 var PCXBlock = function PCXBlock (runtime, element, data) {
 
     var handlerUrl = runtime.handlerUrl(element, "student_submit");
@@ -40,8 +40,8 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
     
     function showCompleteAlert(){
         $('#pcoverlay').fadeIn('fast', function(){
-        res = globalImage;
-        $('#student_check_picture').attr("src", res);
+       // res = globalImage;
+        $('#student_check_picture').attr("src", resultImage);
 
         $('#pcbox').fadeIn('fast', function(){
 
@@ -56,6 +56,10 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
         $('#pcbox').fadeOut('fast', function(){});
         enableScroll();
       });
+    }
+
+    function setResultImage(){
+        resultImage = globalImage;
     }
 
     $('#close_modal_button').click(function () {
@@ -75,7 +79,7 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
         window.World.Draw();
         drawResult();
         
-
+        setResultImage();
         showCompleteAlert();
 
          $('#send_answer').click(function () {
