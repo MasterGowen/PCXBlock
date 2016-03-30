@@ -40,16 +40,15 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
     }
     
     function showCompleteAlert(){
-
-        $('#pcoverlay').fadeIn('fast',function(){
-        $('#pcbox').animate({'top':'20%'},200);
+        $('#pcoverlay').fadeIn('fast', function(){
+        $('#pcbox').fadeIn('fast', function(){});
         $("body").css("overflow","hidden");
       });
     }
 
     function closeCompleteAlert(){
-        $('#pcoverlay').fadeOut('fast',function(){
-        $('#pcbox').animate({'top':'-100%'},200);
+        $('#pcoverlay').fadeOut('fast', function(){
+        $('#pcbox').fadeOut('fast', function(){});
         $("body").css("overflow","auto");
       });
     }
