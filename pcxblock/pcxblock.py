@@ -253,6 +253,7 @@ class PCXBlock(XBlock):
                 "question": self.question,
                 "attempts": self.attempts,
                 "background_image": self.background_image,
+                "empty_image":defaults.empty_image,
                 "grid_step": self.editor_settings["grid_step"],
             
                 "pic_back": defaults.default["pic_back"],
