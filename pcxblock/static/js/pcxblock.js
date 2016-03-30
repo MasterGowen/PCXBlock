@@ -5,6 +5,8 @@
  * @param {int} data The second number.
  * @returns {int} The sum of the two numbers.
  */
+
+var show_background = true;
 var resultImage;
 var PCXBlock = function PCXBlock (runtime, element, data) {
 
@@ -15,6 +17,21 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
     });
     $(element).find("#ge_canvas").mouseout(function workzoneMouseOut () {
         enableScroll();
+    });
+
+
+    $('.show-hide-background').click(function () {
+
+
+        $(this).text(!show_background?"Скрыть фон":"Показать фон");
+
+        if(show_background){
+            $(element).find("#background_check_picture").css( "display", "none" );
+        }
+        else{
+            $(element).find("#background_check_picture").css( "display", "block" );
+        }
+
     });
 
 
@@ -41,7 +58,7 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
     function showCompleteAlert(){
 
         $('#pcoverlay').fadeIn('fast', function(){
-            
+
         setResultImage();
         $('#student_check_picture').attr("src", resultImage);
 
