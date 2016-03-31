@@ -1,6 +1,10 @@
 function PCXBlockEdit (runtime, element, data) {
 
-  onWindowResize();
+    onWindowResize();
+
+    $(function() {
+        $(element).find(".all-tools").draggable();
+    });
 
 
     if (window.World.Crafter.GridMode) {
