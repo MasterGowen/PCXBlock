@@ -189,6 +189,7 @@ class PCXBlock(XBlock):
             "max_attempts": self.max_attempts,
             "background_image": self.background_image,
             "grid_step": self.editor_settings["grid_step"],
+            "thickness_for_contour": self.thickness_for_contour,
 
             "pic_back": defaults.default["pic_back"],
             "pic_bent": defaults.default["pic_bent"],
