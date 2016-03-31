@@ -111,6 +111,13 @@ class PCXBlock(XBlock):
         scope=Scope.settings
     )
 
+    thickness_for_contour = Integer(
+        display_name=u"Ширина размытия",
+        help=u"",
+        default=25,
+        scope=Scope.settings
+    )
+
 
     has_score = True
 
@@ -365,6 +372,7 @@ class PCXBlock(XBlock):
         self.max_attempts = data.get('max_attempts')
         self.editor_settings["grid_step"] = data.get('grid_step')
         self.correct_picture = data.get('correct_picture')
+        self.thickness_for_contour = data.get('thickness_for_contour')
 
         if data.get('background_image') == "":
             self.background_image = defaults.empty_image
@@ -383,7 +391,7 @@ class PCXBlock(XBlock):
             return student_picture_base64
 
         @check_method
-        def pixel_method(student_picture_base64, correct_picture_base64):
+        def pixel_method(student_picture_base64, correct_picture_base64, thickness):
 
             correct_image = base64_to_image(correct_picture_base64)
             student_image = base64_to_image(student_picture_base64)
@@ -393,7 +401,7 @@ class PCXBlock(XBlock):
             all_gray_student_pixels_count = pixels_count(student_image, line_color_min, line_color_max)
             all_gray_correct_pixels_count = pixels_count(correct_image, line_color_min, line_color_max)
 
-            thickness_contour = 25
+            thickness_contour = thickness
             diff = thresh_callback(student_image, correct_image, thickness_contour, 0)
             diff1 = thresh_callback(correct_image, student_image, thickness_contour, 0)
 
@@ -415,7 +423,7 @@ class PCXBlock(XBlock):
             return grade_global
 
 
-        grade_global = pixel_method(get_pictures(data), self.correct_picture)
+        grade_global = pixel_method(get_pictures(data), self.correct_picture, self.thickness_for_contour)
 
         self.points = grade_global * self.weight / 100
         self.attempts += 1
