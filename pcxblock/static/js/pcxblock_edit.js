@@ -30,10 +30,6 @@ function PCXBlockEdit (runtime, element, data) {
     });
 
 
-    $(".modal-content").css("height", 1070);
-    $(".modal-content").css("overflow", "hidden");
-
-
     function changeBackgroundPicture() {
 
       if (this.files && this.files[0]) {
