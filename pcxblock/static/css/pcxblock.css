@@ -49,19 +49,14 @@
 
 .modal-body {
     padding-left: 16px;
-    padding-bottom: 20px;
     position: relative;
     padding-right: 16px;
 }
 
-.modal-body {
-  max-height: none;
-  overflow: visible;
-}
 
 .modal-footer {
      margin-top: 15px;
-    padding: 30px 20px 20px;
+    padding: 5px 20px 20px;
     text-align: right;
 }
 
