@@ -191,6 +191,7 @@ class PCXBlock(XBlock):
             "grid_step": self.editor_settings["grid_step"],
             "thickness_for_contour": self.thickness_for_contour,
 
+
             "pic_back": self.runtime.local_resource_url(self, 'public/images/pic_back.svg'),
             "pic_bent": self.runtime.local_resource_url(self, 'public/images/pic_bent.svg'),
             "pic_line": self.runtime.local_resource_url(self, 'public/images/pic_line.svg'),
@@ -247,7 +248,7 @@ class PCXBlock(XBlock):
 
 
         self.load_resources(js_urls, css_urls, fragment)
-        fragment.initialize_js('PCXBlockEdit', {'grid_step': self.editor_settings["grid_step"]})
+        fragment.initialize_js('PCXBlockEdit', {'grid_step': self.editor_settings["grid_step"], 'correct_picture': self.correct_picture,})
         
         return fragment
 
