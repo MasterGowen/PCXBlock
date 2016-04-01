@@ -41,3 +41,11 @@
     color: white;
 
 }
+
+ .ge_move {
+  right: 0px;
+ }
+
+ .designer .controls {
+    bottom: -10px !important;
+}

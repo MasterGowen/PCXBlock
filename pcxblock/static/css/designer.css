@@ -126,6 +126,7 @@ div#workzone {
     -ie-transition: opacity ease 0.5s;
     bottom: -25px;
 }
+
 .designer .controls td.act {
     opacity: 1;
 }
@@ -487,9 +488,7 @@ button.close {
     margin-top: 1rem;
  }
 
- .ge_move {
-  right: -25px;
- }
+
 
  .designer-block {
   height: 600px;

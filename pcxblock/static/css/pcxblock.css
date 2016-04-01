@@ -70,3 +70,7 @@
     opacity: 0.1;
     border: 1px solid #e6e6e6;
 }
+
+ .ge_move {
+  right: -25px;
+ }
