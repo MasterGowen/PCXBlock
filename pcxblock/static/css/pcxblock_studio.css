@@ -57,3 +57,7 @@
 .designer-block {
     margin-top: 0em !important;
 }
+
+.buttons {
+    position: relative !important;
+}
