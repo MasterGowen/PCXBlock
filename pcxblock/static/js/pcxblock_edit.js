@@ -2,10 +2,10 @@ function PCXBlockEdit (runtime, element, data) {
 
     onWindowResize();
 
-    $(function() {
+    /*$(function() {
         $(element).find(".all-tools").draggable();
     });
-
+*/
 
     if (window.World.Crafter.GridMode) {
             window.World.Drawer.SetStepGrid(data.grid_step);
