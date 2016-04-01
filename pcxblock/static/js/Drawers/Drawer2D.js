@@ -1,5 +1,5 @@
 ﻿var globalImage;
-var globalOlolo;
+
 var Drawer2D = function (container) {
     container.append("<canvas mode='2d'></canvas>");
     var canvas2D = $('canvas[mode=2d]', container)[0];

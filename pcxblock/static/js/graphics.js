@@ -128,10 +128,11 @@
                 window.World.Draw();
                 $('.ge_gridMode').text("Убрать сетку");
             });
-            $('.ge_task').click(function () {
+            
+            /*$('.ge_task').click(function () {
                 $('.ge_errorModal .modal-title').text('Ваше задание');
                 $('.ge_errorModal').modal('show');
-            });
+            });*/
             
 
         });
