@@ -4,8 +4,9 @@ function PCXBlockEdit (runtime, element, data) {
 
     onWindowResize();
 
-    /*$(function() {
-    });*/
+    $(function() {
+        resultImage = data.correct_picture;
+    });
 
 
     if (window.World.Crafter.GridMode) {
@@ -92,15 +93,10 @@ function PCXBlockEdit (runtime, element, data) {
 
     $(element).find(".save-button").bind("click", function() {
 
-        if(typeof globalImage === "undefined") {
-            console.log("pict",data.correct_picture);
-            resultImage = data.correct_picture;
+        if(typeof globalImage !=== "undefined") {
+            resultImage = globalImage;
         }
-        else{
 
-          resultImage = globalImage;
-        
-        }
 
         var handlerUrl = runtime.handlerUrl(element, "studio_submit"),
             data = {
