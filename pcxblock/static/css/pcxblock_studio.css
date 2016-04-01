@@ -53,3 +53,7 @@
 [class*="view-"] .modal-window .editor-with-buttons.wrapper-comp-settings .list-input.settings-list {
      height: auto !important;
 }
+
+.designer-block {
+    margin-top: 0em !important;
+}
