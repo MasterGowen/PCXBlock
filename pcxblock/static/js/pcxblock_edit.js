@@ -4,10 +4,9 @@ function PCXBlockEdit (runtime, element, data) {
 
     onWindowResize();
 
-    /*$(function() {
-        $(element).find(".all-tools").draggable();
+    $(function() {
+        console.log("correct pic:", data.correct_picture);
     });
-*/
 
     if (window.World.Crafter.GridMode) {
             window.World.Drawer.SetStepGrid(data.grid_step);
