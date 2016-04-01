@@ -369,9 +369,11 @@ td.act i.fa, .ge_zoom i {
   -o-animation-name: shake;
   animation-name: shake;
 }
-.modal {
+
+/*.modal {
     z-index: 1040;
-}
+}*/
+
 /*.bs-example-modal .modal-dialog {
     left: auto;
     margin-left: auto;
