@@ -77,10 +77,10 @@
 
  .tools-drag-handle{
     position: absolute; 
-    right: -10px; 
-    width: 20px; 
+    right: 0px; 
+    width: 30px; 
     height: 50px;
-    background: black;
+   
     z-index: 1040;
     cursor: move;
  }

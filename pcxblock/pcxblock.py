@@ -191,13 +191,13 @@ class PCXBlock(XBlock):
             "grid_step": self.editor_settings["grid_step"],
             "thickness_for_contour": self.thickness_for_contour,
 
-
             "pic_back": self.runtime.local_resource_url(self, 'public/images/pic_back.svg'),
             "pic_bent": self.runtime.local_resource_url(self, 'public/images/pic_bent.svg'),
             "pic_line": self.runtime.local_resource_url(self, 'public/images/pic_line.svg'),
             "pic_rect": self.runtime.local_resource_url(self, 'public/images/pic_rect.svg'),
             "pic_BezierCurve": self.runtime.local_resource_url(self, 'public/images/pic_BezierCurve.svg'),
             "pic_eraser": self.runtime.local_resource_url(self, 'public/images/pic_eraser.svg'),
+            "pic_draggable_handler": self.runtime.local_resource_url(self, 'public/images/pic_draggable_handler.png'),
 
             "main_line": defaults.default["main_line"],
             "dash_dot_line": defaults.default["dash_dot_line"],
