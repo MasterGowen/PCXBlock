@@ -9,7 +9,7 @@
                 if (typeof World !== "undefined") {
                     if (typeof World.Drawer2D !== "undefined") {
                         if (World.Drawer2D.FullScreen) {
-                            World.Drawer2D.canvas.height = $('.designer').height();
+                           // World.Drawer2D.canvas.height = $('.designer').height();
                         } 
                         else {
                             World.Drawer2D.canvas.height = 480;
