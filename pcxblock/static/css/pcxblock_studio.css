@@ -61,4 +61,5 @@
 .buttons {
     width: 100% !important;
     position: relative !important;
+    border-radius: 0px !important;
 }
