@@ -12,7 +12,7 @@
                             World.Drawer2D.canvas.height = $('.designer').height();
                         } 
                         else {
-                            World.Drawer2D.canvas.height = $('.designer-block').height() - 120;
+                            World.Drawer2D.canvas.height = 480;
                             $('.designer').height(World.Drawer2D.canvas.height);
                         }
                         World.Drawer2D.canvas.width = $('.designer').width();
