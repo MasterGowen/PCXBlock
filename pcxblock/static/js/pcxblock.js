@@ -86,7 +86,7 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
     
 
     $(function() {
-        $(element).find(".all-tools").draggable();
+        $(element).find(".all-tools").draggable({ handle: "div.tools-drag-handle"});
     });
 
     $(element).find(".Check").
