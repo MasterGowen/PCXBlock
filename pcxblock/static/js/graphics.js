@@ -96,8 +96,10 @@
                     $('.buttons div').removeClass('active');
                     $(this).addClass('active');
                 }
-                var tool = $(this).attr('rel');
-                Meths[tool]();
+                if (!$(this).hasClass('extend-tool')) {
+                    var tool = $(this).attr('rel');
+                    Meths[tool]();
+                }
             });
 
             $('.ge_gridMode').click(function () {
@@ -126,7 +128,7 @@
             $('body').on('click', '.ge_drawerButtons .ge_saveResult', function () {
                 if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetResultMode(true);
                 window.World.Draw();
-                $('.ge_gridMode').text("Убрать сетку");
+                //$('.ge_gridMode').text("Убрать сетку");
                 onWindowResize();
             });
             
