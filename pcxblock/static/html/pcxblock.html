@@ -47,12 +47,12 @@
         <!--<div class="loader"></div>-->
         <div class='leftMenu'>
 
-            <div class="ge_panel">
+           <!-- <div class="ge_panel">
                 <button class="ge_gridMode">Убрать сетку</button>
                 
-            </div>
+            </div>-->
         </div>
-    <div class="all-tools">
+    <div class="all-tools" style="top: 17px">
         <div class="tools-drag-handle"><img src="{{pic_draggable_handler}}"></div>
         <div class='buttons d2d'>
             <div rel="benttool" title="Ломаная" class="tool"><img src="{{pic_bent}}"/></div>
@@ -62,12 +62,15 @@
             <!--<div id="circle-tool" title="Окружность"><img src="/static/circle.png"/></div>-->
             <div rel="resettool" title="Очистить"><img style="height: 38px;" src="{{pic_eraser}}"/></div>
             <div rel="backtool" title="Отменить"><img style="height: 38px;" src='{{pic_back}}'/></div>
+            <div rel="gridmode" class="ge_gridMode" title="Сетка"><img style="height: 38px;" src='{{pic_grid}}'/></div>
         </div>
+        
         <div class='buttons lines-types' style="display:none">
             <div rel="mainline" title="Основная линия" class="tool"><img src="{{main_line}}"/></div>
             <div rel="dashdotline" title="Штрихпунктирная линия" class="tool"><img src="{{dash_dot_line}}"/></div>
             <div rel="dashedline" title="Штриховая линия" class="tool"><img src="{{dashed_line}}"/></div>
             <div rel="thinline" title="Тонкая линия" class="tool"><img src="{{thin_line}}"/></div>
+            <div rel="gridmode" class="ge_gridMode" title="Сетка"><img style="height: 38px;" src='{{pic_grid}}'/></div>
         </div>
     </div>
 
