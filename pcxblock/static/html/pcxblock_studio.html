@@ -1,13 +1,32 @@
 <p>Для создания или редактирования задания кликните "Редактировать".</p>
 
+<!--
 <div style="height:500px">
     <img id = "pict1" alt="background" src="{{background_image}}">
     <img id = "pict2" alt="correct" src="{{correct_picture}}">
 </div>
+-->
 
+<div style="position: relative; margin-top: 5px;">
+	<img id="background_check_picture"  src="{{background_image}}"></img>
+    <img id="student_check_picture"  src="{{correct_picture}}"></img>
+</div>
 <style type="text/css">
 
-#pict1{	
+
+
+
+#student_check_picture{
+    border: 1px solid #e6e6e6;
+}
+
+#background_check_picture{
+    position: absolute;
+    opacity: 0.1;
+    border: 1px solid #e6e6e6;
+}
+
+/*#pict1{	
 	position: absolute;
     width: 95%;
 }
@@ -19,6 +38,6 @@
     opacity: 0.5;
     border: 1px solid black;
 }
-
+*/
 
 </style>
