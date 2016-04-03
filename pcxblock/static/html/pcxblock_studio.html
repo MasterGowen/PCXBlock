@@ -7,20 +7,29 @@
 </div>
 -->
 
-<div style="position: relative; margin-top: 5px;">
-	<img id="background_check_picture"  src="{{background_image}}"></img>
-    <img id="student_check_picture"  src="{{correct_picture}}"></img>
+
+<div style="" class="pic-container">
+	<img class="background_check_picture"  src="{{background_image}}"></img>
+    <img class="student_check_picture"  src="{{correct_picture}}"></img>
 </div>
 <style type="text/css">
 
 
 
+.pic-container>img {
+    max-width: 100% !important;
+}
 
-#student_check_picture{
+.pic-container {
+    position: relative;
+    margin-top: 5px;
+}
+
+.student_check_picture{
     border: 1px solid #e6e6e6;
 }
 
-#background_check_picture{
+.background_check_picture{
     position: absolute;
     opacity: 0.1;
     border: 1px solid #e6e6e6;
