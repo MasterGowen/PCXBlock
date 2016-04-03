@@ -51,6 +51,7 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
 
     function successFunc (result) {
         closeCompleteAlert();
+        $('#send_answer').text("Проверить")
         $('.attempts', element).text(result.attempts);
         $(element).find(".weight").
         html("Набрано баллов: <me-span class=\"points\"></span>");
@@ -100,6 +101,7 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
         showCompleteAlert();
 
          $('#send_answer').click(function () {
+            $('#send_answer').text("Проверка ...")
 			$.ajax({
             	"type": "POST",
             	"url": handlerUrl,
