@@ -440,8 +440,7 @@ class PCXBlock(XBlock):
             'max_value': self.weight,
         })
 
-        return {"points": self.points, 
-                "attempts": self.attempts,
+        return {"points": self.points,
                 "attempts": self.attempts,
                 "max_attempts": self.max_attempts}
 
