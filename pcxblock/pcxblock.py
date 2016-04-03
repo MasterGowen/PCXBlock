@@ -441,13 +441,14 @@ class PCXBlock(XBlock):
         })
 
         return {"points": self.points,
+                "weight": self.weight,
                 "attempts": self.attempts,
                 "max_attempts": self.max_attempts}
 
 
 def answer_opportunity(self):
     """
-    Возможность ответа (если количество сделанное попыток меньше заданного).
+    Возможность ответа (если количество сделанных попыток меньше заданного).
     """
     if self.max_attempts <= self.attempts and self.max_attempts != 0:
         return False
