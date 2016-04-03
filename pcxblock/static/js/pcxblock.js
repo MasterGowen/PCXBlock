@@ -26,7 +26,12 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
             closeCompleteAlert();
     });
 
-
+    $(element).find(".ge_drawBottomLine").click(function () {
+            $(element).find("button.check").show();
+    });
+    $(element).find(".ge_drawLayers").click(function () {
+            $(element).find("button.check").hide();
+    });
 
 
     $('.show-hide-background').click(function () {
@@ -43,6 +48,7 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
 
 
     $(document).ready(function makeGrid () {
+        $(element).find("button.check").hide();
         if (window.World.Crafter.GridMode) {
             window.World.Drawer.SetStepGrid(data.grid_step);
         }
