@@ -432,6 +432,7 @@ class PCXBlock(XBlock):
         grade_global = pixel_method(get_pictures(data), self.correct_picture, self.thickness_for_contour)
 
         self.points = grade_global * self.weight / 100
+        self.points = int(round(self.points))
         self.attempts += 1
         
 

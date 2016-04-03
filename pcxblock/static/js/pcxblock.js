@@ -55,7 +55,7 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
 
         $('.attempts', element).text(result.attempts);
         $(element).find('.weight').html('Набрано баллов: <me-span class="points"></span>');
-        $('.points', element).text(Math.round(result.points) + ' из ' + result.weight);
+        $('.points', element).text(result.points + ' из ' + result.weight);
 
         /*$('.attempts', element).text(result.attempts);
         $(element).find(".weight").
