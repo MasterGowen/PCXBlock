@@ -93,13 +93,9 @@ function PCXBlockEdit (runtime, element, data) {
 
     $(element).find(".save-button").bind("click", function() {
 
-        if(typeof globalImage === "undefined") {
-            //ПЕРЕПИСАТЬ
+        if(typeof globalImage !== "undefined") {
+            resultImage = globalImage;
         }
-        else{
-          resultImage = globalImage;
-        }
-
 
         var handlerUrl = runtime.handlerUrl(element, "studio_submit"),
             data = {

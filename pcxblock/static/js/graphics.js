@@ -9,7 +9,7 @@
                 if (typeof World !== "undefined") {
                     if (typeof World.Drawer2D !== "undefined") {
                         if (World.Drawer2D.FullScreen) {
-                            World.Drawer2D.canvas.height = $('#workzone').height();
+                            World.Drawer2D.canvas.height = $('.designer-block').height();
                         } 
                         else {
                             World.Drawer2D.canvas.height = 480;
@@ -104,7 +104,6 @@
 
             $('.ge_gridMode').click(function () {
                 var gridMode = window.World.Crafter.GetGridMode();
-               // $(this).text(!gridMode?"Убрать сетку":"Показать сетку");
                 if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetGridMode(!gridMode);
             });
 
@@ -128,15 +127,8 @@
             $('body').on('click', '.ge_drawerButtons .ge_saveResult', function () {
                 if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetResultMode(true);
                 window.World.Draw();
-                //$('.ge_gridMode').text("Убрать сетку");
                 onWindowResize();
             });
-            
-            /*$('.ge_task').click(function () {
-                $('.ge_errorModal .modal-title').text('Ваше задание');
-                $('.ge_errorModal').modal('show');
-            });*/
-            
 
         });
         
@@ -187,8 +179,3 @@
             if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetResultMode(true);
             window.World.Draw();
         };
-        
-        
-        /*var getResult = function () {
-            return window.World.SavedResult;
-        };*/
