@@ -52,11 +52,19 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
     function successFunc (result) {
         closeCompleteAlert();
         $('#send_answer').text("Проверить")
+
         $('.attempts', element).text(result.attempts);
+        $(element).find('.weight').html('Набрано баллов: <me-span class="points"></span>');
+        $('.points', element).text(result.points + ' из ' + result.weight);
+
+        /*$('.attempts', element).text(result.attempts);
         $(element).find(".weight").
         html("Набрано баллов: <me-span class=\"points\"></span>");
-        $(".points", element).text(Math.round(result.points));
-        
+        $(".points", element).text(Math.round(result.points));*/
+
+        if (result.max_attempts && result.max_attempts <= result.attempts) {
+            $('.action', element).html('<p><strong>Попытки исчерпаны</strong></p>')
+        };
 
     }
     

@@ -259,6 +259,7 @@ class PCXBlock(XBlock):
 
         if student_id(self) != "student":
             context = {
+                "points": self.points,
                 "display_name": self.display_name,
                 "weight": self.weight,
                 "question": self.question,
@@ -439,7 +440,10 @@ class PCXBlock(XBlock):
             'max_value': self.weight,
         })
 
-        return {"points": self.points, "attempts": self.attempts}
+        return {"points": self.points, 
+                "attempts": self.attempts,
+                "attempts": self.attempts,
+                "max_attempts": self.max_attempts}
 
 
 def answer_opportunity(self):
