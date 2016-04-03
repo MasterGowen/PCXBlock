@@ -63,11 +63,6 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
         $(element).find('.weight').html('Набрано баллов: <me-span class="points"></span>');
         $('.points', element).text(result.points + ' из ' + result.weight);
 
-        /*$('.attempts', element).text(result.attempts);
-        $(element).find(".weight").
-        html("Набрано баллов: <me-span class=\"points\"></span>");
-        $(".points", element).text(Math.round(result.points));*/
-
         if (result.max_attempts && result.max_attempts <= result.attempts) {
             $('.action', element).html('<p><strong>Попытки исчерпаны</strong></p>')
         };
