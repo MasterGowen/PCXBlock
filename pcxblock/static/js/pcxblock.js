@@ -27,10 +27,10 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
     });
 
     $(element).find(".ge_drawBottomLine").click(function () {
-            $(element).find("button.check").show();
+            $(element).find("button.check").removeClass( "disabled" );
     });
     $(element).find(".ge_drawLayers").click(function () {
-            $(element).find("button.check").hide();
+            $(element).find("button.check").addClass( "disabled" );
     });
 
 
@@ -48,7 +48,7 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
 
 
     $(document).ready(function makeGrid () {
-        $(element).find("button.check").hide();
+       $(element).find("button.check").addClass( "disabled" );
         if (window.World.Crafter.GridMode) {
             window.World.Drawer.SetStepGrid(data.grid_step);
         }
