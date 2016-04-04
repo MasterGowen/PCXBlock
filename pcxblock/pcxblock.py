@@ -428,7 +428,6 @@ class PCXBlock(XBlock):
 
             return grade_global
 
-
         try:
             grade_global = pixel_method(get_pictures(data), self.correct_picture, self.thickness_for_contour)
 
@@ -438,17 +437,13 @@ class PCXBlock(XBlock):
         
 
             self.runtime.publish(self, 'grade', {
-            'value': self.points,
-            'max_value': self.weight,
+                'value': self.points,
+                'max_value': self.weight,
             })
-
-            return {"success_status": "ok",
-                    "points": self.points,
-                    "weight": self.weight,
-                    "attempts": self.attempts,
-                    "max_attempts": self.max_attempts}
+            res = {"success_status": 'ok',"points": self.points, "weight": self.weight, "attempts": self.attempts, "max_attempts": self.max_attempts}
         except:
-            return {"success_status": "error"}
+            res = {"success_status": 'error'}
+        return res
 
 
 def answer_opportunity(self):
