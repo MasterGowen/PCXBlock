@@ -67,9 +67,10 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
                 $('.action', element).html('<p><strong>Попытки исчерпаны</strong></p>')
             };
         }
-        else{
+        if(result.success_status == "error"){
             $('#send_answer').text("Проверить");
             alert("При проверке задания возникла ошибка! Попробуйте обновить страницу.");
+            console.log("При проверке задания возникла ошибка! Попробуйте обновить страницу.");
         }
 
     }
@@ -80,8 +81,7 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
 
         setResultImage();
         $('#student_check_picture').attr("src", resultImage);
-        $('#pcbox').fadeIn('fast', function(){
-        });
+        $('#pcbox').fadeIn('fast', function(){});
         disableScroll();
         onWindowResize();
       });
@@ -106,29 +106,21 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
 
     $(element).find(".Check").
     bind("click", function check () {
-
 	if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetResultMode(true);
         window.World.Draw();
         drawResult();
         
-        
         showCompleteAlert();
+    });
 
-         $('#send_answer').click(function () {
-            $('#send_answer').text("Проверка ...")
-			$.ajax({
-            	"type": "POST",
-            	"url": handlerUrl,
-            	"data": JSON.stringify({"picture": resultImage }),
-            	"success": successFunc,
-            });
-
-    	
-    	});
-
-
-
-      
+    $('#send_answer').click(function () {
+        $('#send_answer').text("Проверка ...")
+        $.ajax({
+            "type": "POST",
+            "url": handlerUrl,
+            "data": JSON.stringify({"picture": resultImage }),
+            "success": successFunc,
+    });
     });
 
 };
