@@ -115,7 +115,7 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
             	"type": "POST",
             	"url": handlerUrl,
             	"data": JSON.stringify({"picture": resultImage }),
-            	"success": successFunc
+            	"success": successFunc,
         	    "error": function (xhr, ajaxOptions, thrownError) {
                             alert(xhr.status);
                             alert(thrownError);
