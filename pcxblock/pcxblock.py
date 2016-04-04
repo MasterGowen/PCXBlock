@@ -403,7 +403,8 @@ class PCXBlock(XBlock):
             student_image = base64_to_image(student_picture_base64)
 
             line_color_min = [0, 0, 0]
-            line_color_max = [200, 200, 200] 
+            line_color_max = [200, 200, 200]
+
             all_gray_student_pixels_count = pixels_count(student_image, line_color_min, line_color_max)
             all_gray_correct_pixels_count = pixels_count(correct_image, line_color_min, line_color_max)
 
@@ -428,19 +429,18 @@ class PCXBlock(XBlock):
 
             return grade_global
 
-        try:
+        
             grade_global = pixel_method(get_pictures(data), self.correct_picture, self.thickness_for_contour)
 
             self.points = grade_global * self.weight / 100
             self.points = int(round(self.points))
             self.attempts += 1
-        
-
+        try:
             self.runtime.publish(self, 'grade', {
                 'value': self.points,
                 'max_value': self.weight,
             })
-            res = {"success_status": 'ok',"points": self.points, "weight": self.weight, "attempts": self.attempts, "max_attempts": self.max_attempts}
+            res = {"success_status": 'ok', "points": self.points, "weight": self.weight, "attempts": self.attempts, "max_attempts": self.max_attempts}
         except:
             res = {"success_status": 'error'}
         return res
