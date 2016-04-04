@@ -442,12 +442,14 @@ class PCXBlock(XBlock):
                 'max_value': self.weight,
             })
 
-            return {"points": self.points,
+            return {
+                    "status": "ok",
+                    "points": self.points,
                     "weight": self.weight,
                     "attempts": self.attempts,
                     "max_attempts": self.max_attempts}
         except:
-            return ('errrorr')
+            return {"status": "error"}
 
 def answer_opportunity(self):
     """

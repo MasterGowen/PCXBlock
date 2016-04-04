@@ -57,15 +57,19 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
 
     function successFunc (result) {
         closeCompleteAlert();
-        $('#send_answer').text("Проверить")
 
-        $('.attempts', element).text(result.attempts);
-        $(element).find('.weight').html('Набрано баллов: <me-span class="points"></span>');
-        $('.points', element).text(result.points + ' из ' + result.weight);
-
-        if (result.max_attempts && result.max_attempts <= result.attempts) {
-            $('.action', element).html('<p><strong>Попытки исчерпаны</strong></p>')
-        };
+        if(result.status == "ok"){
+            $('#send_answer').text("Проверить")
+            $('.attempts', element).text(result.attempts);
+            $(element).find('.weight').html('Набрано баллов: <me-span class="points"></span>');
+            $('.points', element).text(result.points + ' из ' + result.weight);
+            if (result.max_attempts && result.max_attempts <= result.attempts) {
+                $('.action', element).html('<p><strong>Попытки исчерпаны</strong></p>')
+            };
+        }
+        else{
+            console.log("error");
+        }
 
     }
     
@@ -116,9 +120,6 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
             	"url": handlerUrl,
             	"data": JSON.stringify({"picture": resultImage }),
             	"success": successFunc,
-        	    "error": function(error) {
-                    console.log(error);
-            }
             });
 
     	
