@@ -69,8 +69,8 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
         }
         if(result.success_status == "error"){
             $('#send_answer').text("Проверить");
-            alert("При проверке задания возникла ошибка! Попробуйте обновить страницу.");
-            console.log("При проверке задания возникла ошибка! Попробуйте обновить страницу.");
+            alert("При проверке задания возникла ошибка! Обновите страницу.");
+            //console.log("При проверке задания возникла ошибка! Попробуйте обновить страницу.");
         }
 
     }
@@ -109,11 +109,10 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
 	if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetResultMode(true);
         window.World.Draw();
         drawResult();
-        
         showCompleteAlert();
     });
 
-    $('#send_answer').click(function () {
+    $(element).find('#send_answer').click(function () {
         $('#send_answer').text("Проверка ...")
         $.ajax({
             "type": "POST",
