@@ -116,7 +116,12 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
             	"url": handlerUrl,
             	"data": JSON.stringify({"picture": resultImage }),
             	"success": successFunc
-        	});
+        	    "error": function (xhr, ajaxOptions, thrownError) {
+                            alert(xhr.status);
+                            alert(thrownError);
+                    }
+            });
+
     	
     	});
 

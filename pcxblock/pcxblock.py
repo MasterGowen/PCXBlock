@@ -447,7 +447,7 @@ class PCXBlock(XBlock):
                     "attempts": self.attempts,
                     "max_attempts": self.max_attempts}
         except:
-            return {'Some error'}
+            raise 'SomeError'
 
 def answer_opportunity(self):
     """
