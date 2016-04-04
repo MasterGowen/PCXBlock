@@ -69,7 +69,7 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
         }
         else{
             $('#send_answer').text("Проверить");
-            console.log("error");
+            alert("При проверке задания возникла ошибка! Попробуйте обновить страницу.");
         }
 
     }
