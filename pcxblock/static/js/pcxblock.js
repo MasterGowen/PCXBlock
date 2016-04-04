@@ -58,8 +58,8 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
     function successFunc (result) {
         closeCompleteAlert();
 
-        if(result.status == "ok"){
-            $('#send_answer').text("Проверить")
+        if(result.success_status == "ok"){
+            $('#send_answer').text("Проверить");
             $('.attempts', element).text(result.attempts);
             $(element).find('.weight').html('Набрано баллов: <me-span class="points"></span>');
             $('.points', element).text(result.points + ' из ' + result.weight);
@@ -68,6 +68,7 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
             };
         }
         else{
+            $('#send_answer').text("Проверить");
             console.log("error");
         }
 

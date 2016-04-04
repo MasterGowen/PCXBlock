@@ -430,26 +430,26 @@ class PCXBlock(XBlock):
 
 
         try:
-            student_answer = get_pictures(data)
-            grade_global = pixel_method(student_answer, self.correct_picture, self.thickness_for_contour)
+            grade_global = pixel_method(get_pictures(data), self.correct_picture, self.thickness_for_contour)
 
             self.points = grade_global * self.weight / 100
             self.points = int(round(self.points))
             self.attempts += 1
+        
 
             self.runtime.publish(self, 'grade', {
-                'value': self.points,
-                'max_value': self.weight,
+            'value': self.points,
+            'max_value': self.weight,
             })
 
-            return {
-                    "status": "ok",
+            return {"success_status": "ok",
                     "points": self.points,
                     "weight": self.weight,
                     "attempts": self.attempts,
                     "max_attempts": self.max_attempts}
         except:
-            return {"status": "error"}
+            return {"success_status": "error"}
+
 
 def answer_opportunity(self):
     """
