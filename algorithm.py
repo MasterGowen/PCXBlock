@@ -45,6 +45,9 @@ def base64_to_image(base64image):
 
 
 def thresh_callback(stud_pic, correct_pic, thick_cont, thresh):
+    """
+    correct_pic(its upper layer) ON student_pic(its bottom layer)
+    """
     sp = copy.copy(stud_pic)
     cp = copy.copy(correct_pic)
     gray = cv2.cvtColor(cp, cv2.COLOR_BGR2GRAY)
@@ -66,7 +69,7 @@ def isolate_color(image, color_min, color_max):
     upper_color = np.array(color_max, dtype=np.uint8)
     mask = cv2.inRange(hsv, lower_color, upper_color)
     mask = 255 - mask
-    return mask
+    return mask #HSV
 
 
 
