@@ -38,7 +38,7 @@ class PCXBlock(XBlock):
     display_name = String(
         display_name=u"Название",
         help=u"Название задания, которое увидят студенты.",
-        default=u'Compare pics',
+        default=u'Нарисуйте',
         scope=Scope.settings
     )
 
@@ -61,7 +61,7 @@ class PCXBlock(XBlock):
     max_attempts = Integer(
         display_name=u"Максимальное количество попыток",
         help=u"",
-        default=100,
+        default=10,
         scope=Scope.settings
     )
 
@@ -72,15 +72,9 @@ class PCXBlock(XBlock):
     )
 
     points = Integer(
-        display_name=u"Количество баллов студента",
+        display_name=u"Текущее количество баллов студента",
         default=None,
         scope=Scope.user_state
-    )
-
-    grading_threshold = Integer(
-        display_name=u"Количество баллов студента",
-        default=None,
-        scope=Scope.settings
     )
 
     editor_settings = JSONField(
@@ -92,7 +86,6 @@ class PCXBlock(XBlock):
         scope=Scope.settings
     )
     
-
     background_image = String(
         display_name=u"Подложенная картинка",
         default=defaults.background_default,
@@ -112,9 +105,9 @@ class PCXBlock(XBlock):
     )
 
     thickness_for_contour = Integer(
-        display_name=u"Ширина размытия",
+        display_name=u"Ширина размытия контура при проверке",
         help=u"",
-        default=25,
+        default=20,
         scope=Scope.settings
     )
 
