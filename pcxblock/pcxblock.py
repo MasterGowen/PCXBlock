@@ -430,11 +430,11 @@ class PCXBlock(XBlock):
             return grade_global
 
         
-            grade_global = pixel_method(get_pictures(data), self.correct_picture, self.thickness_for_contour)
+        grade_global = pixel_method(get_pictures(data), self.correct_picture, self.thickness_for_contour)
 
-            self.points = grade_global * self.weight / 100
-            self.points = int(round(self.points))
-            self.attempts += 1
+        self.points = grade_global * self.weight / 100
+        self.points = int(round(self.points))
+        self.attempts += 1
         try:
             self.runtime.publish(self, 'grade', {
                 'value': self.points,
