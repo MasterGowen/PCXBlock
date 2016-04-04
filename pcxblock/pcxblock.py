@@ -391,10 +391,10 @@ class PCXBlock(XBlock):
     def student_submit(self, data, suffix=''):
         
         def get_pictures(data):
-            #self.student_picture = data["picture"]
-            #student_picture_base64 = data["picture"]
-            self.student_picture = "lolll"
-            student_picture_base64 = "lololollo"
+            self.student_picture = data["picture"]
+            student_picture_base64 = data["picture"]
+            #self.student_picture = "lolll"
+            #student_picture_base64 = "lololollo"
             
             return student_picture_base64
 
