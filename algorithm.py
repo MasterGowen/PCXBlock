@@ -103,7 +103,6 @@ upper_color = np.array([80, 255, 255], dtype=np.uint8)
 lower_color = np.array([0,100,100], dtype=np.uint8)
 upper_color = np.array([20,255,255], dtype=np.uint8)
 
-
 #blue color HSV
 lower_color = np.array([110,50,50], dtype=np.uint8)
 upper_color = np.array([130,255,255], dtype=np.uint8)
