@@ -123,6 +123,19 @@ class PCXBlock(XBlock):
         scope=Scope.settings
     )
 
+    all_lines = JSONField(
+        display_name=u"Настройки цветов линий",
+        help=u"Настройки цветов линий",
+        default={
+            "main_line": {"min_color": [0, 0, 200], "max_color": [200, 200, 255]},
+            "dash_dot_line": {"min_color": [0, 200, 0], "max_color": [200, 255, 200]},
+            "dashed_line": {"min_color": [200, 0, 0], "max_color": [255, 200, 200]},
+            #"thin_line": {"min_color": [0, 0, 0], "max_color": [0, 0, 0]},
+            "standart_black_line": {"min_color": [0, 0, 0], "max_color": [100, 100, 100]}
+        },
+        scope=Scope.settings
+    )    
+
     has_score = True
 
     @staticmethod
@@ -401,11 +414,7 @@ class PCXBlock(XBlock):
         """
         
         #all line colors ranges
-        all_lines = {"main_line": {"min_color": [0, 0, 200], "max_color": [200, 200, 255]},
-                     "dash_dot_line": {"min_color": [0, 200, 0], "max_color": [200, 255, 200]},
-                     "dashed_line": {"min_color": [200, 0, 0], "max_color": [255, 200, 200]},
-                     #"thin_line": {"min_color": [0, 0, 0], "max_color": [0, 0, 0]},
-                     "standart_black_line": {"min_color": [0, 0, 0], "max_color": [100, 100, 100]}}  
+          
 
 
         def get_pictures(data):
@@ -416,12 +425,12 @@ class PCXBlock(XBlock):
 
         @check_method
         def check_answer(student_image, correct_image):
-            used_lines = detect_used_lines_types(correct_image, all_lines)
+            used_lines = detect_used_lines_types(correct_image, self.all_lines)
             #print used_lines
             sum = 0
             for key in used_lines:
-                image_current_lines_correct = isolate_color(correct_image, all_lines[key]['min_color'], all_lines[key]['max_color'])
-                image_current_lines_student = isolate_color(student_image, all_lines[key]['min_color'], all_lines[key]['max_color'])
+                image_current_lines_correct = isolate_color(correct_image, self.all_lines[key]['min_color'], self.all_lines[key]['max_color'])
+                image_current_lines_student = isolate_color(student_image, self.all_lines[key]['min_color'], self.all_lines[key]['max_color'])
                 points = pixel_method(image_current_lines_student, image_current_lines_correct, self.lines_settings[key]["thickness"])
                 sum = sum + points
             points = sum/len(used_lines)

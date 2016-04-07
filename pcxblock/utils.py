@@ -91,7 +91,7 @@ def pixel_method(student_picture_base64, correct_picture_base64, thickness):
 #list of line types present in the picture
 def detect_used_lines_types(image, all_types):
     used_lines_list = []
-    for line in all_lines.keys():
+    for line in all_types.keys():
         pix_count = pixels_count(image, all_types[line]["min_color"], all_types[line]["max_color"])
         #print line, pix_count
         if(pix_count > 50):
