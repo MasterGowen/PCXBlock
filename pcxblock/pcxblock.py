@@ -119,7 +119,7 @@ class PCXBlock(XBlock):
             "dashed_line": {"thickness": 10, "coefficient": 1},
             "dash_dot_line": {"thickness": 10, "coefficient": 1},
             "standart_black_line": {"thickness": 10, "coefficient": 1}
-        }
+        },
         scope=Scope.settings
     )
 
@@ -422,7 +422,7 @@ class PCXBlock(XBlock):
             for key in used_lines:
                 image_current_lines_correct = isolate_color(correct_image, all_lines[key]['min_color'], all_lines[key]['max_color'])
                 image_current_lines_student = isolate_color(student_image, all_lines[key]['min_color'], all_lines[key]['max_color'])
-                points = pixel_method(image_current_lines_student, image_current_lines_correct, lines_settings[key]["thickness"])
+                points = pixel_method(image_current_lines_student, image_current_lines_correct, self.lines_settings[key]["thickness"])
                 sum = sum + points
             points = sum/len(used_lines)
             return points
