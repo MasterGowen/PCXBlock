@@ -38,7 +38,7 @@ class PCXBlock(XBlock):
     display_name = String(
         display_name=u"Название",
         help=u"Название задания, которое увидят студенты.",
-        default=u'Нарисуйте',
+        default=u'Compare images',
         scope=Scope.settings
     )
 
@@ -420,7 +420,7 @@ class PCXBlock(XBlock):
         thin line: ?
         """
                
-        def get_pictures(data):
+        def get_student_picture(data):
             self.student_picture = data["picture"]
             student_picture_base64 = data["picture"]       
             return student_picture_base64
@@ -428,8 +428,9 @@ class PCXBlock(XBlock):
 
         @check_method
         def check_answer(student_image, correct_image):
+        	student_image = base64_to_image(student_image)
+        	correct_image = base64_to_image(correct_image)
             used_lines = detect_used_lines_types(correct_image, self.all_lines)
-            print used_lines
             sum = 0
             for key in used_lines:
                 image_current_lines_correct = isolate_color(correct_image, self.all_lines[key]['min_color'], self.all_lines[key]['max_color'])
@@ -439,18 +440,19 @@ class PCXBlock(XBlock):
             points = sum/len(used_lines)
             return points
 
-        cp = base64_to_image(self.correct_picture)
-        sp = base64_to_image(get_pictures(data))
-        grade_global = check_answer(sp, cp)
-        self.points = grade_global 
-        #self.points = int(round(self.points)) * self.weight / 100
-        self.attempts += 1
-        self.runtime.publish(self, 'grade', {
-            'value': self.points,
-            'max_value': self.weight,
-        })
-        res = {"success_status": 'ok', "points": self.points, "weight": self.weight, "attempts": self.attempts, "max_attempts": self.max_attempts}
-
+        try:
+            grade_global = check_answer(get_student_picture(data), self.correct_picture)
+            self.points = grade_global
+            self.points = grade_global * self.weight / 100
+            self.points = int(round(self.points))
+            self.attempts += 1
+            self.runtime.publish(self, 'grade', {
+                'value': self.points,
+                'max_value': self.weight,
+            })
+            res = {"success_status": 'ok', "points": self.points, "weight": self.weight, "attempts": self.attempts, "max_attempts": self.max_attempts}
+        except:
+            res = {"success_status": 'error'}
         return res
 
 
