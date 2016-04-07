@@ -206,8 +206,16 @@ class PCXBlock(XBlock):
             "pic_rect": self.runtime.local_resource_url(self, 'public/images/pic_rect.svg'),
             "pic_BezierCurve": self.runtime.local_resource_url(self, 'public/images/pic_BezierCurve.svg'),
             "pic_eraser": self.runtime.local_resource_url(self, 'public/images/pic_eraser.svg'),
-            "pic_grid": self.runtime.local_resource_url(self, 'public/images/pic_grid.svg'),
-            
+            "pic_grid": self.runtime.local_resource_url(self, 'public/images/pic_grid.svg'),   
+
+            "main_line_thickness": self.lines_settings["main_line"]["thickness"],
+            "main_line_coefficient": self.lines_settings["main_line"]["coefficient"],
+            "dashed_line_thickness": self.lines_settings["dashed_line"]["thickness"],
+            "dashed_line_coefficient": self.lines_settings["dashed_line"]["coefficient"],
+            "dash_dot_line_thickness": self.lines_settings["dash_dot_line"]["thickness"],
+            "dash_dot_line_coefficient": self.lines_settings["dash_dot_line"]["coefficient"],
+
+
             "main_line": defaults.default["main_line"],
             "dash_dot_line": defaults.default["dash_dot_line"],
             "dashed_line": defaults.default["dashed_line"],
