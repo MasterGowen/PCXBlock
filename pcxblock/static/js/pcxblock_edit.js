@@ -105,7 +105,6 @@ function PCXBlockEdit (runtime, element, data) {
                 "max_attempts": $(element).find("input[name=max_attempts]").val(),
                 "background_image": $(element).find("input[name=background_image]").val(),
                 "grid_step": $(element).find("input[name=grid_step]").val(),
-                "thickness_for_contour": $(element).find("input[name=thickness_for_contour]").val(),
                 "correct_picture": resultImage
             };
 

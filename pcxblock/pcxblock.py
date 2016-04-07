@@ -24,7 +24,7 @@ from xmodule.util.duedate import get_extended_due_date
 from webob.response import Response
 
 import defaults
-from utils import check_method, pixels_count, base64_to_image, thresh_callback, equality_pixels, isolate_color, pixel_method, detect_used_lines_types
+from utils import check_method, pixels_count, base64_to_image, thresh_callback, isolate_color, pixel_method, detect_used_lines_types
 
 
 class PCXBlock(XBlock):
@@ -101,13 +101,6 @@ class PCXBlock(XBlock):
     correct_picture = String(
         display_name=u"Правильная картинка",
         default=defaults.correct_default,
-        scope=Scope.settings
-    )
-
-    thickness_for_contour = Integer(
-        display_name=u"Ширина размытия контура при проверке",
-        help=u"",
-        default=20,
         scope=Scope.settings
     )
 
@@ -206,7 +199,6 @@ class PCXBlock(XBlock):
             "max_attempts": self.max_attempts,
             "background_image": self.background_image,
             "grid_step": self.editor_settings["grid_step"],
-            "thickness_for_contour": self.thickness_for_contour,
 
             "pic_back": self.runtime.local_resource_url(self, 'public/images/pic_back.svg'),
             "pic_bent": self.runtime.local_resource_url(self, 'public/images/pic_bent.svg'),
@@ -395,7 +387,6 @@ class PCXBlock(XBlock):
         self.max_attempts = data.get('max_attempts')
         self.editor_settings["grid_step"] = data.get('grid_step')
         self.correct_picture = data.get('correct_picture')
-        self.thickness_for_contour = data.get('thickness_for_contour')
 
         if data.get('background_image') == "":
             self.background_image = defaults.empty_image
@@ -412,11 +403,7 @@ class PCXBlock(XBlock):
         dashed line: blue
         thin line: ?
         """
-        
-        #all line colors ranges
-          
-
-
+               
         def get_pictures(data):
             self.student_picture = data["picture"]
             student_picture_base64 = data["picture"]       
