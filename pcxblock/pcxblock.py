@@ -116,6 +116,12 @@ class PCXBlock(XBlock):
         scope=Scope.settings
     )
 
+    """
+    main line: red
+    dash dot line: green
+    dashed line: blue
+    thin line: ?
+    """
     all_lines = JSONField(
         display_name=u"Настройки цветов линий",
         help=u"Настройки цветов линий",
@@ -413,12 +419,6 @@ class PCXBlock(XBlock):
 
     @XBlock.json_handler
     def student_submit(self, data, suffix=''):
-        """
-        main line: red
-        dash dot line: green
-        dashed line: blue
-        thin line: ?
-        """
                
         def get_student_picture(data):
             self.student_picture = data["picture"]
@@ -428,8 +428,8 @@ class PCXBlock(XBlock):
 
         @check_method
         def check_answer(student_image, correct_image):
-        	student_image = base64_to_image(student_image)
-        	correct_image = base64_to_image(correct_image)
+            student_image = base64_to_image(student_image)
+            correct_image = base64_to_image(correct_image)
             used_lines = detect_used_lines_types(correct_image, self.all_lines)
             sum = 0
             for key in used_lines:
