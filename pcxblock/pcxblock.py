@@ -24,7 +24,7 @@ from xmodule.util.duedate import get_extended_due_date
 from webob.response import Response
 
 import defaults
-from utils import check_method, pixels_count, base64_to_image, thresh_callback
+from utils import check_method, pixels_count, base64_to_image, thresh_callback, equality_pixels, isolate_color, pixel_method, detect_used_lines_types
 
 
 class PCXBlock(XBlock):
