@@ -80,7 +80,7 @@ class PCXBlock(XBlock):
     editor_settings = JSONField(
         display_name=u"Настройки редактора",
         help=u"Настройки редактора",
-        default={
+        default=={
             "grid_step": "10"
         },
         scope=Scope.settings
@@ -111,6 +111,17 @@ class PCXBlock(XBlock):
         scope=Scope.settings
     )
 
+    lines_settings = JSONField(
+        display_name=u"Настройки проверки",
+        help=u"Настройки проверки",
+        default={
+            "main_line": {"thickness": 10, "coefficient": 1},
+            "dashed_line": {"thickness": 10, "coefficient": 1},
+            "dash_dot_line": {"thickness": 10, "coefficient": 1},
+            "standart_black_line": {"thickness": 10, "coefficient": 1}
+        }
+        scope=Scope.settings
+    )
 
     has_score = True
 
@@ -382,50 +393,45 @@ class PCXBlock(XBlock):
 
     @XBlock.json_handler
     def student_submit(self, data, suffix=''):
+        """
+        main line: red
+        dash dot line: green
+        dashed line: blue
+        thin line: ?
+        """
         
+        #all line colors ranges
+        all_lines = {"main_line": {"min_color": [0, 0, 200], "max_color": [200, 200, 255]},
+                     "dash_dot_line": {"min_color": [0, 200, 0], "max_color": [200, 255, 200]},
+                     "dashed_line": {"min_color": [200, 0, 0], "max_color": [255, 200, 200]},
+                     #"thin_line": {"min_color": [0, 0, 0], "max_color": [0, 0, 0]},
+                     "standart_black_line": {"min_color": [0, 0, 0], "max_color": [100, 100, 100]}}  
+
+
         def get_pictures(data):
             self.student_picture = data["picture"]
-            student_picture_base64 = data["picture"]
-            #self.student_picture = "lolll"
-            #student_picture_base64 = "lololollo"
-            
+            student_picture_base64 = data["picture"]       
             return student_picture_base64
 
+
         @check_method
-        def pixel_method(student_picture_base64, correct_picture_base64, thickness):
-
-            correct_image = base64_to_image(correct_picture_base64)
-            student_image = base64_to_image(student_picture_base64)
-
-            line_color_min = [0, 0, 0]
-            line_color_max = [200, 200, 200]
-
-            all_gray_student_pixels_count = pixels_count(student_image, line_color_min, line_color_max)
-            all_gray_correct_pixels_count = pixels_count(correct_image, line_color_min, line_color_max)
-
-            thickness_contour = thickness
-            diff = thresh_callback(student_image, correct_image, thickness_contour, 0)
-            diff1 = thresh_callback(correct_image, student_image, thickness_contour, 0)
-
-            gray_wrong_pixels_count1 = pixels_count(diff1, line_color_min, line_color_max)
-            gray_wrong_pixels_count = pixels_count(diff, line_color_min, line_color_max)
-
-            if all_gray_student_pixels_count != 0:
-                grade_first = float((all_gray_student_pixels_count - gray_wrong_pixels_count))/all_gray_student_pixels_count
-                grade_first = grade_first
-
-                grade_second = float((all_gray_correct_pixels_count - gray_wrong_pixels_count1))/all_gray_correct_pixels_count
-                grade_second = grade_second
-
-                grade_global = min(grade_first, grade_second) * max(grade_first, grade_second) * 100
-
-            else:
-                grade_global = 0
-
-            return grade_global
+        def check_answer(student_image, correct_image):
+            used_lines = detect_used_lines_types(correct_image, all_lines)
+            #print used_lines
+            sum = 0
+            for key in used_lines:
+                image_current_lines_correct = isolate_color(correct_image, all_lines[key]['min_color'], all_lines[key]['max_color'])
+                image_current_lines_student = isolate_color(student_image, all_lines[key]['min_color'], all_lines[key]['max_color'])
+                points = pixel_method(image_current_lines_student, image_current_lines_correct, lines_settings[key]["thickness"])
+                sum = sum + points
+            points = sum/len(used_lines)
+            return points
 
         try:
-            grade_global = pixel_method(get_pictures(data), self.correct_picture, self.thickness_for_contour)
+            cp = base64_to_image(self.correct_picture)
+            sp = base64_to_image(get_pictures(data))
+
+            grade_global = check_answer(sp, cp)
 
             self.points = grade_global * self.weight / 100
             self.points = int(round(self.points))
