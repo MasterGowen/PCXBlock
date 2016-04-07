@@ -439,8 +439,8 @@ class PCXBlock(XBlock):
         cp = base64_to_image(self.correct_picture)
         sp = base64_to_image(get_pictures(data))
         grade_global = check_answer(sp, cp)
-        self.points = grade_global * self.weight / 100
-        self.points = int(round(self.points))
+        self.points = grade_global 
+        #self.points = int(round(self.points)) * self.weight / 100
         self.attempts += 1
         self.runtime.publish(self, 'grade', {
             'value': self.points,
