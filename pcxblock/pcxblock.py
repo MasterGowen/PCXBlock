@@ -80,7 +80,7 @@ class PCXBlock(XBlock):
     editor_settings = JSONField(
         display_name=u"Настройки редактора",
         help=u"Настройки редактора",
-        default=={
+        default={
             "grid_step": "10"
         },
         scope=Scope.settings
