@@ -105,6 +105,14 @@ function PCXBlockEdit (runtime, element, data) {
                 "max_attempts": $(element).find("input[name=max_attempts]").val(),
                 "background_image": $(element).find("input[name=background_image]").val(),
                 "grid_step": $(element).find("input[name=grid_step]").val(),
+
+                "main_line_thickness": $(element).find("input[name=main_line_thickness]").val(),
+                "main_line_coefficient": $(element).find("input[name=main_line_coefficient]").val(),
+                "dashed_line_thickness": $(element).find("input[name=dashed_line_thickness]").val(),
+                "dashed_line_coefficient": $(element).find("input[name=dashed_line_coefficient]").val(),
+                "dash_dot_line_thickness": $(element).find("input[name=dash_dot_line_thickness]").val(),
+                "dash_dot_line_coefficient": $(element).find("input[name=dash_dot_line_coefficient]").val(),
+
                 "correct_picture": resultImage
             };
 

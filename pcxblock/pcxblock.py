@@ -396,6 +396,14 @@ class PCXBlock(XBlock):
         self.editor_settings["grid_step"] = data.get('grid_step')
         self.correct_picture = data.get('correct_picture')
 
+        self.lines_settings["main_line"]["thickness"] = data.get('main_line_thickness')
+        self.lines_settings["main_line"]["coefficient"] = data.get('main_line_coefficient')
+        self.lines_settings["dashed_line"]["thickness"] = data.get('dashed_line_thickness')
+        self.lines_settings["dashed_line"]["coefficient"] = data.get('dashed_line_coefficient')
+        self.lines_settings["dash_dot_line"]["thickness"] = data.get('dash_dot_line_thickness')
+        self.lines_settings["dash_dot_line"]["coefficient"] = data.get('dash_dot_line_coefficient')
+
+
         if data.get('background_image') == "":
             self.background_image = defaults.empty_image
         else:
