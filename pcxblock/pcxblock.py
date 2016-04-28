@@ -111,7 +111,7 @@ class PCXBlock(XBlock):
             "main_line": {"thickness": 10, "coefficient": 1},
             "dashed_line": {"thickness": 10, "coefficient": 1},
             "dash_dot_line": {"thickness": 10, "coefficient": 1},
-            "standart_black_line": {"thickness": 10, "coefficient": 1}
+            "thin_line": {"thickness": 10, "coefficient": 1}
         },
         scope=Scope.settings
     )
@@ -231,6 +231,8 @@ class PCXBlock(XBlock):
             "dashed_line_coefficient": self.lines_settings["dashed_line"]["coefficient"],
             "dash_dot_line_thickness": self.lines_settings["dash_dot_line"]["thickness"],
             "dash_dot_line_coefficient": self.lines_settings["dash_dot_line"]["coefficient"],
+            "thin_line_thickness": self.lines_settings["thin_line"]["thickness"],
+            "thin_line_coefficient": self.lines_settings["thin_line"]["coefficient"],
 
 
             "main_line": defaults.default["main_line"],
@@ -322,6 +324,8 @@ class PCXBlock(XBlock):
                 "pic_eraser": self.runtime.local_resource_url(self, 'public/images/pic_eraser.svg'),
                 "pic_draggable_handler": self.runtime.local_resource_url(self, 'public/images/pic_draggable_handler.svg'),
                 "pic_grid": self.runtime.local_resource_url(self, 'public/images/pic_grid.svg'),
+
+
 
                 "main_line": defaults.default["main_line"],
                 "dash_dot_line": defaults.default["dash_dot_line"],
@@ -433,6 +437,9 @@ class PCXBlock(XBlock):
         self.lines_settings["dashed_line"]["coefficient"] = data.get('dashed_line_coefficient')
         self.lines_settings["dash_dot_line"]["thickness"] = data.get('dash_dot_line_thickness')
         self.lines_settings["dash_dot_line"]["coefficient"] = data.get('dash_dot_line_coefficient')
+        self.lines_settings["thin_line"]["thickness"] = data.get('thin_line_thickness')
+        self.lines_settings["thin_line"]["coefficient"] = data.get('thin_line_coefficient')
+        
 
 
         if data.get('background_image') == "":
