@@ -117,20 +117,21 @@ class PCXBlock(XBlock):
     )
 
     """
-    main line: red
-    dash dot line: green
+    main line: green
+    dash dot line: RED
     dashed line: blue
-    thin line: ?
+    thin line: BLACK
     """
     all_lines = JSONField(
         display_name=u"Настройки цветов линий",
         help=u"Настройки цветов линий",
         default={
-            "main_line": {"min_color": [0, 0, 200], "max_color": [200, 200, 255]},
-            "dash_dot_line": {"min_color": [0, 200, 0], "max_color": [200, 255, 200]},
+
+            "main_line": {"min_color": [0, 200, 0], "max_color": [200, 255, 200]},
+            "dash_dot_line": {"min_color": [0, 0, 200], "max_color": [200, 200, 255]},
             "dashed_line": {"min_color": [200, 0, 0], "max_color": [255, 200, 200]},
-            #"thin_line": {"min_color": [0, 0, 0], "max_color": [0, 0, 0]},
-            "standart_black_line": {"min_color": [0, 0, 0], "max_color": [100, 100, 100]}
+            "thin_line": {"min_color": [0, 0, 0], "max_color": [100, 100, 100]},
+            #"standart_black_line": {"min_color": [0, 0, 0], "max_color": [100, 100, 100]}
         },
         scope=Scope.settings
     )    
@@ -205,6 +206,16 @@ class PCXBlock(XBlock):
             "max_attempts": self.max_attempts,
             "background_image": self.background_image,
             "grid_step": self.editor_settings["grid_step"],
+
+
+            "pic_back": self.runtime.local_resource_url(self, 'public/images/pic_parallellink.png'),
+            "pic_back": self.runtime.local_resource_url(self, 'public/images/pic_perpendicularlink.png'),
+            "pic_back": self.runtime.local_resource_url(self, 'public/images/pic_extremelink.png'),
+            "pic_back": self.runtime.local_resource_url(self, 'public/images/pic_linepointlink.png'),
+            "pic_back": self.runtime.local_resource_url(self, 'public/images/pic_intersectionlink.png'),
+            "pic_back": self.runtime.local_resource_url(self, 'public/images/pic_circletool.png'),
+            "pic_back": self.runtime.local_resource_url(self, 'public/images/pic_smoothtool.png'),
+            "pic_back": self.runtime.local_resource_url(self, 'public/images/pic_arctool.png'),
 
             "pic_back": self.runtime.local_resource_url(self, 'public/images/pic_back.svg'),
             "pic_bent": self.runtime.local_resource_url(self, 'public/images/pic_bent.svg'),
@@ -291,6 +302,16 @@ class PCXBlock(XBlock):
                 "empty_image":defaults.empty_image,
                 "grid_step": self.editor_settings["grid_step"],
             
+                "pic_back": self.runtime.local_resource_url(self, 'public/images/pic_parallellink.png'),
+                "pic_back": self.runtime.local_resource_url(self, 'public/images/pic_perpendicularlink.png'),
+                "pic_back": self.runtime.local_resource_url(self, 'public/images/pic_extremelink.png'),
+                "pic_back": self.runtime.local_resource_url(self, 'public/images/pic_linepointlink.png'),
+                "pic_back": self.runtime.local_resource_url(self, 'public/images/pic_intersectionlink.png'),
+                "pic_back": self.runtime.local_resource_url(self, 'public/images/pic_circletool.png'),
+                "pic_back": self.runtime.local_resource_url(self, 'public/images/pic_smoothtool.png'),
+                "pic_back": self.runtime.local_resource_url(self, 'public/images/pic_arctool.png'),
+
+
                 "pic_back": self.runtime.local_resource_url(self, 'public/images/pic_back.svg'),
                 "pic_bent": self.runtime.local_resource_url(self, 'public/images/pic_bent.svg'),
                 "pic_line": self.runtime.local_resource_url(self, 'public/images/pic_line.svg'),

@@ -25,6 +25,8 @@
                     window.World.Objects.Walls = [];
                     window.World.Objects.Beziers = [];
                     window.World.Objects.Normals = [];
+                    window.World.Objects.Arcs = [];
+                    window.World.Objects.Curves = [];
                     return false;
                 },
                 backtool: function () {
@@ -36,9 +38,19 @@
                 },
                 linetool: function() {
                     if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetLineMode();
+                    $('div.linktool[rel^=p]').removeAttr('disabled');
                 },
                 beziertool: function() {
                     if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetBezierMode();
+                },
+                arctool: function () {
+                    if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetArcMode();
+                },
+                circletool: function () {
+                    if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetCircleMode();
+                },
+                smoothtool: function () {
+                    if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetSmoothMode();
                 },
                 walltool: function () {
                     if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetWallMode();
@@ -55,6 +67,21 @@
                 thinline: function () {
                     if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetLineType("thin");
                 },
+                parallellink:function () {
+                    if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetLinkType("parallel");
+                },
+                perpendicularlink: function () {
+                    if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetLinkType("perpendicular");
+                },
+                extremelink: function () {
+                    if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetLinkType("extreme");
+                },
+                linepointlink: function () {
+                    if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetLinkType("linepoint");
+                },
+                intersectionlink: function () {
+                    if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetLinkType("intersection");
+                },
             };
 
             $(document).ready(function () {
@@ -69,6 +96,7 @@
             onWindowResize();
             $('[rel=benttool]').addClass('active');
             $('[rel=mainline]').addClass('active');
+            $('div.linktool[rel^=p]').attr('disabled', true);
             $('.designer .controls').mousedown(function (event) {
                 if (event.stopPropagation)
                     event.stopPropagation();
@@ -94,7 +122,9 @@
             $('.buttons div').click(function () {
                 if ($(this).hasClass('tool')) {
                     $('.buttons div').removeClass('active');
-                    $(this).addClass('active');
+                    $('div.tool').removeClass('active');
+                    $('div.linktool').removeClass('active');
+                    $('div.linktool[rel^=p]').attr('disabled',true);
                 }
                 if (!$(this).hasClass('extend-tool')) {
                     var tool = $(this).attr('rel');
@@ -102,6 +132,15 @@
                 }
             });
 
+            $('div.linktool').click(function () {
+                if ($(this).hasClass('linktool') && $(this).not('[disabled]')) {
+                    $('div.linktool').removeClass('active');
+                    $(this).addClass('active');
+                }
+                var tool = $(this).attr('rel');
+                Meths[tool]();
+            });
+            
             $('.ge_gridMode').click(function () {
                 var gridMode = window.World.Crafter.GetGridMode();
                 if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetGridMode(!gridMode);
@@ -133,7 +172,7 @@
         });
         
         
-        document.cancelFullScreen = document.cancelFullScreen || document.webkitCancelFullScreen || document.mozCancelFullScreen;
+         document.cancelFullScreen = document.cancelFullScreen || document.webkitCancelFullScreen || document.mozCancelFullScreen;
 
         function onFullScreenEnter() {
             window.World.Drawer.fullModeScreen(1);
@@ -172,8 +211,7 @@
             document.cancelFullScreen();
             document.querySelector('#' + id + ' .ge_zoom').onclick = function () {
                 enterFullscreen(id);
-            };
-            onWindowResize();
+            }
         }
         var drawResult = function () {
             if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetResultMode(true);

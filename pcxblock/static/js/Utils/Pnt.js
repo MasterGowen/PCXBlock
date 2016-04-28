@@ -58,5 +58,23 @@ Pnt.prototype = {
     mult: function(p) {
         if (typeof p === "undefined") return this;
         return new Pnt(this.X * p, this.Y * p);
-    }
+    },
+    transformToPolar: function (center) {
+        center = center || new Pnt();
+        var x = this.X - center.X, y = this.Y - center.Y;
+        var r = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
+        var alpha = Math.atan(y / x);
+        if (y < 0) {
+            alpha = 2 * Math.PI - alpha;
+        }
+        return new PolarPnt(r, alpha);
+    },
+};
+PolarPnt = function (r, theta) {
+    this.R = r || 0;
+    this.Angle = theta || 0;
+    return this;
+};
+PolarPnt.prototype = {
+    constructor: PolarPnt,
 };

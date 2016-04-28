@@ -1,6 +1,4 @@
-﻿var globalImage;
-
-var Drawer2D = function (container) {
+﻿var Drawer2D = function (container) {
     container.append("<canvas mode='2d'></canvas>");
     var canvas2D = $('canvas[mode=2d]', container)[0];
     canvas2D.width = container.width();
@@ -35,77 +33,160 @@ Drawer2D.prototype.SetStepGrid = function (val) {
     }
 };
 Drawer2D.prototype.Draw = function (objects, currentColor) {
-    var objs = objects.Walls;
     this.Start();
-    var walls = objs.filter(function (a) { return a.type === "wall"; });
 	var $this = this;
-	var toPnt = function(a) {return a.sub($this.Offset).mult(1/$this.Scale);};
+	var toPnt = function (a) { return a.sub($this.Offset).mult(1 / $this.Scale); };
+    // функция отрисовки точки
 	var drawEllipse = function(obj, r, color) {
 		var ctx = $this.canvas.getContext("2d");
 		ctx.save();
 		ctx.fillStyle = color;
 		ctx.beginPath();
-		var $new = toPnt(obj);
-		ctx.arc($new.X, $new.Y, r/ $this.Scale, 0, 2*Math.PI);
+		var nPnt = toPnt(obj);
+		ctx.arc(nPnt.X, nPnt.Y, r / $this.Scale, 0, 2 * Math.PI);
 		ctx.fill();
 		ctx.restore();
 	};
-
+    // линейка
+	if (!$.isEmptyObject(objects.Ruler) && !window.World.Crafter.ResultMode) {
+	    var canva = $this.canvas.getContext("2d");
+	    canva.save();
+	    canva.beginPath();
+	    var lstart = toPnt(objects.Ruler.Start), lend = toPnt(objects.Ruler.End);
+	    canva.moveTo(lstart.X, lstart.Y);
+	    canva.lineTo(lend.X, lend.Y);
+	    canva.strokeStyle = "rgba(255,182,0, 1)";
+	    canva.lineWidth = objects.Ruler.Width / $this.Scale;
+	    canva.stroke();
+	    canva.restore();
+	    if (typeof $this.Message !== "undefined" && typeof $this.mouse !== "undefined") {
+	        canva.font = "20px Arial";
+	        var msg = $this.Message;
+	        var mtrcs = canva.measureText(msg);
+	        canva.fillStyle = "rgba(0,0,0,1)"; // text color
+	        canva.fillText(msg, ($this.mouse.X - $this.Offset.X) / $this.Scale, ($this.mouse.Y - $this.Offset.Y - 10) / $this.Scale);
+	    }
+	}
+    // временная точка привязки
+	if (!$.isEmptyObject(objects.TempLinkPoint) && !window.World.Crafter.ResultMode && !window.World.Crafter.PlotMode) {
+	    drawEllipse(objects.TempLinkPoint, 5, '#fa0519');
+	}
+    // точки привязок
+    objects.LinkPoints.forEach(function(a) {
+        drawEllipse(a, 5, '#fa0519');
+    });
+    // простые линии
     objects.Normals.forEach(function (a) {
         var ctx = $this.canvas.getContext("2d");
         ctx.save();
         ctx.beginPath();
         var col = currentColor || "rgba(255,182,0, 1)";
-        if (window.World.Crafter.PlotMode) {
+        a.Width = window.Config.Wall.width;
+        if (window.World.Crafter.PlotMode && !window.World.Crafter.ResultMode) {
             switch (a.LineType) {
                 case "dashdot": ctx.setLineDash([15, 5, 1, 5]); col = "rgba(0,0,0,1)"; break;
                 case "main": col = "rgba(0,0,0,1)"; break;
                 case "dashed": ctx.setLineDash([15, 5]); col = "rgba(0,0,0,1)"; break;
                 case "thin": a.Width = 0.7; col = "rgba(0,0,0,1)"; break;
             }
-        }
-        if (window.World.Crafter.ResultMode) {
-            if (a.LineType) {
-                var last = toPnt(a.Start), $new = toPnt(a.End);
-                ctx.moveTo(last.X, last.Y);
-                ctx.lineTo($new.X, $new.Y);
-                if (typeof window.World.Crafter.walls !== 'undefined' && window.World.Crafter.walls.filter(function (d) { return d.Eq(a); }).length > 0)
-                    col = currentColor || "rgba(237, 108, 2, 1)";
-                ctx.strokeStyle = col;
-                ctx.lineWidth = a.Width / $this.Scale;
-                ctx.stroke();
-                ctx.restore();
+        } else if (window.World.Crafter.ResultMode) {
+            switch (a.LineType) {
+                case "dashdot": col = "rgba(255,0,0,1)"; break;
+                case "main": col = "rgba(0,255,0,1)"; break;
+                case "dashed": col = "rgba(0,0,255,1)"; break;
+                case "thin": col = "rgba(0,0,0,1)"; break;
             }
-        } else {
+        }
+        if (!window.World.Crafter.ResultMode || (window.World.Crafter.ResultMode && a.LineType)) {
             var last = toPnt(a.Start), $new = toPnt(a.End);
             ctx.moveTo(last.X, last.Y);
             ctx.lineTo($new.X, $new.Y);
-            if (typeof window.World.Crafter.walls !== 'undefined' && window.World.Crafter.walls.filter(function (d) { return d.Eq(a); }).length > 0)
-                col = currentColor || "rgba(237, 108, 2, 1)";
             ctx.strokeStyle = col;
             ctx.lineWidth = a.Width / $this.Scale;
             ctx.stroke();
             ctx.restore();
+        }
+        if (!window.World.Crafter.ResultMode) {
             drawEllipse(a.Start, 1, currentColor || '#ED6C02');
             drawEllipse(a.End, 1, currentColor || '#ED6C02');
+            if (typeof $this.Message !== "undefined" && typeof $this.mouse !== "undefined") {
+                ctx.font = "20px Arial";
+                var msg = $this.Message;
+                var mtrcs = ctx.measureText(msg);
+                ctx.fillStyle = "rgba(0,0,0,1)"; // text color
+                ctx.fillText(msg, ($this.mouse.X - $this.Offset.X) / $this.Scale, ($this.mouse.Y - $this.Offset.Y - 10) / $this.Scale);
+            }
         }
     });
-
-    objects.Beziers.forEach(function (a) {
+    // простые дуги и окружности
+    objects.Arcs.forEach(function (a) {
         var ctx = $this.canvas.getContext("2d");
         ctx.save();
         ctx.beginPath();
         var col = currentColor || "rgba(255,182,0, 1)";
-        if (window.World.Crafter.PlotMode) {
+        a.Width = window.Config.Wall.width;
+        if (window.World.Crafter.PlotMode && !window.World.Crafter.ResultMode) {
             switch (a.LineType) {
                 case "dashdot": ctx.setLineDash([15, 5, 1, 5]); col = "rgba(0,0,0,1)"; break;
                 case "main": col = "rgba(0,0,0,1)"; break;
                 case "dashed": ctx.setLineDash([15, 5]); col = "rgba(0,0,0,1)"; break;
                 case "thin": a.Width = 0.5; col = "rgba(0,0,0,1)"; break;
             }
+        } else if (window.World.Crafter.ResultMode) {
+            switch (a.LineType) {
+                case "dashdot": col = "rgba(255,0,0,1)"; break;
+                case "main": col = "rgba(0,255,0,1)"; break;
+                case "dashed": col = "rgba(0,0,255,1)"; break;
+                case "thin": col = "rgba(0,0,0,1)"; break;
+            }
         }
-        if (window.World.Crafter.ResultMode) {
-            if (a.LineType) {
+        if (!window.World.Crafter.ResultMode || (window.World.Crafter.ResultMode && a.LineType)) {
+            var center = toPnt(a.Center), start = toPnt(a.Start), end = toPnt(a.End);
+            var radius = center.length(start);
+            //        var direction = (end.X - center.X) * (start.Y - center.Y) - (end.Y - center.Y) * (start.X - center.X);
+            var startAngle = 0, endAngle = 2 * Math.PI;
+            if (!a.IsCircle) {
+                startAngle = Math.acos((start.X - center.X) / (center.length(start) + 1)), endAngle = Math.acos((end.X - center.X) / (center.length(end) + 1));
+                if (start.Y < center.Y) {
+                    startAngle = 2 * Math.PI - startAngle;
+                }
+                if (end.Y < center.Y) {
+                    endAngle = 2 * Math.PI - endAngle;
+                }
+            }
+            ctx.arc(center.X, center.Y, radius, startAngle, endAngle);
+            ctx.strokeStyle = col;
+            ctx.lineWidth = a.Width / $this.Scale;
+            ctx.stroke();
+            if (Math.abs(startAngle - endAngle) < 0.01) {
+                ctx.closePath();
+            }
+            ctx.restore();
+        }
+    });
+    // кривые Безье
+    objects.Beziers.forEach(function (a) {
+        var ctx = $this.canvas.getContext("2d");
+        ctx.save();
+        ctx.beginPath();
+        var col = currentColor || "rgba(255,182,0, 1)";
+        a.Width = window.Config.Wall.width;
+        if (window.World.Crafter.PlotMode && !window.World.Crafter.ResultMode) {
+            switch (a.LineType) {
+                case "dashdot": ctx.setLineDash([15, 5, 1, 5]); col = "rgba(0,0,0,1)"; break;
+                case "main": col = "rgba(0,0,0,1)"; break;
+                case "dashed": ctx.setLineDash([15, 5]); col = "rgba(0,0,0,1)"; break;
+                case "thin": a.Width = 0.5; col = "rgba(0,0,0,1)"; break;
+            }
+        } else if (window.World.Crafter.ResultMode) {
+            switch (a.LineType) {
+                case "dashdot": col = "rgba(255,0,0,1)"; break;
+                case "main": col = "rgba(0,255,0,1)"; break;
+                case "dashed": col = "rgba(0,0,255,1)"; break;
+                case "thin": col = "rgba(0,0,0,1)"; break;
+            }
+        }
+        if (!window.World.Crafter.ResultMode || (window.World.Crafter.ResultMode && a.LineType)) {
                 var start = toPnt(a.Start), cpoint1 = toPnt(a.FirstControlPoint), cpoint2 = toPnt(a.SecondControlPoint), end = toPnt(a.End);
                 ctx.moveTo(start.X, start.Y);
                 ctx.bezierCurveTo(cpoint1.X, cpoint1.Y, cpoint2.X, cpoint2.Y, end.X, end.Y);
@@ -113,40 +194,79 @@ Drawer2D.prototype.Draw = function (objects, currentColor) {
                 ctx.lineWidth = a.Width / $this.Scale;
                 ctx.stroke();
                 ctx.restore();
-            }
-        } else {
-            var start = toPnt(a.Start), cpoint1 = toPnt(a.FirstControlPoint), cpoint2 = toPnt(a.SecondControlPoint), end = toPnt(a.End);
-            ctx.moveTo(start.X, start.Y);
-            ctx.bezierCurveTo(cpoint1.X, cpoint1.Y, cpoint2.X, cpoint2.Y, end.X, end.Y);
-            ctx.strokeStyle = col;
-            ctx.lineWidth = a.Width / $this.Scale;
-            ctx.stroke();
-            ctx.restore();
+        }
+        if (!window.World.Crafter.ResultMode && !window.World.Crafter.PlotMode) {
             drawEllipse(a.Start, 1, currentColor || '#ED6C02');
             drawEllipse(a.End, 1, currentColor || '#ED6C02');
             drawEllipse(a.FirstControlPoint, 1, currentColor || 'rgba(255,182,0, 1)');
             drawEllipse(a.SecondControlPoint, 1, currentColor || 'rgba(255,182,0, 1)');
         }
     });
-
-    walls.forEach(function(a) {
+    // сглаженные прямые
+    objects.Curves.forEach(function (a) {
+        var ctx = $this.canvas.getContext("2d");
+        ctx.save();
+        ctx.beginPath();
+        var col = currentColor || "rgba(255,182,0, 1)";
+        a.Width = window.Config.Wall.width;
+        if (window.World.Crafter.PlotMode && !window.World.Crafter.ResultMode) {
+            switch (a.LineType) {
+                case "dashdot": ctx.setLineDash([15, 5, 1, 5]); col = "rgba(0,0,0,1)"; break;
+                case "main": col = "rgba(0,0,0,1)"; break;
+                case "dashed": ctx.setLineDash([15, 5]); col = "rgba(0,0,0,1)"; break;
+                case "thin": a.Width = 0.5; col = "rgba(0,0,0,1)"; break;
+            }
+        } else if (window.World.Crafter.ResultMode) {
+            switch (a.LineType) {
+                case "dashdot": col = "rgba(255,0,0,1)"; break;
+                case "main": col = "rgba(0,255,0,1)"; break;
+                case "dashed": col = "rgba(0,0,255,1)"; break;
+                case "thin": col = "rgba(0,0,0,1)"; break;
+            }
+        }
+        var arr = [];
+        if (!window.World.Crafter.ResultMode || (window.World.Crafter.ResultMode && a.LineType)) {
+                a.Points.map(function(v) {
+                    return toPnt(v);
+                }).forEach(function(item) {
+                    arr.push(item.X, item.Y);
+                });
+                ctx.drawCurve(arr);
+                ctx.strokeStyle = col;
+                ctx.lineWidth = a.Width / $this.Scale;
+                ctx.stroke();
+                ctx.restore();
+            }
+        if (!window.World.Crafter.ResultMode && !window.World.Crafter.PlotMode) {
+            a.Points.forEach(function(item) {
+                drawEllipse(item, 1, currentColor || '#ED6C02');
+            });
+        }
+    });
+    // ломанные и прямоугольники
+    objects.Walls.forEach(function(a) {
 		var ctx = $this.canvas.getContext("2d");
 		ctx.save();
 		ctx.beginPath();
 		var last = toPnt(a.Start), $new = toPnt(a.End);
 		var col = currentColor || "rgba(255,182,0, 1)";
-		if (typeof window.World.Crafter.walls !== 'undefined' && window.World.Crafter.walls.filter(function (d) { return d.Eq(a); }).length > 0)
-		    col = currentColor || "rgba(237, 108, 2, 1)";
-		if (window.World.Crafter.PlotMode) {
-		    switch(a.LineType) {
+		a.Width = window.Config.Wall.width;
+		if (window.World.Crafter.PlotMode && !window.World.Crafter.ResultMode) {
+		    switch (a.LineType) {
 		        case "dashdot": ctx.setLineDash([15, 5, 1, 5]); col = "rgba(0,0,0,1)"; break;
 		        case "main": col = "rgba(0,0,0,1)"; break;
 		        case "dashed": ctx.setLineDash([15, 5]); col = "rgba(0,0,0,1)"; break;
 		        case "thin": a.Width = 0.5; col = "rgba(0,0,0,1)"; break;
 		    }
+		} else if (window.World.Crafter.ResultMode) {
+		    switch (a.LineType) {
+		        case "dashdot": col = "rgba(255,0,0,1)"; break;
+		        case "main": col = "rgba(0,255,0,1)"; break;
+		        case "dashed": col = "rgba(0,0,255,1)"; break;
+		        case "thin": col = "rgba(0,0,0,1)"; break;
+		    }
 		}
-        if (window.World.Crafter.ResultMode) {
-            if (a.LineType) {
+		if (!window.World.Crafter.ResultMode || (window.World.Crafter.ResultMode && a.LineType)) {
                 ctx.moveTo(last.X, last.Y);
                 ctx.lineTo($new.X, $new.Y);
                 ctx.strokeStyle = col;
@@ -154,29 +274,28 @@ Drawer2D.prototype.Draw = function (objects, currentColor) {
                 ctx.stroke();
                 ctx.restore();
             }
-        } else {
-            ctx.moveTo(last.X, last.Y);
-            ctx.lineTo($new.X, $new.Y);
-		    ctx.strokeStyle = col;
-            ctx.lineWidth = a.Width / $this.Scale;
-		    ctx.stroke();
-		    ctx.restore();
+		if (!window.World.Crafter.ResultMode && !window.World.Crafter.PlotMode) {
             drawEllipse(a.Start, 1, currentColor || '#ED6C02');
             drawEllipse(a.End, 1, currentColor || '#ED6C02');
+            if (typeof $this.Message !== "undefined" && typeof $this.mouse !== "undefined") {
+                ctx.font = "20px Arial";
+                var msg = $this.Message;
+                var mtrcs = ctx.measureText(msg);
+                ctx.fillStyle = "rgba(0,0,0,1)"; // text color
+                ctx.fillText(msg, ($this.mouse.X - $this.Offset.X) / $this.Scale, ($this.mouse.Y - $this.Offset.Y - 10) / $this.Scale);
+            }
         }
-    }); 
+    });
     if (window.World.Crafter.ResultMode) {
         var dataURL = $this.canvas.toDataURL();
         window.World.SavedResult = dataURL;
-        globalImage = dataURL;
-        //this.DownloadCanvas(dataURL, 'result.png');
+        this.DownloadCanvas(dataURL, 'result.png');
         window.World.Crafter.SetResultMode(false);
         $this.canvas.width = $this.canvas.OldWidth;
         $this.canvas.height = $this.canvas.OldHeight;
         this.Scale = 1;
         window.World.Crafter.SetGridMode(true);
-    }   
-
+    }
     this.End();
 };
 Drawer2D.prototype.fullModeScreen = function (flag) {
@@ -321,3 +440,108 @@ Drawer2D.prototype.MoveBottom = function () {
     }
     this.Offset.Y += this.OffsetStep * this.Scale;
 };
+// smooth line by points
+if (CanvasRenderingContext2D != 'undefined') {
+    CanvasRenderingContext2D.prototype.drawCurve =
+        function (pts, tension, isClosed, numOfSegments, showPoints) {
+            drawCurve(this, pts, tension, isClosed, numOfSegments, showPoints);
+        };
+}
+function drawCurve(ctx, ptsa, tension, isClosed, numOfSegments, showPoints) {
+
+    showPoints = showPoints ? showPoints : false;
+
+    ctx.beginPath();
+
+    drawLines(ctx, getCurvePoints(ptsa, tension, isClosed, numOfSegments));
+
+    if (showPoints) {
+        ctx.stroke();
+        ctx.beginPath();
+        for (var i = 0; i < ptsa.length - 1; i += 2)
+            ctx.rect(ptsa[i] - 2, ptsa[i + 1] - 2, 4, 4);
+    }
+}
+function getCurvePoints(pts, tension, isClosed, numOfSegments) {
+
+    // use input value if provided, or use a default value   
+    tension = (typeof tension != 'undefined') ? tension : 0.5;
+    isClosed = isClosed ? isClosed : false;
+    numOfSegments = numOfSegments ? numOfSegments : 16;
+
+    var _pts = [], res = [],    // clone array
+        x, y,           // our x,y coords
+        t1x, t2x, t1y, t2y, // tension vectors
+        c1, c2, c3, c4,     // cardinal points
+        st, t, i;       // steps based on num. of segments
+
+    // clone array so we don't change the original
+    //
+    _pts = pts.slice(0);
+
+    // The algorithm require a previous and next point to the actual point array.
+    // Check if we will draw closed or open curve.
+    // If closed, copy end points to beginning and first points to end
+    // If open, duplicate first points to befinning, end points to end
+    if (isClosed) {
+        _pts.unshift(pts[pts.length - 1]);
+        _pts.unshift(pts[pts.length - 2]);
+        _pts.unshift(pts[pts.length - 1]);
+        _pts.unshift(pts[pts.length - 2]);
+        _pts.push(pts[0]);
+        _pts.push(pts[1]);
+    }
+    else {
+        _pts.unshift(pts[1]);   //copy 1. point and insert at beginning
+        _pts.unshift(pts[0]);
+        _pts.push(pts[pts.length - 2]); //copy last point and append
+        _pts.push(pts[pts.length - 1]);
+    }
+
+    // ok, lets start..
+
+    // 1. loop goes through point array
+    // 2. loop goes through each segment between the 2 pts + 1e point before and after
+    for (i = 2; i < (_pts.length - 4) ; i += 2) {
+        for (t = 0; t <= numOfSegments; t++) {
+
+            // calc tension vectors
+            t1x = (_pts[i + 2] - _pts[i - 2]) * tension;
+            t2x = (_pts[i + 4] - _pts[i]) * tension;
+
+            t1y = (_pts[i + 3] - _pts[i - 1]) * tension;
+            t2y = (_pts[i + 5] - _pts[i + 1]) * tension;
+
+            // calc step
+            st = t / numOfSegments;
+
+            // calc cardinals
+            c1 = 2 * Math.pow(st, 3) - 3 * Math.pow(st, 2) + 1;
+            c2 = -(2 * Math.pow(st, 3)) + 3 * Math.pow(st, 2);
+            c3 = Math.pow(st, 3) - 2 * Math.pow(st, 2) + st;
+            c4 = Math.pow(st, 3) - Math.pow(st, 2);
+
+            // calc x and y cords with common control vectors
+            x = c1 * _pts[i] + c2 * _pts[i + 2] + c3 * t1x + c4 * t2x;
+            y = c1 * _pts[i + 1] + c2 * _pts[i + 3] + c3 * t1y + c4 * t2y;
+
+            //store points in array
+            res.push(x);
+            res.push(y);
+
+        }
+    }
+
+    return res;
+}
+function drawLines(ctx, pts) {
+    ctx.moveTo(pts[0], pts[1]);
+    for (i = 2; i < pts.length - 1; i += 2) ctx.lineTo(pts[i], pts[i + 1]);
+}
+/*example
+var myPoints = [10,10, 40,30, 100,10, 200, 100, 200, 50, 250, 120]; //minimum two points
+var tension = 1;
+drawCurve(ctx, myPoints); //default tension=0.5
+drawCurve(ctx, myPoints, tension);
+ctx.drawCurve(myPoints);
+*/

@@ -4,12 +4,13 @@ window.WorldClass = function (container) {
     this.Id = new Guid().Value;
     this.Objects = {
         Walls: [],
-        Areas: [],
-        Objs: [],
-        Line: [],
-        Elements: [],
         Normals: [],
         Beziers: [],
+        Curves:[],
+        Arcs: [],
+        Ruler: {},
+        LinkPoints: [],
+        TempLinkPoint:{},
         SavedResult:''
     };
     this.Events = [];
@@ -22,7 +23,6 @@ window.WorldClass = function (container) {
         this.SetMode(this.mode);
         this.Behaviour = new Behaviour(container[0]);
         var pressedKeys = [];
-        var border = 40;
         var $this = this;
         this.shiftKey = false;
         this.Behaviour.Subscribe(function(e) {
