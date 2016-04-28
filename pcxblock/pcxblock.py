@@ -111,7 +111,7 @@ class PCXBlock(XBlock):
             "main_line": {"thickness": 10, "coefficient": 1},
             "dashed_line": {"thickness": 10, "coefficient": 1},
             "dash_dot_line": {"thickness": 10, "coefficient": 1},
-            "thin_line": {"thickness": 10, "coefficient": 1}
+            "thin_line": {"thickness": 10, "coefficient": 1},
         },
         scope=Scope.settings
     )
@@ -231,7 +231,7 @@ class PCXBlock(XBlock):
             "dashed_line_coefficient": self.lines_settings["dashed_line"]["coefficient"],
             "dash_dot_line_thickness": self.lines_settings["dash_dot_line"]["thickness"],
             "dash_dot_line_coefficient": self.lines_settings["dash_dot_line"]["coefficient"],
-            
+
             "thin_line_thickness": self.lines_settings["thin_line"]["thickness"],
             "thin_line_coefficient": self.lines_settings["thin_line"]["coefficient"],
 
