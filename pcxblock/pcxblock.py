@@ -463,7 +463,7 @@ class PCXBlock(XBlock):
                 image_current_lines_student = isolate_color(student_image, self.all_lines[key]['min_color'], self.all_lines[key]['max_color'])
                 points = pixel_method(image_current_lines_student, image_current_lines_correct, self.lines_settings[key]["thickness"])
                 sum = sum + points
-                print print("Points for line type: ", key)
+                print ("Points for line type: ", points)
             points = sum/len(used_lines)
             return points
 
