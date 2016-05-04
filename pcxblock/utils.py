@@ -74,7 +74,7 @@ def pixel_method(student_picture_base64, correct_picture_base64, thickness):
     all_color_student_pixels_count = pixels_count(student_image, line_color_min, line_color_max)
     all_color_correct_pixels_count = pixels_count(correct_image, line_color_min, line_color_max)
     print("thickness: ", thickness)
-    thickness_contour = 20
+    thickness_contour = thickness
     diff = thresh_callback(student_image, correct_image, thickness_contour, 0)
     diff1 = thresh_callback(correct_image, student_image, thickness_contour, 0)
     gray_wrong_pixels_count1 = pixels_count(diff1, line_color_min, line_color_max)
