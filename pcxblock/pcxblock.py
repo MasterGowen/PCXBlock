@@ -475,19 +475,19 @@ class PCXBlock(XBlock):
             points = sum/len(used_lines)
             return points
 
-        try:
-            grade_global = check_answer(get_student_picture(data), self.correct_picture)
-            self.points = grade_global
-            self.points = grade_global * self.weight / 100
-            self.points = int(round(self.points))
-            self.attempts += 1
-            self.runtime.publish(self, 'grade', {
-                'value': self.points,
-                'max_value': self.weight,
-            })
-            res = {"success_status": 'ok', "points": self.points, "weight": self.weight, "attempts": self.attempts, "max_attempts": self.max_attempts}
-        except:
-            res = {"success_status": 'error'}
+        #try:
+        grade_global = check_answer(get_student_picture(data), self.correct_picture)
+        self.points = grade_global
+        self.points = grade_global * self.weight / 100
+        self.points = int(round(self.points))
+        self.attempts += 1
+        self.runtime.publish(self, 'grade', {
+            'value': self.points,
+            'max_value': self.weight,
+        })
+        res = {"success_status": 'ok', "points": self.points, "weight": self.weight, "attempts": self.attempts, "max_attempts": self.max_attempts}
+        #except:
+        #    res = {"success_status": 'error'}
         return res
 
 
