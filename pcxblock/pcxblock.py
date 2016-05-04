@@ -108,13 +108,28 @@ class PCXBlock(XBlock):
         display_name=u"Настройки проверки",
         help=u"Настройки проверки",
         default={
-            "main_line": {"thickness": 10, "coefficient": 1},
-            "dashed_line": {"thickness": 10, "coefficient": 1},
-            "dash_dot_line": {"thickness": 10, "coefficient": 1},
-            "thin_line": {"thickness": 10, "coefficient": 1},
+            "main_line": {"thickness": 20, "coefficient": 1},
+            "dashed_line": {"thickness": 20, "coefficient": 1},
+            "dash_dot_line": {"thickness": 20, "coefficient": 1},
+            "thin_line": {"thickness": 20, "coefficient": 1},
         },
         scope=Scope.settings
     )
+
+    links_settings = JSONField(
+        display_name=u"Настройки привязок",
+        help=u"Настройки привязок",
+        default={"thickness": 20, "coefficient": 1},
+        scope=Scope.settings
+    )
+
+    links_color = JSONField(
+        display_name=u"Настройки цвета привязок",
+        help=u"Настройки цвета привязок",
+        default={"min_color": [100, 100, 100], "max_color": [150, 150, 150]},
+        scope=Scope.settings
+    )   
+
 
     """
     main line: green
@@ -466,28 +481,28 @@ class PCXBlock(XBlock):
             used_lines = detect_used_lines_types(correct_image, self.all_lines)
             sum = 0
             for key in used_lines:
-                print("Used ", key)
+                #print("Used ", key)
                 image_current_lines_correct = isolate_color(correct_image, self.all_lines[key]['min_color'], self.all_lines[key]['max_color'])
                 image_current_lines_student = isolate_color(student_image, self.all_lines[key]['min_color'], self.all_lines[key]['max_color'])
                 points = pixel_method(image_current_lines_student, image_current_lines_correct, self.lines_settings[key]["thickness"])
                 sum = sum + points
-                print ("Points for line type: ", points)
+                #print ("Points for line type: ", points)
             points = sum/len(used_lines)
             return points
 
-        #try:
-        grade_global = check_answer(get_student_picture(data), self.correct_picture)
-        self.points = grade_global
-        self.points = grade_global * self.weight / 100
-        self.points = int(round(self.points))
-        self.attempts += 1
-        self.runtime.publish(self, 'grade', {
-            'value': self.points,
-            'max_value': self.weight,
-        })
-        res = {"success_status": 'ok', "points": self.points, "weight": self.weight, "attempts": self.attempts, "max_attempts": self.max_attempts}
-        #except:
-        #    res = {"success_status": 'error'}
+        try:
+            grade_global = check_answer(get_student_picture(data), self.correct_picture)
+            self.points = grade_global
+            self.points = grade_global * self.weight / 100
+            self.points = int(round(self.points))
+            self.attempts += 1
+            self.runtime.publish(self, 'grade', {
+                'value': self.points,
+                'max_value': self.weight,
+            })
+            res = {"success_status": 'ok', "points": self.points, "weight": self.weight, "attempts": self.attempts, "max_attempts": self.max_attempts}
+        except:
+            res = {"success_status": 'error'}
         return res
 
 
