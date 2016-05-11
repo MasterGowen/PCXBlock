@@ -152,6 +152,7 @@
                 $('.ge_drawerButtons .ge_saveResult').show();
                 if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetPlotMode(true);
                 $('.d2d').hide();
+                $('.ge_panel').hide();
                 $('.lines-types').show();
                 
             });
@@ -161,6 +162,7 @@
                 $('.ge_drawerButtons .ge_saveResult').hide();
                 if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetPlotMode(false);
                 $('.d2d').show();
+                $('.ge_panel').show();
                 $('.lines-types').hide();
             });
             $('body').on('click', '.ge_drawerButtons .ge_saveResult', function () {
