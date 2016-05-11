@@ -114,6 +114,8 @@ function PCXBlockEdit (runtime, element, data) {
                 "dash_dot_line_coefficient": $(element).find("input[name=dash_dot_line_coefficient]").val(),
                 "thin_line_thickness": $(element).find("input[name=thin_line_thickness]").val(),
                 "thin_line_coefficient": $(element).find("input[name=thin_line_coefficient]").val(),
+                "link_thickness": $(element).find("input[name=link_thickness]").val(),
+                "link_coefficient": $(element).find("input[name=link_coefficient]").val(),
 
                 "correct_picture": resultImage
             };

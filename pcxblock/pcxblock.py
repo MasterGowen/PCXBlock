@@ -123,6 +123,10 @@ class PCXBlock(XBlock):
         scope=Scope.settings
     )
 
+
+    """
+    link: gray (125, 125, 125)
+    """
     links_color = JSONField(
         display_name=u"Настройки цвета привязок",
         help=u"Настройки цвета привязок",
@@ -133,9 +137,9 @@ class PCXBlock(XBlock):
 
     """
     main line: green
-    dash dot line: RED
+    dash dot line: red
     dashed line: blue
-    thin line: BLACK
+    thin line: black
     """
     all_lines = JSONField(
         display_name=u"Настройки цветов линий",
@@ -146,7 +150,6 @@ class PCXBlock(XBlock):
             "dash_dot_line": {"min_color": [0, 0, 200], "max_color": [200, 200, 255]},
             "dashed_line": {"min_color": [200, 0, 0], "max_color": [255, 200, 200]},
             "thin_line": {"min_color": [0, 0, 0], "max_color": [100, 100, 100]},
-            #"standart_black_line": {"min_color": [0, 0, 0], "max_color": [100, 100, 100]}
         },
         scope=Scope.settings
     )    
@@ -246,9 +249,12 @@ class PCXBlock(XBlock):
             "dashed_line_coefficient": self.lines_settings["dashed_line"]["coefficient"],
             "dash_dot_line_thickness": self.lines_settings["dash_dot_line"]["thickness"],
             "dash_dot_line_coefficient": self.lines_settings["dash_dot_line"]["coefficient"],
-
             "thin_line_thickness": self.lines_settings["thin_line"]["thickness"],
             "thin_line_coefficient": self.lines_settings["thin_line"]["coefficient"],
+
+            "link_thickness": self.links_settings["thickness"],
+            "link_coefficient": self.links_settings["coefficient"],
+
 
 
             "main_line": defaults.default["main_line"],
@@ -456,8 +462,10 @@ class PCXBlock(XBlock):
         self.lines_settings["thin_line"]["thickness"] = int(data.get('thin_line_thickness'))
         self.lines_settings["thin_line"]["coefficient"] = int(data.get('thin_line_coefficient'))
         
-
-
+        self.links_settings["thickness"] = int(data.get('link_thickness'))
+        self.links_settings["coefficient"] = int(data.get('link_coefficient'))
+              
+              
         if data.get('background_image') == "":
             self.background_image = defaults.empty_image
         else:
