@@ -99,9 +99,9 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
 
     
 
-    $(function() {
+    /*$(function() {
         $(element).find(".all-tools").draggable({ handle: "div.tools-drag-handle", containment: ".content-wrapper", scroll: false});
-    });
+    });*/
 
     $(element).find(".Check").
     bind("click", function check () {
