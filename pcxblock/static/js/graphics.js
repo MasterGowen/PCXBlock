@@ -165,10 +165,10 @@
                 var gridMode = window.World.Crafter.GetGridMode();
 
                 if(!gridMode){
-                    $(this).removeClass('grid-active');
+                    $(".ge_gridMode").removeClass('grid-active');
                 }
                 else{
-                    $(this).addClass('grid-active');
+                    $(".ge_gridMode").addClass('grid-active');
                 }
 
                 if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetGridMode(!gridMode);

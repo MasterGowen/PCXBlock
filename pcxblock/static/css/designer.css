@@ -22,7 +22,7 @@
 .buttons div:hover,.buttons div.active {
     cursor: pointer;
 }
-.buttons div.grid-active,.buttons div:hover img,.buttons div.active img,.ge_panel .linktool.active img,.ge_panel .linktool:not([disabled]):hover img{
+.buttons div.grid-active img,.buttons div:hover img,.buttons div.active img,.ge_panel .linktool.active img,.ge_panel .linktool:not([disabled]):hover img{
     background-color: #F3F3F3;
     border-radius: 2px;
 }
