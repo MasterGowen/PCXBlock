@@ -9,7 +9,7 @@
                 if (typeof World !== "undefined") {
                     if (typeof World.Drawer2D !== "undefined") {
                         if (World.Drawer2D.FullScreen) {
-                            World.Drawer2D.canvas.height = screen.height * .7;//$('.designer-block').height();
+                            World.Drawer2D.canvas.height = screen.height * .9;//$('.designer-block').height();
                             $('.designer').height(World.Drawer2D.canvas.height);
                         } 
                         else {
