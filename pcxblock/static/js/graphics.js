@@ -163,7 +163,15 @@
             
             $('.ge_gridMode').click(function () {
                 var gridMode = window.World.Crafter.GetGridMode();
+                if($(this).hasClass('active')){
+                    $(this).removeClass('active');
+                }
+                else{
+                     $(this).addClass('active');
+                }
+
                 if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetGridMode(!gridMode);
+
             });
 
             $('body').on('click', '.ge_drawerButtons .ge_drawBottomLine', function () {
