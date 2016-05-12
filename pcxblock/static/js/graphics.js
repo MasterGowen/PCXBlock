@@ -7,7 +7,6 @@
             var formatter = new Formatting.NumberFormatter(new Formatting.NumberFormatInfo());
             function onWindowResize(fs) {
                 fs = typeof fs !== 'undefined' ? fs : false;
-                console.log('fs: ' + fs);
                 if (typeof World !== "undefined") {
                     if (typeof World.Drawer2D !== "undefined") {
                         if (World.Drawer2D.FullScreen) {
@@ -15,7 +14,8 @@
                         } 
                         else if (fs == true) {
                              
-                         
+                        console.log('fs: ' + fs);
+                        console.log('screen.height: ' + screen.height);
                         World.Drawer2D.canvas.height = screen.height;
                         $('.designer').height(World.Drawer2D.canvas.height);
                         }
