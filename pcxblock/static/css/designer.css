@@ -24,11 +24,11 @@
 }
 .buttons div:hover img,.buttons div.active img,.ge_panel .linktool.active img,.ge_panel .linktool:not([disabled]):hover img{
     background-color: #F3F3F3;
-    border-radius: 7px;
+    border-radius: 2px;
 }
 .tool>img {
-    height: 38px;
-    width: 50px;
+    height: 40px;
+    width: 40px;
 }
 
 div.designer {
