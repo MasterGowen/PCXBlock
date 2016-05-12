@@ -5,21 +5,12 @@
                 Wall: { height: 2.5 * 100, width: 2 }
             };
             var formatter = new Formatting.NumberFormatter(new Formatting.NumberFormatInfo());
-            function onWindowResize(fs) {
-                fs = typeof fs !== 'undefined' ? fs : false;
+            function onWindowResize() {
                 if (typeof World !== "undefined") {
                     if (typeof World.Drawer2D !== "undefined") {
                         if (World.Drawer2D.FullScreen) {
-                            World.Drawer2D.canvas.height = $('.designer-block').height();
+                            World.Drawer2D.canvas.height = screen.height;//$('.designer-block').height();
                         } 
-                        else if (fs) {
-                             
-                        console.log('fs: ' + fs);
-                        console.log('screen.height: ' + screen.height);
-                        World.Drawer2D.canvas.height = screen.height;
-                        $('.designer').height(World.Drawer2D.canvas.height);
-                        }
-
                         else {
                             World.Drawer2D.canvas.height = 480;
                             $('.designer').height(World.Drawer2D.canvas.height);
@@ -203,7 +194,7 @@
                 var fullscreenElement = document.fullscreenElement || document.mozFullscreenElement || document.webkitFullscreenElement;
                 var fullscreenEnabled = document.fullscreenEnabled || document.mozFullscreenEnabled || document.webkitFullscreenEnabled;
                 console.log('fullscreenEnabled = ' + fullscreenEnabled, ',  fullscreenElement = ', fullscreenElement, ',  e = ', e);
-                onWindowResize(true);
+                onWindowResize();
             }
 
             el.addEventListener("webkitfullscreenchange", onfullscreenchange);
