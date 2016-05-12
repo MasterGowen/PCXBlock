@@ -5,16 +5,25 @@
                 Wall: { height: 2.5 * 100, width: 2 }
             };
             var formatter = new Formatting.NumberFormatter(new Formatting.NumberFormatInfo());
-            function onWindowResize() {
+            function onWindowResize(fs) {
+                fs = typeof fs !== 'undefined' ? fs : false;
                 if (typeof World !== "undefined") {
                     if (typeof World.Drawer2D !== "undefined") {
                         if (World.Drawer2D.FullScreen) {
                             World.Drawer2D.canvas.height = $('.designer-block').height();
                         } 
+                        else if (fs == true) {
+                             
+                         
+                        World.Drawer2D.canvas.height = '100%';
+                        $('.designer').height(World.Drawer2D.canvas.height);
+                        }
+
                         else {
                             World.Drawer2D.canvas.height = 480;
                             $('.designer').height(World.Drawer2D.canvas.height);
                         }
+                        
                         World.Drawer2D.canvas.width = $('.designer').width();
                         World.Drawer2D.reSizeCanvas();
                     }
