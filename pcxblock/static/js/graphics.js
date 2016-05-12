@@ -25,10 +25,13 @@
 
             document.onkeypress = function(evt) {
                 evt = evt || window.event;
+                console.log('keydown: ' + evt.keyCode);
                 if (evt.keyCode == 27) {
+                    console.log('esc: true');
                     if (typeof World.Drawer2D !== "undefined") {
                         if (World.Drawer2D.FullScreen) {
                             World.Drawer2D.canvas.height = 480;
+                            console.log('height: ' + World.Drawer2D.canvas.height);
                             $('.designer').height(World.Drawer2D.canvas.height);
                         } 
                     }
