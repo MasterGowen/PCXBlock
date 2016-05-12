@@ -31,8 +31,9 @@
                             World.Drawer2D.canvas.height = 480;
                             $('.designer').height(World.Drawer2D.canvas.height);
                         } 
+                    }
                 }
-            };
+            }
             
             var Meths = {
                 resettool: function () {
