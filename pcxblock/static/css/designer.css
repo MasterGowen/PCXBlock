@@ -22,7 +22,7 @@
 .buttons div:hover,.buttons div.active {
     cursor: pointer;
 }
-.buttons div:hover img,.buttons div.active img{
+.buttons div:hover img,.buttons div.active img,.ge_panel .linktool.active img,.ge_panel .linktool:not([disabled]):hover img{
     background-color: #F3F3F3;
     border-radius: 7px;
 }
@@ -292,3 +292,4 @@ button.close {
 .linktool{
  max-width: 40px;
 }
+.ge_panel .linktool[disabled]{ opacity: 0.4;cursor: not-allowed;}
