@@ -202,7 +202,7 @@
                 var fullscreenElement = document.fullscreenElement || document.mozFullscreenElement || document.webkitFullscreenElement;
                 var fullscreenEnabled = document.fullscreenEnabled || document.mozFullscreenEnabled || document.webkitFullscreenEnabled;
                 console.log('fullscreenEnabled = ' + fullscreenEnabled, ',  fullscreenElement = ', fullscreenElement, ',  e = ', e);
-                onWindowResize();
+                onWindowResize(true);
             }
 
             el.addEventListener("webkitfullscreenchange", onfullscreenchange);
