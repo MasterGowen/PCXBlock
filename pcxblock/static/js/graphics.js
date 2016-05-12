@@ -138,7 +138,7 @@
                 window.World.Drawer.ScaleUp();
             });
             $('.buttons div').click(function () {
-                if ($(this).hasClass('tool')) {
+                if ($(this).hasClass('tool') ) {
                     $('.buttons div').removeClass('active');
                     $('div.tool').removeClass('active');
                     $('div.linktool').removeClass('active');
@@ -163,12 +163,15 @@
             
             $('.ge_gridMode').click(function () {
                 var gridMode = window.World.Crafter.GetGridMode();
-                if($(".ge_gridMode").hasClass('active')){
-                    $(".ge_gridMode").removeClass('active');
+
+                if(!gridMode){
+                    $(this).removeClass('grid-active');
                 }
                 else{
-                     $(".ge_gridMode").addClass('active');
+                    $(this).addClass('grid-active');
                 }
+
+                $(this).text(!gridMode? "Убрать сетку":"Показать сетку" );
 
                 if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetGridMode(!gridMode);
 
