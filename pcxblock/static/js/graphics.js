@@ -163,11 +163,11 @@
             
             $('.ge_gridMode').click(function () {
                 var gridMode = window.World.Crafter.GetGridMode();
-                if($(this).hasClass('active')){
-                    $(this).removeClass('active');
+                if($(".ge_gridMode").hasClass('active')){
+                    $(".ge_gridMode").removeClass('active');
                 }
                 else{
-                     $(this).addClass('active');
+                     $(".ge_gridMode").addClass('active');
                 }
 
                 if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetGridMode(!gridMode);
