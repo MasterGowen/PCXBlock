@@ -16,7 +16,7 @@
                         else if (fs == true) {
                              
                          
-                        World.Drawer2D.canvas.height = '100%';
+                        World.Drawer2D.canvas.height = screen.height;
                         $('.designer').height(World.Drawer2D.canvas.height);
                         }
 
