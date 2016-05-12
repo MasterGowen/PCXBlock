@@ -125,6 +125,7 @@
                     $('div.tool').removeClass('active');
                     $('div.linktool').removeClass('active');
                     $('div.linktool[rel^=p]').attr('disabled',true);
+                    $(this).addClass('active');
                 }
                 if (!$(this).hasClass('extend-tool')) {
                     var tool = $(this).attr('rel');
@@ -136,6 +137,7 @@
                 if ($(this).hasClass('linktool') && $(this).not('[disabled]')) {
                     $('div.linktool').removeClass('active');
                     $(this).addClass('active');
+
                 }
                 var tool = $(this).attr('rel');
                 Meths[tool]();
