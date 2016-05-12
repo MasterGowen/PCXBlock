@@ -12,7 +12,7 @@
                         if (World.Drawer2D.FullScreen) {
                             World.Drawer2D.canvas.height = $('.designer-block').height();
                         } 
-                        else if (fs == true) {
+                        else if (fs) {
                              
                         console.log('fs: ' + fs);
                         console.log('screen.height: ' + screen.height);
