@@ -232,8 +232,8 @@ class PCXBlock(XBlock):
             "pic_linepointlink": self.runtime.local_resource_url(self, 'public/images/pic_linepointlink.png'),
             "pic_intersectionlink": self.runtime.local_resource_url(self, 'public/images/pic_intersectionlink.png'),
             "pic_circletool": self.runtime.local_resource_url(self, 'public/images/pic_circletool.svg'),
-            "pic_smoothtool": self.runtime.local_resource_url(self, 'public/images/pic_smoothtool.png'),
-            "pic_arctool": self.runtime.local_resource_url(self, 'public/images/pic_arctool.png'),
+            "pic_smoothtool": self.runtime.local_resource_url(self, 'public/images/pic_smoothtool.svg'),
+            "pic_arctool": self.runtime.local_resource_url(self, 'public/images/pic_arctool.svg'),
 
             "pic_back": self.runtime.local_resource_url(self, 'public/images/pic_back.svg'),
             "pic_bent": self.runtime.local_resource_url(self, 'public/images/pic_bent.svg'),
@@ -334,8 +334,8 @@ class PCXBlock(XBlock):
                 "pic_linepointlink": self.runtime.local_resource_url(self, 'public/images/pic_linepointlink.png'),
                 "pic_intersectionlink": self.runtime.local_resource_url(self, 'public/images/pic_intersectionlink.png'),
                 "pic_circletool": self.runtime.local_resource_url(self, 'public/images/pic_circletool.svg'),
-                "pic_smoothtool": self.runtime.local_resource_url(self, 'public/images/pic_smoothtool.png'),
-                "pic_arctool": self.runtime.local_resource_url(self, 'public/images/pic_arctool.png'),
+                "pic_smoothtool": self.runtime.local_resource_url(self, 'public/images/pic_smoothtool.svg'),
+                "pic_arctool": self.runtime.local_resource_url(self, 'public/images/pic_arctool.svg'),
 
 
                 "pic_back": self.runtime.local_resource_url(self, 'public/images/pic_back.svg'),
