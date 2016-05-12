@@ -17,7 +17,7 @@
 }
 
 .buttons div {
-    padding: 8px 5px;
+    padding: 6px 6px;
 }
 .buttons div:hover,.buttons div.active {
     cursor: pointer;
@@ -287,10 +287,15 @@ button.close {
 
  .designer-block {
   height: 540px;
-  margin-top: 0.5em;
+  margin-top: 0.2em;
  }
 
 .linktool{
  max-width: 40px;
 }
 .ge_panel .linktool[disabled]{ opacity: 0.4;cursor: not-allowed;}
+
+.all-tools img {
+    padding: -1px;
+    border: 1px solid #747177;
+}
