@@ -7,6 +7,7 @@
             var formatter = new Formatting.NumberFormatter(new Formatting.NumberFormatInfo());
             function onWindowResize(fs) {
                 fs = typeof fs !== 'undefined' ? fs : false;
+                console.log('fs: ' + fs);
                 if (typeof World !== "undefined") {
                     if (typeof World.Drawer2D !== "undefined") {
                         if (World.Drawer2D.FullScreen) {
