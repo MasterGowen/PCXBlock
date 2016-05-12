@@ -7,7 +7,6 @@
     font-family: "dinreg";
     color: #525b66;
     overflow: hidden;
-    padding-top: 1em;
 }
 .button {
     font-size:1.1em;
@@ -44,6 +43,7 @@ div.designer {
 
 div#workzone {
   position:relative;
+  padding-top: 1em;
 }
 #workzone div[role=row] {
     float: left;
