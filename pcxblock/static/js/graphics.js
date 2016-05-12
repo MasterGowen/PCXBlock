@@ -22,6 +22,18 @@
                     }
                 }
             }
+
+            document.onkeypress = function(evt) {
+                evt = evt || window.event;
+                if (evt.keyCode == 27) {
+                    if (typeof World.Drawer2D !== "undefined") {
+                        if (World.Drawer2D.FullScreen) {
+                            World.Drawer2D.canvas.height = 480;
+                            $('.designer').height(World.Drawer2D.canvas.height);
+                        } 
+                }
+            };
+            
             var Meths = {
                 resettool: function () {
                     window.World.Objects.Walls = [];
