@@ -243,6 +243,12 @@ class PCXBlock(XBlock):
             "pic_eraser": self.runtime.local_resource_url(self, 'public/images/pic_eraser.svg'),
             "pic_grid": self.runtime.local_resource_url(self, 'public/images/pic_grid.svg'),   
 
+            "pic_main_line": self.runtime.local_resource_url(self, 'public/images/pic_main_line.svg'),  
+            "pic_dash_dot_line": self.runtime.local_resource_url(self, 'public/images/pic_dash_dot_line.svg'),  
+            "pic_dashed_line": self.runtime.local_resource_url(self, 'public/images/pic_dashed_line.svg'),  
+            "pic_thin_line": self.runtime.local_resource_url(self, 'public/images/pic_thin_line.svg'),  
+
+
             "main_line_thickness": self.lines_settings["main_line"]["thickness"],
             "main_line_coefficient": self.lines_settings["main_line"]["coefficient"],
             "dashed_line_thickness": self.lines_settings["dashed_line"]["thickness"],
@@ -254,13 +260,6 @@ class PCXBlock(XBlock):
 
             "link_thickness": self.links_settings["thickness"],
             "link_coefficient": self.links_settings["coefficient"],
-
-
-
-            "main_line": defaults.default["main_line"],
-            "dash_dot_line": defaults.default["dash_dot_line"],
-            "dashed_line": defaults.default["dashed_line"],
-            "thin_line": defaults.default["thin_line"],
         }
 
         fragment = Fragment()
@@ -336,8 +335,6 @@ class PCXBlock(XBlock):
                 "pic_circletool": self.runtime.local_resource_url(self, 'public/images/pic_circletool.svg'),
                 "pic_smoothtool": self.runtime.local_resource_url(self, 'public/images/pic_smoothtool.svg'),
                 "pic_arctool": self.runtime.local_resource_url(self, 'public/images/pic_arctool.svg'),
-
-
                 "pic_back": self.runtime.local_resource_url(self, 'public/images/pic_back.svg'),
                 "pic_bent": self.runtime.local_resource_url(self, 'public/images/pic_bent.svg'),
                 "pic_line": self.runtime.local_resource_url(self, 'public/images/pic_line.svg'),
@@ -346,7 +343,10 @@ class PCXBlock(XBlock):
                 "pic_eraser": self.runtime.local_resource_url(self, 'public/images/pic_eraser.svg'),
                 "pic_draggable_handler": self.runtime.local_resource_url(self, 'public/images/pic_draggable_handler.svg'),
                 "pic_grid": self.runtime.local_resource_url(self, 'public/images/pic_grid.svg'),
-
+                "pic_main_line": self.runtime.local_resource_url(self, 'public/images/pic_main_line.svg'),  
+                "pic_dash_dot_line": self.runtime.local_resource_url(self, 'public/images/pic_dash_dot_line.svg'),  
+                "pic_dashed_line": self.runtime.local_resource_url(self, 'public/images/pic_dashed_line.svg'),  
+                "pic_thin_line": self.runtime.local_resource_url(self, 'public/images/pic_thin_line.svg'),  
 
 
                 "main_line": defaults.default["main_line"],
