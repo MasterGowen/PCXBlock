@@ -171,8 +171,6 @@
                     $(this).addClass('grid-active');
                 }
 
-                $(this).text(!gridMode? "Убрать сетку":"Показать сетку" );
-
                 if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetGridMode(!gridMode);
 
             });
