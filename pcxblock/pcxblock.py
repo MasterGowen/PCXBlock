@@ -145,7 +145,6 @@ class PCXBlock(XBlock):
         display_name=u"Настройки цветов линий",
         help=u"Настройки цветов линий",
         default={
-
             "main_line": {"min_color": [0, 200, 0], "max_color": [200, 255, 200]},
             "dash_dot_line": {"min_color": [0, 0, 200], "max_color": [200, 200, 255]},
             "dashed_line": {"min_color": [200, 0, 0], "max_color": [255, 200, 200]},
