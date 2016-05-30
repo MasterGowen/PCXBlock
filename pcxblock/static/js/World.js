@@ -2,17 +2,8 @@
 var parentness = {};
 window.WorldClass = function (container) {
     this.Id = new Guid().Value;
-    this.Objects = {
-        Walls: [],
-        Normals: [],
-        Beziers: [],
-        Curves:[],
-        Arcs: [],
-        Ruler: {},
-        LinkPoints: [],
-        TempLinkPoint:{},
-        SavedResult:''
-    };
+    
+    this.GetObjects();
     this.Events = [];
     this.UndoedEvents = [];
     this.mode = window.Modes.two;
@@ -49,10 +40,16 @@ window.WorldClass = function (container) {
                         $this.Crafter.ProcessCommand({ type: 'keyup', key: e.data.key });
                     }
                 }
-
                 var p = $this.Drawer.GetWorldPoint(e.data);
                 if (e.type === "mousemove") {
                     $this.Crafter.ProcessCommand({ type: 'move', point: p, rightButton: e.data.rightButton, leftButton: e.data.leftButton });
+                }
+                if (e.type === "dblclick") {
+                    if (e.data.leftButton)
+                        $this.leftMouse = false;
+                    if (e.data.rightButton)
+                        $this.rightMouse = false;
+                    $this.Crafter.ProcessCommand({ type: 'dbl', point: p, rightButton: e.data.rightButton, leftButton: e.data.leftButton });
                 }
                 if (e.type === "mousedown") {
                     $this.leftMouse = (e.data.leftButton);
@@ -66,13 +63,7 @@ window.WorldClass = function (container) {
                         $this.rightMouse = false;
                     $this.Crafter.ProcessCommand({ type: 'up', point: p, rightButton: e.data.rightButton, leftButton: e.data.leftButton });
                 }
-                if (e.type === "dblclick") {
-                    if (e.data.leftButton)
-                        $this.leftMouse = false;
-                    if (e.data.rightButton)
-                        $this.rightMouse = false;
-                    $this.Crafter.ProcessCommand({ type: 'dbl', point: p, rightButton: e.data.rightButton, leftButton: e.data.leftButton });
-                }
+                
             }
             //$this.Draw();
         });
@@ -106,7 +97,7 @@ window.WorldClass.prototype = {
             e.redo();
         }
     },
-    UpdateCycles: function () {
+    UpdateCycles: function() {
         return;
         var cycles = findCycles(this.Objects.Walls);
         var hashes = [];
@@ -126,7 +117,7 @@ window.WorldClass.prototype = {
             }
         }
     },
-    Draw: function () {
+    Draw: function() {
         if (typeof this.lastDate !== "undefined" && Date.now() - this.lastDate < 100)
             return;
         this.lastDate = Date.now();
@@ -142,119 +133,119 @@ window.WorldClass.prototype = {
             });
         });
     },
-	Compute: function(cb) {
-		var wps = {}; 
-		this.Objects.Walls.forEach(function(a) {
-			var arrs = a.Config.Left.fill.objs.concat(a.Config.Right.fill.objs);
-			arrs = arrs.filter(function(b) {
-				return typeof b.image !== "undefined";
-			});
-			for (var i in arrs) {
-				if (arrs[i].id <= 0) continue;
-				if (isNaN(arrs[i].Pnt.X) || typeof(arrs[i].id) === "undefined") continue;
-				if (typeof wps[arrs[i].id] === "undefined") {
-					wps[arrs[i].id] = {id:arrs[i].id, w: arrs[i].w, l: 0, image: arrs[i].image, inf: ' м', name: arrs[i].name};
-				}
-				var ceil = Math.ceil(arrs[i].width/arrs[i].w);
-				if (((arrs[i].width-arrs[i].w*ceil)/arrs[i].w) > 0)
-					ceil++;
-				wps[arrs[i].id].l += ceil*arrs[i].height/100;
-			}
-		});
-		this.Objects.Walls.forEach(function(a) {
-			var arrs = (a.Config.Left.tiles||[]).concat(a.Config.Right.tiles||[]);
-			arrs = arrs.filter(function(b) {
-				return typeof b.image !== "undefined";
-			});
-			for (var i in arrs) {
-				if (typeof(arrs[i].id) === "undefined") continue;
-				if (typeof wps[arrs[i].id] === "undefined") {
-					wps[arrs[i].id] = {id:arrs[i].id, l: 0, image: arrs[i].image, inf: ' пл', name: arrs[i].name };
-				}
-				if (typeof wps[arrs[i].id].name === 'undefined')
-					wps[arrs[i].id].name = arrs[i].name;
-				wps[arrs[i].id].l++;
-			}
-		});
-		for (var k in this.Objects.Areas) {
-			var a = this.Objects.Areas[k];
-			var arrs = a.tiles||[];
-			var mm = GetMaxAndMinArr(a);
-			var oo = a;
-			oo = oo.map(function (b) { return new Pnt((b.X - mm.min.X)*2, (b.Y - mm.min.Y)*2); });
-			arrs = arrs.filter(function(b) {
-				var pnt = new Pnt((b.w+2*a.tilebordw)*(b.col),(b.h+2*a.tilebordh)*(b.row));
-				var pnt1 = new Pnt((b.w+2*a.tilebordw)*(b.col+1),(b.h+2*a.tilebordh)*(b.row));
-				var pnt2 = new Pnt((b.w+2*a.tilebordw)*(b.col+1),(b.h+2*a.tilebordh)*(b.row+1));
-				var pnt3 = new Pnt((b.w+2*a.tilebordw)*(b.col),(b.h+2*a.tilebordh)*(b.row+1));
-				return typeof b.image !== "undefined" && (AreIsIn(oo, pnt) || AreIsIn(oo, pnt1) || AreIsIn(oo, pnt2) || AreIsIn(oo, pnt3));
-			});
-			for (var i in arrs) {
-				if (typeof(arrs[i].id) === "undefined") continue;
-				if (typeof wps[arrs[i].id] === "undefined") {
-					wps[arrs[i].id] = {id:arrs[i].id, l: 0, image: arrs[i].image, inf: ' пл', name: arrs[i].name };
-				}
-				if (typeof wps[arrs[i].id].name === 'undefined')
-					wps[arrs[i].id].name = arrs[i].name;
-				wps[arrs[i].id].l++;
-			}
-			arrs = a.lams||[];
-			arrs = arrs.filter(function(b) {
-				return typeof b.image !== "undefined";
-			});
-			if (arrs.length > 0) {
-				var i = 0;
-				if (typeof(arrs[i].id) === "undefined") continue;
-				if (typeof wps[arrs[i].id] === "undefined") {
-					wps[arrs[i].id] = {id:arrs[i].id, image: arrs[i].image, l: 0, inf: ' м x м', name: arrs[i].name  };
-				}
-				if (typeof wps[arrs[i].id].name === 'undefined')
-					wps[arrs[i].id].name = arrs[i].name;
-				wps[arrs[i].id].l += Math.round(getSquareForPoints(a)/ 200)/100;
-			}
-		}
-		var cnt =0;
-		for (var i in wps) {
-			cnt++;
-			(function(th) {
-				var res = '';
-				var ccb = function() {
-					th.cat = res;
-					cb(th);
-				};
-				var getPrnt = function(id, end) {
-					var l = res.length+6;
-					if (typeof parentness[id] !== 'undefined') {
-						res = parentness[id]+" &gt; "+res;
-						end();
-						return;
-					} else {
-						var newEnd = function() {
-							parentness[id] = res.substr(0, res.length - l);
-							end();
-						};
-						getFromDB('waregroup', 'id=' + id, function(a){
-							if (a.length == 0 || a[0].id == 0) {
-								newEnd();
-								return;
-							}
-							res = a[0].name+" &gt; "+res;
-							getPrnt(a[0].pid, newEnd);
-						});
-					}
-				};
-				getFromDB('ware', 'id=' + wps[i].id, function(b){
-					getPrnt(b[0].pid, ccb);
-				});
-			})(wps[i]);
-		}
-		return cnt;
-	},
-    SetMode: function (mode) {
+    Compute: function(cb) {
+        var wps = {};
+        this.Objects.Walls.forEach(function(a) {
+            var arrs = a.Config.Left.fill.objs.concat(a.Config.Right.fill.objs);
+            arrs = arrs.filter(function(b) {
+                return typeof b.image !== "undefined";
+            });
+            for (var i in arrs) {
+                if (arrs[i].id <= 0) continue;
+                if (isNaN(arrs[i].Pnt.X) || typeof(arrs[i].id) === "undefined") continue;
+                if (typeof wps[arrs[i].id] === "undefined") {
+                    wps[arrs[i].id] = { id: arrs[i].id, w: arrs[i].w, l: 0, image: arrs[i].image, inf: ' м', name: arrs[i].name };
+                }
+                var ceil = Math.ceil(arrs[i].width / arrs[i].w);
+                if (((arrs[i].width - arrs[i].w * ceil) / arrs[i].w) > 0)
+                    ceil++;
+                wps[arrs[i].id].l += ceil * arrs[i].height / 100;
+            }
+        });
+        this.Objects.Walls.forEach(function(a) {
+            var arrs = (a.Config.Left.tiles || []).concat(a.Config.Right.tiles || []);
+            arrs = arrs.filter(function(b) {
+                return typeof b.image !== "undefined";
+            });
+            for (var i in arrs) {
+                if (typeof(arrs[i].id) === "undefined") continue;
+                if (typeof wps[arrs[i].id] === "undefined") {
+                    wps[arrs[i].id] = { id: arrs[i].id, l: 0, image: arrs[i].image, inf: ' пл', name: arrs[i].name };
+                }
+                if (typeof wps[arrs[i].id].name === 'undefined')
+                    wps[arrs[i].id].name = arrs[i].name;
+                wps[arrs[i].id].l++;
+            }
+        });
+        for (var k in this.Objects.Areas) {
+            var a = this.Objects.Areas[k];
+            var arrs = a.tiles || [];
+            var mm = GetMaxAndMinArr(a);
+            var oo = a;
+            oo = oo.map(function(b) { return new Pnt((b.X - mm.min.X) * 2, (b.Y - mm.min.Y) * 2); });
+            arrs = arrs.filter(function(b) {
+                var pnt = new Pnt((b.w + 2 * a.tilebordw) * (b.col), (b.h + 2 * a.tilebordh) * (b.row));
+                var pnt1 = new Pnt((b.w + 2 * a.tilebordw) * (b.col + 1), (b.h + 2 * a.tilebordh) * (b.row));
+                var pnt2 = new Pnt((b.w + 2 * a.tilebordw) * (b.col + 1), (b.h + 2 * a.tilebordh) * (b.row + 1));
+                var pnt3 = new Pnt((b.w + 2 * a.tilebordw) * (b.col), (b.h + 2 * a.tilebordh) * (b.row + 1));
+                return typeof b.image !== "undefined" && (AreIsIn(oo, pnt) || AreIsIn(oo, pnt1) || AreIsIn(oo, pnt2) || AreIsIn(oo, pnt3));
+            });
+            for (var i in arrs) {
+                if (typeof(arrs[i].id) === "undefined") continue;
+                if (typeof wps[arrs[i].id] === "undefined") {
+                    wps[arrs[i].id] = { id: arrs[i].id, l: 0, image: arrs[i].image, inf: ' пл', name: arrs[i].name };
+                }
+                if (typeof wps[arrs[i].id].name === 'undefined')
+                    wps[arrs[i].id].name = arrs[i].name;
+                wps[arrs[i].id].l++;
+            }
+            arrs = a.lams || [];
+            arrs = arrs.filter(function(b) {
+                return typeof b.image !== "undefined";
+            });
+            if (arrs.length > 0) {
+                var i = 0;
+                if (typeof(arrs[i].id) === "undefined") continue;
+                if (typeof wps[arrs[i].id] === "undefined") {
+                    wps[arrs[i].id] = { id: arrs[i].id, image: arrs[i].image, l: 0, inf: ' м x м', name: arrs[i].name };
+                }
+                if (typeof wps[arrs[i].id].name === 'undefined')
+                    wps[arrs[i].id].name = arrs[i].name;
+                wps[arrs[i].id].l += Math.round(getSquareForPoints(a) / 200) / 100;
+            }
+        }
+        var cnt = 0;
+        for (var i in wps) {
+            cnt++;
+            (function(th) {
+                var res = '';
+                var ccb = function() {
+                    th.cat = res;
+                    cb(th);
+                };
+                var getPrnt = function(id, end) {
+                    var l = res.length + 6;
+                    if (typeof parentness[id] !== 'undefined') {
+                        res = parentness[id] + " &gt; " + res;
+                        end();
+                        return;
+                    } else {
+                        var newEnd = function() {
+                            parentness[id] = res.substr(0, res.length - l);
+                            end();
+                        };
+                        getFromDB('waregroup', 'id=' + id, function(a) {
+                            if (a.length == 0 || a[0].id == 0) {
+                                newEnd();
+                                return;
+                            }
+                            res = a[0].name + " &gt; " + res;
+                            getPrnt(a[0].pid, newEnd);
+                        });
+                    }
+                };
+                getFromDB('ware', 'id=' + wps[i].id, function(b) {
+                    getPrnt(b[0].pid, ccb);
+                });
+            })(wps[i]);
+        }
+        return cnt;
+    },
+    SetMode: function(mode) {
         $('.loader').css('display', 'block');
         this.Changed = true;
         var mm = GetMaxAndMinArr([]);
-        this.Objects.Walls.forEach(function (a) {
+        this.Objects.Walls.forEach(function(a) {
             mm.max.X = Math.max(mm.max.X, a.Start.X, a.End.X);
             mm.max.Y = Math.max(mm.max.Y, a.Start.Y, a.End.Y);
             mm.min.X = Math.min(mm.min.X, a.Start.X, a.End.X);
@@ -269,14 +260,89 @@ window.WorldClass.prototype = {
             this.Drawer2D.Offset.Y = 0;
             this.Drawer = this.Drawer2D;
             //this.Draw();
-        } 
+        }
         $('.loader').css('display', 'none');
     },
-    SaveToLocalStorage:function() {
-        this.Save(function(o) {
-            window.localStorage.setItem("saved", JSON.stringify(o));
-        });
+    GetObjects: function () {
+        this.Objects = {
+            Walls: [],
+            Normals: [],
+            Beziers: [],
+            Curves: [],
+            Arcs: [],
+            Ruler: {},
+            LinkPoints: [],
+            TempLinkPoint: {},
+            TempArc: {},
+            SavedResult: ''
+        };
+        if (window.localStorage['saved']) {
+            var $this = this;
+            var currentObjects = JSON.parse(window.localStorage['saved']);
+            currentObjects.Walls.forEach(function (a) {
+                if (a != null) {
+                    var w = new Wall();
+                    w.Start = new Pnt(a.Start.X, a.Start.Y);
+                    w.End = new Pnt(a.End.X, a.End.Y);
+                    $this.Objects.Walls.push(w);
+                }
+            });
+            currentObjects.Normals.forEach(function (a) {
+                if (a != null) {
+                    var w = new Wall();
+                    w.Start = new Pnt(a.Start.X, a.Start.Y);
+                    w.End = new Pnt(a.End.X, a.End.Y);
+                    $this.Objects.Normals.push(w);
+                }
+            });
+            currentObjects.Beziers.forEach(function (a) {
+                if (a != null) {
+                    var w = new BezierCurve();
+                    w.Start = new Pnt(a.Start.X, a.Start.Y);
+                    w.FirstControlPoint= new Pnt(a.FirstControlPoint.X, a.FirstControlPoint.Y);
+                    w.SecondControlPoint= new Pnt(a.SecondControlPoint.X, a.SecondControlPoint.Y);
+                    w.CurrentIndex= a.CurrentIndex;
+                    w.End = new Pnt(a.End.X, a.End.Y);
+                    $this.Objects.Beziers.push(w);
+                }
+            });
+            currentObjects.Curves.forEach(function (a) {
+                if (a != null) {
+                    var w = new SmoothCurve();
+                    w.Points = [];
+                    w.PntCount = a.PntCount;
+                    a.Points.forEach(function (e) {
+                        w.Points.push(new Pnt(e.X, e.Y));
+                    });
+                    $this.Objects.Curves.push(w);
+                }
+            });
+            currentObjects.Arcs.forEach(function (a) {
+                if (a != null) {
+                    var w = new Arc();
+                    w.Start = new Pnt(a.Start.X, a.Start.Y);
+                    w.Center = new Pnt(a.Center.X, a.Center.Y);
+                    w.IsCircle = a.IsCircle;
+                    w.End = new Pnt(a.End.X, a.End.Y);
+                    $this.Objects.Arcs.push(w);
+                }
+            });
+            currentObjects.LinkPoints.forEach(function (a) {
+                if (a != null) {
+                    var w = new LinkPoint();
+                    w.Point = new Pnt(a.Point.X, a.Point.Y);
+                    $this.Objects.LinkPoints.push(w);
+                }
+            });
+        }
+        
     },
+    SaveToLocalStorage: function () {
+        window.localStorage.setItem("saved", JSON.stringify(window.World.Objects));
+       /* this.Save(function(o) {
+            window.localStorage.setItem("saved", JSON.stringify(o));
+        });*/
+    }/*,
     SaveToDB: function () {
         var cnv = document.createElement('canvas');
         cnv.width = 100;
@@ -365,5 +431,5 @@ window.WorldClass.prototype = {
             o.Walls.push(v);
         });
         howToSave(o);
-    }
+    }*/
 };
