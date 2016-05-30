@@ -234,7 +234,7 @@ class PCXBlock(XBlock):
             "pic_smoothtool": self.runtime.local_resource_url(self, 'public/images/pic_smoothtool.svg'),
             "pic_arctool": self.runtime.local_resource_url(self, 'public/images/pic_arctool.svg'),
 
-            "pic_grid-point": self.runtime.local_resource_url(self, 'public/images/pic_grid-point.svg'),
+            "pic_grid_point": self.runtime.local_resource_url(self, 'public/images/pic_grid_point.svg'),
             "pic_point": self.runtime.local_resource_url(self, 'public/images/pic_point.svg'),
             "pic_ruler": self.runtime.local_resource_url(self, 'public/images/pic_ruler.svg'),
             "pic_eraser": self.runtime.local_resource_url(self, 'public/images/pic_eraser.svg'),
@@ -345,7 +345,7 @@ class PCXBlock(XBlock):
                 "pic_line": self.runtime.local_resource_url(self, 'public/images/pic_line.svg'),
                 "pic_rect": self.runtime.local_resource_url(self, 'public/images/pic_rect.svg'),
 
-                "pic_grid-point": self.runtime.local_resource_url(self, 'public/images/pic_grid-point.svg'),
+                "pic_grid_point": self.runtime.local_resource_url(self, 'public/images/pic_grid_point.svg'),
                 "pic_point": self.runtime.local_resource_url(self, 'public/images/pic_point.svg'),
                 "pic_ruler": self.runtime.local_resource_url(self, 'public/images/pic_ruler.svg'),
                 "pic_eraser": self.runtime.local_resource_url(self, 'public/images/pic_eraser.svg'),
