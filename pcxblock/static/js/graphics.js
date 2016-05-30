@@ -137,7 +137,7 @@
                 }
             };
 
-            
+
             function showSize(e) {
                 if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetSizeMode(e.checked);
             }
@@ -288,5 +288,10 @@
         }
         var drawResult = function () {
             if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetResultMode(true);
+            window.World.Draw();
+        };
+
+        var drawMonoResult = function () {
+            if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetMonoMode(true);
             window.World.Draw();
         };

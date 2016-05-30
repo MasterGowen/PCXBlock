@@ -8,6 +8,7 @@
 
 var show_background = true;
 var resultImage;
+var monoResultImage;
 
 var PCXBlock = function PCXBlock (runtime, element, data) {
 
@@ -79,7 +80,7 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
         $('#pcoverlay').fadeIn('fast', function(){
 
         setResultImage();
-        $('#student_check_picture').attr("src", resultImage);
+        $('#student_check_picture').attr("src", monoResultImage);
         $('#pcbox').fadeIn('fast', function(){});
         disableScroll();
         onWindowResize();
@@ -95,9 +96,10 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
 
     function setResultImage(){
         resultImage = globalImage;
+        monoResultImage = drawMonoResult();
     }
 
-    
+
 
     /*$(function() {
         $(element).find(".all-tools").draggable({ handle: "div.tools-drag-handle", containment: ".content-wrapper", scroll: false});
