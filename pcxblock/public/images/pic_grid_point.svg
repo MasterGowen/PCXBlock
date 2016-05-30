@@ -1,0 +1,24 @@
+<svg id="Слой_1" data-name="Слой 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke-width: 1.5px;
+      }
+
+      .cls-1, .cls-2 {
+        stroke: #4d4d4d;
+        stroke-linejoin: round;
+      }
+
+      .cls-2 {
+        fill: red;
+        stroke-linecap: round;
+      }
+    </style>
+  </defs>
+  <title>Безымянный-1</title>
+  <line class="cls-1" x1="10.3" y1="40" x2="23.96"/>
+  <line class="cls-1" x1="40" y1="24.91" y2="14.67"/>
+  <circle class="cls-2" cx="17.43" cy="19.13" r="5.42"/>
+</svg>

@@ -237,7 +237,7 @@ class PCXBlock(XBlock):
             "pic_grid_point": self.runtime.local_resource_url(self, 'public/images/pic_grid_point.svg'),
             "pic_point": self.runtime.local_resource_url(self, 'public/images/pic_point.svg'),
             "pic_ruler": self.runtime.local_resource_url(self, 'public/images/pic_ruler.svg'),
-            "pic_eraser": self.runtime.local_resource_url(self, 'public/images/pic_eraser.svg'),
+            "pic_delete": self.runtime.local_resource_url(self, 'public/images/pic_delete.svg'),
 
             "pic_back": self.runtime.local_resource_url(self, 'public/images/pic_back.svg'),
             "pic_bent": self.runtime.local_resource_url(self, 'public/images/pic_bent.svg'),
@@ -348,7 +348,7 @@ class PCXBlock(XBlock):
                 "pic_grid_point": self.runtime.local_resource_url(self, 'public/images/pic_grid_point.svg'),
                 "pic_point": self.runtime.local_resource_url(self, 'public/images/pic_point.svg'),
                 "pic_ruler": self.runtime.local_resource_url(self, 'public/images/pic_ruler.svg'),
-                "pic_eraser": self.runtime.local_resource_url(self, 'public/images/pic_eraser.svg'),
+                "pic_delete": self.runtime.local_resource_url(self, 'public/images/pic_delete.svg'),
 
                 "pic_BezierCurve": self.runtime.local_resource_url(self, 'public/images/pic_BezierCurve.svg'),
                 "pic_eraser": self.runtime.local_resource_url(self, 'public/images/pic_eraser.svg'),
