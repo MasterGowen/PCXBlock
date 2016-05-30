@@ -1,6 +1,7 @@
 ﻿var WallCrafter = function () {
     this.PrecisionMode = false;
     this.WallMode = false;
+    this.MonoMode = false;
     this.BentMode = true;
     this.LineMode = false;
     this.BezierMode = false;
@@ -9,58 +10,34 @@
     this.ResultMode = false;
     this.PlotMode = false;
     this.GridMode = true;
-    this.PaintMode = "WallMode";
+    this.DeleteMode = false;
+    this.RulerMode = false;
     this.LineType = "main";
     this.LinkType = "none";
+    this.SizeMode = false;
+    this.AngleMode = false;
+    this.PointMode = false;
     SimpleCrafter.call(this);
 };
 WallCrafter.prototype = new SimpleCrafter();
 WallCrafter.prototype.SetPaintMode = function (flag) {
     this.WallMode = false;
     this.BezierMode = false;
+    this.RulerMode = false;
     this.SmoothMode = false;
     this.ArcMode = false;
     this.LineMode = false;
     this.BentMode = false;
     this.CircleMode = false;
-    this.PaintMode = flag;
+    this.DeleteMode = false;
+    this.PointMode = false;
     this.LinkType = "none";
     delete this.startPoint;
-};
-WallCrafter.prototype.SetBentMode = function () {
-    this.SetPaintMode("BentMode");
-    this.BentMode = true;
-    delete this.startPoint;
-};
-WallCrafter.prototype.SetArcMode = function () {
-    this.SetPaintMode("ArcMode");
-    this.ArcMode = true;
-    delete this.startPoint;
-};
-WallCrafter.prototype.SetCircleMode = function () {
-    this.SetPaintMode("CircleMode");
-    this.CircleMode = true;
-    delete this.startPoint;
-};
-WallCrafter.prototype.SetSmoothMode = function () {
-    this.SetPaintMode("SmoothMode");
-    this.SmoothMode = true;
-    delete this.startPoint;
-};
-WallCrafter.prototype.SetWallMode = function () {
-    this.SetPaintMode("WallMode");
-    this.WallMode = true;
-    delete this.startPoint;
-};
-WallCrafter.prototype.SetBezierMode = function () {
-    this.SetPaintMode("BezierMode");
-    this.BezierMode = true;
-    delete this.startPoint;
-};
-WallCrafter.prototype.SetLineMode = function () {
-    this.SetPaintMode("LineMode");
-    this.LineMode = true;
-    delete this.startPoint;
+    window.World.Objects.TempLinkPoint = {};
+    window.World.Objects.TempArc = {};
+    window.World.Objects.Ruler = {};
+    delete this.tmpLinkPoint;
+    this[flag] = true;
 };
 WallCrafter.prototype.SetPlotMode = function (flag) {
     this.PlotMode = flag;
@@ -70,8 +47,22 @@ WallCrafter.prototype.SetResultMode = function (flag) {
     this.ResultMode = flag;
     this.GridMode = false;
 };
+WallCrafter.prototype.SetMonoMode = function (flag) {
+    this.MonoMode = flag;
+    this.ResultMode = flag;
+    this.GridMode = false;
+};
 WallCrafter.prototype.SetGridMode = function (flag) {
     this.GridMode = flag;
+};
+WallCrafter.prototype.SetGridLinkMode = function () {
+    this.PrecisionMode = !this.PrecisionMode;
+};
+WallCrafter.prototype.SetSizeMode = function (flag) {
+    this.SizeMode = flag;
+};
+WallCrafter.prototype.SetAngleMode = function (flag) {
+    this.AngleMode = flag;
 };
 WallCrafter.prototype.GetGridMode = function () {
     return this.GridMode;
@@ -80,6 +71,7 @@ WallCrafter.prototype.SetLineType = function (flag) {
     this.LineType = flag;
 };
 WallCrafter.prototype.SetLinkType = function (flag) {
+    this.PrecisionMode = false;
     this.LinkType = flag;
 };
 SimpleCrafter.prototype.KeyDown = function (key) {
@@ -113,8 +105,14 @@ SimpleCrafter.prototype.KeyUp = function (key) {
 };
 
 WallCrafter.prototype.MouseDown = function (pnt) {
-    if (this.PlotMode) {
-        this.CheckPoint(this.ProcessPoint(pnt), 0.15);
+    delete window.World.Drawer2D.Message;
+    delete window.World.Drawer2D.MessageAngle;
+    if (this.PlotMode || this.DeleteMode) {
+        this.SelectPoint();
+        return;
+    }
+    if (this.PointMode && !$.isEmptyObject(window.World.Objects.TempLinkPoint)) {
+        this.AddLinkPoint();
         return;
     }
         document.body.style.cursor = 'default';
@@ -123,9 +121,15 @@ WallCrafter.prototype.MouseDown = function (pnt) {
         if (this.LinkType != "none" && !$.isEmptyObject(window.World.Objects.TempLinkPoint)) {
             this.AddLinkPoint();
         }
-        delete window.World.Drawer2D.Message;
+        
         delete this.tmpLinkPoint;
         if (typeof this.startPoint !== "undefined") {
+            if (this.RulerMode) {
+                window.World.Objects.Ruler = {};
+                delete this.tmpRuler;
+                delete this.startPoint;
+                return;
+            }
             if (this.LinkType == "parallel" && this.Ruler) {
                 this.startPoint = this.ProcessPoint(pnt);
                 this.Ruler = false;
@@ -151,6 +155,7 @@ WallCrafter.prototype.MouseDown = function (pnt) {
                     break;
                 case 3:
                     this.tmpBezier.End = this.startPoint;
+                    window.World.SaveToLocalStorage();
                     delete this.tmpBezier;
                     delete this.startPoint;
                     break;
@@ -184,6 +189,7 @@ WallCrafter.prototype.MouseDown = function (pnt) {
                             obj: this.tmpArc,
                             redo: function () {
                                 window.World.Objects.Arcs.push(this.obj);
+                                window.World.SaveToLocalStorage();
                                 window.World.Draw();
                             },
                             undo: function () {
@@ -191,15 +197,20 @@ WallCrafter.prototype.MouseDown = function (pnt) {
                                     if (window.World.Objects.Arcs[i] === this.obj)
                                         delete window.World.Objects.Arcs[i];
                                 }
+                                window.World.SaveToLocalStorage();
                                 window.World.Draw();
                             }
                         });
                         window.World.redo();
+                        delete window.World.Drawer2D.MessageAngle;
                         delete this.tmpArc;
                     } else this.startPoint = pr; 
                 } else {
+                    this.PushElement();
+                    window.World.Objects.TempArc = {};
                     delete this.tmpArc;
                     delete this.startPoint;
+                    delete window.World.Drawer2D.MessageAngle;
                 }
                 return;
             }
@@ -209,6 +220,10 @@ WallCrafter.prototype.MouseDown = function (pnt) {
 WallCrafter.prototype.DblClick = function () {
     if (!this.PlotMode) {
         document.body.style.cursor = 'default';
+        if (this.SmoothMode) {
+            window.World.Objects.Curves[window.World.Objects.Curves.length - 1].Points.pop();
+            window.World.Objects.Curves[window.World.Objects.Curves.length - 1].Points.pop();
+        }
         window.World.UpdateCycles();
         delete this.startPoint;
         delete this.tmpWall;
@@ -219,67 +234,82 @@ WallCrafter.prototype.DblClick = function () {
         delete this.tmpWalls;
         delete this.tmpVectorPoint;
         delete this.tmpLinkPoint;
+        delete window.World.Drawer2D.MessageAngle;
         delete window.World.Drawer2D.Message;
     }
 };
 WallCrafter.prototype.ProcessPoint = function (pnt) {
-    if (this.PrecisionMode)
-        return pnt;
-    var sizeCell = new Drawer().CellSize;
-    pnt = new Pnt(Math.round(pnt.X / sizeCell) * sizeCell, Math.round(pnt.Y / sizeCell) * sizeCell);
-    var normPnt;
-    if (typeof this.startPoint !== "undefined") {
-       var len = Math.round(this.startPoint.length(pnt) / 10) * 10;
-		var ang = this.startPoint.AngleTo(pnt);
-		if (!this.WallMode)
-			ang = Math.round(this.startPoint.AngleTo(pnt) / Math.PI * 180 )  / 180 * Math.PI; 
-		var norma = new Pnt(this.startPoint.X + len * Math.cos(ang), this.startPoint.Y + len * Math.sin(ang));
-		normPnt = new Pnt(Math.round(norma.X / sizeCell) * sizeCell, Math.round(norma.Y / sizeCell) * sizeCell);
-    }
-    
-    if (this.LineMode || this.BezierMode) return normPnt || pnt;
-    
-    var $this = this;
-    var near = window.World.Objects.Walls.filter(function (e) { return e.Start.length(pnt) < sizeCell/2 || e.End.length(pnt) < sizeCell/2; });
-    if (near.length > 0)
-        return near[0].Start.length(pnt) < sizeCell/2 ? near[0].Start : near[0].End;
-    else {
-        // проверка есть ли уже эта линия среди нарисованных
-        var onLine = window.World.Objects.Walls.map(function (e) {
-            var eps = sizeCell;
-            normPnt = normPnt || pnt;
-            if ((Math.min(e.Start.X, e.End.X) - eps) >= normPnt.X || (Math.max(e.Start.X, e.End.X) + eps) <= normPnt.X)
-                return undefined;
-            if ((Math.min(e.Start.Y, e.End.Y) - eps) >= normPnt.Y || (Math.max(e.Start.Y, e.End.Y) + eps) <= normPnt.Y)
-                return undefined;
-            
-            var alpha = (e.End.Y - e.Start.Y) / (e.End.X - e.Start.X);
-            if (alpha === 0) {// если на оси X лежит
-                return pnt.GetNearest(new Pnt(pnt.X, e.End.Y), new Pnt(normPnt.X, e.End.Y));
-            }
-            if (Math.abs(alpha) === Infinity) {// если на оси Y лежит
-                var ar = [new Pnt(e.End.X, pnt.Y), new Pnt(e.End.X, normPnt.Y)];
-                if (typeof $this.startPoint !== "undefined") {
-                    ar.push(new Pnt(e.End.X, $this.startPoint.Y));
-                }
-                return pnt.GetNearest(ar);
-            }
-            var b = e.End.Y - e.End.X * alpha;
-            if (Math.abs(alpha * pnt.X + b - pnt.Y) < 20) {
-                return pnt.GetNearest(new Pnt(pnt.X, alpha * pnt.X + b), new Pnt((pnt.Y - b) / alpha, pnt.Y), normPnt, new Pnt(normPnt.X, alpha * normPnt.X + b), new Pnt((normPnt.Y - b) / alpha, normPnt.Y));
-            }
-            return undefined;
-        }).filter(function (a) { return typeof a !== "undefined"; });
-        if (onLine.length > 0)
-            return pnt.GetNearest(onLine);
-    }
+    var resultPnt = pnt;
+    if (this.PrecisionMode) {
+        // привязка к сетке
+        var sizeCell = window.World.Drawer.CellSize;
+        pnt = new Pnt(Math.round(pnt.X / sizeCell) * sizeCell, Math.round(pnt.Y / sizeCell) * sizeCell);
+        var normPnt;
+        if (typeof this.startPoint !== "undefined") {
+            var len = Math.round(this.startPoint.length(pnt) / sizeCell) * sizeCell;
+            var ang = this.startPoint.AngleTo(pnt);
+            if (!this.WallMode)
+                ang = Math.round(this.startPoint.AngleTo(pnt) / Math.PI * 180) / 180 * Math.PI;
+            var norma = new Pnt(this.startPoint.X + len * Math.cos(ang), this.startPoint.Y + len * Math.sin(ang));
+            normPnt = new Pnt(Math.round(norma.X / sizeCell) * sizeCell, Math.round(norma.Y / sizeCell) * sizeCell);
+        }
+        // привязка к крайним точкам
+        /*if (this.BentMode) {
+            var $this = this;
+            var near = window.World.Objects.Walls.filter(function(e) { return e.Start.length(pnt) < 10 || e.End.length(pnt) < 10; });
+            if (near.length > 0)
+                return near[0].Start.length(pnt) < 10 ? near[0].Start : near[0].End;
+            else {
+                // проверка есть ли уже эта линия среди нарисованных
+                var onLine = window.World.Objects.Walls.map(function(e) {
+                    var eps = sizeCell;
+                    normPnt = normPnt || pnt;
+                    if ((Math.min(e.Start.X, e.End.X) - eps) >= normPnt.X || (Math.max(e.Start.X, e.End.X) + eps) <= normPnt.X)
+                        return undefined;
+                    if ((Math.min(e.Start.Y, e.End.Y) - eps) >= normPnt.Y || (Math.max(e.Start.Y, e.End.Y) + eps) <= normPnt.Y)
+                        return undefined;
 
-    return normPnt || pnt;
+                    var alpha = (e.End.Y - e.Start.Y) / (e.End.X - e.Start.X);
+                    if (alpha === 0) { // если на оси X лежит
+                        return pnt.GetNearest(new Pnt(pnt.X, e.End.Y), new Pnt(normPnt.X, e.End.Y));
+                    }
+                    if (Math.abs(alpha) === Infinity) { // если на оси Y лежит
+                        var ar = [new Pnt(e.End.X, pnt.Y), new Pnt(e.End.X, normPnt.Y)];
+                        if (typeof $this.startPoint !== "undefined") {
+                            ar.push(new Pnt(e.End.X, $this.startPoint.Y));
+                        }
+                        return pnt.GetNearest(ar);
+                    }
+                    var b = e.End.Y - e.End.X * alpha;
+                    if (Math.abs(alpha * pnt.X + b - pnt.Y) < 20) {
+                        return pnt.GetNearest(new Pnt(pnt.X, alpha * pnt.X + b), new Pnt((pnt.Y - b) / alpha, pnt.Y), normPnt, new Pnt(normPnt.X, alpha * normPnt.X + b), new Pnt((normPnt.Y - b) / alpha, normPnt.Y));
+                    }
+                    return undefined;
+                }).filter(function(a) { return typeof a !== "undefined"; });
+                if (onLine.length > 0)
+                    return pnt.GetNearest(onLine);
+            }
+        }*/
+        resultPnt = normPnt || pnt;
+    }
+    if (this.AngleMode && typeof this.startPoint !== "undefined") {
+        var angle = this.startPoint.AngleTo(resultPnt) * 180 / Math.PI;
+        if (angle < 0) {
+            angle = -angle;
+        } else {
+            angle = 360-angle;
+        }
+        window.World.Drawer2D.MessageAngle = Math.round(angle)+"°";
+    }
+    return resultPnt;
 };
 WallCrafter.prototype.MouseMove = function (pnt) {
-    if (this.PlotMode) return;
     window.World.Drawer2D.mouse = pnt;
     pnt = this.ProcessPoint(pnt);
+    if (this.DeleteMode || this.PlotMode) {
+        this.CheckPoint(this.ProcessPoint(pnt), 0.15, true);
+        return;
+    }
     if (typeof this.startPoint !== "undefined" && (this.startPoint.X != pnt.X || this.startPoint.Y != pnt.Y)) {
         document.body.style.cursor = 'crosshair';
         if (this.WallMode) {
@@ -351,14 +381,31 @@ WallCrafter.prototype.MouseMove = function (pnt) {
                 // значит задан радиус и рисуем дугу
                 if (this.ArcMode) {
                     this.tmpArc.End = pnt;
-                    this.PushElement();
+                    window.World.Objects.TempArc = this.tmpArc;
                 }
             }
-        } else {
+        } else if (this.RulerMode) {
+            this.tmpRuler = new Wall(this.startPoint, pnt);
+            window.World.Drawer2D.Message = Math.round(this.tmpRuler.End.length(this.tmpRuler.Start));
+            window.World.UndoedEvents = [];
+            window.World.UndoedEvents.push({
+                obj: this.tmpRuler,
+                redo: function () {
+                    window.World.Objects.Ruler = this.obj;
+                    window.World.Draw();
+                },
+                undo: function () {
+                    window.World.Objects.Ruler = {};
+                    window.World.Draw();
+                }
+            });
+            window.World.redo();
+            window.World.Draw();
+        }else{
             if (this.LinkType == "parallel" && this.Ruler) {
                 this.tmpRuler = new Wall(this.startPoint, pnt);
                 window.World.Drawer2D.Message = Math.round(this.tmpRuler.End.length(this.tmpRuler.Start)) ;
-                this.tmpLinkPoint = pnt;
+                this.tmpLinkPoint = new LinkPoint(pnt);
                 window.World.Objects.TempLinkPoint = pnt;
                 window.World.UndoedEvents = [];
                 window.World.UndoedEvents.push({
@@ -398,6 +445,11 @@ WallCrafter.prototype.MouseMove = function (pnt) {
         }
         window.World.Draw();
     } else {
+        if (this.PointMode) {
+            this.tmpLinkPoint = new LinkPoint(pnt);
+            window.World.Objects.TempLinkPoint = pnt;
+            return;
+        } 
         delete this.tmpLinkPoint;
         window.World.Objects.TempLinkPoint = { };
         if (this.LinkType != "none" && typeof this.startPoint === "undefined") {
@@ -406,7 +458,7 @@ WallCrafter.prototype.MouseMove = function (pnt) {
                 case "parallel":
                     res = this.GetPointOnLine(pnt);
                     if (res.flag) {
-                        this.tmpLinkPoint = pnt;
+                        this.tmpLinkPoint = new LinkPoint(pnt);
                         this.tmpVectorPoint = res.vector;
                         window.World.Objects.TempLinkPoint = pnt;
                         this.Ruler = true;
@@ -415,7 +467,7 @@ WallCrafter.prototype.MouseMove = function (pnt) {
                 case "perpendicular":
                     res = this.GetPointOnLine(pnt);
                     if (res.flag) {
-                        this.tmpLinkPoint = pnt;
+                        this.tmpLinkPoint = new LinkPoint(pnt);
                         this.tmpVectorPoint = res.vector;
                         window.World.Objects.TempLinkPoint = pnt;
                     }
@@ -423,24 +475,26 @@ WallCrafter.prototype.MouseMove = function (pnt) {
                 case "extreme":
                     res = this.CheckExtremePoints(pnt);
                     if(res.flag) {
-                        this.tmpLinkPoint = res.pnt;
+                        this.tmpLinkPoint = new LinkPoint(res.pnt);
                         window.World.Objects.TempLinkPoint = res.pnt;
                     }
                     break;
                 case "linepoint":
-                    if (this.CheckPoint(pnt, 0.1)) {
-                        this.tmpLinkPoint = pnt;
+                    var result = this.CheckPoint(pnt, 0.1, false);
+                    if (result.flag) {
+                        this.tmpLinkPoint = new LinkPoint(pnt);
                         window.World.Objects.TempLinkPoint = pnt;
                     }
                     break;
                 case "intersection":
                     if(this.CheckIntersection(pnt)>1) {
-                        this.tmpLinkPoint = pnt;
+                        this.tmpLinkPoint = new LinkPoint(pnt);
                         window.World.Objects.TempLinkPoint = pnt;
                     };
                     break;
             }
         }
+        
 //        delete window.World.Drawer2D.Message;
     }
 };
@@ -449,7 +503,7 @@ WallCrafter.prototype.GetProjectionOnParallel = function (pnt, vector, linepnt) 
     // направлящий вектор (vx,vy) и точка (x0,y0) => уравнение прямой (-vy/vx)x+y+(vy/vx*x0-y0)=0
     // проекция точки (xp,yp) на прямую => 
     var answer = new Pnt();
-    answer.X = ((vector.Y / vector.X) * (pnt.Y + vector.Y / vector.X * linepnt.X - pnt.Y) + pnt.X) / (Math.pow(vector.Y / vector.X, 2) + 1);
+    answer.X = ((vector.Y / vector.X) * (pnt.Y + vector.Y / vector.X * linepnt.X - linepnt.Y) + pnt.X) / (Math.pow(vector.Y / vector.X, 2) + 1);
     answer.Y = linepnt.Y + (vector.Y / vector.X) * (answer.X - linepnt.X);
     return answer;
 };
@@ -489,10 +543,9 @@ WallCrafter.prototype.CheckIntersection = function (pnt) {
         }
     });
     if (result.flag < 2) {
-        window.World.Objects.Beziers.forEach(function (a) {
+        window.World.Objects.Arcs.forEach(function (a) {
             if (result.flag < 2) {
-                var points = [a.Start, a.FirstControlPoint, a.SecondControlPoint, a.End];
-                if (window.World.Crafter.Kardano(points, pnt)) {
+                if (window.World.Crafter.CheckPointInArc(a.Start, a.End, a.Center, pnt, a.IsCircle, accuracy)) {
                     result.flag++;
                 }
             }
@@ -508,9 +561,10 @@ WallCrafter.prototype.CheckIntersection = function (pnt) {
         });
     }
     if (result.flag < 2) {
-        window.World.Objects.Arcs.forEach(function (a) {
+        window.World.Objects.Beziers.forEach(function (a) {
             if (result.flag < 2) {
-                if (window.World.Crafter.CheckPointInArc(a.Start, a.End, a.Center, pnt, a.IsCircle, accuracy)) {
+                var points = [a.Start, a.FirstControlPoint, a.SecondControlPoint, a.End];
+                if (window.World.Crafter.Kardano(points, pnt)) {
                     result.flag++;
                 }
             }
@@ -539,9 +593,9 @@ WallCrafter.prototype.CheckExtremePoints = function (pnt) {
                 if (a.Points[0].length(pnt) < accuracy) {
                     result.flag = true;
                     result.pnt = a.Points[0];
-                } else if (a.Points[a.PntCount - 1].length(pnt) < accuracy) {
+                } else if (a.Points[a.Points.length - 1].length(pnt) < accuracy) {
                     result.flag = true;
-                    result.pnt = a.Points[a.PntCount - 1];
+                    result.pnt = a.Points[a.Points.length - 1];
                 }
             }
         });
@@ -549,13 +603,18 @@ WallCrafter.prototype.CheckExtremePoints = function (pnt) {
     return result;
 };
 WallCrafter.prototype.CheckPointInCurve = function (points, pnt, accuracy) {
-    var a = {Start:points[0]};
-    for (var i = 1; i < points.length; i++) {
-        a.End = points[i];
-        if (Math.abs(Math.sqrt(Math.pow(a.Start.X - pnt.X, 2) + Math.pow(a.Start.Y - pnt.Y, 2)) + Math.sqrt(Math.pow(a.End.X - pnt.X, 2) + Math.pow(a.End.Y - pnt.Y, 2)) - Math.sqrt(Math.pow(a.End.X - a.Start.X, 2) + Math.pow(a.End.Y - a.Start.Y, 2))) < accuracy+0.05) {
+    var arr = [];
+    points.forEach(function (item) {
+        arr.push(item.X, item.Y);
+    });
+    var allpoints = getCurvePoints(arr);
+    var a = { Start: new Pnt(allpoints[0],allpoints[1]) };
+    for (var i = 2; i < allpoints.length; i+=2) {
+        a.End = new Pnt(allpoints[i], allpoints[i+1]);
+        if (Math.abs(Math.sqrt(Math.pow(a.Start.X - pnt.X, 2) + Math.pow(a.Start.Y - pnt.Y, 2)) + Math.sqrt(Math.pow(a.End.X - pnt.X, 2) + Math.pow(a.End.Y - pnt.Y, 2)) - Math.sqrt(Math.pow(a.End.X - a.Start.X, 2) + Math.pow(a.End.Y - a.Start.Y, 2))) < accuracy+2) {
             return true;
         }
-        a.Start = points[i];
+        a.Start = new Pnt(allpoints[i], allpoints[i + 1]);
     }
     return false;
 };
@@ -565,16 +624,18 @@ WallCrafter.prototype.CheckPointInArc = function (start, end, center, pnt, isCir
     if (Math.abs(Math.pow(pnt.X - center.X, 2) + Math.pow(pnt.Y - center.Y, 2) - Math.pow(center.length(start), 2)) > accuracy*10000+1000) return false;
     if (isCircle) return true;
     //  проверяем угол
-    var startAngle = Math.acos((start.X - center.X) / (center.length(start) + 1)) * 180 / Math.PI, endAngle = Math.acos((end.X - center.X) / (center.length(end) + 1)) * 180 / Math.PI, needAngle = Math.acos((pnt.X - center.X) / (center.length(pnt) + 1)) * 180 / Math.PI;
-    if (start.Y < center.Y) {
-        startAngle = 360 - startAngle;
-    }
-    if (end.Y < center.Y) {
-        endAngle = 360 - endAngle;
-    }
-    if (pnt.Y < center.Y) {
-        needAngle = 360 - needAngle;
-    }
+    var startAngle = Math.acos((start.X - center.X) / (center.length(start) + 1)) * 180 / Math.PI,
+        endAngle = Math.acos((end.X - center.X) / (center.length(end) + 1)) * 180 / Math.PI,
+        needAngle = Math.acos((pnt.X - center.X) / (center.length(pnt) + 1)) * 180 / Math.PI;
+        if (start.Y < center.Y) {
+            startAngle = 360-startAngle;
+        }
+        if (end.Y < center.Y) {
+            endAngle = 360-endAngle;
+        }
+        if (pnt.Y < center.Y) {
+            needAngle = 360-needAngle;
+        }
     return (startAngle < endAngle && needAngle > startAngle && needAngle < endAngle)
         || (startAngle > endAngle && ((needAngle > startAngle && needAngle <= 360) || needAngle < endAngle));
 };
@@ -611,58 +672,103 @@ WallCrafter.prototype.Kardano = function (points,pnt) {
     for (var i = 0; i < x.length; i++) {
         var y = Math.pow(1 - x[i], 3) * points[0].Y + 3 * x[i] * Math.pow(1 - x[i], 2) * points[1].Y + 3 * Math.pow(x[i], 2) * (1 - x[i]) * points[2].Y + Math.pow(x[i], 3) * points[3].Y;
         if (Math.abs(y - pnt.Y) < 10) {
-            return true;
+            var t1 = (-z[1] + Math.sqrt(z[1] * z[1] - 3 * z[0] * z[2])) / (3 * z[0]), t2 = (-z[1] - Math.sqrt(z[1] * z[1] - 3 * z[0] * z[2])) / (3 * z[0]);
+            var maxX = -100000000000, maxY = -100000000000, minX = 100000000000, minY = 100000000000;
+            if (t1 <= 1 && t1 >= 0) {
+                var xe1 = z[0] * Math.pow(t1, 3) + z[1] * Math.pow(t1, 2) + z[2] * t1 + points[0].X,
+                    ye1 = Math.pow(1 - t1, 3) * points[0].Y + 3 * t1 * Math.pow(1 - t1, 2) * points[1].Y + 3 * Math.pow(t1, 2) * (1 - t1) * points[2].Y + Math.pow(t1, 3) * points[3].Y;
+                if (maxX < xe1) maxX = xe1;
+                if (maxY < ye1) maxY = ye1;
+                if (minX > xe1) minX = xe1;
+                if (minY > ye1) minY = ye1;
+            }
+            if (t2 <= 1 && t2 >= 0) {
+                var xe2 = z[0] * Math.pow(t2, 3) + z[1] * Math.pow(t2, 2) + z[2] * t2 + points[0].X,
+                    ye2 = Math.pow(1 - t2, 3) * points[0].Y + 3 * t2 * Math.pow(1 - t2, 2) * points[1].Y + 3 * Math.pow(t2, 2) * (1 - t2) * points[2].Y + Math.pow(t2, 3) * points[3].Y;
+                if (maxX < xe2) maxX = xe2;
+                if (maxY < ye2) maxY = ye2;
+                if (minX > xe2) minX = xe2;
+                if (minY > ye2) minY = ye2;
+            }
+            maxX = Math.max(points[2].X, points[1].X, points[3].X, points[0].X, maxX), minX = Math.min(points[2].X, points[1].X, points[3].X, points[0].X, minX), maxY = Math.max(points[2].Y, points[1].Y, points[3].Y, points[0].Y, maxY), minY = Math.min(points[2].Y, points[1].Y, points[3].Y, points[0].Y, minY);
+//            window.World.Objects.Normals = [];
+//            window.World.Objects.Normals.push(new Wall(new Pnt(maxX, minY), new Pnt(maxX, maxY)));
+//            window.World.Objects.Normals.push(new Wall(new Pnt(minX, maxY), new Pnt(maxX, maxY)));
+//            window.World.Objects.Normals.push(new Wall(new Pnt(maxX, minY), new Pnt(minX, minY)));
+//            window.World.Objects.Normals.push(new Wall(new Pnt(minX, minY), new Pnt(minX, maxY)));
+            return (pnt.Y >= minY && pnt.Y <= maxY && pnt.X >= minX && pnt.X <= maxX);
         }
     }
     return false;
 
 };
-WallCrafter.prototype.CheckPoint = function(pnt,accuracy) {
+WallCrafter.prototype.CheckPoint = function(pnt,accuracy,selection) {
     var result = { flag: 0, pnt: new Pnt() };
-    window.World.Objects.Walls.concat(window.World.Objects.Normals).forEach(function (a) {
+    var a = window.World.Objects.LinkPoints;
+    for (var i = a.length-1; i >= 0; i--) {
+        if (selection) a[i].Selected = false;
         if (!result.flag) {
-            if (Math.abs(Math.sqrt(Math.pow(a.Start.X - pnt.X, 2) + Math.pow(a.Start.Y - pnt.Y, 2)) + Math.sqrt(Math.pow(a.End.X - pnt.X, 2) + Math.pow(a.End.Y - pnt.Y, 2)) - Math.sqrt(Math.pow(a.End.X - a.Start.X, 2) + Math.pow(a.End.Y - a.Start.Y, 2))) < accuracy) {
-                if (window.World.Crafter.PlotMode) a.LineType = window.World.Crafter.LineType;
+            if (Math.abs(a[i].Point.X - pnt.X) < 10 && Math.abs(a[i].Point.Y - pnt.Y) < 10) {
                 result.flag = true;
+                if (selection) a[i].Selected = true;
             }
         }
-    });
-    if (!result.flag) {
-        window.World.Objects.Beziers.forEach(function(a) {
+    }
+    if (!result.flag || selection) {
+        a = window.World.Objects.Walls.concat(window.World.Objects.Normals);
+        for (i = a.length - 1; i >= 0; i--) {
+            if (selection) a[i].Selected = false;
             if (!result.flag) {
-                var points = [a.Start, a.FirstControlPoint, a.SecondControlPoint, a.End];
+                if (Math.abs(Math.sqrt(Math.pow(a[i].Start.X - pnt.X, 2) + Math.pow(a[i].Start.Y - pnt.Y, 2)) + Math.sqrt(Math.pow(a[i].End.X - pnt.X, 2) + Math.pow(a[i].End.Y - pnt.Y, 2)) - Math.sqrt(Math.pow(a[i].End.X - a[i].Start.X, 2) + Math.pow(a[i].End.Y - a[i].Start.Y, 2))) < accuracy) {
+                    if (window.World.Crafter.PlotMode && !selection) a[i].LineType = window.World.Crafter.LineType;
+                    result.flag = true;
+                    if (selection) a[i].Selected = true;
+                }
+            }
+        }
+    }
+    if (!result.flag || selection) {
+        a = window.World.Objects.Arcs;
+        for (i = a.length - 1; i >= 0; i--) {
+            if (selection) a[i].Selected = false;
+            if (!result.flag) {
+                result.flag = window.World.Crafter.CheckPointInArc(a[i].Start, a[i].End, a[i].Center, pnt, a[i].IsCircle, accuracy);
+                if (result.flag) {
+                    if (window.World.Crafter.PlotMode && !selection) a[i].LineType = window.World.Crafter.LineType;
+                    if (selection) a[i].Selected = true;
+                }
+            }
+        }
+        }
+    if (!result.flag || selection) {
+        a = window.World.Objects.Curves;
+        for (i = a.length - 1; i >= 0; i--) {
+            if (selection) a[i].Selected = false;
+            if (!result.flag) {
+                result.flag = window.World.Crafter.CheckPointInCurve(a[i].Points, pnt, accuracy);
+                if (result.flag) {
+                    if (window.World.Crafter.PlotMode && !selection) a[i].LineType = window.World.Crafter.LineType;
+                    if (selection) a[i].Selected = true;
+                }
+            }
+        }
+    }
+    if (!result.flag || selection) {
+        a = window.World.Objects.Beziers;
+        for (i = a.length-1; i >= 0; i--) {
+            if (selection) a[i].Selected = false;
+            if (!result.flag) {
+                var points = [a[i].Start, a[i].FirstControlPoint, a[i].SecondControlPoint, a[i].End];
                 result.flag = window.World.Crafter.Kardano(points, pnt);
                 if (result.flag) {
-                    if (window.World.Crafter.PlotMode) a.LineType = window.World.Crafter.LineType;
-                    result.flag = true;
+                    if (window.World.Crafter.PlotMode && !selection) a[i].LineType = window.World.Crafter.LineType;
+                    if (selection) a[i].Selected = true;
                 }
             }
-        });
-    }
-    if (!result.flag) {
-        window.World.Objects.Curves.forEach(function(a) {
-            if (!result.flag) {
-                result.flag = window.World.Crafter.CheckPointInCurve(a.Points, pnt, accuracy);
-                if (result.flag) {
-                    if (window.World.Crafter.PlotMode) a.LineType = window.World.Crafter.LineType;
-                    result.flag = true;
-                }
-            }
-        });
-    }
-    if (!result.flag) {
-        window.World.Objects.Arcs.forEach(function(a) {
-            if (!result.flag) {
-                result.flag = window.World.Crafter.CheckPointInArc(a.Start, a.End, a.Center, pnt, a.IsCircle, accuracy);
-                if (result.flag) {
-                    if (window.World.Crafter.PlotMode) a.LineType = window.World.Crafter.LineType;
-                    result.flag = true;
-                }
-            }
-        });
+        }
     }
     // пока только приблизительная точка
-    return result.flag;
+    return result;
 };
 WallCrafter.prototype.PushElement = function() {
     var obj = this.tmpWall;
@@ -687,6 +793,7 @@ WallCrafter.prototype.PushElement = function() {
             if (window.World.Crafter.ArcMode || window.World.Crafter.CircleMode) window.World.Objects.Arcs.push(this.obj);
             if (window.World.Crafter.SmoothMode) window.World.Objects.Curves.push(this.obj);
             if (window.World.Crafter.BezierMode) window.World.Objects.Beziers.push(this.obj);
+            window.World.SaveToLocalStorage();
             window.World.Draw();
         },
         undo: function() {
@@ -719,28 +826,98 @@ WallCrafter.prototype.PushElement = function() {
                 this.obj.forEach(function(e) {
                     delete window.World.Objects.Walls[window.World.Objects.Walls.indexOf(e)];
                 });
+            window.World.SaveToLocalStorage();
             window.World.Draw();
         }
     });
     window.World.redo();
 };
-WallCrafter.prototype.AddLinkPoint = function () {
+WallCrafter.prototype.AddLinkPoint = function() {
     window.World.Objects.TempLinkPoint = {};
     window.World.UndoedEvents = [];
     window.World.UndoedEvents.push({
         obj: this.tmpLinkPoint,
-        redo: function () {
+        redo: function() {
             window.World.Objects.LinkPoints.push(this.obj);
+            window.World.SaveToLocalStorage();
             window.World.Draw();
         },
-        undo: function () {
+        undo: function() {
             for (var i in window.World.Objects.LinkPoints) {
                 if (window.World.Objects.LinkPoints[i] === this.obj)
                     delete window.World.Objects.LinkPoints[i];
             }
+            window.World.SaveToLocalStorage();
             window.World.Draw();
         }
     });
     window.World.redo();
     window.World.Draw();
+};
+WallCrafter.prototype.SelectPoint = function () {
+    var flag = false;
+    var elementPos = -1;
+    if (!window.World.Crafter.PlotMode) {
+        elementPos = window.World.Objects.LinkPoints.map(function (x) { return x.Selected; }).indexOf(true);
+        if (elementPos > -1) {
+            window.World.Objects.LinkPoints.splice(elementPos, 1);
+            flag = true;
+        }
+    }
+    if (flag) return;
+    window.World.Objects.Walls.forEach(function (a,index) {
+        if (a.Selected) {
+            if (window.World.Crafter.PlotMode) a.LineType = window.World.Crafter.LineType;
+            else elementPos = index;
+            flag = true;
+        }
+    });
+    if (elementPos > -1) {
+        window.World.Objects.Walls.splice(elementPos, 1);
+    }
+    if (flag) return;
+    window.World.Objects.Normals.forEach(function (a, index) {
+        if (a.Selected) {
+            if (window.World.Crafter.PlotMode) a.LineType = window.World.Crafter.LineType;
+            else elementPos = index;
+            flag = true;
+        }
+    });
+    if (elementPos > -1) {
+        window.World.Objects.Normals.splice(elementPos, 1);
+    }
+    if (flag) return;
+    window.World.Objects.Arcs.forEach(function (a, index) {
+        if (a.Selected) {
+            if (window.World.Crafter.PlotMode) a.LineType = window.World.Crafter.LineType;
+            else elementPos = index;
+            flag = true;
+        }
+    });
+    if (elementPos > -1) {
+        window.World.Objects.Arcs.splice(elementPos, 1);
+    }
+    if (flag) return;
+    window.World.Objects.Curves.forEach(function (a, index) {
+        if (a.Selected) {
+            if (window.World.Crafter.PlotMode) a.LineType = window.World.Crafter.LineType;
+            else elementPos = index;
+            flag = true;
+        }
+    });
+    if (elementPos > -1) {
+        window.World.Objects.Curves.splice(elementPos, 1);
+    }
+    if (flag) return;
+    window.World.Objects.Beziers.forEach(function (a, index) {
+        if (a.Selected) {
+            if (window.World.Crafter.PlotMode) a.LineType = window.World.Crafter.LineType;
+            else elementPos = index;
+            flag = true;
+        }
+    });
+    if (elementPos > -1) {
+        window.World.Objects.Beziers.splice(elementPos, 1);
+    }
+    if (flag) return;
 }

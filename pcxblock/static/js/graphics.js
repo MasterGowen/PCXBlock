@@ -45,33 +45,47 @@
                     window.World.Objects.Normals = [];
                     window.World.Objects.Arcs = [];
                     window.World.Objects.Curves = [];
+                    window.World.Objects.Ruler = {};
+                    window.World.Objects.LinkPoints = [];
+                    window.World.Objects.TempLinkPoint = {};
+                    window.World.Objects.TempArc = {};
+                    window.World.Objects.SavedResult = '';
                     return false;
                 },
                 backtool: function () {
                     window.World.Crafter.KeyDown(27);
                     return false;
                 },
-                benttool: function () {
-                    if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetBentMode();
+                DeleteMode: function () {
+                    if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetPaintMode("DeleteMode");
                 },
-                linetool: function() {
-                    if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetLineMode();
+                RulerMode: function () {
+                    if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetPaintMode("RulerMode");
+                },
+                PointMode: function () {
+                    if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetPaintMode("PointMode");
+                },
+                BentMode: function () {
+                    if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetPaintMode("BentMode");
+                },
+                LineMode: function () {
+                    if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetPaintMode("LineMode");
                     $('div.linktool[rel^=p]').removeAttr('disabled');
                 },
-                beziertool: function() {
-                    if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetBezierMode();
+                BezierMode: function () {
+                    if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetPaintMode("BezierMode");
                 },
-                arctool: function () {
-                    if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetArcMode();
+                ArcMode: function () {
+                    if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetPaintMode("ArcMode");
                 },
-                circletool: function () {
-                    if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetCircleMode();
+                CircleMode: function () {
+                    if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetPaintMode("CircleMode");
                 },
-                smoothtool: function () {
-                    if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetSmoothMode();
+                SmoothMode: function () {
+                    if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetPaintMode("SmoothMode");
                 },
-                walltool: function () {
-                    if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetWallMode();
+                WallMode: function () {
+                    if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetPaintMode("WallMode");
                 },
                 mainline: function () {
                     if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetLineType("main");
@@ -85,23 +99,51 @@
                 thinline: function () {
                     if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetLineType("thin");
                 },
+                backline: function () {
+                    if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetLineType("none");
+                },
                 parallellink:function () {
-                    if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetLinkType("parallel");
+                    if (window.World.Crafter instanceof WallCrafter) {
+                        window.World.Crafter.SetLinkType("parallel");
+                    }
                 },
                 perpendicularlink: function () {
-                    if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetLinkType("perpendicular");
+                    if (window.World.Crafter instanceof WallCrafter) {
+                        window.World.Crafter.SetLinkType("perpendicular");
+                    }
                 },
                 extremelink: function () {
-                    if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetLinkType("extreme");
+                    if (window.World.Crafter instanceof WallCrafter) {
+                        window.World.Crafter.SetLinkType("extreme");
+                    }
                 },
                 linepointlink: function () {
-                    if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetLinkType("linepoint");
+                    if (window.World.Crafter instanceof WallCrafter) {
+                        window.World.Crafter.SetLinkType("linepoint");
+                    }
                 },
                 intersectionlink: function () {
-                    if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetLinkType("intersection");
+                    if (window.World.Crafter instanceof WallCrafter) {
+                        window.World.Crafter.SetLinkType("intersection");
+                    }
                 },
+                gridlink: function () {
+                    if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetGridLinkMode();
+                },
+                nonelink: function () {
+                    if (window.World.Crafter instanceof WallCrafter) {
+                        window.World.Crafter.SetLinkType("none");
+                    }
+                }
             };
 
+            
+            function showSize(e) {
+                if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetSizeMode(e.checked);
+            }
+            function showAngle(e) {
+                if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetAngleMode(e.checked);
+            }
             $(document).ready(function () {
             window.quality = 30;
             window.World = new WorldClass($('.designer'));

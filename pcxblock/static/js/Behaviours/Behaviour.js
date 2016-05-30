@@ -4,6 +4,16 @@
     this.canvas = canvas;
     var $this = this;
     this.Work = true;
+    $(canvas).dblclick(function (e) {
+        var parentOffset = $(e.target).parent().offset();
+        var relX = e.pageX - parentOffset.left;
+        var relY = e.pageY - parentOffset.top;
+        if (!$this.Work) return;
+        if (e.originalEvent.defaultPrevented)
+            return;
+        $this.Raise({ type: "dblclick", data: { X: relX, Y: relY } });
+        e.preventDefault();
+    });
     $(canvas).mousedown(function (e) {
         var parentOffset = $(e.target).parent().offset();
         var relX = e.pageX - parentOffset.left;
@@ -13,17 +23,7 @@
             return;
         $this.Raise({ type: "mousedown", data: { X: relX, Y: relY, leftButton: e.button === 0, rightButton: e.button === 2 } });
         e.preventDefault();
-    });
-    $(canvas).dblclick(function (e) {
-        var parentOffset = $(e.target).parent().offset();
-        var relX = e.pageX - parentOffset.left;
-        var relY = e.pageY - parentOffset.top;
-        if (!$this.Work) return;
-        if (e.originalEvent.defaultPrevented)
-            return;
-        $this.Raise({ type: "dblclick", data: { X: relX, Y: relY} });
-        e.preventDefault();
-    });
+        });
     $(canvas).mouseup(function (e) {
         var parentOffset = $(e.target).parent().offset();
         var relX = e.pageX - parentOffset.left;

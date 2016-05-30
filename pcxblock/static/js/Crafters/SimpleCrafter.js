@@ -4,6 +4,10 @@
 SimpleCrafter.prototype = new Crafter();
 SimpleCrafter.prototype.ProcessCommand = function (cmd) {
     switch (cmd.type) {
+        case "dbl":
+            if (typeof cmd.point === "undefined") return;
+            this.DblClick(cmd.point);
+            break;
         case "down":
             if (cmd.rightButton)
                 break;
@@ -16,10 +20,6 @@ SimpleCrafter.prototype.ProcessCommand = function (cmd) {
         case "move":
             if (typeof cmd.point === "undefined") return;
             this.MouseMove(cmd.point);
-            break;
-        case "dbl":
-            if (typeof cmd.point === "undefined") return;
-            this.DblClick(cmd.point);
             break;
         case "keydown":
             this.KeyDown(cmd.key);
