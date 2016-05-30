@@ -32,8 +32,8 @@
 }
 
 .tool>img {
-    height: 40px;
-    width: 40px;
+    height: 32px;
+    width: 32px;
 }
 
 div.designer {
@@ -296,7 +296,7 @@ button.close {
  }
 
 .linktool{
- max-width: 40px;
+ max-width: 32px;
 }
 .ge_panel .linktool[disabled]{ opacity: 0.4;cursor: not-allowed;}
 
