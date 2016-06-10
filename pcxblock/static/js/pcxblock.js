@@ -80,7 +80,7 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
         $('#pcoverlay').fadeIn('fast', function(){
         setResultImage();
 
-        $('#student_check_picture').attr("src", monoResultImage);
+        $('#student_check_picture').attr("src", globalImage);
         $('#pcbox').fadeIn('fast', function(){});
         disableScroll();
         drawResult();
