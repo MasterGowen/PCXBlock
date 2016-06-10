@@ -76,16 +76,16 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
     }
     
     function showCompleteAlert(){
-
-        $('#pcoverlay').fadeIn('fast', function(){
         drawMonoResult();
+        $('#pcoverlay').fadeIn('fast', function(){
         setResultImage();
 
         $('#student_check_picture').attr("src", monoResultImage);
         $('#pcbox').fadeIn('fast', function(){});
         disableScroll();
+        drawResult();
         onWindowResize();
-        resultImage = globalImage;
+
       });
     }
 
@@ -97,8 +97,7 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
     }
 
     function setResultImage(){
-        resultImage = globalImage;
-        monoResultImage = getResult();
+       globalImage = getResult();
     }
 
 
@@ -109,13 +108,13 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
 
     $(element).find(".Check").
     bind("click", function check () {
-	if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetResultMode(true);
-        window.World.Draw();
+
         drawResult();
         showCompleteAlert();
     });
 
     $(element).find('#send_answer').click(function () {
+        globalImage = getResult();
         $('#send_answer').text("Проверка ...")
         $.ajax({
             "type": "POST",
