@@ -78,12 +78,14 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
     function showCompleteAlert(){
 
         $('#pcoverlay').fadeIn('fast', function(){
-
+        drawMonoResult();
         setResultImage();
+
         $('#student_check_picture').attr("src", monoResultImage);
         $('#pcbox').fadeIn('fast', function(){});
         disableScroll();
         onWindowResize();
+        resultImage = globalImage;
       });
     }
 
@@ -96,7 +98,7 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
 
     function setResultImage(){
         resultImage = globalImage;
-        monoResultImage = drawMonoResult();
+        monoResultImage = getResult();
     }
 
 
