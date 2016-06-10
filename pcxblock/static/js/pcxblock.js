@@ -115,6 +115,7 @@ var PCXBlock = function PCXBlock (runtime, element, data) {
 
     $(element).find('#send_answer').click(function () {
         globalImage = getResult();
+        resultImage = globalImage;
         $('#send_answer').text("Проверка ...")
         $.ajax({
             "type": "POST",
