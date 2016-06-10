@@ -145,7 +145,6 @@ class PCXBlock(XBlock):
         display_name=u"Настройки цветов линий",
         help=u"Настройки цветов линий",
         default={
-
             "main_line": {"min_color": [0, 200, 0], "max_color": [200, 255, 200]},
             "dash_dot_line": {"min_color": [0, 0, 200], "max_color": [200, 200, 255]},
             "dashed_line": {"min_color": [200, 0, 0], "max_color": [255, 200, 200]},
@@ -226,14 +225,19 @@ class PCXBlock(XBlock):
             "grid_step": self.editor_settings["grid_step"],
 
 
-            "pic_parallellink": self.runtime.local_resource_url(self, 'public/images/pic_parallellink.png'),
-            "pic_perpendicularlink": self.runtime.local_resource_url(self, 'public/images/pic_perpendicularlink.png'),
-            "pic_extremelink": self.runtime.local_resource_url(self, 'public/images/pic_extremelink.png'),
-            "pic_linepointlink": self.runtime.local_resource_url(self, 'public/images/pic_linepointlink.png'),
-            "pic_intersectionlink": self.runtime.local_resource_url(self, 'public/images/pic_intersectionlink.png'),
-            "pic_circletool": self.runtime.local_resource_url(self, 'public/images/pic_circletool.png'),
-            "pic_smoothtool": self.runtime.local_resource_url(self, 'public/images/pic_smoothtool.png'),
-            "pic_arctool": self.runtime.local_resource_url(self, 'public/images/pic_arctool.png'),
+            "pic_parallellink": self.runtime.local_resource_url(self, 'public/images/pic_parallellink.svg'),
+            "pic_perpendicularlink": self.runtime.local_resource_url(self, 'public/images/pic_perpendicularlink.svg'),
+            "pic_extremelink": self.runtime.local_resource_url(self, 'public/images/pic_extremelink.svg'),
+            "pic_linepointlink": self.runtime.local_resource_url(self, 'public/images/pic_linepointlink.svg'),
+            "pic_intersectionlink": self.runtime.local_resource_url(self, 'public/images/pic_intersectionlink.svg'),
+            "pic_circletool": self.runtime.local_resource_url(self, 'public/images/pic_circletool.svg'),
+            "pic_smoothtool": self.runtime.local_resource_url(self, 'public/images/pic_smoothtool.svg'),
+            "pic_arctool": self.runtime.local_resource_url(self, 'public/images/pic_arctool.svg'),
+
+            "pic_grid_point": self.runtime.local_resource_url(self, 'public/images/pic_grid_point.svg'),
+            "pic_point": self.runtime.local_resource_url(self, 'public/images/pic_point.svg'),
+            "pic_ruler": self.runtime.local_resource_url(self, 'public/images/pic_ruler.svg'),
+            "pic_delete": self.runtime.local_resource_url(self, 'public/images/pic_delete.svg'),
 
             "pic_back": self.runtime.local_resource_url(self, 'public/images/pic_back.svg'),
             "pic_bent": self.runtime.local_resource_url(self, 'public/images/pic_bent.svg'),
@@ -242,6 +246,12 @@ class PCXBlock(XBlock):
             "pic_BezierCurve": self.runtime.local_resource_url(self, 'public/images/pic_BezierCurve.svg'),
             "pic_eraser": self.runtime.local_resource_url(self, 'public/images/pic_eraser.svg'),
             "pic_grid": self.runtime.local_resource_url(self, 'public/images/pic_grid.svg'),   
+
+            "pic_main_line": self.runtime.local_resource_url(self, 'public/images/pic_main_line.svg'),  
+            "pic_dash_dot_line": self.runtime.local_resource_url(self, 'public/images/pic_dash_dot_line.svg'),  
+            "pic_dashed_line": self.runtime.local_resource_url(self, 'public/images/pic_dashed_line.svg'),  
+            "pic_thin_line": self.runtime.local_resource_url(self, 'public/images/pic_thin_line.svg'),  
+
 
             "main_line_thickness": self.lines_settings["main_line"]["thickness"],
             "main_line_coefficient": self.lines_settings["main_line"]["coefficient"],
@@ -254,13 +264,6 @@ class PCXBlock(XBlock):
 
             "link_thickness": self.links_settings["thickness"],
             "link_coefficient": self.links_settings["coefficient"],
-
-
-
-            "main_line": defaults.default["main_line"],
-            "dash_dot_line": defaults.default["dash_dot_line"],
-            "dashed_line": defaults.default["dashed_line"],
-            "thin_line": defaults.default["thin_line"],
         }
 
         fragment = Fragment()
@@ -286,6 +289,7 @@ class PCXBlock(XBlock):
             'static/js/Utils/NumberFormat.js',
             'static/js/Utils/Wall.js',  
             'static/js/Utils/BezierCurve.js',
+            'static/js/Utils/LinkPoint.js',
             'static/js/Utils/SmoothCurve.js',
             'static/js/Utils/Arc.js',
             'static/js/Crafters/Crafter.js',
@@ -328,25 +332,32 @@ class PCXBlock(XBlock):
                 "empty_image":defaults.empty_image,
                 "grid_step": self.editor_settings["grid_step"],
             
-                "pic_parallellink": self.runtime.local_resource_url(self, 'public/images/pic_parallellink.png'),
-                "pic_perpendicularlink": self.runtime.local_resource_url(self, 'public/images/pic_perpendicularlink.png'),
-                "pic_extremelink": self.runtime.local_resource_url(self, 'public/images/pic_extremelink.png'),
-                "pic_linepointlink": self.runtime.local_resource_url(self, 'public/images/pic_linepointlink.png'),
-                "pic_intersectionlink": self.runtime.local_resource_url(self, 'public/images/pic_intersectionlink.png'),
-                "pic_circletool": self.runtime.local_resource_url(self, 'public/images/pic_circletool.png'),
-                "pic_smoothtool": self.runtime.local_resource_url(self, 'public/images/pic_smoothtool.png'),
-                "pic_arctool": self.runtime.local_resource_url(self, 'public/images/pic_arctool.png'),
-
-
+                "pic_parallellink": self.runtime.local_resource_url(self, 'public/images/pic_parallellink.svg'),
+                "pic_perpendicularlink": self.runtime.local_resource_url(self, 'public/images/pic_perpendicularlink.svg'),
+                "pic_extremelink": self.runtime.local_resource_url(self, 'public/images/pic_extremelink.svg'),
+                "pic_linepointlink": self.runtime.local_resource_url(self, 'public/images/pic_linepointlink.svg'),
+                "pic_intersectionlink": self.runtime.local_resource_url(self, 'public/images/pic_intersectionlink.svg'),
+                "pic_circletool": self.runtime.local_resource_url(self, 'public/images/pic_circletool.svg'),
+                "pic_smoothtool": self.runtime.local_resource_url(self, 'public/images/pic_smoothtool.svg'),
+                "pic_arctool": self.runtime.local_resource_url(self, 'public/images/pic_arctool.svg'),
                 "pic_back": self.runtime.local_resource_url(self, 'public/images/pic_back.svg'),
                 "pic_bent": self.runtime.local_resource_url(self, 'public/images/pic_bent.svg'),
                 "pic_line": self.runtime.local_resource_url(self, 'public/images/pic_line.svg'),
                 "pic_rect": self.runtime.local_resource_url(self, 'public/images/pic_rect.svg'),
+
+                "pic_grid_point": self.runtime.local_resource_url(self, 'public/images/pic_grid_point.svg'),
+                "pic_point": self.runtime.local_resource_url(self, 'public/images/pic_point.svg'),
+                "pic_ruler": self.runtime.local_resource_url(self, 'public/images/pic_ruler.svg'),
+                "pic_delete": self.runtime.local_resource_url(self, 'public/images/pic_delete.svg'),
+
                 "pic_BezierCurve": self.runtime.local_resource_url(self, 'public/images/pic_BezierCurve.svg'),
                 "pic_eraser": self.runtime.local_resource_url(self, 'public/images/pic_eraser.svg'),
                 "pic_draggable_handler": self.runtime.local_resource_url(self, 'public/images/pic_draggable_handler.svg'),
                 "pic_grid": self.runtime.local_resource_url(self, 'public/images/pic_grid.svg'),
-
+                "pic_main_line": self.runtime.local_resource_url(self, 'public/images/pic_main_line.svg'),  
+                "pic_dash_dot_line": self.runtime.local_resource_url(self, 'public/images/pic_dash_dot_line.svg'),  
+                "pic_dashed_line": self.runtime.local_resource_url(self, 'public/images/pic_dashed_line.svg'),  
+                "pic_thin_line": self.runtime.local_resource_url(self, 'public/images/pic_thin_line.svg'),  
 
 
                 "main_line": defaults.default["main_line"],
@@ -390,6 +401,7 @@ class PCXBlock(XBlock):
                 'static/js/Utils/NumberFormat.js',
                 'static/js/Utils/Wall.js',  
                 'static/js/Utils/BezierCurve.js',
+                'static/js/Utils/LinkPoint.js',
                 'static/js/Utils/SmoothCurve.js',
                 'static/js/Utils/Arc.js',
                 'static/js/Crafters/Crafter.js',
@@ -489,12 +501,12 @@ class PCXBlock(XBlock):
             used_lines = detect_used_lines_types(correct_image, self.all_lines)
             sum = 0
             for key in used_lines:
-                #print("Used ", key)
+                print("Used ", key)
                 image_current_lines_correct = isolate_color(correct_image, self.all_lines[key]['min_color'], self.all_lines[key]['max_color'])
                 image_current_lines_student = isolate_color(student_image, self.all_lines[key]['min_color'], self.all_lines[key]['max_color'])
                 points = pixel_method(image_current_lines_student, image_current_lines_correct, self.lines_settings[key]["thickness"])
                 sum = sum + points
-                #print ("Points for line type: ", points)
+                print ("Points for line type: ", points)
             points = sum/len(used_lines)
             return points
 

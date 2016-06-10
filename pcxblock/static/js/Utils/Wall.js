@@ -3,9 +3,10 @@ var Wall = function (start, end) {
     this.id = ind++;
     this.Start = start;
     this.End = end;
-    this.Width = window.Config.Wall.width;
-    this.Height = window.Config.Wall.height;
-    this.Config = { Left: { Changed: 2, fill: { objs: [], full: { color: "#ffffff" } } }, Right: { Changed: 2, fill: { objs: [], full: { color: "#ffffff" } } } };
+//    this.Width = window.Config.Wall.width;
+//    this.Height = window.Config.Wall.height;
+//    this.Config = { Left: { Changed: 2, fill: { objs: [], full: { color: "#ffffff" } } }, Right: { Changed: 2, fill: { objs: [], full: { color: "#ffffff" } } } };
+    this.Selected = false;
     window.updated = true;
 };
 Wall.prototype = {

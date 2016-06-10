@@ -56,8 +56,12 @@
 	.st50{fill:none;stroke:#4D4D4D;stroke-width:3;stroke-linecap:round;stroke-miterlimit:10;stroke-dasharray:7,5;}
 	.st51{fill:none;stroke:#4D4D4D;stroke-linecap:round;stroke-miterlimit:10;}
 </style>
-<line class="st51" x1="12.7" y1="3.1" x2="12.7" y2="37"/>
-<line class="st51" x1="28.5" y1="3.1" x2="28.5" y2="37"/>
-<line class="st51" x1="36.9" y1="12.2" x2="3.1" y2="12.2"/>
-<line class="st51" x1="36.9" y1="27.9" x2="3.1" y2="27.9"/>
+<g>
+	<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="4.1667" y1="20.0208" x2="35.5417" y2="20.0208">
+		<stop  offset="0" style="stop-color:#FFFFFF"/>
+		<stop  offset="1" style="stop-color:#000000"/>
+	</linearGradient>
+	
+		<line style="fill:url(#SVGID_1_);stroke:#4D4D4D;stroke-width:3;stroke-linecap:round;stroke-miterlimit:10;" x1="35.5" y1="4.3" x2="4.2" y2="35.7"/>
+</g>
 </svg>
