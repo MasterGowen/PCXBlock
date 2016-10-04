@@ -46,7 +46,7 @@ class PCXBlock(XBlock):
     question = List(
         display_name=u"Вопрос",
         help=u"Текст задания.",
-        default=[u"Вы готовы, дети?"],
+        default=[u"Вы готовы, дети?", ],
         scope=Scope.settings
     )
 
@@ -94,7 +94,7 @@ class PCXBlock(XBlock):
     
     background_image = List(
         display_name=u"Подложенная картинка",
-        default=[defaults.background_default],
+        default=[defaults.background_default, ],
         scope=Scope.settings
     )
 
@@ -106,7 +106,7 @@ class PCXBlock(XBlock):
 
     correct_picture = List(
         display_name=u"Правильная картинка",
-        default=[defaults.correct_default],
+        default=[defaults.correct_default, ],
         scope=Scope.settings
     )
 
