@@ -222,7 +222,7 @@ class PCXBlock(XBlock):
         context = {
             "display_name": self.display_name,
             "weight": self.weight,
-            "question": List(self.question),
+            "question": self.question,
             "max_attempts": self.max_attempts,
             "background_image": self.background_image,
             "grid_step": self.editor_settings["grid_step"],
@@ -327,17 +327,17 @@ class PCXBlock(XBlock):
         if self.seed == -1:
             self.seed = random.randint(1000, 1000000)
 
-        variant = None
+        variant = random.choice(len(self.question) - 1)
 
         if student_id(self) != "student":
             context = {
                 "points": self.points,
                 "display_name": self.display_name,
                 "weight": self.weight,
-                "question": self.question,
+                "question": self.question[variant],
                 "attempts": self.attempts,
-                "background_image": self.background_image,
-                "empty_image":defaults.empty_image,
+                "background_image": self.background_image[variant],
+                "empty_image": defaults.empty_image,
                 "grid_step": self.editor_settings["grid_step"],
             
                 "pic_parallellink": self.runtime.local_resource_url(self, 'public/images/pic_parallellink.svg'),
@@ -435,8 +435,8 @@ class PCXBlock(XBlock):
             self.load_resources(js_urls, css_urls, fragment)
         else:
             context = {
-                "background_image": self.background_image,
-                "correct_picture": self.correct_picture
+                "background_image": self.background_image[variant],
+                "correct_picture": self.correct_picture[variant]
             }
 
             fragment = Fragment()
