@@ -2,6 +2,7 @@
 
 import datetime
 import pkg_resources
+import random
 import json
 import pytz
 import datetime
@@ -43,6 +44,7 @@ class PCXBlock(XBlock):
     )
 
     question = String(
+        # TODO: list
         display_name=u"Вопрос",
         help=u"Текст задания.",
         default=u"Вы готовы, дети?",
@@ -61,13 +63,19 @@ class PCXBlock(XBlock):
     max_attempts = Integer(
         display_name=u"Максимальное количество попыток",
         help=u"",
-        default=10,
+        default=1,
         scope=Scope.settings
     )
 
     attempts = Integer(
         display_name=u"Количество сделанных попыток",
         default=0,
+        scope=Scope.user_state
+    )
+
+    seed = Integer(
+        display_name=u"seed",
+        default=-1,
         scope=Scope.user_state
     )
 
@@ -87,6 +95,7 @@ class PCXBlock(XBlock):
     )
     
     background_image = String(
+        # TODO: list
         display_name=u"Подложенная картинка",
         default=defaults.background_default,
         scope=Scope.settings
@@ -99,6 +108,7 @@ class PCXBlock(XBlock):
     )
 
     correct_picture = String(
+        # TODO: list
         display_name=u"Правильная картинка",
         default=defaults.correct_default,
         scope=Scope.settings
@@ -321,6 +331,9 @@ class PCXBlock(XBlock):
         Отображение PCXBlock студенту (LMS).
         """
 
+        if self.seed == -1:
+            self.seed = random.randint(1000000)
+
         if student_id(self) != "student":
             context = {
                 "points": self.points,
@@ -364,6 +377,7 @@ class PCXBlock(XBlock):
                 "dash_dot_line": defaults.default["dash_dot_line"],
                 "dashed_line": defaults.default["dashed_line"],
                 "thin_line": defaults.default["thin_line"],
+                "seed": self.seed,
             }
 
             #if(student_id)
@@ -506,7 +520,7 @@ class PCXBlock(XBlock):
                 image_current_lines_student = isolate_color(student_image, self.all_lines[key]['min_color'], self.all_lines[key]['max_color'])
                 points = pixel_method(image_current_lines_student, image_current_lines_correct, self.lines_settings[key]["thickness"])
                 sum = sum + points
-                print ("Points for line type: ", points)
+                print("Points for line type: ", points)
             points = sum/len(used_lines)
             return points
 
