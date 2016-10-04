@@ -332,7 +332,7 @@ class PCXBlock(XBlock):
         """
 
         if self.seed == -1:
-            self.seed = random.randint(1000000)
+            self.seed = random.randint(1000, 1000000)
 
         if student_id(self) != "student":
             context = {
