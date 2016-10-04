@@ -327,7 +327,7 @@ class PCXBlock(XBlock):
         if self.seed == -1:
             self.seed = random.randint(1000, 1000000)
 
-        variant = random.choice(len(self.question) - 1)
+        #variant = random.choice(len(self.question) - 1)
 
         if student_id(self) != "student":
             context = {
@@ -336,7 +336,7 @@ class PCXBlock(XBlock):
                 "weight": self.weight,
                 "question": self.question,  # [variant],
                 "attempts": self.attempts,
-                "background_image": self.background_image[variant],
+                "background_image": self.background_image, #[variant],
                 "empty_image": defaults.empty_image,
                 "grid_step": self.editor_settings["grid_step"],
             
