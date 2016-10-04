@@ -435,8 +435,8 @@ class PCXBlock(XBlock):
             self.load_resources(js_urls, css_urls, fragment)
         else:
             context = {
-                "background_image": self.background_image[variant],
-                "correct_picture": self.correct_picture[variant]
+                "background_image": self.background_image,  # [variant],
+                "correct_picture": self.correct_picture,  # [variant]
             }
 
             fragment = Fragment()
