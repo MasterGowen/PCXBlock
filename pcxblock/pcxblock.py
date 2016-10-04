@@ -46,7 +46,7 @@ class PCXBlock(XBlock):
     question = List(
         display_name=u"Вопрос",
         help=u"Текст задания.",
-        default=[u"Вы готовы, дети?", ],
+        default=list(u"Вы готовы, дети?", ),
         scope=Scope.settings
     )
 
@@ -334,7 +334,7 @@ class PCXBlock(XBlock):
                 "points": self.points,
                 "display_name": self.display_name,
                 "weight": self.weight,
-                "question": self.question[variant],
+                "question": self.question,  # [variant],
                 "attempts": self.attempts,
                 "background_image": self.background_image[variant],
                 "empty_image": defaults.empty_image,
