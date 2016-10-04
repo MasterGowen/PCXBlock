@@ -18,7 +18,7 @@ from django.template import Context, Template
 from django.utils.encoding import smart_text
 
 from xblock.core import XBlock
-from xblock.fields import Scope, Integer, String, JSONField, Boolean
+from xblock.fields import Scope, Integer, String, JSONField, Boolean, List
 from xblock.fragment import Fragment
 
 from xmodule.util.duedate import get_extended_due_date
@@ -43,8 +43,7 @@ class PCXBlock(XBlock):
         scope=Scope.settings
     )
 
-    question = String(
-        # TODO: list
+    question = List(
         display_name=u"Вопрос",
         help=u"Текст задания.",
         default=u"Вы готовы, дети?",
@@ -59,7 +58,6 @@ class PCXBlock(XBlock):
         scope=Scope.settings
     )
 
-    #TODO: 1!
     max_attempts = Integer(
         display_name=u"Максимальное количество попыток",
         help=u"",
@@ -94,8 +92,7 @@ class PCXBlock(XBlock):
         scope=Scope.settings
     )
     
-    background_image = String(
-        # TODO: list
+    background_image = List(
         display_name=u"Подложенная картинка",
         default=defaults.background_default,
         scope=Scope.settings
@@ -107,8 +104,7 @@ class PCXBlock(XBlock):
         scope=Scope.user_state
     )
 
-    correct_picture = String(
-        # TODO: list
+    correct_picture = List(
         display_name=u"Правильная картинка",
         default=defaults.correct_default,
         scope=Scope.settings
@@ -133,7 +129,6 @@ class PCXBlock(XBlock):
         scope=Scope.settings
     )
 
-
     """
     link: gray (125, 125, 125)
     """
@@ -143,7 +138,6 @@ class PCXBlock(XBlock):
         default={"min_color": [100, 100, 100], "max_color": [150, 150, 150]},
         scope=Scope.settings
     )   
-
 
     """
     main line: green
@@ -219,7 +213,6 @@ class PCXBlock(XBlock):
         return self.xmodule_runtime.get_user_role() == 'instructor'
 
     # views
-    
 
     def studio_view(self, *args, **kwargs):
         """
@@ -333,6 +326,8 @@ class PCXBlock(XBlock):
 
         if self.seed == -1:
             self.seed = random.randint(1000, 1000000)
+
+        variant = None
 
         if student_id(self) != "student":
             context = {
