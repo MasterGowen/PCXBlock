@@ -46,7 +46,7 @@ class PCXBlock(XBlock):
     question = List(
         display_name=u"Вопрос",
         help=u"Текст задания.",
-        default=list(u"Вы готовы, дети?", ),
+        default=[u"Задание студенту", ],
         scope=Scope.settings
     )
 
