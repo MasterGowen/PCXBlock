@@ -334,7 +334,7 @@ class PCXBlock(XBlock):
                 "points": self.points,
                 "display_name": self.display_name,
                 "weight": self.weight,
-                "question": self.question[variant],
+                "question": list(self.question)[variant],
                 "attempts": self.attempts,
                 "background_image": self.background_image, #[variant],
                 "empty_image": defaults.empty_image,
