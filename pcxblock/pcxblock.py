@@ -327,6 +327,8 @@ class PCXBlock(XBlock):
         if self.seed == -1:
             self.seed = random.randint(1000, 1000000)
 
+        print(self.question, '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+
         variant = random.randint(0, len(list(self.question)) - 1)
 
         if student_id(self) != "student":
