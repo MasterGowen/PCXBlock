@@ -278,7 +278,6 @@ class PCXBlock(XBlock):
             )
         )
 
-
         js_urls = (
             'static/js/js/guid.js',
             'static/js/Utils/Pnt.js',
@@ -498,7 +497,6 @@ class PCXBlock(XBlock):
             student_picture_base64 = data["picture"]       
             return student_picture_base64
 
-
         @check_method
         def check_answer(student_image, correct_image):
             student_image = base64_to_image(student_image)
@@ -506,8 +504,8 @@ class PCXBlock(XBlock):
             used_lines = detect_used_lines_types(correct_image, self.all_lines)
             sum = 0
             for key in used_lines:
-                print("Used ", key)
                 image_current_lines_correct = isolate_color(correct_image, self.all_lines[key]['min_color'], self.all_lines[key]['max_color'])
+                print("Used ", key, '  :', 'image_current_lines_correct  ', image_current_lines_correct)
                 image_current_lines_student = isolate_color(student_image, self.all_lines[key]['min_color'], self.all_lines[key]['max_color'])
                 points = pixel_method(image_current_lines_student, image_current_lines_correct, self.lines_settings[key]["thickness"])
                 sum = sum + points
