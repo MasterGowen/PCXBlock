@@ -18,7 +18,7 @@ from django.template import Context, Template
 from django.utils.encoding import smart_text
 
 from xblock.core import XBlock
-from xblock.fields import Scope, Integer, String, JSONField, Boolean, List
+from xblock.fields import Scope, Integer, String, JSONField, Boolean
 from xblock.fragment import Fragment
 
 from xmodule.util.duedate import get_extended_due_date
@@ -43,10 +43,11 @@ class PCXBlock(XBlock):
         scope=Scope.settings
     )
 
-    question = List(
+    question = String(
+        # TODO: list
         display_name=u"Вопрос",
         help=u"Текст задания.",
-        default=[u"Задание студенту", ],
+        default=u"Изобразите на чертеже...",
         scope=Scope.settings
     )
 
@@ -58,6 +59,7 @@ class PCXBlock(XBlock):
         scope=Scope.settings
     )
 
+    #TODO: 1!
     max_attempts = Integer(
         display_name=u"Максимальное количество попыток",
         help=u"",
@@ -68,12 +70,6 @@ class PCXBlock(XBlock):
     attempts = Integer(
         display_name=u"Количество сделанных попыток",
         default=0,
-        scope=Scope.user_state
-    )
-
-    seed = Integer(
-        display_name=u"seed",
-        default=-1,
         scope=Scope.user_state
     )
 
@@ -92,9 +88,10 @@ class PCXBlock(XBlock):
         scope=Scope.settings
     )
     
-    background_image = List(
+    background_image = String(
+        # TODO: list
         display_name=u"Подложенная картинка",
-        default=[defaults.background_default, ],
+        default=defaults.background_default,
         scope=Scope.settings
     )
 
@@ -104,9 +101,10 @@ class PCXBlock(XBlock):
         scope=Scope.user_state
     )
 
-    correct_picture = List(
+    correct_picture = String(
+        # TODO: list
         display_name=u"Правильная картинка",
-        default=[defaults.correct_default, ],
+        default=defaults.correct_default,
         scope=Scope.settings
     )
 
@@ -129,6 +127,7 @@ class PCXBlock(XBlock):
         scope=Scope.settings
     )
 
+
     """
     link: gray (125, 125, 125)
     """
@@ -138,6 +137,7 @@ class PCXBlock(XBlock):
         default={"min_color": [100, 100, 100], "max_color": [150, 150, 150]},
         scope=Scope.settings
     )   
+
 
     """
     main line: green
@@ -213,6 +213,7 @@ class PCXBlock(XBlock):
         return self.xmodule_runtime.get_user_role() == 'instructor'
 
     # views
+
 
     def studio_view(self, *args, **kwargs):
         """
@@ -324,22 +325,15 @@ class PCXBlock(XBlock):
         Отображение PCXBlock студенту (LMS).
         """
 
-        if self.seed == -1:
-            self.seed = random.randint(1000, 1000000)
-
-        print(self.question, '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
-
-        variant = random.randint(0, len(list(self.question)) - 1)
-
         if student_id(self) != "student":
             context = {
                 "points": self.points,
                 "display_name": self.display_name,
                 "weight": self.weight,
-                "question": list(self.question)[variant],
+                "question": self.question,
                 "attempts": self.attempts,
-                "background_image": self.background_image, #[variant],
-                "empty_image": defaults.empty_image,
+                "background_image": self.background_image,
+                "empty_image":defaults.empty_image,
                 "grid_step": self.editor_settings["grid_step"],
             
                 "pic_parallellink": self.runtime.local_resource_url(self, 'public/images/pic_parallellink.svg'),
@@ -374,8 +368,8 @@ class PCXBlock(XBlock):
                 "dash_dot_line": defaults.default["dash_dot_line"],
                 "dashed_line": defaults.default["dashed_line"],
                 "thin_line": defaults.default["thin_line"],
-                "seed": self.seed,
             }
+
 
             #if(student_id)
             if self.max_attempts != 0:
@@ -437,8 +431,8 @@ class PCXBlock(XBlock):
             self.load_resources(js_urls, css_urls, fragment)
         else:
             context = {
-                "background_image": self.background_image,  # [variant],
-                "correct_picture": self.correct_picture,  # [variant]
+                "background_image": self.background_image,
+                "correct_picture": self.correct_picture
             }
 
             fragment = Fragment()
