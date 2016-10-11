@@ -107,7 +107,7 @@ def normalize_coefficients(list_k):
     coefficients = []
     if isinstance(list_k, list):
         for k_stud in list_k:
-            k = 1 / float(sum(list_k) * k_stud)
+            k = k_stud / float(sum(list_k))
             coefficients.append(k)
         return coefficients
     else:
