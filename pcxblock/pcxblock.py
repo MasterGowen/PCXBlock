@@ -505,9 +505,9 @@ class PCXBlock(XBlock):
             sum = 0
             for key in used_lines:
                 image_current_lines_correct = isolate_color(correct_image, self.all_lines[key]['min_color'], self.all_lines[key]['max_color'])
-                print("Used ", key, '  :', 'image_current_lines_correct  ', image_current_lines_correct)
                 image_current_lines_student = isolate_color(student_image, self.all_lines[key]['min_color'], self.all_lines[key]['max_color'])
                 points = pixel_method(image_current_lines_student, image_current_lines_correct, self.lines_settings[key]["thickness"])
+                print("Used ", key, '  :', 'image_current_lines_student  ', image_current_lines_student)
                 sum = sum + points
                 print("Points for line type: ", points)
             points = sum/len(used_lines)
