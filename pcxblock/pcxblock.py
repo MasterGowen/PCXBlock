@@ -25,7 +25,7 @@ from xmodule.util.duedate import get_extended_due_date
 from webob.response import Response
 
 import defaults
-from utils import check_method, pixels_count, base64_to_image, thresh_callback, isolate_color, pixel_method, detect_used_lines_types
+from utils import *
 
 
 class PCXBlock(XBlock):
@@ -503,6 +503,9 @@ class PCXBlock(XBlock):
             correct_image = base64_to_image(correct_image)
             used_lines = detect_used_lines_types(correct_image, self.all_lines)
             sum = 0
+
+            print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!', normalize_coefficients([k["coefficient"] for k in self.lines_settings.keys()])
+
             for key in used_lines:
                 image_current_lines_correct = isolate_color(correct_image, self.all_lines[key]['min_color'], self.all_lines[key]['max_color'])
                 image_current_lines_student = isolate_color(student_image, self.all_lines[key]['min_color'], self.all_lines[key]['max_color'])

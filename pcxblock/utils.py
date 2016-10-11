@@ -101,3 +101,14 @@ def detect_used_lines_types(image, all_types):
         if(pix_count > 50):
             used_lines_list.append(line)
     return used_lines_list
+
+
+def normalize_coefficients(list_k):
+    coefficients = []
+    if isinstance(list_k, list):
+        for k_stud in list_k:
+            k = 1 / sum(list_k) * k_stud
+            coefficients.append(k)
+        return coefficients
+    else:
+        raise 'Error normalize_coefficients'
