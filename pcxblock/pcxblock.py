@@ -504,7 +504,7 @@ class PCXBlock(XBlock):
             used_lines = detect_used_lines_types(correct_image, self.all_lines)
             sum = 0
 
-            print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!', normalize_coefficients([k["coefficient"] for k in self.lines_settings.keys()])
+            print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!', normalize_coefficients([k["coefficient"] for k in self.lines_settings.keys()]))
 
             for key in used_lines:
                 image_current_lines_correct = isolate_color(correct_image, self.all_lines[key]['min_color'], self.all_lines[key]['max_color'])
