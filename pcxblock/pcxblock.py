@@ -505,6 +505,7 @@ class PCXBlock(XBlock):
             sum = 0
 
             print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!', normalize_coefficients([self.lines_settings[k]["coefficient"] for k in self.lines_settings.keys()]))
+            print(self.lines_settings)
 
             for key in used_lines:
                 image_current_lines_correct = isolate_color(correct_image, self.all_lines[key]['min_color'], self.all_lines[key]['max_color'])
