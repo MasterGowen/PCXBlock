@@ -479,7 +479,7 @@ class PCXBlock(XBlock):
         self.lines_settings["thin_line"]["coefficient"] = float(data.get('thin_line_coefficient'))
         
         self.links_settings["thickness"] = int(data.get('link_thickness'))
-        self.links_settings["coefficient"] = int(data.get('link_coefficient'))
+        self.links_settings["coefficient"] = float(data.get('link_coefficient'))
               
               
         if data.get('background_image') == "":
@@ -505,7 +505,8 @@ class PCXBlock(XBlock):
             used_links = detect_used_links(correct_image)
             points_sum = 0
 
-            coefficients = normalize_coefficients([self.lines_settings[k]["coefficient"] for k in self.lines_settings.keys() if k in used_lines])
+            coefficients_raw = [self.lines_settings[k]["coefficient"] for k in self.lines_settings.keys() if k in used_lines].append(self.links_settings["coefficient"])
+            coefficients = normalize_coefficients(coefficients_raw)
 
             for key in used_lines:
                 image_current_lines_correct = isolate_color(correct_image, self.all_lines[key]['min_color'], self.all_lines[key]['max_color'])
@@ -513,8 +514,13 @@ class PCXBlock(XBlock):
                 points = pixel_method(image_current_lines_student, image_current_lines_correct, self.lines_settings[key]["thickness"])
                 line_type_points = points * coefficients[used_lines.index(key)]
                 points_sum += line_type_points
-                print('Line type: ', key, "; Points for line type: ", points, '; line_type_points', line_type_points, '; coeff', coefficients[used_lines.index(key)])
 
+            if used_links:
+                image_current_links_correct = isolate_color(correct_image, [0, 180, 250], [0, 185, 255])
+                image_current_links_student = isolate_color(student_image, [0, 180, 250], [0, 185, 255])
+                points = pixel_method(image_current_links_student, image_current_links_correct, self.links_settings["thickness"], "link")
+                line_type_points = points * coefficients[-1]
+                points_sum += line_type_points
             return points_sum
 
 

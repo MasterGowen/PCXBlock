@@ -68,7 +68,7 @@ def thresh_callback(stud_pic, correct_pic, thick_cont, thresh):
 
 
 #return grade 0-100 for two images
-def pixel_method(student_picture_base64, correct_picture_base64, thickness):
+def pixel_method(student_picture_base64, correct_picture_base64, thickness, object_type="line"):
     #check color. black now
     line_color_min = [0, 0, 0]
     line_color_max = [200, 200, 200]
@@ -82,7 +82,13 @@ def pixel_method(student_picture_base64, correct_picture_base64, thickness):
     diff1 = thresh_callback(correct_image, student_image, thickness_contour, 0)
     gray_wrong_pixels_count1 = pixels_count(diff1, line_color_min, line_color_max)
     gray_wrong_pixels_count = pixels_count(diff, line_color_min, line_color_max)
-    if all_color_student_pixels_count > 50:
+    if all_color_student_pixels_count > 50 and object_type == "line":
+        grade_first = float((all_color_student_pixels_count - gray_wrong_pixels_count))/all_color_student_pixels_count
+        grade_first = grade_first
+        grade_second = float((all_color_correct_pixels_count - gray_wrong_pixels_count1))/all_color_correct_pixels_count
+        grade_second = grade_second
+        grade_global = min(grade_first, grade_second) * max(grade_first, grade_second) * 100
+    elif all_color_student_pixels_count > 0 and object_type == "link":
         grade_first = float((all_color_student_pixels_count - gray_wrong_pixels_count))/all_color_student_pixels_count
         grade_first = grade_first
         grade_second = float((all_color_correct_pixels_count - gray_wrong_pixels_count1))/all_color_correct_pixels_count
@@ -98,7 +104,7 @@ def detect_used_lines_types(image, all_types):
     for line in all_types.keys():
         pix_count = pixels_count(image, all_types[line]["min_color"], all_types[line]["max_color"])
         #print line, pix_count
-        if(pix_count > 50):
+        if pix_count > 50:
             used_lines_list.append(line)
     return used_lines_list
 
