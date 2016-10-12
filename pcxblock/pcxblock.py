@@ -502,6 +502,7 @@ class PCXBlock(XBlock):
             student_image = base64_to_image(student_image)
             correct_image = base64_to_image(correct_image)
             used_lines = detect_used_lines_types(correct_image, self.all_lines)
+            used_links = detect_used_lines_types(correct_image,)
             points_sum = 0
 
             coefficients = normalize_coefficients([self.lines_settings[k]["coefficient"] for k in self.lines_settings.keys() if k in used_lines])

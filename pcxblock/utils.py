@@ -102,6 +102,14 @@ def detect_used_lines_types(image, all_types):
             used_lines_list.append(line)
     return used_lines_list
 
+def detect_used_links(image):
+    pix_count = pixels_count(image, [0, 180, 250], [0, 185, 255])
+    print('PPPPPPPPIIIIIIIIIXXXXXXXXX:', pix_count)
+    if pix_count > 0:
+        return True
+    else:
+        return False
+
 
 def normalize_coefficients(list_k):
     coefficients = []
