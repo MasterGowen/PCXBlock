@@ -125,4 +125,4 @@ def normalize_coefficients(list_k):
             coefficients.append(k)
         return coefficients
     else:
-        raise 'Error normalize_coefficients'
+        raise Exception('Error normalize_coefficients')

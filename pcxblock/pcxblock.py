@@ -506,6 +506,7 @@ class PCXBlock(XBlock):
             points_sum = 0
 
             coefficients_raw = [self.lines_settings[k]["coefficient"] for k in self.lines_settings.keys() if k in used_lines].append(self.links_settings["coefficient"])
+            print coefficients_raw
             coefficients = normalize_coefficients(coefficients_raw)
 
             for key in used_lines:
