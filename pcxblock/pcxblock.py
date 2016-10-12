@@ -505,8 +505,8 @@ class PCXBlock(XBlock):
             used_links = detect_used_links(correct_image)
             points_sum = 0
 
-            coefficients_raw = [self.lines_settings[k]["coefficient"] for k in self.lines_settings.keys() if k in used_lines].append(self.links_settings["coefficient"])
-            print coefficients_raw
+            coefficients_raw = [self.lines_settings[k]["coefficient"] for k in self.lines_settings.keys() if k in used_lines]
+            coefficients_raw.append(self.links_settings["coefficient"])
             coefficients = normalize_coefficients(coefficients_raw)
 
             for key in used_lines:
