@@ -2,7 +2,7 @@
             window.minimimumOpacity = 0.1;
             window.headerHeight = 100;
             window.Config = {
-                Wall: { height: 2.5 * 100, width: 2 }
+                Wall: { height: 25 * 100, width: 20 }
             };
             var formatter = new Formatting.NumberFormatter(new Formatting.NumberFormatInfo());
             function onWindowResize() {
