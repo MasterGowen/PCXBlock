@@ -512,7 +512,7 @@ class PCXBlock(XBlock):
                 points = pixel_method(image_current_lines_student, image_current_lines_correct, self.lines_settings[key]["thickness"])
                 line_type_points = points * coefficients[used_lines.index(key)]
                 points_sum += line_type_points
-                print("Points for line type: ", points, '; line_type_points', line_type_points)
+                print('Line type: ', key, "; Points for line type: ", points, '; line_type_points', line_type_points, '; coeff', coefficients[used_lines.index(key)])
 
             return points_sum
 
