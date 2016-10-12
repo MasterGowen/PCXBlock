@@ -67,7 +67,7 @@ Drawer2D.prototype.Draw = function (objects, currentColor) {
             switch (a.LineType) {
                 case "dashdot": ctx.setLineDash([20, 7, 2, 7]); col = "rgba(0,0,0,1)"; break;
                 case "main": col = "rgba(0,0,0,1)"; break;
-                case "dashed": ctx.setLineDash([20, 7]); col = "rgba(0,0,0,1)"; break;
+                case "dashed": ctx.setLineDash([20, 9]); col = "rgba(0,0,0,1)"; break;
                 case "thin": a.Width = a.Width / 2; col = "rgba(0,0,0,1)"; break;
             }
         } else if (window.World.Crafter.ResultMode) {
@@ -116,7 +116,7 @@ Drawer2D.prototype.Draw = function (objects, currentColor) {
             switch (a.LineType) {
                 case "dashdot": ctx.setLineDash([20, 7, 2, 7]); col = "rgba(0,0,0,1)"; break;
                 case "main": col = "rgba(0,0,0,1)"; break;
-                case "dashed": ctx.setLineDash([20, 7]); col = "rgba(0,0,0,1)"; break;
+                case "dashed": ctx.setLineDash([20, 9]); col = "rgba(0,0,0,1)"; break;
                 case "thin": a.Width = a.Width / 2; col = "rgba(0,0,0,1)"; break;
             }
         } else if (window.World.Crafter.ResultMode) {
@@ -157,7 +157,7 @@ Drawer2D.prototype.Draw = function (objects, currentColor) {
             switch (a.LineType) {
                 case "dashdot": ctx.setLineDash([20, 7, 2, 7]); col = "rgba(0,0,0,1)"; break;
                 case "main": col = "rgba(0,0,0,1)"; break;
-                case "dashed": ctx.setLineDash([20, 7]); col = "rgba(0,0,0,1)"; break;
+                case "dashed": ctx.setLineDash([20, 9]); col = "rgba(0,0,0,1)"; break;
                 case "thin": a.Width = a.Width / 2; col = "rgba(0,0,0,1)"; break;
             }
         } else if (window.World.Crafter.ResultMode) {
@@ -202,7 +202,7 @@ Drawer2D.prototype.Draw = function (objects, currentColor) {
 		    switch (a.LineType) {
 		        case "dashdot": ctx.setLineDash([20, 7, 2, 7]); col = "rgba(0,0,0,1)"; break;
 		        case "main": col = "rgba(0,0,0,1)"; break;
-		        case "dashed": ctx.setLineDash([20, 7]); col = "rgba(0,0,0,1)"; break;
+		        case "dashed": ctx.setLineDash([20, 9]); col = "rgba(0,0,0,1)"; break;
 		        case "thin": a.Width = a.Width / 2; col = "rgba(0,0,0,1)"; break;
 		    }
 		} else if (window.World.Crafter.ResultMode) {
