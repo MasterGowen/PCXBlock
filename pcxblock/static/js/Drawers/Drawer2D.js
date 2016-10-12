@@ -65,10 +65,10 @@ Drawer2D.prototype.Draw = function (objects, currentColor) {
         a.Width = window.Config.Wall.width;
         if (window.World.Crafter.PlotMode && !window.World.Crafter.ResultMode) {
             switch (a.LineType) {
-                case "dashdot": ctx.setLineDash([15, 5, 1, 5]); col = "rgba(0,0,0,1)"; break;
+                case "dashdot": ctx.setLineDash([20, 7, 2, 7]); col = "rgba(0,0,0,1)"; break;
                 case "main": col = "rgba(0,0,0,1)"; break;
-                case "dashed": ctx.setLineDash([15, 5]); col = "rgba(0,0,0,1)"; break;
-                case "thin": a.Width = 0.5; col = "rgba(0,0,0,1)"; break;
+                case "dashed": ctx.setLineDash([20, 7]); col = "rgba(0,0,0,1)"; break;
+                case "thin": a.Width = a.Width / 4; col = "rgba(0,0,0,1)"; break;
             }
         } else if (window.World.Crafter.ResultMode) {
             if (window.World.Crafter.MonoMode) col = "rgba(0,0,0,1)";
