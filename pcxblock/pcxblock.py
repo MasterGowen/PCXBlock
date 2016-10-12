@@ -470,13 +470,13 @@ class PCXBlock(XBlock):
         self.correct_picture = data.get('correct_picture')
 
         self.lines_settings["main_line"]["thickness"] = int(data.get('main_line_thickness'))
-        self.lines_settings["main_line"]["coefficient"] = int(data.get('main_line_coefficient'))
+        self.lines_settings["main_line"]["coefficient"] = float(data.get('main_line_coefficient'))
         self.lines_settings["dashed_line"]["thickness"] = int(data.get('dashed_line_thickness'))
-        self.lines_settings["dashed_line"]["coefficient"] = int(data.get('dashed_line_coefficient'))
+        self.lines_settings["dashed_line"]["coefficient"] = float(data.get('dashed_line_coefficient'))
         self.lines_settings["dash_dot_line"]["thickness"] = int(data.get('dash_dot_line_thickness'))
-        self.lines_settings["dash_dot_line"]["coefficient"] = int(data.get('dash_dot_line_coefficient'))
+        self.lines_settings["dash_dot_line"]["coefficient"] = float(data.get('dash_dot_line_coefficient'))
         self.lines_settings["thin_line"]["thickness"] = int(data.get('thin_line_thickness'))
-        self.lines_settings["thin_line"]["coefficient"] = int(data.get('thin_line_coefficient'))
+        self.lines_settings["thin_line"]["coefficient"] = float(data.get('thin_line_coefficient'))
         
         self.links_settings["thickness"] = int(data.get('link_thickness'))
         self.links_settings["coefficient"] = int(data.get('link_coefficient'))
