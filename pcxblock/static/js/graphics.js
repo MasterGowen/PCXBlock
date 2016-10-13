@@ -194,14 +194,13 @@
             $('div.linktool').click(function () {
                 if ($(this).hasClass('active')) {
                     $(this).removeClass('active');
-                    $('div.linktool[rel^=p]').attr('disabled',true);
+                    var tool = "nonelink";
                     }
                 else {
                     $(this).addClass('active');
-                     $('div.linktool[rel^=p]').removeAttr('disabled');
+                    $('div.linktool[rel^=p]').attr('disabled',false);
+                    var tool = "gridlink";
                 };
-
-                var tool = $(this).attr('rel');
                 Meths[tool]();
             });
             
