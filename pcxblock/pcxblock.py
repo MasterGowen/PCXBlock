@@ -502,11 +502,11 @@ class PCXBlock(XBlock):
             student_image = base64_to_image(student_image)
             correct_image = base64_to_image(correct_image)
             used_lines = detect_used_lines_types(correct_image, self.all_lines)
-            used_links = detect_used_links(correct_image)
+            # used_links = detect_used_links(correct_image)
             points_sum = 0
 
             coefficients_raw = [self.lines_settings[k]["coefficient"] for k in self.lines_settings.keys() if k in used_lines]
-            coefficients_raw.append(self.links_settings["coefficient"])
+            #coefficients_raw.append(self.links_settings["coefficient"])
             coefficients = normalize_coefficients(coefficients_raw)
 
             for key in used_lines:
@@ -516,12 +516,12 @@ class PCXBlock(XBlock):
                 line_type_points = points * coefficients[used_lines.index(key)]
                 points_sum += line_type_points
 
-            if used_links:
-                image_current_links_correct = isolate_color(correct_image, [0, 180, 250], [0, 185, 255])
-                image_current_links_student = isolate_color(student_image, [0, 180, 250], [0, 185, 255])
-                points = pixel_method(image_current_links_student, image_current_links_correct, self.links_settings["thickness"], "link")
-                line_type_points = points * coefficients[-1]
-                points_sum += line_type_points
+            # if used_links:
+            #     image_current_links_correct = isolate_color(correct_image, [0, 180, 250], [0, 185, 255])
+            #     image_current_links_student = isolate_color(student_image, [0, 180, 250], [0, 185, 255])
+            #     points = pixel_method(image_current_links_student, image_current_links_correct, self.links_settings["thickness"], "link")
+            #     line_type_points = points * coefficients[-1]
+            #     points_sum += line_type_points
             return points_sum
 
 
