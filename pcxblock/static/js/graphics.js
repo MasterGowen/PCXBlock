@@ -183,6 +183,8 @@
                 if ($(this).hasClass('tool') ) {
                     $('.buttons div').removeClass('active');
                     $('div.tool').removeClass('active');
+                    $('div.linktool').removeClass('active');
+                    $('div.linktool[rel^=p]').attr('disabled',true);
                     $(this).addClass('active');
                 }
                 if (!$(this).hasClass('extend-tool')) {
@@ -192,15 +194,12 @@
             });
 
             $('div.linktool').click(function () {
-                if ($(this).hasClass('active')) {
-                    $(this).removeClass('active');
-                    var tool = "nonelink";
-                    }
-                else {
+                if ($(this).hasClass('linktool') && $(this).not('[disabled]')) {
+                    $('div.linktool').removeClass('active');
                     $(this).addClass('active');
-                    $('div.linktool[rel^=p]').attr('disabled',false);
-                    var tool = "gridlink";
-                };
+
+                }
+                var tool = $(this).attr('rel');
                 Meths[tool]();
             });
             
