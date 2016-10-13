@@ -183,7 +183,6 @@
                 if ($(this).hasClass('tool') ) {
                     $('.buttons div').removeClass('active');
                     $('div.tool').removeClass('active');
-                    $('div.linktool').removeClass('active');
                     $('div.linktool[rel^=p]').attr('disabled',true);
                     $(this).addClass('active');
                 }
@@ -196,11 +195,13 @@
             $('div.linktool').click(function () {
                 if ($(this).hasClass('active')) {
                     $(this).removeClass('active');
+                    $('div.linktool[rel^=p]').attr('disabled',true);
                     }
                 else {
                     $(this).addClass('active');
+                    $('div.linktool[rel^=p]').attr('disabled',false);
                 };
-                
+
                 var tool = $(this).attr('rel');
                 Meths[tool]();
             });
