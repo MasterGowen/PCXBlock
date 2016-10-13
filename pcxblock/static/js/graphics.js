@@ -194,11 +194,13 @@
             });
 
             $('div.linktool').click(function () {
-                // if ($(this).hasClass('linktool') && $(this).not('[disabled]')) {
-                //     $('div.linktool').removeClass('active');
-                //     $(this).addClass('active');
-
-                // }
+                if ($(this).hasClass('active')) {
+                    $(this).removeClass('active');
+                    }
+                else {
+                    $(this).addClass('active');
+                };
+                
                 var tool = $(this).attr('rel');
                 Meths[tool]();
             });
