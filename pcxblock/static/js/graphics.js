@@ -2,7 +2,7 @@
             window.minimimumOpacity = 0.1;
             window.headerHeight = 100;
             window.Config = {
-                Wall: { height: 250, width: 10 }
+                Wall: { height: 2.5 * 100, width: 2 }
             };
             var formatter = new Formatting.NumberFormatter(new Formatting.NumberFormatInfo());
             function onWindowResize() {
@@ -145,7 +145,7 @@
                 if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetAngleMode(e.checked);
             }
             $(document).ready(function () {
-            window.quality = 10;
+            window.quality = 30;
             window.World = new WorldClass($('.designer'));
             window.minimimumOpacity = 0.1;
             window.World.Crafter = new WallCrafter();

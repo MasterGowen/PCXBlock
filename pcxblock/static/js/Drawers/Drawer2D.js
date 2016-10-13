@@ -65,10 +65,10 @@ Drawer2D.prototype.Draw = function (objects, currentColor) {
         a.Width = window.Config.Wall.width;
         if (window.World.Crafter.PlotMode && !window.World.Crafter.ResultMode) {
             switch (a.LineType) {
-                case "dashdot": ctx.setLineDash([20, 7, 2, 7]); col = "rgba(0,0,0,1)"; break;
+                case "dashdot": ctx.setLineDash([15, 5, 1, 5]); col = "rgba(0,0,0,1)"; break;
                 case "main": col = "rgba(0,0,0,1)"; break;
-                case "dashed": ctx.setLineDash([20, 9]); col = "rgba(0,0,0,1)"; break;
-                case "thin": a.Width = a.Width / 2; col = "rgba(0,0,0,1)"; break;
+                case "dashed": ctx.setLineDash([15, 5]); col = "rgba(0,0,0,1)"; break;
+                case "thin": a.Width = 0.5; col = "rgba(0,0,0,1)"; break;
             }
         } else if (window.World.Crafter.ResultMode) {
             if (window.World.Crafter.MonoMode) col = "rgba(0,0,0,1)";
@@ -114,10 +114,10 @@ Drawer2D.prototype.Draw = function (objects, currentColor) {
         a.Width = window.Config.Wall.width;
         if (window.World.Crafter.PlotMode && !window.World.Crafter.ResultMode) {
             switch (a.LineType) {
-                case "dashdot": ctx.setLineDash([20, 7, 2, 7]); col = "rgba(0,0,0,1)"; break;
+                case "dashdot": ctx.setLineDash([15, 5, 1, 5]); col = "rgba(0,0,0,1)"; break;
                 case "main": col = "rgba(0,0,0,1)"; break;
-                case "dashed": ctx.setLineDash([20, 9]); col = "rgba(0,0,0,1)"; break;
-                case "thin": a.Width = a.Width / 2; col = "rgba(0,0,0,1)"; break;
+                case "dashed": ctx.setLineDash([15, 5]); col = "rgba(0,0,0,1)"; break;
+                case "thin": a.Width = 0.5; col = "rgba(0,0,0,1)"; break;
             }
         } else if (window.World.Crafter.ResultMode) {
             if (window.World.Crafter.MonoMode) col = "rgba(0,0,0,1)";
@@ -155,10 +155,10 @@ Drawer2D.prototype.Draw = function (objects, currentColor) {
         a.Width = window.Config.Wall.width;
         if (window.World.Crafter.PlotMode && !window.World.Crafter.ResultMode) {
             switch (a.LineType) {
-                case "dashdot": ctx.setLineDash([20, 7, 2, 7]); col = "rgba(0,0,0,1)"; break;
+                case "dashdot": ctx.setLineDash([15, 5, 1, 5]); col = "rgba(0,0,0,1)"; break;
                 case "main": col = "rgba(0,0,0,1)"; break;
-                case "dashed": ctx.setLineDash([20, 9]); col = "rgba(0,0,0,1)"; break;
-                case "thin": a.Width = a.Width / 2; col = "rgba(0,0,0,1)"; break;
+                case "dashed": ctx.setLineDash([15, 5]); col = "rgba(0,0,0,1)"; break;
+                case "thin": a.Width = 0.5; col = "rgba(0,0,0,1)"; break;
             }
         } else if (window.World.Crafter.ResultMode) {
             if (window.World.Crafter.MonoMode) col = "rgba(0,0,0,1)";
@@ -200,10 +200,10 @@ Drawer2D.prototype.Draw = function (objects, currentColor) {
 		a.Width = window.Config.Wall.width;
 		if (window.World.Crafter.PlotMode && !window.World.Crafter.ResultMode) {
 		    switch (a.LineType) {
-		        case "dashdot": ctx.setLineDash([20, 7, 2, 7]); col = "rgba(0,0,0,1)"; break;
+		        case "dashdot": ctx.setLineDash([15, 5, 1, 5]); col = "rgba(0,0,0,1)"; break;
 		        case "main": col = "rgba(0,0,0,1)"; break;
-		        case "dashed": ctx.setLineDash([20, 9]); col = "rgba(0,0,0,1)"; break;
-		        case "thin": a.Width = a.Width / 2; col = "rgba(0,0,0,1)"; break;
+		        case "dashed": ctx.setLineDash([15, 5]); col = "rgba(0,0,0,1)"; break;
+		        case "thin": a.Width = 0.5; col = "rgba(0,0,0,1)"; break;
 		    }
 		} else if (window.World.Crafter.ResultMode) {
 		    if (window.World.Crafter.MonoMode) col = "rgba(0,0,0,1)";
@@ -256,14 +256,14 @@ Drawer2D.prototype.Draw = function (objects, currentColor) {
     }
     // временная точка привязки
     if (!$.isEmptyObject(objects.TempLinkPoint) && !window.World.Crafter.ResultMode && !window.World.Crafter.PlotMode) {
-        drawEllipse(objects.TempLinkPoint, 10, '#ED6C02');
+        drawEllipse(objects.TempLinkPoint, 3, '#ED6C02');
     }
     // точки привязок
     objects.LinkPoints.forEach(function (a) {
         var col = '#ED6C02';
         if (window.World.Crafter.MonoMode) col = "rgba(0,0,0,1)";
         if (a.Selected) col = "rgba(255, 0, 0, 1)";
-        drawEllipse(a.Point, 10, col);
+        drawEllipse(a.Point, 3, col);
     });
     if (window.World.Crafter.ResultMode) {
         var dataURL = $this.canvas.toDataURL();
