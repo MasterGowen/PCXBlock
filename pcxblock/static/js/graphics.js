@@ -198,7 +198,7 @@
                     }
                 else {
                     $(this).addClass('active');
-                    $('div.linktool[rel^=p]').attr('disabled',false);
+                     $('div.linktool[rel^=p]').removeAttr('disabled');
                 };
 
                 var tool = $(this).attr('rel');
