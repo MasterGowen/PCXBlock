@@ -145,7 +145,7 @@
                 if (window.World.Crafter instanceof WallCrafter) window.World.Crafter.SetAngleMode(e.checked);
             }
             $(document).ready(function () {
-            window.quality = 30;
+            window.quality = 10;
             window.World = new WorldClass($('.designer'));
             window.minimimumOpacity = 0.1;
             window.World.Crafter = new WallCrafter();
