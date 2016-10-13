@@ -183,7 +183,6 @@
                 if ($(this).hasClass('tool') ) {
                     $('.buttons div').removeClass('active');
                     $('div.tool').removeClass('active');
-                    $('div.linktool[rel^=p]').attr('disabled',true);
                     $(this).addClass('active');
                 }
                 if (!$(this).hasClass('extend-tool')) {
