@@ -12,6 +12,7 @@ import sys
 import cv2
 import base64
 import numpy as np
+import os
 
 
 from django.template import Context, Template
@@ -160,14 +161,6 @@ class PCXBlock(XBlock):
     has_score = True
 
     @staticmethod
-    def resource_string(path):
-        """
-        Handy helper for getting resources from our kit.
-        """
-        data = pkg_resources.resource_string(__name__, path)
-        return data.decode("utf8")
-
-    @staticmethod
     def load_resources(js_urls, css_urls, fragment):
         """
         Загрузка локальных статических ресурсов.
@@ -177,7 +170,7 @@ class PCXBlock(XBlock):
             if js_url.startswith('public/'):
                 fragment.add_javascript_url(self.runtime.local_resource_url(self, js_url))
             elif js_url.startswith('static/'):
-                fragment.add_javascript(_resource(js_url))
+                fragment.add_javascript(load_resource(js_url))
             else:
                 pass
 
@@ -186,7 +179,7 @@ class PCXBlock(XBlock):
             if css_url.startswith('public/'):
                 fragment.add_css_url(self.runtime.local_resource_url(self, css_url))
             elif css_url.startswith('static/'):
-                fragment.add_css(_resource(css_url))
+                fragment.add_css(load_resource(css_url))
             else:
                 pass
 
@@ -219,7 +212,6 @@ class PCXBlock(XBlock):
         """
         Отображение pcxblock разработчику (CMS).
         """
-
         context = {
             "display_name": self.display_name,
             "weight": self.weight,
@@ -552,15 +544,6 @@ def _now():
     Получение текущих даты и времени.
     """
     return datetime.datetime.utcnow().replace(tzinfo=pytz.utc)
-
-
-def _resource(path):  # pragma: NO COVER
-    """
-    Handy helper for getting resources from our kit.
-    """
-    data = pkg_resources.resource_string(__name__, path)
-    return data.decode("utf8")
-
 
 def render_template(template_path, context=None):
     """

@@ -1,3 +1,4 @@
+{% load static %}
 <div class="wrapper-comp-settings editor-with-buttons is-active" id="settings-tab">
     
 
@@ -11,42 +12,42 @@
         <div class="all-tools" style="display: inline-flex;">
 
         <div class='buttons d2d'>
-                 <div rel="BentMode" title="Ломаная" class="tool"><img src="{{pic_bent}}"/></div>
-                 <div rel="LineMode" title="Линия" class="tool"><img src="{{pic_line}}"/></div>
-                 <div rel="WallMode" title="Прямоугольник" class="tool"><img src="{{pic_rect}}"/></div>
-                 <div rel="BezierMode" title="Кривая Безье" class="tool"><img src="{{pic_BezierCurve}}"/></div>
+                 <div rel="BentMode" title="Ломаная" class="tool"><img src='{% static "img/pic_bent.png" %}'/></div>
+                 <div rel="LineMode" title="Линия" class="tool"><img src='{% static "img/pic_line.png" %}'/></div>
+                 <div rel="WallMode" title="Прямоугольник" class="tool"><img src='{% static "img/pic_rect.png" %}'/></div>
+                 <div rel="BezierMode" title="Кривая Безье" class="tool"><img src='{% static "img/pic_BezierCurve.png" %}'/></div>
            
-                 <div rel="CircleMode" title="Окружность" class="tool"><img src="{{pic_circletool}}"/></div>
-                 <div rel="SmoothMode" title="Сглаженная линия" class="tool"><img src="{{pic_smoothtool}}"/></div>
-                 <div rel="ArcMode" title="Дуга" class="tool"><img src="{{pic_arctool}}"/></div>
+                 <div rel="CircleMode" title="Окружность" class="tool"><img src='{% static "img/pic_circletool.png" %}'/></div>
+                 <div rel="SmoothMode" title="Сглаженная линия" class="tool"><img src='{% static "img/pic_smoothtool.png" %}'/></div>
+                 <div rel="ArcMode" title="Дуга" class="tool"><img src='{% static "img/pic_arctool.png" %}'/></div>
 
-                 <div rel="RulerMode" title="Линейка" class="tool"><img src="{{pic_ruler}}"/></div>
-                 <div rel="PointMode" title="Точка" class="tool"><img src="{{pic_point}}"/></div>
-                 <div rel="DeleteMode" title="Удалить" class="tool"><img src="{{pic_delete}}"/></div>
+                 <div rel="RulerMode" title="Линейка" class="tool"><img src='{% static "img/pic_ruler.png" %}'></div>
+                 <div rel="PointMode" title="Точка" class="tool"><img src='{% static "img/pic_point.png" %}'/></div>
+                 <div rel="DeleteMode" title="Удалить" class="tool"><img src='{% static "img/pic_delete.png" %}'/></div>
 
-                 <div rel="resettool" title="Очистить"><img style="height: 40px;" src="{{pic_eraser}}"/></div>
-                 <div rel="backtool" title="Отменить"><img style="height: 40px;" src='{{pic_back}}'/></div>
-                 <div rel="gridmode" class="ge_gridMode extend-tool grid-active" title="Показать/скрыть сетку"><img style="height: 40px;" src='{{pic_grid}}'/></div>
+                 <div rel="resettool" title="Очистить"><img style="height: 40px;" src='{% static "img/pic_eraser.png" %}'/></div>
+                 <div rel="backtool" title="Отменить"><img style="height: 40px;" src='{% static "img/pic_back.png" %}'/></div>
+                 <div rel="gridmode" class="ge_gridMode extend-tool grid-active" title="Показать/скрыть сетку"><img style="height: 40px;" src='{% static "img/pic_grid.png" %}'/></div>
              </div>
 
              <div class='buttons lines-types' style="display:none">
-                 <div rel="mainline" title="Основная линия" class="tool"><img src="{{pic_main_line}}"/></div>
-                 <div rel="dashdotline" title="Штрихпунктирная линия" class="tool"><img src="{{pic_dash_dot_line}}"/></div>
-                 <div rel="dashedline" title="Штриховая линия" class="tool"><img src="{{pic_dashed_line}}"/></div>
-                 <div rel="thinline" title="Тонкая линия" class="tool"><img src="{{pic_thin_line}}"/></div>
+                 <div rel="mainline" title="Основная линия" class="tool"><img src='{% static "img/pic_main_line.png" %}'/></div>
+                 <div rel="dashdotline" title="Штрихпунктирная линия" class="tool"><img src='{% static "img/pic_dash_dot_line.png" %}'/></div>
+                 <div rel="dashedline" title="Штриховая линия" class="tool"><img src='{% static "img/pic_dashed_line.png" %}'/></div>
+                 <div rel="thinline" title="Тонкая линия" class="tool"><img src='{% static "img/pic_thin_line.png" %}'/></div>
                  
-                 <div rel="backline" title="Отменить выделение" class="tool"><img style="height: 32px;" src="{{pic_back}}"/></div>
+                 <div rel="backline" title="Отменить выделение" class="tool"><img style="height: 32px;" src='{% static "img/pic_back.png" %}'/></div>
 
-                 <div rel="gridmode" class="ge_gridMode extend-tool grid-active" title="Показать/скрыть сетку"><img style="height: 32px;" src='{{pic_grid}}'/></div>
+                 <div rel="gridmode" class="ge_gridMode extend-tool grid-active" title="Показать/скрыть сетку"><img style="height: 32px;" src='{% static "img/pic_grid.png" %}'/></div>
              </div>
 
              <div class="buttons ge_panel">
                 
-                <div title="Привязка к параллельности" class="linktool" rel="parallellink"><img src="{{pic_parallellink}}"/></div>
-                <div title="Привязка к перпендикулярности" class="linktool" rel="perpendicularlink"><img src="{{pic_perpendicularlink}}"/></div>
-                <div title="Привязка к крайним точкам" class="linktool" rel="extremelink"><img src="{{pic_extremelink}}"/></div>
-                <div title="Привязка к точке на линии" class="linktool" rel="linepointlink"><img src="{{pic_linepointlink}}"/></div>
-                <div title="Привязка к пересечениям" class="linktool" rel="intersectionlink"><img src="{{pic_intersectionlink}}"/></div>
+                <div title="Привязка к параллельности" class="linktool" rel="parallellink"><img src='{% static "img/pic_parallellink.png" %}'/></div>
+                <div title="Привязка к перпендикулярности" class="linktool" rel="perpendicularlink"><img src='{% static "img/pic_perpendicularlink.png" %}'/></div>
+                <div title="Привязка к крайним точкам" class="linktool" rel="extremelink"><img src='{% static "img/pic_extremelink.png" %}'/></div>
+                <div title="Привязка к точке на линии" class="linktool" rel="linepointlink"><img src='{% static "img/pic_linepointlink.png" %}'/></div>
+                <div title="Привязка к пересечениям" class="linktool" rel="intersectionlink"><img src='{% static "img/pic_intersectionlink.png" %}'/></div>
         </div>
 
 
@@ -205,7 +206,7 @@
           <div class="ge_panel">
                 <label><input type="checkbox" class="show_size" onchange="showSize(this);"/> Показывать размер</label>
                 <label><input type="checkbox" class="show_angle" onchange="showAngle(this);"/> Показывать угол</label>
-            <div title="Привязка к сетке" class="linktool" rel="gridlink"><img src="{{pic_grid_point}}"/></div>
+            <div title="Привязка к сетке" class="linktool" rel="gridlink"><img src='{% static "img/pic_grid_point.png" %}'/></div>
             </div>
 
   <div class="xblock-actions">
